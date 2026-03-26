@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Footer } from './components/footer/footer';
 import { Navbar } from './components/navbar/navbar';
+import {supabase} from '../../supabase/supabase';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,5 @@ import { Navbar } from './components/navbar/navbar';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App{
+}
