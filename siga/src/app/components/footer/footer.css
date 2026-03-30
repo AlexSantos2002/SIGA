@@ -1,24 +1,24 @@
-.footer {
-  background: #252627;
-  color: #fff9fb;
-  margin-top: 80px;
+.rodape {
   position: relative;
   overflow: hidden;
+  margin-top: 80px;
+  background: #252627;
+  color: #fff9fb;
 }
 
-.footer-line {
+.linha-topo {
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, #4b88a2 0%, #7fb3c8 50%, #4b88a2 100%);
 }
 
-.footer-container {
+.conteudo-rodape {
   max-width: 1200px;
   margin: 0 auto;
   padding: 56px 24px 32px;
 }
 
-.footer-intro {
+.topo-rodape {
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -27,33 +27,19 @@
   margin-bottom: 36px;
 }
 
-.footer-brand {
+.apresentacao-rodape {
   max-width: 700px;
 }
 
-.footer-badge {
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 6px 12px;
-  border: 1px solid rgba(75, 136, 162, 0.45);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #4b88a2;
-  background-color: rgba(75, 136, 162, 0.08);
-}
-
-.footer-brand h2 {
+.titulo-rodape {
   margin: 0 0 14px;
+  max-width: 760px;
   font-size: 34px;
   line-height: 1.15;
   font-weight: 700;
-  max-width: 760px;
 }
 
-.footer-brand p {
+.texto-rodape {
   margin: 0;
   max-width: 680px;
   color: #d3d4d9;
@@ -61,7 +47,7 @@
   line-height: 1.75;
 }
 
-.footer-action-box {
+.caixa-acao {
   min-width: 240px;
   padding: 18px;
   border: 1px solid rgba(255, 249, 251, 0.08);
@@ -69,100 +55,104 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
-.footer-action-text {
+.texto-acao {
   margin: 0 0 12px;
   color: #d3d4d9;
   font-size: 13px;
 }
 
-.footer-action-button {
+.botao-acao {
   display: block;
   width: 100%;
-  text-align: center;
   padding: 12px 18px;
   border-radius: 12px;
   background: #4b88a2;
   color: #fff9fb;
+  text-align: center;
   text-decoration: none;
   font-weight: 600;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.footer-action-button:hover {
+.botao-acao:hover {
   background: #5b9bb7;
   transform: translateY(-2px);
 }
 
-.footer-features {
+.blocos-rodape {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   margin-bottom: 40px;
 }
 
-.footer-feature-card {
+.bloco-info {
   padding: 22px 20px;
   border: 1px solid rgba(255, 249, 251, 0.06);
   border-radius: 18px;
   background: #2f3133;
 }
 
-.footer-feature-number {
+.numero-bloco {
   display: inline-block;
   margin-bottom: 12px;
+  color: #4b88a2;
   font-size: 12px;
   font-weight: 700;
-  color: #4b88a2;
   letter-spacing: 1px;
 }
 
-.footer-feature-card h3 {
+.titulo-bloco {
   margin: 0 0 10px;
   font-size: 18px;
   color: #fff9fb;
 }
 
-.footer-feature-card p {
+.texto-bloco {
   margin: 0;
   color: #d3d4d9;
   font-size: 14px;
   line-height: 1.65;
 }
 
-.footer-links-section {
+.links-rodape {
   display: grid;
   grid-template-columns: 1.2fr 1.2fr 1fr;
   gap: 28px;
   padding-top: 12px;
 }
 
-.footer-column h3 {
+.coluna-rodape {
+  display: block;
+}
+
+.titulo-coluna {
   margin: 0 0 14px;
   font-size: 15px;
   color: #fff9fb;
 }
 
-.footer-column a,
-.footer-column p {
+.coluna-rodape a,
+.coluna-rodape p {
   display: block;
   margin: 0 0 10px;
   color: #d3d4d9;
-  text-decoration: none;
   font-size: 14px;
+  text-decoration: none;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.footer-column a:hover {
+.coluna-rodape a:hover {
   color: #4b88a2;
   transform: translateX(3px);
 }
 
-.footer-bottom {
-  border-top: 1px solid rgba(255, 249, 251, 0.08);
+.base-rodape {
   margin-top: 36px;
+  border-top: 1px solid rgba(255, 249, 251, 0.08);
 }
 
-.footer-bottom-container {
+.conteudo-base {
   max-width: 1200px;
   margin: 0 auto;
   padding: 18px 24px 22px;
@@ -172,48 +162,48 @@
   flex-wrap: wrap;
 }
 
-.footer-bottom p {
+.conteudo-base p {
   margin: 0;
-  font-size: 13px;
   color: #d3d4d9;
+  font-size: 13px;
 }
 
-.footer-message {
+.mensagem-base {
   text-align: right;
 }
 
 @media (max-width: 900px) {
-  .footer-brand h2 {
+  .titulo-rodape {
     font-size: 28px;
   }
 
-  .footer-features {
+  .blocos-rodape {
     grid-template-columns: 1fr;
   }
 
-  .footer-links-section {
+  .links-rodape {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 640px) {
-  .footer-container {
+  .conteudo-rodape {
     padding: 44px 18px 26px;
   }
 
-  .footer-brand h2 {
+  .titulo-rodape {
     font-size: 24px;
   }
 
-  .footer-links-section {
+  .links-rodape {
     grid-template-columns: 1fr;
   }
 
-  .footer-bottom-container {
+  .conteudo-base {
     flex-direction: column;
   }
 
-  .footer-message {
+  .mensagem-base {
     text-align: left;
   }
 }

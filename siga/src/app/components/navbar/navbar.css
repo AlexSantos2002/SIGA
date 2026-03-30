@@ -1,4 +1,4 @@
-.navbar {
+.barra-topo {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -7,7 +7,7 @@
   border-bottom: 1px solid rgba(255, 249, 251, 0.08);
 }
 
-.navbar-container {
+.conteudo-barra {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px 24px;
@@ -17,7 +17,7 @@
   gap: 24px;
 }
 
-.navbar-logo {
+.logo {
   color: #fff9fb;
   text-decoration: none;
   font-size: 24px;
@@ -25,13 +25,13 @@
   letter-spacing: 1px;
 }
 
-.navbar-menu {
+.menu-navegacao {
   display: flex;
   align-items: center;
   gap: 28px;
 }
 
-.navbar-menu a {
+.menu-navegacao a {
   color: #d3d4d9;
   text-decoration: none;
   font-size: 15px;
@@ -39,17 +39,17 @@
   transition: color 0.2s ease;
 }
 
-.navbar-menu a:hover {
+.menu-navegacao a:hover {
   color: #4b88a2;
 }
 
-.navbar-actions {
+.acoes-barra {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.navbar-login {
+.link-entrar {
   color: #fff9fb;
   text-decoration: none;
   font-size: 14px;
@@ -57,11 +57,11 @@
   transition: color 0.2s ease;
 }
 
-.navbar-login:hover {
+.link-entrar:hover {
   color: #4b88a2;
 }
 
-.navbar-button {
+.botao-topo {
   display: inline-block;
   padding: 10px 16px;
   border-radius: 12px;
@@ -73,17 +73,17 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.navbar-button:hover {
+.botao-topo:hover {
   background: #5b9bb7;
   transform: translateY(-2px);
 }
 
 @media (max-width: 900px) {
-  .navbar-container {
+  .conteudo-barra {
     flex-wrap: wrap;
   }
 
-  .navbar-menu {
+  .menu-navegacao {
     order: 3;
     width: 100%;
     justify-content: center;
@@ -94,19 +94,19 @@
 }
 
 @media (max-width: 640px) {
-  .navbar-container {
+  .conteudo-barra {
     padding: 14px 18px;
   }
 
-  .navbar-logo {
+  .logo {
     font-size: 22px;
   }
 
-  .navbar-actions {
+  .acoes-barra {
     gap: 10px;
   }
 
-  .navbar-button {
+  .botao-topo {
     padding: 9px 14px;
     font-size: 13px;
   }

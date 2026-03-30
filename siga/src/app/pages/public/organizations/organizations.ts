@@ -1,18 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {OrganizationService} from '../../../services/organization.service';
+import { Component } from '@angular/core';
+import { OrganizationService } from '../../../services/organization.service';
 
 @Component({
   selector: 'app-organizations',
+  standalone: true,
   imports: [],
   templateUrl: './organizations.html',
   styleUrl: './organizations.css',
 })
-export class Organizations implements OnInit {
+export class Organizations {
   constructor(private organizationService: OrganizationService) {}
-
-  ngOnInit(): void {
-    this.registerOrganization();
-  }
 
   name: string = 'organizacao de animais';
   email: string = 'organizacao';
@@ -20,6 +17,11 @@ export class Organizations implements OnInit {
   address: string = 'Porto';
 
   registerOrganization(): void {
-    this.organizationService.createOrganization(this.name, this.email, this.phone, this.address);
+    this.organizationService.createOrganization(
+      this.name,
+      this.email,
+      this.phone,
+      this.address
+    );
   }
 }

@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.private-content {
+  min-height: calc(100vh - 80px);
+  padding: 24px;
+}
