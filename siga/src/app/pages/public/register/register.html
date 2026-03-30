@@ -1,0 +1,127 @@
+<section class="pagina-registo">
+  <div class="container-registo">
+
+    <div class="cabecalho-registo">
+      <p class="etiqueta-registo">REGISTO</p>
+
+      <h1>Criar conta da organização</h1>
+
+      <div class="linha-registo"></div>
+
+      <p class="descricao-registo">
+        Preencha os dados da organização e do administrador principal para criar
+        a conta inicial no SIGA.
+      </p>
+    </div>
+
+    <form class="formulario-registo">
+
+      <div class="secao-formulario">
+        <h2>Dados da organização</h2>
+
+        <div class="linha-formulario">
+          <div class="grupo-campo">
+            <label for="nomeOrganizacao">Nome da organização</label>
+            <input
+              id="nomeOrganizacao"
+              type="text"
+              placeholder="Associação Patas Seguras"
+            />
+          </div>
+
+          <div class="grupo-campo">
+            <label for="emailOrganizacao">Email da organização</label>
+            <input
+              id="emailOrganizacao"
+              type="email"
+              placeholder="contacto@organizacao.pt"
+            />
+          </div>
+        </div>
+
+        <div class="linha-formulario">
+          <div class="grupo-campo">
+            <label for="telefone">Telefone</label>
+            <input
+              id="telefone"
+              type="text"
+              placeholder="912345678"
+            />
+          </div>
+
+          <div class="grupo-campo">
+            <label for="morada">Morada</label>
+            <input
+              id="morada"
+              type="text"
+              placeholder="Rua das Flores, 10"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="secao-formulario">
+        <h2>Administrador principal</h2>
+
+        <div class="linha-formulario">
+          <div class="grupo-campo">
+            <label for="nomeAdmin">Nome</label>
+            <input
+              id="nomeAdmin"
+              type="text"
+              placeholder="Nome do responsável"
+            />
+          </div>
+
+          <div class="grupo-campo">
+            <label for="emailAdmin">Email de acesso</label>
+            <input
+              id="emailAdmin"
+              type="email"
+              placeholder="email@exemplo.pt"
+            />
+          </div>
+        </div>
+
+        <div class="linha-formulario">
+          <div class="grupo-campo">
+            <label for="password">Palavra-passe</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Introduza a palavra-passe"
+            />
+          </div>
+
+          <div class="grupo-campo">
+            <label for="confirmarPassword">Confirmar palavra-passe</label>
+            <input
+              id="confirmarPassword"
+              type="password"
+              placeholder="Repita a palavra-passe"
+            />
+          </div>
+        </div>
+      </div>
+
+      <label class="grupo-checkbox">
+        <input type="checkbox" />
+        <span>
+          Confirmo que os dados introduzidos são verdadeiros e pertencem à
+          organização registada.
+        </span>
+      </label>
+
+      <div class="acoes-formulario">
+        <button type="submit" class="botao-submeter">
+          Criar conta
+        </button>
+
+        <a routerLink="/login" class="link-login">
+          Já tenho conta
+        </a>
+      </div>
+
+    </form>
+  </div>
+</section>
