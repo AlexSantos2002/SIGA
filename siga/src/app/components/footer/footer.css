@@ -1,7 +1,7 @@
 .rodape {
   position: relative;
   overflow: hidden;
-  margin-top: 80px;
+  margin-top: 48px;
   background: #252627;
   color: #fff9fb;
 }
@@ -15,19 +15,33 @@
 .conteudo-rodape {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 56px 24px 32px;
+  padding: 36px 24px 24px;
+}
+
+.rodape-superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 249, 251, 0.08);
+}
+
+.info-principal {
+  max-width: 620px;
 }
 
 .logo-rodape {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .imagem-logo {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   transition: transform 0.2s ease;
 }
@@ -43,51 +57,19 @@
   letter-spacing: 1px;
 }
 
-.topo-rodape {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 36px;
-}
-
-.apresentacao-rodape {
-  max-width: 700px;
-}
-
-.titulo-rodape {
-  margin: 0 0 14px;
-  max-width: 760px;
-  font-size: 34px;
-  line-height: 1.15;
-  font-weight: 700;
-}
-
-.texto-rodape {
+.descricao-rodape {
   margin: 0;
-  max-width: 680px;
   color: #d3d4d9;
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-.caixa-acao {
-  min-width: 240px;
-  padding: 18px;
-  border: 1px solid rgba(255, 249, 251, 0.08);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.texto-acao {
-  margin: 0 0 12px;
-  color: #d3d4d9;
-  font-size: 13px;
+.acao-rodape {
+  min-width: 220px;
 }
 
 .botao-acao {
-  display: block;
+  display: inline-block;
   width: 100%;
   padding: 12px 18px;
   border-radius: 12px;
@@ -97,6 +79,8 @@
   text-decoration: none;
   font-weight: 600;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  user-select: none;
 }
 
 .botao-acao:hover {
@@ -104,54 +88,14 @@
   transform: translateY(-2px);
 }
 
-.blocos-rodape {
+.rodape-links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-bottom: 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding-top: 24px;
 }
 
-.bloco-info {
-  padding: 22px 20px;
-  border: 1px solid rgba(255, 249, 251, 0.06);
-  border-radius: 18px;
-  background: #2f3133;
-}
-
-.numero-bloco {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #4b88a2;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.titulo-bloco {
-  margin: 0 0 10px;
-  font-size: 18px;
-  color: #fff9fb;
-}
-
-.texto-bloco {
-  margin: 0;
-  color: #d3d4d9;
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.links-rodape {
-  display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1fr;
-  gap: 28px;
-  padding-top: 12px;
-}
-
-.coluna-rodape {
-  display: block;
-}
-
-.titulo-coluna {
+.coluna-rodape h3 {
   margin: 0 0 14px;
   font-size: 15px;
   color: #fff9fb;
@@ -164,7 +108,12 @@
   color: #d3d4d9;
   font-size: 14px;
   text-decoration: none;
+}
+
+.coluna-rodape a {
   transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  user-select: none;
 }
 
 .coluna-rodape a:hover {
@@ -173,17 +122,17 @@
 }
 
 .base-rodape {
-  margin-top: 36px;
+  margin-top: 24px;
   border-top: 1px solid rgba(255, 249, 251, 0.08);
 }
 
 .conteudo-base {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 18px 24px 22px;
+  padding: 16px 24px 20px;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -197,31 +146,18 @@
   text-align: right;
 }
 
-@media (max-width: 900px) {
-  .titulo-rodape {
-    font-size: 28px;
-  }
-
-  .blocos-rodape {
-    grid-template-columns: 1fr;
-  }
-
-  .links-rodape {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .conteudo-rodape {
-    padding: 44px 18px 26px;
+    padding: 30px 18px 22px;
   }
 
-  .titulo-rodape {
-    font-size: 24px;
+  .rodape-superior {
+    align-items: flex-start;
   }
 
-  .links-rodape {
+  .rodape-links {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .conteudo-base {
