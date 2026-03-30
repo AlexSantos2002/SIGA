@@ -1,0 +1,142 @@
+.pagina-sobre {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef6fa 0%, #f9fbfc 100%);
+}
+
+.hero-sobre {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px 90px;
+  background:
+    linear-gradient(135deg, #252627 0%, #2f3f48 45%, #4b88a2 100%);
+}
+
+.brilho {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.brilho-1 {
+  width: 260px;
+  height: 260px;
+  top: -40px;
+  right: 10%;
+  background: #7fb3c8;
+}
+
+.brilho-2 {
+  width: 220px;
+  height: 220px;
+  bottom: -50px;
+  left: 8%;
+  background: #4b88a2;
+}
+
+.conteudo-sobre,
+.conteudo-secao {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.rotulo {
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: #d4ebf4;
+}
+
+.titulo-principal {
+  margin-bottom: 24px;
+  font-size: 56px;
+  line-height: 1.05;
+  color: #fff9fb;
+}
+
+.texto-introducao {
+  font-size: 18px;
+  line-height: 1.9;
+  color: rgba(255, 249, 251, 0.9);
+}
+
+/* SECÇÕES */
+.secao-sobre {
+  padding: 76px 24px;
+}
+
+.secao-branca {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.secao-azul-suave {
+  background: linear-gradient(
+    180deg,
+    rgba(75, 136, 162, 0.08),
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+.mini-titulo {
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4b88a2;
+  text-transform: uppercase;
+}
+
+.titulo-secao {
+  font-size: 36px;
+  color: #252627;
+  margin-bottom: 10px;
+}
+
+.linha-decorativa {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #4b88a2, #7fb3c8);
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+
+.texto-secao {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #5f6b73;
+  margin-bottom: 16px;
+}
+
+.secao-final {
+  padding-bottom: 100px;
+}
+
+.destaque-final {
+  padding-top: 10px;
+}
+
+.acoes-sobre {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+}
+
+.botao {
+  padding: 14px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.botao-primario {
+  background: #4b88a2;
+  color: white;
+}
+
+.botao-secundario {
+  border: 1px solid #4b88a2;
+  color: #4b88a2;
+}
