@@ -14,7 +14,7 @@
       </p>
     </div>
 
-    <form class="formulario-registo">
+    <form [formGroup]="form" class="formulario-registo">
 
       <div class="secao-formulario">
         <h2>Dados da organização</h2>
@@ -26,6 +26,7 @@
               id="nomeOrganizacao"
               type="text"
               placeholder="Associação Patas Seguras"
+              formControlName="name"
             />
           </div>
 
@@ -35,6 +36,7 @@
               id="emailOrganizacao"
               type="email"
               placeholder="contacto@organizacao.pt"
+              formControlName="email"
             />
           </div>
         </div>
@@ -46,6 +48,7 @@
               id="telefone"
               type="text"
               placeholder="912345678"
+              formControlName="phone"
             />
           </div>
 
@@ -55,6 +58,7 @@
               id="morada"
               type="text"
               placeholder="Rua das Flores, 10"
+              formControlName="address"
             />
           </div>
         </div>
@@ -70,6 +74,7 @@
               id="nomeAdmin"
               type="text"
               placeholder="Nome do responsável"
+              formControlName="adminName"
             />
           </div>
 
@@ -79,6 +84,7 @@
               id="emailAdmin"
               type="email"
               placeholder="email@exemplo.pt"
+              formControlName="adminEmail"
             />
           </div>
         </div>
@@ -90,6 +96,7 @@
               id="password"
               type="password"
               placeholder="Introduza a palavra-passe"
+              formControlName="adminPassword"
             />
           </div>
 
@@ -113,7 +120,7 @@
       </label>
 
       <div class="acoes-formulario">
-        <button type="submit" class="botao-submeter">
+        <button (click)="register()" type="submit" class="botao-submeter">
           Criar conta
         </button>
 
