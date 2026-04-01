@@ -1,39 +1,45 @@
 import {supabase} from '../../../../../supabase/supabase';
 
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../services/auth.service';
-import {Router} from '@angular/router';
+import { OrganizationService } from '../../../services/organization.service';
+import { FormBuilder, FormsModule, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
+  standalone: true
 })
-export class Register implements OnInit{
+export class Register {
 
-  constructor(private auth: AuthService, private router: Router) {
+  form: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private organizationService: OrganizationService
+  ) {
+    this.form = this.fb.group({
+      // Organização
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+
+      // Admin
+      adminName: ['', Validators.required],
+      adminEmail: ['', [Validators.required, Validators.email]],
+      adminPassword: ['', Validators.required],
+    });
   }
-
-  email: string = 'nicolaspaiva@outlook.com';
-  password: string = 'abc123';
-  organizationId: string = '36232177-5ae4-461f-96dc-2178a544da52';
-  error: string = '';
-
 
   async register() {
-    try {
-      await this.auth.signUp(this.email, this.password, this.organizationId);
-      alert('Registration successful! Please check your email to confirm.');
-      this.router.navigate(['/login']);
-    } catch (err: any) {
-      this.error = err.message;
-    }
-  }
 
+    if (this.form.invalid) return;
 
-  ngOnInit(): void {
-    this.register();
+    const request = this.form.value;
+
+    await this.organizationService.registerOrganization(request);
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from '../../../services/organization.service';
+import { RegisterOrganizationRequest } from '../../../models/RegisterOrganizationRequest';
 
 @Component({
   selector: 'app-organizations',
@@ -10,18 +11,4 @@ import { OrganizationService } from '../../../services/organization.service';
 })
 export class Organizations {
   constructor(private organizationService: OrganizationService) {}
-
-  name: string = 'organizacao de animais';
-  email: string = 'organizacao';
-  phone: string = '123456789';
-  address: string = 'Porto';
-
-  registerOrganization(): void {
-    this.organizationService.createOrganization(
-      this.name,
-      this.email,
-      this.phone,
-      this.address
-    );
-  }
 }
