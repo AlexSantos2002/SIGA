@@ -14,7 +14,7 @@
       </p>
     </div>
 
-    <form [formGroup]="form" class="formulario-registo">
+    <form [formGroup]="form" (ngSubmit)="register()" class="formulario-registo">
 
       <div class="secao-formulario">
         <h2>Dados da organização</h2>
@@ -120,7 +120,7 @@
       </label>
 
       <div class="acoes-formulario">
-        <button (click)="register()" type="submit" class="botao-submeter">
+        <button type="submit" class="botao-submeter">
           Criar conta
         </button>
 

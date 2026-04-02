@@ -1,7 +1,6 @@
-import { Injectable, NgModule } from '@angular/core';
+import { Injectable} from '@angular/core';
 import {supabase} from '../../../supabase/supabase';
 import {RegisterOrganizationRequest} from '../models/RegisterOrganizationRequest';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,6 @@ export class OrganizationService {
    * Cria tambem o administrador principal da organizacao
    */
   async registerOrganization(request: RegisterOrganizationRequest) {
-
 
     // Cria a organizacao
     const { data: orgData, error: orgError } = await supabase
@@ -35,8 +33,15 @@ export class OrganizationService {
       password: request.adminPassword,
     });
 
-    if (authError) throw authError;
-    if (!authData.user) throw new Error('Administrador não foi criado');
+    // Deleta a organizacao caso o administrador nao seja criado
+    if (authError || !authData.user) {
+      await supabase
+        .from('organizations')
+        .delete()
+        .eq('id', organizationId);
+
+      throw authError;
+    }
 
     // Insere na tabela de usuarios
     const { error: userError } = await supabase
