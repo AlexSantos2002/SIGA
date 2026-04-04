@@ -1,6 +1,11 @@
+<!-- 
+  Página de registo de organização para criar uma conta associada a uma organização e ao seu administrador principal
+-->
+
 <section class="pagina-registo">
   <div class="container-registo">
 
+    <!-- Cabeçalho da página -->
     <div class="cabecalho-registo">
       <p class="etiqueta-registo">REGISTO</p>
 
@@ -14,8 +19,10 @@
       </p>
     </div>
 
+    <!--Formulário de registo-->
     <form [formGroup]="form" (ngSubmit)="register()" class="formulario-registo">
 
+      <!--Dados da organização-->
       <div class="secao-formulario">
         <h2>Dados da organização</h2>
 
@@ -64,6 +71,7 @@
         </div>
       </div>
 
+      <!--Dados do administrador-->
       <div class="secao-formulario">
         <h2>Administrador principal</h2>
 
@@ -111,6 +119,7 @@
         </div>
       </div>
 
+      <!-- Confirmação de dados -->
       <label class="grupo-checkbox">
         <input type="checkbox" />
         <span>
@@ -119,6 +128,7 @@
         </span>
       </label>
 
+      <!-- Ações do formulário -->
       <div class="acoes-formulario">
         <button type="submit" class="botao-submeter">
           Criar conta
