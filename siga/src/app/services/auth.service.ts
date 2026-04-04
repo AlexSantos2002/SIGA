@@ -1,65 +1,85 @@
 import { Injectable } from '@angular/core';
 import {supabase} from '../../../supabase/supabase';
-import { CreateUserRequest } from '../models/CreateUserRequest';
+import { LoginRequest } from '../models/LoginRequest';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  /**
-   * Regista um usuario com seu email, password e organizacao
-   * @param email
-   * @param password
-   * @param organizationId
-   */
-  async signUp(email: string, password: string, organizationId: string) {
-    // Faz o signup com as credenciais
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email,
-      password,
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
+
+  async login(request: LoginRequest): Promise<User> {
+    // Faz o login no supabase auth
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: request.email,
+      password: request.password
     });
-    if (authError) throw authError;
 
-    // Insere na tabela "users"
-    const { error: tableError } = await supabase
+    if (error) throw error;
+
+    // Busca o usuario da tabela "users"
+    const { data: userProfile, error: userError } = await supabase
       .from('users')
-      .insert([{ id: authData.user?.id, organization_id: organizationId }]);
-    if (tableError) throw tableError;
+      .select('*')
+      .eq('id', data.user.id)
+      .single();
 
-    return authData.user;
+    if (userError) throw userError;
+
+    const user = this.mapToUser(userProfile);
+
+    this.currentUserSubject.next(user);
+
+    return user;
   }
 
-
-  /**
-   * Regista um administrador.
-   * O registo do administrador é feito assim que a
-   * organização é criada
-   * @param request
-   */
-  async registerAdmin(request: CreateUserRequest) {
-    const {name, email, password, organizationId} = request;
-
-    // Faz o registo no supabase
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    if (authError) throw authError;
-    if (!authData.user) throw new Error('Usuário não foi criado');
-
-    // Insere o administrador na tabela "users"
-    const { error: tableError } = await supabase
-      .from('users')
-      .insert([{
-        id: authData.user.id,
-        name,
-        email,
-        organization_id: organizationId,
-        role: 'admin'
-      }]);
-    if (tableError) throw tableError;
-
-    return authData.user;
+  async logout() {
+    await supabase.auth.signOut();
+    this.currentUserSubject.next(null);
   }
+
+  getCurrentUser() {
+    return this.currentUserSubject.value;
+  }
+
+  // Carrega o usuario autenticado.
+  // Deve ser utilizado na inicializacao da aplicacao,
+  // para evitar o login constante
+  async loadUserFromSession() {
+    const { data } = await supabase.auth.getSession();
+
+    if (!data.session) return;
+
+    const userId = data.session.user.id;
+
+    const { data: userProfile } = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    const user = this.mapToUser(userProfile);
+
+    this.currentUserSubject.next(user);
+  }
+
+  async getSession() {
+    const { data } = await supabase.auth.getSession();
+    return data.session;
+  }
+
+  // Converte o usuario enviado pelo supabase para um User
+  private mapToUser(profile: any): User {
+    return {
+      name: profile.name,
+      email: profile.email,
+      role: profile.role,
+      organizationId: profile.organization_id
+    };
+  }
+
 }

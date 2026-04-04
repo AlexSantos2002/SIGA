@@ -1,8 +1,7 @@
-import {supabase} from '../../../../../supabase/supabase';
-
 import {Component, OnInit} from '@angular/core';
 import { OrganizationService } from '../../../services/organization.service';
 import { FormBuilder, FormsModule, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RegisterOrganizationRequest } from '../../../models/RegisterOrganizationRequest';
 
 @Component({
   selector: 'app-register',
@@ -20,9 +19,9 @@ export class Register {
     private organizationService: OrganizationService
   ) {
     this.form = this.fb.group({
-      // Organização
+      // Organizacao
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       address: ['', Validators.required],
 
@@ -33,13 +32,24 @@ export class Register {
     });
   }
 
-  async register() {
 
+  async register() {
     if (this.form.invalid) return;
 
-    const request = this.form.value;
+    const request: RegisterOrganizationRequest = this.form.value;
 
-    await this.organizationService.registerOrganization(request);
+    try {
+      const org = await this.organizationService.registerOrganization(request);
+      console.log('Organização registada');
+      this.form.reset();
+
+      // Redirecionar para a pagina da organizacao
+
+    } catch (err) {
+      console.log('Erro: ', err);
+
+      // Implementar mensagem de erro
+    }
   }
 
 }
