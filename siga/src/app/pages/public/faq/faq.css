@@ -1,0 +1,145 @@
+.faq-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef6fa 0%, #f9fbfc 100%);
+}
+
+.faq-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;
+  padding: 120px 24px 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagem-hero {
+  position: absolute;
+  inset: 0;
+  background-image: url('/caes2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.filtro-hero {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(37, 38, 39, 0.78) 0%, rgba(37, 38, 39, 0.52) 45%, rgba(37, 38, 39, 0.32) 100%),
+    linear-gradient(180deg, rgba(75, 136, 162, 0.25) 0%, rgba(75, 136, 162, 0.45) 100%);
+}
+
+.faq-hero-conteudo {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  text-align: center;
+  color: #fff;
+}
+
+.faq-etiqueta {
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8d7e5;
+}
+
+.faq-titulo {
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  margin: 0;
+}
+
+.faq-linha {
+  width: 80px;
+  height: 4px;
+  margin: 20px auto;
+  background: linear-gradient(90deg, #7fb3c8, #d8eef8);
+  border-radius: 999px;
+}
+
+.faq-subtitulo {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.faq-conteudo {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.faq-intro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.faq-intro h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #252627;
+}
+
+.faq-intro p {
+  color: #5f6f78;
+  line-height: 1.7;
+}
+
+.faq-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  border-radius: 16px;
+  background: #ffffffcc;
+  border: 1px solid rgba(75, 136, 162, 0.15);
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+}
+
+.faq-pergunta {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.faq-icone {
+  background: #4b88a2;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-resposta {
+  padding: 0 20px 20px;
+  color: #5f6f78;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .faq-hero {
+    padding: 100px 20px 70px;
+  }
+
+  .faq-conteudo {
+    padding: 60px 20px;
+  }
+}

@@ -1,0 +1,54 @@
+<section class="faq-page">
+
+  <section class="faq-hero">
+    <div class="imagem-hero" aria-hidden="true"></div>
+    <div class="filtro-hero"></div>
+
+    <div class="faq-hero-conteudo">
+      <p class="faq-etiqueta">FAQ</p>
+
+      <h1 class="faq-titulo">
+        Perguntas frequentes
+      </h1>
+
+      <div class="faq-linha"></div>
+
+      <p class="faq-subtitulo">
+        Encontra aqui respostas rápidas às dúvidas mais comuns sobre o SIGA,
+        a plataforma e a sua utilização.
+      </p>
+    </div>
+  </section>
+
+  <section class="faq-conteudo">
+
+    <div class="faq-intro">
+      <h2>Dúvidas mais comuns</h2>
+
+      <p>
+        Esta secção reúne algumas das perguntas mais frequentes sobre o projeto.
+        O objetivo é tornar a navegação mais clara e ajudar a compreender melhor
+        a proposta da plataforma.
+      </p>
+    </div>
+
+    <div class="faq-lista">
+      <div
+        class="faq-item"
+        *ngFor="let faq of faqs; let i = index"
+        [class.aberto]="faq.open"
+      >
+        <button class="faq-pergunta" (click)="toggleFaq(i)">
+          <span>{{ faq.question }}</span>
+          <span class="faq-icone">{{ faq.open ? '−' : '+' }}</span>
+        </button>
+
+        <div class="faq-resposta" *ngIf="faq.open">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</section>

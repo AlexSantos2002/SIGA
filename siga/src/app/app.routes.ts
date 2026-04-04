@@ -5,9 +5,9 @@ import { PrivateLayout } from './pages/private/private-layout';
 
 import { Home } from './pages/public/home/home';
 import { Register } from './pages/public/register/register';
-import { Organizations } from './pages/public/organizations/organizations';
 import { About } from './pages/public/about/about';
 import { Contacts } from './pages/public/contacts/contacts';
+import { Faq } from './pages/public/faq/faq';
 
 export const routes: Routes = [
   {
@@ -16,8 +16,8 @@ export const routes: Routes = [
     children: [
       { path: '', component: Home },
       { path: 'register', component: Register },
-      { path: 'organizations', component: Organizations },
       { path: 'about', component: About },
+      { path: 'faq', component: Faq },
       { path: 'contacts', component: Contacts }
     ]
   },
