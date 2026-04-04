@@ -1,3 +1,5 @@
+/* Estrutura principal */
+
 .rodape {
   position: relative;
   overflow: hidden;
@@ -6,6 +8,7 @@
   color: #fff9fb;
 }
 
+/* Linha superior */
 .linha-topo {
   width: 100%;
   height: 4px;
@@ -18,6 +21,8 @@
   padding: 36px 24px 24px;
 }
 
+/* Secção superior */
+
 .rodape-superior {
   display: flex;
   justify-content: space-between;
@@ -28,6 +33,7 @@
   border-bottom: 1px solid rgba(255, 249, 251, 0.08);
 }
 
+/* Informação principal */
 .info-principal {
   max-width: 620px;
 }
@@ -46,6 +52,7 @@
   transition: transform 0.2s ease;
 }
 
+/* Animação no icon */
 .logo-rodape:hover .imagem-logo {
   transform: rotate(5deg) scale(1.05);
 }
@@ -63,6 +70,8 @@
   font-size: 14px;
   line-height: 1.7;
 }
+
+/*Botão de ação*/
 
 .acao-rodape {
   min-width: 220px;
@@ -88,6 +97,8 @@
   transform: translateY(-2px);
 }
 
+/* Links do footer */
+
 .rodape-links {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -110,6 +121,7 @@
   text-decoration: none;
 }
 
+/* Interação nos links */
 .coluna-rodape a {
   transition: color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
@@ -120,6 +132,8 @@
   color: #4b88a2;
   transform: translateX(3px);
 }
+
+/* Base do footer */
 
 .base-rodape {
   margin-top: 24px;
@@ -142,9 +156,12 @@
   font-size: 13px;
 }
 
+/* Mensagem alinhada à direita para desktop */
 .mensagem-base {
   text-align: right;
 }
+
+/* Responsividade */
 
 @media (max-width: 768px) {
   .conteudo-rodape {
@@ -155,6 +172,7 @@
     align-items: flex-start;
   }
 
+  /* Passa para uma coluna */
   .rodape-links {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -164,6 +182,7 @@
     flex-direction: column;
   }
 
+  /* Ajusta alinhamento telemovel e mobiles */
   .mensagem-base {
     text-align: left;
   }

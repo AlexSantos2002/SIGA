@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+/**
+ * @description
+ * Componente responsável pelo footer
+ * 
+ * Este componente é apresentado em todas as páginas públicas
+ */
 @Component({
   selector: 'app-footer',
   standalone: true,

@@ -1,20 +1,29 @@
+<!-- 
+ HTML da barra de navegaçao
+-->
+
 <header class="barra-topo">
   <div class="conteudo-barra">
+
+    <!-- Icon e ligação à página inicial -->
     <a routerLink="/" class="logo">
       <img src="/favicon.ico" alt="Logótipo SIGA" class="logo-imagem" />
       <span class="logo-texto">SIGA</span>
     </a>
 
+    <!-- Menu principal -->
     <nav class="menu-navegacao">
       <a routerLink="/">Início</a>
-      <a href="/faq">FAQ</a>
+      <a routerLink="/faq">FAQ</a>
       <a routerLink="/about">Sobre</a>
       <a routerLink="/contacts">Contactos</a>
     </nav>
 
+    <!-- Criar conta e login -->
     <div class="acoes-barra">
-      <a href="#" class="link-entrar">Entrar</a>
+      <a routerLink="/login" class="link-entrar">Entrar</a>
       <a routerLink="/register" class="botao-topo">Começar agora</a>
     </div>
+
   </div>
 </header>

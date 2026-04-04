@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 
+/**
+ * @description
+ * Componente responsável pelo login
+ * 
+ * Formulário de login onde o utilizador introduz
+ * 
+ * Após o login redireciona para uma página
+ */
 @Component({
   selector: 'app-login',
   imports: [],
@@ -9,8 +17,21 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './login.css',
 })
 export class Login implements OnInit {
+
+  /**
+   * @description
+   * Formulário utilizado para receber as credenciais do user
+   */
   form: FormGroup;
 
+  /**
+   * @description
+   * Construtor do componente
+   * Inicializa o formulário com validações obrigatórias
+   * 
+   * @param fb Serviço FormBuilder para criação do formulário
+   * @param authService Responsável pelo login
+   */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -25,24 +46,39 @@ export class Login implements OnInit {
     this.login()
   }
 
-  async login() {
+  /**
+   * @description
+   * Realiza o processo de login do utilizador
+   * 
+   * Envia as credenciais para o AuthService e em caso de sucesso, verifica o papel do utilizador
+   * para definir o redirecionamento adequado.
+   * 
+   * Em caso de erro regista o erro e  apresenta uma mensagem ao utilizador.
+   * 
+   * @returns {Promise<void>} Promessa resolvida após tentativa de login
+   */
+  async login(): Promise<void> {
     try {
       const user = await this.authService.login(this.form.value);
+
       console.log('Login efetuado');
 
+      /**
+       * Verifica o papel do utilizador autenticado
+       */
       if (user.role == 'admin') {
         console.log('Administrador logado');
 
-        // Redirecionar para pagina de administrador
+        //Redirecionar para página de administrador
       } else {
-        console.log('Usuario logado');
+        console.log('Utilizador logado');
 
-        // redirecionar para pagina de usuarios
+        //Redirecionar para página de utilizador
       }
     } catch (err) {
       console.log(err);
 
-      // Adicionar mensagem de erro
+      // mensagem de erro ao utilizador
     }
   }
 }

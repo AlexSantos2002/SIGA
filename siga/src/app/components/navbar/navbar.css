@@ -1,3 +1,4 @@
+/*Estrutura principal da navbar*/
 .barra-topo {
   position: sticky;
   top: 0;
@@ -16,6 +17,8 @@
   justify-content: space-between;
   gap: 24px;
 }
+
+/* Icon */
 
 .logo {
   display: inline-flex;
@@ -39,9 +42,12 @@
   color: #fff9fb;
 }
 
+/* Animacap ao passar o rato no icon */
 .logo:hover .logo-imagem {
   transform: rotate(5deg) scale(1.05);
 }
+
+/* Menu de navegação */
 
 .menu-navegacao {
   display: flex;
@@ -61,6 +67,8 @@
   color: #4b88a2;
 }
 
+/* Ações do user */
+
 .acoes-barra {
   display: flex;
   align-items: center;
@@ -79,6 +87,7 @@
   color: #4b88a2;
 }
 
+/* Botão principal */
 .botao-topo {
   display: inline-block;
   padding: 10px 16px;
@@ -96,11 +105,14 @@
   transform: translateY(-2px);
 }
 
+/* Responsividade */
+
 @media (max-width: 900px) {
   .conteudo-barra {
     flex-wrap: wrap;
   }
 
+  /* O menu passa para uma linha inferior e centralizada */
   .menu-navegacao {
     order: 3;
     width: 100%;
