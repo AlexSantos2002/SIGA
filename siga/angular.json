@@ -14,10 +14,14 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "pt-PT",
+        "sourceLocale": {
+          "code": "pt-PT",
+          "subPath": ""
+        },
         "locales": {
           "en": {
-            "translation": "locale/messages.en.xlf"
+            "translation": "locale/messages.en.xlf",
+            "subPath": "en"
           }
         }
       },
