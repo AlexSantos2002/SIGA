@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="7106539915530262914" datatype="html">
+        <source> Plataforma de apoio à gestão de animais e processos de adoção por organizações de proteção animal. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7210930735981511249" datatype="html">
+        <source>Começar agora</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1826668441638703043" datatype="html">
+        <source>Navegação</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8237522812427434567" datatype="html">
+        <source>Início</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5489968893403305908" datatype="html">
+        <source>Sobre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7761920529535961293" datatype="html">
+        <source>Registar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8433768950518578342" datatype="html">
+        <source>Contacto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1825932113518847029" datatype="html">
+        <source>Portugal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5800079101929505269" datatype="html">
+        <source>© 2026 SIGA. Todos os direitos reservados.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">55,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6094347634921217686" datatype="html">
+        <source> Feito para apoiar associações e organizações de proteção animal. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
+          <context context-type="linenumber">59,60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2806917038528218276" datatype="html">
+        <source>FAQ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/faq/faq.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2969147548839550756" datatype="html">
+        <source>Contactos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6307676985066487860" datatype="html">
+        <source> PT | EN </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4540642178875789338" datatype="html">
+        <source>Português</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5866254605255506989" datatype="html">
+        <source>English</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="600376029726528115" datatype="html">
+        <source>Entrar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8513029167698384448" datatype="html">
+        <source>Sobre o SIGA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6530395672904771361" datatype="html">
+        <source> Uma plataforma criada para apoiar organizações de proteção animal de forma mais simples, organizada e humana. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7404309311984318906" datatype="html">
+        <source> O SIGA surge da necessidade de melhorar a forma como muitas organizações gerem informação sobre animais, adotantes e processos de adoção. A proposta passa por reunir tudo num único sistema claro, intuitivo e estruturado. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6990443002155929174" datatype="html">
+        <source>Origem</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3039953517660565917" datatype="html">
+        <source>Porque nasceu este projeto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">35,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6547151409286692488" datatype="html">
+        <source> Em muitas organizações, a informação encontra-se dispersa por folhas de cálculo, mensagens, documentos ou apontamentos soltos. Isso dificulta o acompanhamento do historial dos animais, o controlo dos processos de adoção e a consulta rápida de dados importantes no dia a dia. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">41,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1923606360098846795" datatype="html">
+        <source> O SIGA foi pensado precisamente para responder a esse problema, oferecendo uma plataforma que ajuda a centralizar informação e a tornar a gestão mais clara, consistente e acessível. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="366604124396966672" datatype="html">
+        <source>Objetivo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8321998720764992370" datatype="html">
+        <source>O que o SIGA pretende oferecer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">61,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4037436607245216517" datatype="html">
+        <source> O objetivo da plataforma é apoiar o registo e acompanhamento dos animais, facilitar a organização dos processos de adoção e melhorar a forma como a informação é consultada dentro de cada organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">66,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="560008961080146352" datatype="html">
+        <source> Mais do que guardar dados, o SIGA procura ajudar as organizações a trabalhar com mais estrutura, reduzir a desorganização e ter uma visão mais completa sobre cada caso. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">72,74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4962332592922082992" datatype="html">
+        <source>Visão</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">84,85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3528056969017991906" datatype="html">
+        <source> Uma ferramenta pensada para a realidade das organizações </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">86,87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2804895148723269600" datatype="html">
+        <source> Esta plataforma foi idealizada tendo em conta necessidades concretas observadas em contextos reais. A intenção é desenvolver uma solução útil, prática e adaptada ao trabalho diário de associações e organizações que lidam com acolhimento, acompanhamento e adoção responsável de animais. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">92,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="224081177712017758" datatype="html">
+        <source> O foco está na simplicidade, na clareza da informação e na criação de uma base sólida que possa evoluir no futuro com novas funcionalidades. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">99,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1288578523830865013" datatype="html">
+        <source>Evolução</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">110,111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2815389994370983855" datatype="html">
+        <source>Um projeto em crescimento</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">111,113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6661439306449312042" datatype="html">
+        <source> O SIGA pretende continuar a evoluir, acompanhando as necessidades das organizações e melhorando progressivamente a experiência de utilização. A visão é construir uma plataforma cada vez mais útil, capaz de apoiar uma gestão animal mais responsável, organizada e eficiente. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">116,119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2876845279614484382" datatype="html">
+        <source>Criar conta</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">124,125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4633353316472239553" datatype="html">
+        <source>Ver organizações</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/about/about.html</context>
+          <context context-type="linenumber">125,126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7580907415197220785" datatype="html">
+        <source>CONTACTOS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3673656205726730950" datatype="html">
+        <source>Entre em contacto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5958161800033122452" datatype="html">
+        <source> Se tiver dúvidas sobre a plataforma, quiser obter mais informações ou pretender falar connosco sobre a utilização do SIGA na sua organização, poderá fazê-lo através dos contactos abaixo ou através do formulário. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3078732027036868314" datatype="html">
+        <source>Fale connosco</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7220894950910498623" datatype="html">
+        <source> O SIGA foi pensado para apoiar organizações no registo, acompanhamento e gestão de animais, bem como na organização do processo de adoção de forma mais clara e estruturada. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8294907277116346236" datatype="html">
+        <source> Caso tenha interesse em conhecer melhor a plataforma, esclarecer alguma funcionalidade ou partilhar sugestões de melhoria, estaremos disponíveis para ajudar. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">71,72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6499251675131147754" datatype="html">
+        <source>Telefone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9058655571434642402" datatype="html">
+        <source>Apoio e informações</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2200876087272063677" datatype="html">
+        <source> Poderá utilizar este espaço para esclarecer dúvidas sobre registo de organizações, utilização geral da plataforma ou outras questões relacionadas com o projeto. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">54,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7157780716199298379" datatype="html">
+        <source>Envie uma mensagem</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">63,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2332180001770133395" datatype="html">
+        <source>Nome</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">82,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8234857715854104344" datatype="html">
+        <source>O seu nome</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4435552890100036332" datatype="html">
+        <source>Assunto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">76,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5979220134786002379" datatype="html">
+        <source>Assunto da mensagem</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7006504226018571450" datatype="html">
+        <source>Mensagem</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">81,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1041467469516131858" datatype="html">
+        <source>Escreva aqui a sua mensagem</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">85,86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="422393855676607027" datatype="html">
+        <source> Enviar mensagem </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">92,93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5244642504083940533" datatype="html">
+        <source> Perguntas frequentes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/faq/faq.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8181800150532825505" datatype="html">
+        <source> Encontra aqui respostas rápidas às dúvidas mais comuns sobre o SIGA, a plataforma e a sua utilização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/faq/faq.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5313568974851623771" datatype="html">
+        <source>Dúvidas mais comuns</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/faq/faq.html</context>
+          <context context-type="linenumber">36,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4942265175746015815" datatype="html">
+        <source> Esta secção reúne algumas das perguntas mais frequentes sobre o projeto. O objetivo é tornar a navegação mais clara e ajudar a compreender melhor a proposta da plataforma. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/faq/faq.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4751418736521891024" datatype="html">
+        <source> Uma plataforma para apoiar organizações no cuidado, acompanhamento e adoção responsável de animais. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1114980981621076901" datatype="html">
+        <source> O SIGA centraliza informação importante, simplifica processos e ajuda organizações a gerir animais e adoções de forma mais clara, organizada e eficiente. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4024267164262443995" datatype="html">
+        <source>Começar já</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3701850969072337993" datatype="html">
+        <source>Saber mais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3505632579767175021" datatype="html">
+        <source>Sobre o projeto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="846060097294313656" datatype="html">
+        <source> Uma solução simples para uma gestão mais humana e eficiente </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6591306512768827485" datatype="html">
+        <source> O SIGA foi pensado para apoiar organizações que lidam diariamente com o acolhimento, acompanhamento e adoção de animais. A plataforma procura reunir informação essencial num único local, reduzindo a dispersão de dados e facilitando o acompanhamento de cada processo. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">47,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9049831392464339297" datatype="html">
+        <source>Funções principais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7733274776457323578" datatype="html">
+        <source>Gestão de animais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1971141401738322816" datatype="html">
+        <source> Regista e acompanha informação relevante sobre cada animal de forma clara e organizada. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7438587570649858558" datatype="html">
+        <source>Processos de adoção</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="877428297150890724" datatype="html">
+        <source> Acompanha as várias etapas de adoção com mais estrutura e melhor acesso à informação. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4628153947528154253" datatype="html">
+        <source>Organização centralizada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">80,81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5107677901477213845" datatype="html">
+        <source> Mantém dados importantes num único sistema, acessível e adaptado às necessidades da organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">82,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7280206485110572966" datatype="html">
+        <source>Porque usar o SIGA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">95,97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1973150807432395602" datatype="html">
+        <source> Mais clareza, mais organização, melhor acompanhamento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">98,99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2606504098337466653" datatype="html">
+        <source> O objetivo do SIGA é apoiar organizações de proteção animal com uma plataforma intuitiva, útil e preparada para facilitar o trabalho diário. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">102,103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="72225236906177286" datatype="html">
+        <source>Animais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">111,112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4896652728048369511" datatype="html">
+        <source>Registo e histórico organizados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">112,113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3586518820682258088" datatype="html">
+        <source>Adoções</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">116,117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="745165328632255477" datatype="html">
+        <source>Processos mais claros e responsáveis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">117,118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5299218461070639270" datatype="html">
+        <source>Plataforma</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">121,122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6975552729773811996" datatype="html">
+        <source>Uma solução pensada para organizações</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">122,123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8740650754504608516" datatype="html">
+        <source>Começa a utilizar o SIGA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">133,135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3992804442088140699" datatype="html">
+        <source> Cria a tua conta e começa a organizar a gestão animal da tua organização de forma mais simples e estruturada. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">136,137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3456063921733794586" datatype="html">
+        <source> Criar conta </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
+          <context context-type="linenumber">142,143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4723729699972393049" datatype="html">
+        <source>REGISTO</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5713500916207198774" datatype="html">
+        <source>Criar conta da organização</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="167599553203686836" datatype="html">
+        <source> Preencha os dados da organização e do administrador principal para criar a conta inicial no SIGA. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="599279694964963577" datatype="html">
+        <source>Dados da organização</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4727065767125378286" datatype="html">
+        <source>Nome da organização</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6342404303245908766" datatype="html">
+        <source>Associação Patas Seguras</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="596226359555435876" datatype="html">
+        <source>Email da organização</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2249942102904409775" datatype="html">
+        <source>Morada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1345987950970462943" datatype="html">
+        <source>Rua das Flores, 10</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1041155509366923391" datatype="html">
+        <source>Administrador principal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">78,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1527229157887963172" datatype="html">
+        <source>Nome do responsável</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">86,87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6831917850141525267" datatype="html">
+        <source>Email de acesso</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3625214439166825841" datatype="html">
+        <source>Palavra-passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">105,106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="579908806089817338" datatype="html">
+        <source>Introduza a palavra-passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">109,110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2780740608724801087" datatype="html">
+        <source>Confirmar palavra-passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">116,117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2803155010811042517" datatype="html">
+        <source>Repita a palavra-passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">120,121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2321174301230730808" datatype="html">
+        <source> Confirmo que os dados introduzidos são verdadeiros e pertencem à organização registada. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">131,132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5766127861654266929" datatype="html">
+        <source> Já tenho conta </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

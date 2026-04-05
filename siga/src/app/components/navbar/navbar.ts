@@ -33,14 +33,18 @@ export class Navbar {
 
   /**
    * @description
-   * Define o idioma selecionado pelo utilizador.
+   * Define o idioma selecionado pelo utilizador
    *
-   * @param lang Código do idioma 
+   * @param lang Código do idioma
    * @returns {void} Não retorna valor
    */
   changeLang(lang: string): void {
-    console.log('Idioma selecionado:', lang);
-    localStorage.setItem('lang', lang);
+    if (lang === 'pt') {
+      window.location.href = '/';
+    } else if (lang === 'en') {
+      window.location.href = '/en/';
+    }
+
     this.showLangMenu = false;
   }
 }

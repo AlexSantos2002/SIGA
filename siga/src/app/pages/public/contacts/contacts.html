@@ -5,11 +5,11 @@
 
   <!-- Secção de topo -->
   <section class="topo-contactos">
-    <p class="etiqueta-contactos">CONTACTOS</p>
+    <p class="etiqueta-contactos" i18n>CONTACTOS</p>
 
-    <h1 class="titulo-contactos">Entre em contacto</h1>
+    <h1 class="titulo-contactos" i18n>Entre em contacto</h1>
 
-    <p class="subtitulo-contactos">
+    <p class="subtitulo-contactos" i18n>
       Se tiver dúvidas sobre a plataforma, quiser obter mais informações ou
       pretender falar connosco sobre a utilização do SIGA na sua organização,
       poderá fazê-lo através dos contactos abaixo ou através do formulário.
@@ -21,15 +21,15 @@
 
     <!-- Informações de contacto -->
     <div class="informacoes-contactos">
-      <h2>Fale connosco</h2>
+      <h2 i18n>Fale connosco</h2>
 
-      <p class="texto-contactos">
+      <p class="texto-contactos" i18n>
         O SIGA foi pensado para apoiar organizações no registo, acompanhamento e
         gestão de animais, bem como na organização do processo de adoção de
         forma mais clara e estruturada.
       </p>
 
-      <p class="texto-contactos">
+      <p class="texto-contactos" i18n>
         Caso tenha interesse em conhecer melhor a plataforma, esclarecer alguma
         funcionalidade ou partilhar sugestões de melhoria, estaremos disponíveis
         para ajudar.
@@ -37,20 +37,20 @@
 
       <!-- Dados de contacto -->
       <div class="linha-contacto">
-        <span class="rotulo-contacto">Email</span>
+        <span class="rotulo-contacto" i18n>Email</span>
         <span class="valor-contacto">geral@siga.pt</span>
       </div>
 
       <div class="linha-contacto">
-        <span class="rotulo-contacto">Telefone</span>
+        <span class="rotulo-contacto" i18n>Telefone</span>
         <span class="valor-contacto">+351 91x xxx xxx</span>
       </div>
 
       <!-- Informação adicional -->
       <div class="bloco-apoio">
-        <h3>Apoio e informações</h3>
+        <h3 i18n>Apoio e informações</h3>
 
-        <p>
+        <p i18n>
           Poderá utilizar este espaço para esclarecer dúvidas sobre registo de
           organizações, utilização geral da plataforma ou outras questões
           relacionadas com o projeto.
@@ -60,34 +60,35 @@
 
     <!-- Formulário de contacto -->
     <form class="formulario-contactos">
-      <h2>Envie uma mensagem</h2>
+      <h2 i18n>Envie uma mensagem</h2>
 
       <div class="grupo-campo">
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" placeholder="O seu nome" />
+        <label for="nome" i18n>Nome</label>
+        <input id="nome" type="text" placeholder="O seu nome" i18n-placeholder />
       </div>
 
       <div class="grupo-campo">
-        <label for="email">Email</label>
+        <label for="email" i18n>Email</label>
         <input id="email" type="email" placeholder="o.seu@email.com" />
       </div>
 
       <div class="grupo-campo">
-        <label for="assunto">Assunto</label>
-        <input id="assunto" type="text" placeholder="Assunto da mensagem" />
+        <label for="assunto" i18n>Assunto</label>
+        <input id="assunto" type="text" placeholder="Assunto da mensagem" i18n-placeholder />
       </div>
 
       <div class="grupo-campo">
-        <label for="mensagem">Mensagem</label>
+        <label for="mensagem" i18n>Mensagem</label>
         <textarea
           id="mensagem"
           rows="6"
           placeholder="Escreva aqui a sua mensagem"
+          i18n-placeholder
         ></textarea>
       </div>
 
       <!-- Botão de envio -->
-      <button type="submit" class="botao-enviar">
+      <button type="submit" class="botao-enviar" i18n>
         Enviar mensagem
       </button>
     </form>

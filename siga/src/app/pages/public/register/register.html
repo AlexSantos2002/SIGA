@@ -7,13 +7,13 @@
 
     <!-- Cabeçalho da página -->
     <div class="cabecalho-registo">
-      <p class="etiqueta-registo">REGISTO</p>
+      <p class="etiqueta-registo" i18n>REGISTO</p>
 
-      <h1>Criar conta da organização</h1>
+      <h1 i18n>Criar conta da organização</h1>
 
       <div class="linha-registo"></div>
 
-      <p class="descricao-registo">
+      <p class="descricao-registo" i18n>
         Preencha os dados da organização e do administrador principal para criar
         a conta inicial no SIGA.
       </p>
@@ -24,21 +24,22 @@
 
       <!--Dados da organização-->
       <div class="secao-formulario">
-        <h2>Dados da organização</h2>
+        <h2 i18n>Dados da organização</h2>
 
         <div class="linha-formulario">
           <div class="grupo-campo">
-            <label for="nomeOrganizacao">Nome da organização</label>
+            <label for="nomeOrganizacao" i18n>Nome da organização</label>
             <input
               id="nomeOrganizacao"
               type="text"
               placeholder="Associação Patas Seguras"
               formControlName="name"
+              i18n-placeholder
             />
           </div>
 
           <div class="grupo-campo">
-            <label for="emailOrganizacao">Email da organização</label>
+            <label for="emailOrganizacao" i18n>Email da organização</label>
             <input
               id="emailOrganizacao"
               type="email"
@@ -50,7 +51,7 @@
 
         <div class="linha-formulario">
           <div class="grupo-campo">
-            <label for="telefone">Telefone</label>
+            <label for="telefone" i18n>Telefone</label>
             <input
               id="telefone"
               type="text"
@@ -60,12 +61,13 @@
           </div>
 
           <div class="grupo-campo">
-            <label for="morada">Morada</label>
+            <label for="morada" i18n>Morada</label>
             <input
               id="morada"
               type="text"
               placeholder="Rua das Flores, 10"
               formControlName="address"
+              i18n-placeholder
             />
           </div>
         </div>
@@ -73,21 +75,22 @@
 
       <!--Dados do administrador-->
       <div class="secao-formulario">
-        <h2>Administrador principal</h2>
+        <h2 i18n>Administrador principal</h2>
 
         <div class="linha-formulario">
           <div class="grupo-campo">
-            <label for="nomeAdmin">Nome</label>
+            <label for="nomeAdmin" i18n>Nome</label>
             <input
               id="nomeAdmin"
               type="text"
               placeholder="Nome do responsável"
               formControlName="adminName"
+              i18n-placeholder
             />
           </div>
 
           <div class="grupo-campo">
-            <label for="emailAdmin">Email de acesso</label>
+            <label for="emailAdmin" i18n>Email de acesso</label>
             <input
               id="emailAdmin"
               type="email"
@@ -99,21 +102,23 @@
 
         <div class="linha-formulario">
           <div class="grupo-campo">
-            <label for="password">Palavra-passe</label>
+            <label for="password" i18n>Palavra-passe</label>
             <input
               id="password"
               type="password"
               placeholder="Introduza a palavra-passe"
               formControlName="adminPassword"
+              i18n-placeholder
             />
           </div>
 
           <div class="grupo-campo">
-            <label for="confirmarPassword">Confirmar palavra-passe</label>
+            <label for="confirmarPassword" i18n>Confirmar palavra-passe</label>
             <input
               id="confirmarPassword"
               type="password"
               placeholder="Repita a palavra-passe"
+              i18n-placeholder
             />
           </div>
         </div>
@@ -122,7 +127,7 @@
       <!-- Confirmação de dados -->
       <label class="grupo-checkbox">
         <input type="checkbox" />
-        <span>
+        <span i18n>
           Confirmo que os dados introduzidos são verdadeiros e pertencem à
           organização registada.
         </span>
@@ -130,11 +135,11 @@
 
       <!-- Ações do formulário -->
       <div class="acoes-formulario">
-        <button type="submit" class="botao-submeter">
+        <button type="submit" class="botao-submeter" i18n>
           Criar conta
         </button>
 
-        <a routerLink="/login" class="link-login">
+        <a routerLink="/login" class="link-login" i18n>
           Já tenho conta
         </a>
       </div>

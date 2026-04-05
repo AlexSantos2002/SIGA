@@ -13,12 +13,23 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "pt-PT",
+        "locales": {
+          "en": {
+            "translation": "locale/messages.en.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "polyfills": [
+              "@angular/localize/init"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -31,6 +42,7 @@
           },
           "configurations": {
             "production": {
+              "localize": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -46,9 +58,15 @@
               "outputHashing": "all"
             },
             "development": {
+              "localize": false,
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "en": {
+              "localize": [
+                "en"
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -61,6 +79,9 @@
             },
             "development": {
               "buildTarget": "siga:build:development"
+            },
+            "en": {
+              "buildTarget": "siga:build:development,en"
             }
           },
           "defaultConfiguration": "development"

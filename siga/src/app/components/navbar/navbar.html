@@ -9,10 +9,10 @@
 
     <!-- Menu principal -->
     <nav class="menu-navegacao">
-      <a routerLink="/">Início</a>
-      <a routerLink="/faq">FAQ</a>
-      <a routerLink="/about">Sobre</a>
-      <a routerLink="/contacts">Contactos</a>
+      <a routerLink="/" i18n>Início</a>
+      <a routerLink="/faq" i18n>FAQ</a>
+      <a routerLink="/about" i18n>Sobre</a>
+      <a routerLink="/contacts" i18n>Contactos</a>
     </nav>
 
     <!-- Ações do utilizador -->
@@ -20,18 +20,18 @@
 
       <!-- Botão de troca de idioma -->
       <div class="language-switcher">
-        <button type="button" class="botao-linguagem" (click)="toggleLangMenu()">
+        <button type="button" class="botao-linguagem" (click)="toggleLangMenu()" i18n>
           PT | EN
         </button>
 
         <div class="menu-linguagem" *ngIf="showLangMenu">
-          <button type="button" (click)="changeLang('pt')">Português</button>
-          <button type="button" (click)="changeLang('en')">English</button>
+          <button type="button" (click)="changeLang('pt')" i18n>Português</button>
+          <button type="button" (click)="changeLang('en')" i18n>English</button>
         </div>
       </div>
 
-      <a routerLink="/login" class="link-entrar">Entrar</a>
-      <a routerLink="/register" class="botao-topo">Começar agora</a>
+      <a routerLink="/login" class="link-entrar" i18n>Entrar</a>
+      <a routerLink="/register" class="botao-topo" i18n>Começar agora</a>
     </div>
 
   </div>
