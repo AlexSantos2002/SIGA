@@ -6,6 +6,7 @@
   overflow: hidden;
 }
 
+/* Elemento decorativo de fundo*/
 .fundo-contactos {
   position: absolute;
   top: -220px;
@@ -22,6 +23,7 @@
   pointer-events: none;
 }
 
+/* título e introdução */
 .topo-contactos {
   position: relative;
   z-index: 1;
@@ -57,6 +59,7 @@
   color: #5b6870;
 }
 
+/* informações + formulário */
 .conteudo-contactos {
   position: relative;
   z-index: 1;
@@ -68,6 +71,7 @@
   animation: aparecer-suave 0.9s ease;
 }
 
+/* Títulos das secções */
 .informacoes-contactos h2,
 .formulario-contactos h2 {
   margin: 0 0 22px;
@@ -75,6 +79,7 @@
   color: #252627;
 }
 
+/* Texto */
 .texto-contactos {
   margin: 0 0 20px;
   font-size: 1rem;
@@ -82,6 +87,7 @@
   color: #5c6971;
 }
 
+/* email/telefone */
 .linha-contacto {
   display: flex;
   flex-direction: column;
@@ -104,6 +110,7 @@
   color: #252627;
 }
 
+/* Bloco adicional de apoio */
 .bloco-apoio {
   margin-top: 34px;
   padding-top: 10px;
@@ -121,12 +128,14 @@
   color: #5c6971;
 }
 
+/* Formulário de contacto */
 .formulario-contactos {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
+/* label + input */
 .grupo-campo {
   display: flex;
   flex-direction: column;
@@ -139,6 +148,7 @@
   color: #2f3940;
 }
 
+/* Estilo de Inputs*/
 .grupo-campo input,
 .grupo-campo textarea {
   width: 100%;
@@ -157,16 +167,19 @@
   color: #8b98a0;
 }
 
+/* Focar input */
 .grupo-campo input:focus,
 .grupo-campo textarea:focus {
   border-bottom-color: #4b88a2;
 }
 
+/* Área de texto ajustável */
 .grupo-campo textarea {
   resize: vertical;
   min-height: 120px;
 }
 
+/* Botão de envio */
 .botao-enviar {
   align-self: flex-start;
   margin-top: 12px;
@@ -186,6 +199,7 @@
   box-shadow: 0 12px 24px rgba(75, 136, 162, 0.2);
 }
 
+/*Animação de entrada*/
 @keyframes aparecer-suave {
   from {
     opacity: 0;
@@ -198,11 +212,13 @@
   }
 }
 
+/* Responsividade */
 @media (max-width: 900px) {
   .pagina-contactos {
     padding: 105px 20px 70px;
   }
 
+  /* Layout passa para uma coluna */
   .conteudo-contactos {
     grid-template-columns: 1fr;
     gap: 44px;

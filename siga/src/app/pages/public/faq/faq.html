@@ -1,9 +1,15 @@
 <section class="faq-page">
 
+  <!-- Hero da página FAQ -->
   <section class="faq-hero">
+
+    <!-- Imagem de fundo -->
     <div class="imagem-hero" aria-hidden="true"></div>
+
+    <!-- Melhorar legibilidade -->
     <div class="filtro-hero"></div>
 
+    <!-- Conteúdo principal -->
     <div class="faq-hero-conteudo">
       <p class="faq-etiqueta">FAQ</p>
 
@@ -11,6 +17,7 @@
         Perguntas frequentes
       </h1>
 
+      <!-- Linha -->
       <div class="faq-linha"></div>
 
       <p class="faq-subtitulo">
@@ -18,10 +25,13 @@
         a plataforma e a sua utilização.
       </p>
     </div>
+
   </section>
 
+  <!--Conteúdo FAQ -->
   <section class="faq-conteudo">
 
+    <!-- Introdução -->
     <div class="faq-intro">
       <h2>Dúvidas mais comuns</h2>
 
@@ -32,21 +42,33 @@
       </p>
     </div>
 
+    <!-- Lista de perguntas -->
     <div class="faq-lista">
+
+      <!-- Iteração pelas FAQs -->
       <div
         class="faq-item"
         *ngFor="let faq of faqs; let i = index"
         [class.aberto]="faq.open"
       >
+
+        <!-- toggle -->
         <button class="faq-pergunta" (click)="toggleFaq(i)">
           <span>{{ faq.question }}</span>
-          <span class="faq-icone">{{ faq.open ? '−' : '+' }}</span>
+
+          <!-- Ícone indica estado aberto/fechado -->
+          <span class="faq-icone">
+            {{ faq.open ? '−' : '+' }}
+          </span>
         </button>
 
+        <!-- Resposta -->
         <div class="faq-resposta" *ngIf="faq.open">
           <p>{{ faq.answer }}</p>
         </div>
+
       </div>
+
     </div>
 
   </section>

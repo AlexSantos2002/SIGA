@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+/**
+ * @description
+ * Componente responsável pela página de contactos
+ */
 @Component({
   selector: 'app-contacts',
   standalone: true,

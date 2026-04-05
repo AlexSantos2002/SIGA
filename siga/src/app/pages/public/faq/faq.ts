@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+/**
+ * @description
+ * Componente responsável pela página de FAQ
+ * 
+ * Apresenta uma lista de perguntas e respostas sobre a plataforma SIGA
+ */
 @Component({
   selector: 'app-faq',
   standalone: true,
@@ -9,6 +15,11 @@ import { Component } from '@angular/core';
   styleUrl: './faq.css'
 })
 export class Faq {
+
+  /**
+   * @description
+   * Lista de perguntas frequentes apresentadas na página
+   */
   faqs = [
     {
       question: 'O que é o SIGA?',
@@ -42,6 +53,13 @@ export class Faq {
     }
   ];
 
+  /**
+   * @description
+   * Alterna o estado de uma pergunta da FAQ.
+   * 
+   * @param index Índice da pergunta na lista
+   * @returns {void} Não retorna valor
+   */
   toggleFaq(index: number): void {
     this.faqs[index].open = !this.faqs[index].open;
   }

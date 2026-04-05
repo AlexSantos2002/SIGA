@@ -1,7 +1,11 @@
+/*Estrutura geral*/
+
 .pagina-inicial {
   min-height: 100vh;
   background: linear-gradient(180deg, #eef6fa 0%, #f9fbfc 100%);
 }
+
+/*Hero*/
 
 .hero {
   position: relative;
@@ -12,6 +16,7 @@
   align-items: center;
 }
 
+/* Imagem de fundo do hero */
 .imagem-hero {
   position: absolute;
   inset: 0;
@@ -21,6 +26,7 @@
   background-repeat: no-repeat;
 }
 
+/* Melhorar contraste do texto */
 .filtro-hero {
   position: absolute;
   inset: 0;
@@ -29,6 +35,7 @@
     linear-gradient(180deg, rgba(75, 136, 162, 0.18) 0%, rgba(75, 136, 162, 0.08) 100%);
 }
 
+/* Conteúdo principal do hero */
 .conteudo-hero {
   position: relative;
   z-index: 1;
@@ -38,6 +45,7 @@
   color: #fff9fb;
 }
 
+/* Título principal com animação*/
 .titulo-principal {
   margin: 0 0 20px;
   max-width: 860px;
@@ -50,6 +58,7 @@
   animation-delay: 0.15s;
 }
 
+/* Texto de apoio */
 .texto-principal {
   margin: 0;
   max-width: 720px;
@@ -61,6 +70,7 @@
   animation-delay: 0.3s;
 }
 
+/* Botões do hero */
 .botoes-hero {
   display: flex;
   gap: 14px;
@@ -70,6 +80,8 @@
   animation: aparecer-esquerda 0.9s ease forwards;
   animation-delay: 0.45s;
 }
+
+/*Botões*/
 
 .botao {
   display: inline-block;
@@ -106,6 +118,8 @@
   box-shadow: 0 10px 22px rgba(255, 249, 251, 0.08);
 }
 
+/*Secções*/
+
 .secao {
   max-width: 1200px;
   margin: 0 auto;
@@ -114,22 +128,13 @@
   animation: aparecer-cima 0.85s ease forwards;
 }
 
-.secao:nth-of-type(2) {
-  animation-delay: 0.2s;
-}
+/*Delays*/
+.secao:nth-of-type(2) { animation-delay: 0.2s; }
+.secao:nth-of-type(3) { animation-delay: 0.35s; }
+.secao:nth-of-type(4) { animation-delay: 0.45s; }
+.secao:nth-of-type(5) { animation-delay: 0.55s; }
 
-.secao:nth-of-type(3) {
-  animation-delay: 0.35s;
-}
-
-.secao:nth-of-type(4) {
-  animation-delay: 0.45s;
-}
-
-.secao:nth-of-type(5) {
-  animation-delay: 0.55s;
-}
-
+/* Rótulo da secção */
 .rotulo-secao {
   margin-bottom: 18px;
   font-size: 12px;
@@ -139,6 +144,7 @@
   color: #4b88a2;
 }
 
+/* Layout em duas colunas */
 .bloco-duplo {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -160,6 +166,8 @@
   color: #5f6b73;
 }
 
+/*Cartões*/
+
 .grelha-cartoes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -179,7 +187,6 @@
 }
 
 .numero-cartao {
-  display: inline-block;
   margin-bottom: 12px;
   color: #4b88a2;
   font-size: 12px;
@@ -191,7 +198,6 @@
   margin: 0 0 12px;
   font-size: 24px;
   color: #252627;
-  line-height: 1.2;
 }
 
 .texto-cartao {
@@ -201,11 +207,12 @@
   color: #5f6b73;
 }
 
+/*Destaque*/
+
 .bloco-destaque {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 54px;
-  align-items: start;
 }
 
 .lista-destaque {
@@ -218,18 +225,16 @@
   gap: 18px;
   padding: 20px 0;
   border-bottom: 1px solid rgba(75, 136, 162, 0.16);
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .linha-destaque:hover {
   transform: translateX(6px);
-  border-bottom-color: rgba(75, 136, 162, 0.35);
 }
 
 .categoria-destaque {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #4b88a2;
 }
@@ -238,8 +243,9 @@
   margin: 0;
   font-size: 16px;
   color: #252627;
-  line-height: 1.6;
 }
+
+/*Secção final*/
 
 .chamada-final {
   padding-top: 20px;
@@ -255,35 +261,26 @@
   margin-bottom: 24px;
 }
 
-@keyframes aparecer-esquerda {
-  from {
-    opacity: 0;
-    transform: translateX(-55px);
-  }
+/*Animações*/
 
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes aparecer-esquerda {
+  from { opacity: 0; transform: translateX(-55px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes aparecer-cima {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+/*Responsividade*/
 
 @media (max-width: 980px) {
   .titulo-principal {
     font-size: 48px;
   }
 
+  /* Layout passa para uma coluna */
   .bloco-duplo,
   .bloco-destaque,
   .grelha-cartoes {
@@ -307,7 +304,6 @@
 
   .texto-principal {
     font-size: 16px;
-    line-height: 1.7;
   }
 
   .secao {
@@ -322,6 +318,7 @@
     font-size: 21px;
   }
 
+  /* Ajuste layout destaque */
   .linha-destaque {
     grid-template-columns: 1fr;
     gap: 8px;

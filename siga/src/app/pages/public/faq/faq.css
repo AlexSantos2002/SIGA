@@ -3,6 +3,7 @@
   background: linear-gradient(180deg, #eef6fa 0%, #f9fbfc 100%);
 }
 
+/* Hero principal da página */
 .faq-hero {
   position: relative;
   overflow: hidden;
@@ -13,6 +14,7 @@
   justify-content: center;
 }
 
+/* Imagem de fundo do hero */
 .imagem-hero {
   position: absolute;
   inset: 0;
@@ -22,6 +24,7 @@
   background-repeat: no-repeat;
 }
 
+/* Melhorar o contraste do texto */
 .filtro-hero {
   position: absolute;
   inset: 0;
@@ -30,6 +33,7 @@
     linear-gradient(180deg, rgba(75, 136, 162, 0.25) 0%, rgba(75, 136, 162, 0.45) 100%);
 }
 
+/* Texto sobre o hero */
 .faq-hero-conteudo {
   position: relative;
   z-index: 1;
@@ -51,6 +55,7 @@
   margin: 0;
 }
 
+/* Linha abaixo do título */
 .faq-linha {
   width: 80px;
   height: 4px;
@@ -65,12 +70,14 @@
   line-height: 1.7;
 }
 
+/* Área principal de conteúdo da FAQ */
 .faq-conteudo {
   max-width: 1000px;
   margin: 0 auto;
   padding: 80px 24px;
 }
 
+/* Texto introdutório */
 .faq-intro {
   text-align: center;
   margin-bottom: 50px;
@@ -87,12 +94,14 @@
   line-height: 1.7;
 }
 
+/* Lista vertical das perguntas */
 .faq-lista {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* Cada item individual da FAQ */
 .faq-item {
   border-radius: 16px;
   background: #ffffffcc;
@@ -105,6 +114,7 @@
   transform: translateY(-2px);
 }
 
+/* Botão que abre e fecha a resposta */
 .faq-pergunta {
   width: 100%;
   padding: 20px;
@@ -117,6 +127,7 @@
   font-size: 1rem;
 }
 
+/* Ícone visual do estado da pergunta */
 .faq-icone {
   background: #4b88a2;
   color: white;
@@ -128,12 +139,14 @@
   justify-content: center;
 }
 
+/* Abrir a pergunta */
 .faq-resposta {
   padding: 0 20px 20px;
   color: #5f6f78;
   line-height: 1.7;
 }
 
+/* Ajustes para telemovel e mobiles */
 @media (max-width: 768px) {
   .faq-hero {
     padding: 100px 20px 70px;

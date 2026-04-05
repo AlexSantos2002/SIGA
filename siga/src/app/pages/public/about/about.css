@@ -3,6 +3,7 @@
   background: linear-gradient(180deg, #eef6fa 0%, #f9fbfc 100%);
 }
 
+/* Hero principal */
 .hero-sobre {
   position: relative;
   overflow: hidden;
@@ -12,6 +13,7 @@
   align-items: center;
 }
 
+/* Imagem de fundo */
 .imagem-hero {
   position: absolute;
   inset: 0;
@@ -21,6 +23,7 @@
   background-repeat: no-repeat;
 }
 
+/* Melhorar legibilidade */
 .overlay-hero {
   position: absolute;
   inset: 0;
@@ -29,6 +32,7 @@
     linear-gradient(180deg, rgba(75, 136, 162, 0.18), rgba(75, 136, 162, 0.08));
 }
 
+/* Conteúdo centralizado */
 .conteudo-sobre,
 .conteudo-secao {
   position: relative;
@@ -38,6 +42,7 @@
   margin: 0 auto;
 }
 
+/* Rótulo*/
 .rotulo {
   margin-bottom: 18px;
   font-size: 12px;
@@ -47,6 +52,7 @@
   color: #d4ebf4;
 }
 
+/* Título principal */
 .titulo-principal {
   margin: 0 0 20px;
   max-width: 860px;
@@ -57,6 +63,7 @@
   color: #fff9fb;
 }
 
+/* Texto introdutório */
 .texto-introducao {
   margin: 0;
   max-width: 720px;
@@ -65,14 +72,17 @@
   color: rgba(255, 249, 251, 0.92);
 }
 
+/* Secções informativas */
 .secao-sobre {
   padding: 78px 24px;
 }
 
+/* Fundo claro */
 .secao-branca {
   background: rgba(255, 255, 255, 0.6);
 }
 
+/* Fundo azul suave */
 .secao-azul-suave {
   background: linear-gradient(
     180deg,
@@ -81,6 +91,7 @@
   );
 }
 
+/* Pequeno título */
 .mini-titulo {
   margin-bottom: 18px;
   font-size: 12px;
@@ -90,6 +101,7 @@
   color: #4b88a2;
 }
 
+/* Títulos das secções */
 .titulo-secao {
   margin: 0 0 12px;
   font-size: 38px;
@@ -97,6 +109,7 @@
   color: #252627;
 }
 
+/* Linha */
 .linha-decorativa {
   width: 60px;
   height: 4px;
@@ -105,14 +118,15 @@
   margin-bottom: 20px;
 }
 
+/* Texto das secções */
 .texto-secao {
-  margin: 0;
+  margin: 0 0 16px;
   font-size: 15px;
   line-height: 1.9;
   color: #5f6b73;
-  margin-bottom: 16px;
 }
 
+/* Secção final */
 .secao-final {
   padding-bottom: 90px;
 }
@@ -121,6 +135,7 @@
   padding-top: 20px;
 }
 
+/* Botões */
 .acoes-sobre {
   display: flex;
   gap: 14px;
@@ -162,8 +177,9 @@
   box-shadow: 0 10px 22px rgba(75, 136, 162, 0.08);
 }
 
-/* -------- RESPONSIVO (igual lógica do HOME) -------- */
+/* Responsividade */
 
+/* Tablets */
 @media (max-width: 980px) {
   .titulo-principal {
     font-size: 48px;
@@ -178,6 +194,7 @@
   }
 }
 
+/* Telemóveis */
 @media (max-width: 640px) {
   .hero-sobre {
     padding: 90px 18px 72px;

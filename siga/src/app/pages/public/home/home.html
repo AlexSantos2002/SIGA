@@ -1,8 +1,18 @@
+<!-- 
+  Página inicial (Home)
+-->
+
 <section class="pagina-inicial">
+
+  <!-- Hero -->
   <section class="hero">
-    <div class="imagem-hero"></div>
+    <!-- Imagem de fundo -->
+    <div class="imagem-hero" aria-hidden="true"></div>
+
+    <!-- Melhorar contraste do texto -->
     <div class="filtro-hero"></div>
 
+    <!-- Conteúdo principal -->
     <div class="conteudo-hero">
 
       <h1 class="titulo-principal">
@@ -15,18 +25,24 @@
         organizações a gerir animais e adoções de forma mais clara, organizada e eficiente.
       </p>
 
+      <!-- Botões de ação -->
       <div class="botoes-hero">
         <a routerLink="/register" class="botao botao-primario">Começar já</a>
         <a routerLink="/organizations" class="botao botao-secundario">Saber mais</a>
       </div>
+
     </div>
   </section>
 
+  <!--Secção: Sobre o projeto-->
   <section class="secao">
     <div class="rotulo-secao">Sobre o projeto</div>
 
     <div class="bloco-duplo">
-      <h2 class="titulo-secao">Uma solução simples para uma gestão mais humana e eficiente</h2>
+      <h2 class="titulo-secao">
+        Uma solução simples para uma gestão mais humana e eficiente
+      </h2>
+
       <p class="texto-secao">
         O SIGA foi pensado para apoiar organizações que lidam diariamente com o
         acolhimento, acompanhamento e adoção de animais. A plataforma procura reunir
@@ -36,10 +52,13 @@
     </div>
   </section>
 
+  <!--Secção de Funcionalidades principais-->
   <section class="secao">
     <div class="rotulo-secao">Funções principais</div>
 
+    <!-- Grelha de funcionalidades -->
     <div class="grelha-cartoes">
+
       <article class="cartao">
         <span class="numero-cartao">01</span>
         <h3 class="titulo-cartao">Gestão de animais</h3>
@@ -63,21 +82,31 @@
           Mantém dados importantes num único sistema, acessível e adaptado às necessidades da organização.
         </p>
       </article>
+
     </div>
   </section>
 
+  <!-- Secção Destaque -->
   <section class="secao destaque">
     <div class="bloco-destaque">
+
+      <!-- Texto explicativo -->
       <div class="texto-destaque">
         <div class="rotulo-secao">Porque usar o SIGA</div>
-        <h2 class="titulo-secao">Mais clareza, mais organização, melhor acompanhamento</h2>
+
+        <h2 class="titulo-secao">
+          Mais clareza, mais organização, melhor acompanhamento
+        </h2>
+
         <p class="texto-secao">
           O objetivo do SIGA é apoiar organizações de proteção animal com uma plataforma
           intuitiva, útil e preparada para facilitar o trabalho diário.
         </p>
       </div>
 
+      <!-- Lista de vantagens -->
       <div class="lista-destaque">
+
         <div class="linha-destaque">
           <span class="categoria-destaque">Animais</span>
           <p class="descricao-destaque">Registo e histórico organizados</p>
@@ -92,18 +121,28 @@
           <span class="categoria-destaque">Plataforma</span>
           <p class="descricao-destaque">Uma solução pensada para organizações</p>
         </div>
+
       </div>
     </div>
   </section>
 
+  <!-- Secção final -->
   <section class="secao chamada-final">
     <div class="caixa-final">
+
       <h2 class="titulo-secao">Começa a utilizar o SIGA</h2>
+
       <p class="texto-secao">
         Cria a tua conta e começa a organizar a gestão animal da tua organização
         de forma mais simples e estruturada.
       </p>
-      <a routerLink="/register" class="botao botao-primario">Criar conta</a>
+
+      <!-- Botão principal -->
+      <a routerLink="/register" class="botao botao-primario">
+        Criar conta
+      </a>
+
     </div>
   </section>
+
 </section>
