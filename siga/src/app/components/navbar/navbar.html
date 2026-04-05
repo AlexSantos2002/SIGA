@@ -1,11 +1,7 @@
-<!-- 
- HTML da barra de navegaçao
--->
-
 <header class="barra-topo">
   <div class="conteudo-barra">
 
-    <!-- Icon e ligação à página inicial -->
+    <!-- Ícone e ligação à página inicial -->
     <a routerLink="/" class="logo">
       <img src="/favicon.ico" alt="Logótipo SIGA" class="logo-imagem" />
       <span class="logo-texto">SIGA</span>
@@ -19,8 +15,21 @@
       <a routerLink="/contacts">Contactos</a>
     </nav>
 
-    <!-- Criar conta e login -->
+    <!-- Ações do utilizador -->
     <div class="acoes-barra">
+
+      <!-- Botão de troca de idioma -->
+      <div class="language-switcher">
+        <button type="button" class="botao-linguagem" (click)="toggleLangMenu()">
+          PT | EN
+        </button>
+
+        <div class="menu-linguagem" *ngIf="showLangMenu">
+          <button type="button" (click)="changeLang('pt')">Português</button>
+          <button type="button" (click)="changeLang('en')">English</button>
+        </div>
+      </div>
+
       <a routerLink="/login" class="link-entrar">Entrar</a>
       <a routerLink="/register" class="botao-topo">Começar agora</a>
     </div>
