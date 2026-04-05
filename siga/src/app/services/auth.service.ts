@@ -45,6 +45,10 @@ export class AuthService {
     return user;
   }
 
+
+  /**
+   * Realiza o logout do usuário
+   */
   async logout() {
     await supabase.auth.signOut();
     this.currentUserSubject.next(null);
@@ -75,10 +79,6 @@ export class AuthService {
     this.currentUserSubject.next(user);
   }
 
-  async getSession() {
-    const { data } = await supabase.auth.getSession();
-    return data.session;
-  }
 
   // Converte o usuario enviado pelo supabase para um User
   private mapToUser(profile: any): User {

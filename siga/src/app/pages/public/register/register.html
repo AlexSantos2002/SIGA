@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Página de registo de organização para criar uma conta associada a uma organização e ao seu administrador principal
 -->
 
@@ -29,6 +29,7 @@
         <div class="linha-formulario">
           <div class="grupo-campo">
             <label for="nomeOrganizacao" i18n>Nome da organização</label>
+
             <input
               id="nomeOrganizacao"
               type="text"
@@ -36,6 +37,14 @@
               formControlName="name"
               i18n-placeholder
             />
+
+            <small class="text-red-500" *ngIf="isInvalid('name') && form.get('name')?.hasError('required')">
+              Campo obrigatório
+            </small>
+
+            <small class="text-red-500" *ngIf="isInvalid('name') && form.get('name')?.hasError('minlength')">
+              Nome demasiado curto
+            </small>
           </div>
 
           <div class="grupo-campo">
@@ -46,6 +55,14 @@
               placeholder="contacto@organizacao.pt"
               formControlName="email"
             />
+
+            <small class="text-red-500" *ngIf="isInvalid('email') && form.get('email')?.hasError('required')">
+              Campo obrigatório
+            </small>
+
+            <small class="text-red-500" *ngIf="isInvalid('email') && form.get('email')?.hasError('email')">
+              Email inválido
+            </small>
           </div>
         </div>
 
@@ -58,6 +75,16 @@
               placeholder="912345678"
               formControlName="phone"
             />
+
+            <small class="text-red-500"
+                   *ngIf="form.get('phone')?.touched && form.get('phone')?.hasError('required')">
+              Campo obrigatório
+            </small>
+
+            <small class="text-red-500"
+                   *ngIf="form.get('phone')?.touched && form.get('phone')?.hasError('pattern')">
+              Número inválido (9 dígitos)
+            </small>
           </div>
 
           <div class="grupo-campo">
@@ -69,6 +96,11 @@
               formControlName="address"
               i18n-placeholder
             />
+
+            <small class="text-red-500"
+                   *ngIf="form.get('address')?.touched && form.get('address')?.hasError('required')">
+              Campo obrigatório
+            </small>
           </div>
         </div>
       </div>
@@ -87,6 +119,14 @@
               formControlName="adminName"
               i18n-placeholder
             />
+
+            <small class="text-red-500" *ngIf="isInvalid('adminName') && form.get('adminName')?.hasError('required')">
+              Campo obrigatório
+            </small>
+
+            <small class="text-red-500" *ngIf="isInvalid('adminName') && form.get('adminName')?.hasError('minlength')">
+              Nome demasiado curto
+            </small>
           </div>
 
           <div class="grupo-campo">
@@ -97,6 +137,14 @@
               placeholder="email@exemplo.pt"
               formControlName="adminEmail"
             />
+
+            <small class="text-red-500" *ngIf="isInvalid('adminEmail') && form.get('adminEmail')?.hasError('required')">
+              Campo obrigatório
+            </small>
+
+            <small class="text-red-500" *ngIf="isInvalid('adminEmail') && form.get('adminEmail')?.hasError('email')">
+              Email inválido
+            </small>
           </div>
         </div>
 
@@ -108,8 +156,11 @@
               type="password"
               placeholder="Introduza a palavra-passe"
               formControlName="adminPassword"
-              i18n-placeholder
-            />
+              i18n-placeholder/>
+
+            <small class="text-red-500" *ngIf="isInvalid('adminPassword') && form.get('adminPassword')?.hasError('minlength')">
+              A palavra-passe deve ter ao menos 6 caracteres
+            </small>
           </div>
 
           <div class="grupo-campo">
@@ -118,8 +169,14 @@
               id="confirmarPassword"
               type="password"
               placeholder="Repita a palavra-passe"
+              formControlName="adminPasswordConfirm"
               i18n-placeholder
             />
+
+            <small class="text-red-500"
+                   *ngIf="form.hasError('passwordMismatch') && form.get('adminPasswordConfirm')?.touched">
+              As palavras-passe não são iguais
+            </small>
           </div>
         </div>
       </div>
@@ -135,7 +192,7 @@
 
       <!-- Ações do formulário -->
       <div class="acoes-formulario">
-        <button type="submit" class="botao-submeter" i18n>
+        <button type="submit" [disabled]="form.invalid" class="botao-submeter" i18n>
           Criar conta
         </button>
 

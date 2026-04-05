@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OrganizationService } from '../../../services/organization.service';
-import { FormBuilder, FormsModule, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  ValidatorFn,
+  AbstractControl, ValidationErrors
+} from '@angular/forms';
 import { RegisterOrganizationRequest } from '../../../models/RegisterOrganizationRequest';
+import { CommonModule } from '@angular/common';
 
 /**
  * @description
@@ -10,7 +19,7 @@ import { RegisterOrganizationRequest } from '../../../models/RegisterOrganizatio
  */
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
   standalone: true
@@ -42,17 +51,18 @@ export class Register {
     private organizationService: OrganizationService
   ) {
     this.form = this.fb.group({
-      // Dados da organização
-      name: ['', Validators.required],
+      // Organização
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      address: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
+      address: ['', [Validators.required, Validators.minLength(5)]],
 
-      // Dados do administrador
-      adminName: ['', Validators.required],
+      // Admin
+      adminName: ['', [Validators.required, Validators.minLength(3)]],
       adminEmail: ['', [Validators.required, Validators.email]],
-      adminPassword: ['', Validators.required],
-    });
+      adminPassword: ['', [Validators.required, Validators.minLength(6)]],
+      adminPasswordConfirm: ['', [Validators.required]]
+    }, {validators: this.passwordMatchValidator});
   }
 
   /**
@@ -87,5 +97,22 @@ export class Register {
       // falta fazer:  Implementar mensagem de erro para o utilizador
     }
   }
+
+
+  /**
+   * Verifica se o input contém erro
+   */
+  isInvalid(controlName: string): boolean {
+    const control = this.form.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
+
+  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('adminPassword')?.value;
+    const confirm = group.get('adminPasswordConfirm')?.value;
+
+    return password === confirm ? null : { passwordMismatch: true };
+  };
 
 }
