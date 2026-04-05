@@ -4,6 +4,9 @@ import { LoginRequest } from '../models/LoginRequest';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 
+/**
+ * Serviço responsável pela autenticação de usuários
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -12,6 +15,11 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
+
+  /**
+   * Realiza o login de usuários já registados no sistema
+   * @param request
+   */
   async login(request: LoginRequest): Promise<User> {
     // Faz o login no supabase auth
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -21,7 +29,7 @@ export class AuthService {
 
     if (error) throw error;
 
-    // Busca o usuario da tabela "users"
+    // Busca o usuário da tabela "users"
     const { data: userProfile, error: userError } = await supabase
       .from('users')
       .select('*')

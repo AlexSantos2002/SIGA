@@ -2,13 +2,17 @@ import { Injectable} from '@angular/core';
 import {supabase} from '../../../supabase/supabase';
 import {RegisterOrganizationRequest} from '../models/RegisterOrganizationRequest';
 
+/**
+ * Serviço responsável por tarefas relacionadas a organização
+ *
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class OrganizationService {
 
   /**
-   * Cria uma organizacao com nome, email, numero e morada
+   * Regista uma organizacao com nome, email, numero e morada
    * Cria tambem o administrador principal da organizacao
    */
   async registerOrganization(request: RegisterOrganizationRequest) {

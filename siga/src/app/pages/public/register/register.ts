@@ -6,7 +6,7 @@ import { RegisterOrganizationRequest } from '../../../models/RegisterOrganizatio
 /**
  * @description
  * Componente responsável pelo registo de organizações na plataforma SIGA através de um formulario utilizadno reactive forms
- * 
+ *
  */
 @Component({
   selector: 'app-register',
@@ -24,11 +24,16 @@ export class Register {
    */
   form: FormGroup;
 
+  isLoading = false;
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
+
+
   /**
    * @description
    * Construtor do componente.
    * Inicializa o formulário com validações obrigatórias.
-   * 
+   *
    * @param fb Serviço FormBuilder utilizado para criar o formulário
    * @param organizationService Serviço responsável pela lógica de registo
    */
@@ -53,14 +58,18 @@ export class Register {
   /**
    * @description
    * Submete o formulário de registo da organização.
-   * 
+   *
    * Valida os dados introduzidos e, caso sejam válidos,
    * envia-os para o serviço responsável pela criação da organização.
-   * 
+   *
    * @returns {Promise<void>} Promessa resolvida após tentativa de registo
    */
   async register(): Promise<void> {
     if (this.form.invalid) return;
+
+    this.isLoading = true;
+    this.errorMessage = null;
+    this.successMessage = null;
 
     const request: RegisterOrganizationRequest = this.form.value;
 

@@ -9,17 +9,18 @@ import { About } from './pages/public/about/about';
 import { Contacts } from './pages/public/contacts/contacts';
 import { Faq } from './pages/public/faq/faq';
 import { Login } from './pages/public/login/login';
+import { Animals } from './pages/private/animals/animals';
 
 /**
  * @description
  * Configuração das rotas da aplicação SIGA.
- * 
+ *
  * Define a navegação entre páginas públicas (antes do login)
  * e privadas (após o login), utilizando layouts diferentes
- * 
+ *
  * O PublicLayout é utilizado para páginas acessíveis a todos os utilizadores
  * O PrivateLayout é utilizado para a área interna da aplicação
- * 
+ *
  * @returns {Routes} Lista de rotas configuradas para a aplicação
  */
 export const routes: Routes = [
@@ -62,12 +63,15 @@ export const routes: Routes = [
     /**
      * @description
      * Área privada da aplicação
-     * 
+     *
      * Esta rota será utilizada para funcionalidades internas
      * disponíveis apenas após autenticação.
      */
     path: 'app',
-    component: PrivateLayout
+    component: PrivateLayout,
+    children: [
+      { path: 'animals', component: Animals },
+    ]
   },
   {
     /**
