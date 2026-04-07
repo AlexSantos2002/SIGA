@@ -5,9 +5,9 @@ import { AuthService } from '../../../services/auth.service';
 /**
  * @description
  * Componente responsável pelo login
- * 
+ *
  * Formulário de login onde o utilizador introduz
- * 
+ *
  * Após o login redireciona para uma página
  */
 @Component({
@@ -28,7 +28,7 @@ export class Login implements OnInit {
    * @description
    * Construtor do componente
    * Inicializa o formulário com validações obrigatórias
-   * 
+   *
    * @param fb Serviço FormBuilder para criação do formulário
    * @param authService Responsável pelo login
    */
@@ -49,17 +49,22 @@ export class Login implements OnInit {
   /**
    * @description
    * Realiza o processo de login do utilizador
-   * 
+   *
    * Envia as credenciais para o AuthService e em caso de sucesso, verifica o papel do utilizador
    * para definir o redirecionamento adequado.
-   * 
+   *
    * Em caso de erro regista o erro e  apresenta uma mensagem ao utilizador.
-   * 
+   *
    * @returns {Promise<void>} Promessa resolvida após tentativa de login
    */
   async login(): Promise<void> {
     try {
-      const user = await this.authService.login(this.form.value);
+      // const user = await this.authService.login(this.form.value);
+      const user = await this.authService.login({
+        email: 'n@n.com',
+        password: '123456'
+      });
+
 
       console.log('Login efetuado');
 

@@ -8,6 +8,7 @@ import {RegisterOrganizationRequest} from '../models/RegisterOrganizationRequest
 export class OrganizationService {
 
   /**
+   * @description
    * Cria uma organizacao com nome, email, numero e morada
    * Cria tambem o administrador principal da organizacao
    */
@@ -19,13 +20,15 @@ export class OrganizationService {
       .insert([{
         name: request.name,
         phone: request.phone,
+        email: request.email,
         address: request.address
       }])
-      .select();
+      .select()
+      .single();
 
     if (orgError) throw orgError;
 
-    const organizationId = orgData[0].id;
+    const organizationId = orgData.id;
 
     // Cria o administrador no supabase auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -56,16 +59,6 @@ export class OrganizationService {
 
     if (userError) throw userError;
 
-    return orgData[0];
-  }
-
-
-  /**
-   * Retorna as organizacoes disponiveis
-   */
-  async getOrganizations() {
-    const { data, error } = await supabase.from('organizations').select('*');
-    if (error) throw error;
-    return data;
+    return orgData;
   }
 }

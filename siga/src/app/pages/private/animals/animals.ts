@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimalService } from '../../../services/animal.service';
 import { RegisterAnimalRequest } from '../../../models/RegisterAnimalRequest';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-animals',
@@ -17,6 +18,7 @@ export class Animals {
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
+    private authService: AuthService,
   ) {
     this.animalForm = this.fb.group({
       name: ['', Validators.required],
@@ -25,29 +27,34 @@ export class Animals {
       gender: ['', Validators.required],
       birthDate: [''],
       status: ['available', Validators.required],
-      organizationId: [null, Validators.required],
     });
   }
 
+  // TODO: Permitir que apenas utilizadores autenticados insiram animais
 
-  async onSubmit() {
-    if (this.animalForm.invalid) {
-      return;
-    }
-
+  async register() {
     try {
-      const request = this.animalForm.value;
+      await this.authService.loadUserFromSession();
+
+      const user = this.authService.getCurrentUser();
+      if (!user) {
+        throw new Error('Utilizador não autenticado');
+      }
+
+      const request = {
+        name: 'Rex',
+        species: 'Dog',
+        breedId: 'e9a7cdb8-7d06-4246-a9d9-3c5c471270e1',
+        gender: 'male',
+        birthDate: '2022-01-01',
+        status: 'available',
+        organizationId: user.organizationId,
+      };
 
       const animal = await this.animalService.registerAnimal(request);
-
-      console.log('Animal created:', animal);
-
-      // Reset form after success
-      this.animalForm.reset({
-        status: 'available',
-      });
-    } catch (error: any) {
-      console.error('Erro: ', error);
+      console.log('Animal criado:', animal);
+    } catch (error) {
+      console.error('Erro:', error);
     }
   }
 }
