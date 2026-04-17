@@ -17,7 +17,7 @@
 .imagem-hero {
   position: absolute;
   inset: 0;
-  background-image: url('/gato.jpg');
+  background-image: url('/gato.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
