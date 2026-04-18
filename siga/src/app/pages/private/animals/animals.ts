@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimalService } from '../../../services/animal.service';
-import { RegisterAnimalRequest } from '../../../models/RegisterAnimalRequest';
 import { AuthService } from '../../../services/auth.service';
+import { supabase } from '../../../../../supabase/supabase';
 
 @Component({
   selector: 'app-animals',
@@ -11,45 +11,48 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './animals.css',
 })
 export class Animals {
-  animalForm: FormGroup;
-
-  // TODO: Obter ID da organização através do usuário
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
     private authService: AuthService,
   ) {
-    this.animalForm = this.fb.group({
+    this.form = this.fb.group({
       name: ['', Validators.required],
       species: ['', Validators.required],
       breedId: [null],
       gender: ['', Validators.required],
       birthDate: [''],
-      status: ['available', Validators.required],
+      available: [true, Validators.required],
     });
   }
 
-  // TODO: Permitir que apenas utilizadores autenticados insiram animais
-
+  /**
+   * Faz o registo de um novo animal a partir
+   * dos dados inseridos no formulário
+   */
   async register() {
     try {
-      await this.authService.loadUserFromSession();
-
       const user = this.authService.getCurrentUser();
+
       if (!user) {
         throw new Error('Utilizador não autenticado');
       }
 
-      const request = {
-        name: 'Rex',
-        species: 'Dog',
-        breedId: 'e9a7cdb8-7d06-4246-a9d9-3c5c471270e1',
-        gender: 'male',
-        birthDate: '2022-01-01',
-        status: 'available',
-        organizationId: user.organizationId,
-      };
+      // Exemplo de request
+      // const request = {
+      //   name: 'Rex',
+      //   species: 'Dog',
+      //   breedId: 'e9a7cdb8-7d06-4246-a9d9-3c5c471270e1',
+      //   gender: 'male',
+      //   birthDate: '2022-03-15',
+      //   available: true,
+      //   organizationId: user.organizationId,
+      // };
+
+      const request = {...this.form.value,
+        organizationId: user.organizationId};
 
       const animal = await this.animalService.registerAnimal(request);
       console.log('Animal criado:', animal);
@@ -57,4 +60,5 @@ export class Animals {
       console.error('Erro:', error);
     }
   }
+
 }

@@ -4,6 +4,6 @@ export interface RegisterAnimalRequest {
   breedId: string,
   gender: string,
   birthDate: string,
-  status: string,
+  available: boolean,
   organizationId: string
 }

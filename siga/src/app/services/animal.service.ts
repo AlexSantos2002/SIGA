@@ -12,7 +12,7 @@ export class AnimalService {
    * Regista um novo animal
    * @param request contém os dados do animal
    */
-  async registerAnimal(request: RegisterAnimalRequest) {
+  async registerAnimal(request: RegisterAnimalRequest): Promise<any> {
     const {data: animalData, error: animalError} = await supabase
       .from("animals")
       .insert([{
@@ -21,7 +21,7 @@ export class AnimalService {
         breed_id: request.breedId,
         gender: request.gender,
         birth_date: request.birthDate,
-        status: request.status,
+        available: request.available,
         organization_id: request.organizationId
       }]).select().single();
 
@@ -32,4 +32,34 @@ export class AnimalService {
     return animalData;
   }
 
+
+  /**
+   * Retorna a lista com os animais pertencentes a organização
+   * @param organizationId
+   */
+  async fetchAnimals(organizationId: string): Promise<any> {
+    const {data: animals, error: error} = await supabase
+      .from("animals")
+      .select()
+      .eq("organization_id", organizationId);
+
+    if (error) throw error;
+
+    return animals;
+  }
+
+  // TODO: Buscar animais disponiveis
+  async fetchAvailableAnimals(organizationId: string, available: boolean = true): Promise<any> {
+    const {data: availableAnimals, error: error} = await supabase
+      .from("animals")
+      .select()
+      .eq("organization_id", organizationId)
+      .eq('status', available);
+
+    if (error) throw error;
+
+    return availableAnimals;
+  }
+
+  // TODO: Fazer buscas por animais baseadas em critérios (gênero, espécie, etc)
 }

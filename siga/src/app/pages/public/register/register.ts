@@ -55,7 +55,7 @@ export class Register {
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
-      address: ['', [Validators.required, Validators.minLength(5)]],
+      address: ['', [Validators.required]],
 
       // Admin
       adminName: ['', [Validators.required, Validators.minLength(3)]],
