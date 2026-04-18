@@ -1,1 +1,66 @@
-<p>login works!</p>
+ <--Página de login da plataforma SIGA
+
+
+<section class="pagina-login">
+  <div class="container-login">
+
+    <!-- Cabeçalho da página -->
+    <div class="cabecalho-login">
+      <p class="etiqueta-login">LOGIN</p>
+
+      <h1>Entrar na plataforma</h1>
+
+      <div class="linha-login"></div>
+
+      <p class="descricao-login">
+        Introduza os seus dados de acesso para entrar no SIGA!
+      </p>
+    </div>
+
+    <!-- Formulário -->
+    <form [formGroup]="form" (ngSubmit)="login()" class="formulario-login">
+
+      <div class="grupo-campo">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="email@exemplo.pt"
+          formControlName="email"
+        />
+      </div>
+
+      <div class="grupo-campo">
+        <label for="password">Palavra-passe</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Introduza a palavra-passe"
+          formControlName="password"
+        />
+      </div>
+
+      <div class="linha-opcoes">
+        <label class="grupo-checkbox">
+          <input type="checkbox" />
+          <span>Manter sessão iniciada</span>
+        </label>
+
+        <a routerLink="/recover-password" class="link-secundario">
+          Esqueci-me da palavra-passe
+        </a>
+      </div>
+
+      <div class="acoes-login">
+        <button type="submit" class="botao-entrar">
+          Entrar
+        </button>
+
+        <a routerLink="/register" class="link-registo">
+          Criar conta
+        </a>
+      </div>
+
+    </form>
+  </div>
+</section>

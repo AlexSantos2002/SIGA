@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 
 /**
  * @description
  * Componente responsável pelo login
  *
- * Formulário de login onde o utilizador introduz
+ * Apresenta um formulário onde o utilizador introduz
+ * as credenciais de acesso à plataforma
  *
  * Após o login redireciona para uma página
  */
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login implements OnInit {
+export class Login {
 
   /**
    * @description
@@ -37,13 +39,9 @@ export class Login implements OnInit {
     private authService: AuthService,
   ) {
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-  }
-
-  ngOnInit(): void {
-    this.login()
   }
 
   /**
@@ -51,20 +49,20 @@ export class Login implements OnInit {
    * Realiza o processo de login do utilizador
    *
    * Envia as credenciais para o AuthService e em caso de sucesso, verifica o papel do utilizador
-   * para definir o redirecionamento adequado.
+   * para definir o redirecionamento adequado
    *
-   * Em caso de erro regista o erro e  apresenta uma mensagem ao utilizador.
+   * Em caso de erro regista o erro e apresenta uma mensagem ao utilizador
    *
    * @returns {Promise<void>} Promessa resolvida após tentativa de login
    */
   async login(): Promise<void> {
-    try {
-      // const user = await this.authService.login(this.form.value);
-      const user = await this.authService.login({
-        email: 'n@n.com',
-        password: '123456'
-      });
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
+    try {
+      const user = await this.authService.login(this.form.value);
 
       console.log('Login efetuado');
 
@@ -83,7 +81,7 @@ export class Login implements OnInit {
     } catch (err) {
       console.log(err);
 
-      // mensagem de erro ao utilizador
+      //Mensagem de erro ao utilizador
     }
   }
 }
