@@ -37,7 +37,7 @@ export class AnimalService {
    * Retorna a lista com os animais pertencentes a organização
    * @param organizationId
    */
-  async fetchAnimals(organizationId: string): Promise<any> {
+  async fetchAllAnimals(organizationId: string): Promise<any> {
     const {data: animals, error: error} = await supabase
       .from("animals")
       .select()

@@ -10,6 +10,7 @@ import { Contacts } from './pages/public/contacts/contacts';
 import { Faq } from './pages/public/faq/faq';
 import { Login } from './pages/public/login/login';
 import { Animals } from './pages/private/animals/animals';
+import { AuthGuard } from './guards/auth.guard';
 
 /**
  * @description
@@ -69,8 +70,11 @@ export const routes: Routes = [
      */
     path: 'app',
     component: PrivateLayout,
+    // canActivate: [AuthGuard], -> permite o acesso a utilizadores autenticados
     children: [
-      { path: 'animals', component: Animals },
+      { path: 'animals',
+        component: Animals,
+      },
     ]
   },
   {

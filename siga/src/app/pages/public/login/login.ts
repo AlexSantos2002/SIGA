@@ -65,20 +65,12 @@ export class Login {
     try {
       const user = await this.authService.login(this.form.value);
 
-      console.log('Login efetuado');
-
-      /**
-       * Verifica o papel do utilizador autenticado
-       */
-      if (user.role == 'admin') {
-        console.log('Administrador logado');
-
-        //Redirecionar para página de administrador
-      } else {
+      if (user) {
         console.log('Utilizador logado');
 
-        //Redirecionar para página de utilizador
+        // Redirecionar para pagina principal
       }
+
     } catch (err) {
       console.log(err);
 

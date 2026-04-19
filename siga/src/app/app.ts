@@ -15,13 +15,5 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit{
-
-  constructor(private authService: AuthService) {
-  }
-
-  async ngOnInit() {
-    await this.authService.loadUserFromSession();
-  }
-
+export class App {
 }
