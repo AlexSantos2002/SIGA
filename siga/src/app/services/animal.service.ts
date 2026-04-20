@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { RegisterAnimalRequest } from '../models/RegisterAnimalRequest';
+import { RegisterAnimalRequest } from '../models/animal/RegisterAnimalRequest';
 import { supabase } from '../../../supabase/supabase';
+import { AnimalResponse } from '../models/animal/AnimalResponse';
+import { data } from 'autoprefixer';
+import { AnimalFilters } from '../models/animal/AnimalFilters';
 
 
 @Injectable({
@@ -17,7 +20,7 @@ export class AnimalService {
       .from("animals")
       .insert([{
         name: request.name,
-        species: request.species,
+        species_id: request.species,
         breed_id: request.breedId,
         gender: request.gender,
         birth_date: request.birthDate,
@@ -34,32 +37,53 @@ export class AnimalService {
 
 
   /**
-   * Retorna a lista com os animais pertencentes a organização
-   * @param organizationId
+   * Faz a busca por animais baseada em filtros como gênero,
+   * espécie, raça e disponibilidade.
+   * @param filters
    */
-  async fetchAllAnimals(organizationId: string): Promise<any> {
-    const {data: animals, error: error} = await supabase
-      .from("animals")
-      .select()
-      .eq("organization_id", organizationId);
+  async searchAnimals(filters: AnimalFilters): Promise<AnimalResponse[]> {
+    let query = supabase
+      .from('animals')
+      .select('*')
+      .eq('organization_id', filters.organizationId);
+
+    // Filtra a espécie
+    if (filters.species) {
+      query = query.eq('species', filters.species);
+    }
+
+    // Filtra o gênero
+    if (filters.gender) {
+      query = query.eq('gender', filters.gender);
+    }
+
+    if (filters.available !== undefined) {
+      query = query.eq('available', filters.available);
+    }
+
+    if (filters.breedId) {
+      query = query.eq('breed_id', filters.breedId);
+    }
+
+    const { data: animals, error } = await query;
 
     if (error) throw error;
 
-    return animals;
+    return animals.map((animal) => this.toAnimalResponse(animal)) || [];
   }
 
-  // TODO: Buscar animais disponiveis
-  async fetchAvailableAnimals(organizationId: string, available: boolean = true): Promise<any> {
-    const {data: availableAnimals, error: error} = await supabase
-      .from("animals")
-      .select()
-      .eq("organization_id", organizationId)
-      .eq('status', available);
+  // TODO: Modificar requests para obter strings para raça e espécie
 
-    if (error) throw error;
-
-    return availableAnimals;
+  toAnimalResponse(response: any): AnimalResponse {
+    return {
+      id: response.id,
+      name: response.name,
+      species: response.species,
+      breed: response.breed_id,
+      gender: response.gender,
+      birthDate: response.birth_date,
+      available: response.available,
+      createdAt: response.created_at,
+    };
   }
-
-  // TODO: Fazer buscas por animais baseadas em critérios (gênero, espécie, etc)
 }

@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import {supabase} from '../../../supabase/supabase';
-import {RegisterOrganizationRequest} from '../models/RegisterOrganizationRequest';
+import {RegisterOrganizationRequest} from '../models/auth/RegisterOrganizationRequest';
 
 @Injectable({
   providedIn: 'root',

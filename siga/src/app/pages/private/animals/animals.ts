@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimalService } from '../../../services/animal.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/User';
+import { AnimalFilters } from '../../../models/animal/AnimalFilters';
 
 @Component({
   selector: 'app-animals',
@@ -14,6 +15,8 @@ export class Animals implements OnInit {
 
   // Formulário para criação de animais
   form: FormGroup;
+
+  // TODO: Implementar lista de animais para visualização
 
   // Utilizador atual
   private currentUser!: User;
@@ -49,18 +52,18 @@ export class Animals implements OnInit {
   async register() {
     try {
       // Exemplo de request
-      // const request = {
-      //   name: 'King',
-      //   species: 'Dog',
-      //   breedId: 'a9a7cdb8-7d06-4246-a9d9-3c5c471270e0',
-      //   gender: 'male',
-      //   birthDate: '2020-03-18',
-      //   available: false,
-      //   organizationId: this.currentUser.organizationId,
-      // };
+      const request = {
+        name: 'King',
+        species: '31f246ce-d30e-4c31-a536-87730b5fb263',
+        breedId: 'e4cbc727-9bdb-476f-8434-ec89dc5c6c5a',
+        gender: 'male',
+        birthDate: '2020-03-18',
+        available: false,
+        organizationId: this.currentUser.organizationId,
+      };
 
-      const request = {...this.form.value,
-        organizationId: this.currentUser.organizationId};
+      // const request = {...this.form.value,
+      //   organizationId: this.currentUser.organizationId};
 
       const animal = await this.animalService.registerAnimal(request);
       console.log('Animal criado:', animal);
@@ -78,10 +81,12 @@ export class Animals implements OnInit {
    */
   async fetchAllAnimals() {
     try {
-      await this.animalService.fetchAllAnimals(this.currentUser.organizationId);
-
-      // TODO: Implementar lista de animais para visualização
-
+      const animals = await this.animalService
+        .searchAnimals({organizationId: this.currentUser.organizationId, available: false} as AnimalFilters);
+      console.log(animals);
     } catch (err) {}
   }
+
+
+
 }

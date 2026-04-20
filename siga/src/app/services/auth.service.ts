@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { supabase } from '../../../supabase/supabase';
-import { LoginRequest } from '../models/LoginRequest';
+import { LoginRequest } from '../models/auth/LoginRequest';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 

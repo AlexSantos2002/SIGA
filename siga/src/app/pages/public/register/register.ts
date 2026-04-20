@@ -9,7 +9,7 @@ import {
   ValidatorFn,
   AbstractControl, ValidationErrors
 } from '@angular/forms';
-import { RegisterOrganizationRequest } from '../../../models/RegisterOrganizationRequest';
+import { RegisterOrganizationRequest } from '../../../models/auth/RegisterOrganizationRequest';
 import { CommonModule } from '@angular/common';
 
 /**
