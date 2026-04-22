@@ -4,6 +4,7 @@ import { AnimalService } from '../../../services/animal.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/User';
 import { AnimalFilters } from '../../../models/animal/AnimalFilters';
+import { AnimalResponse } from '../../../models/animal/AnimalResponse';
 
 @Component({
   selector: 'app-animals',
@@ -53,12 +54,12 @@ export class Animals implements OnInit {
     try {
       // Exemplo de request
       const request = {
-        name: 'King',
-        species: '31f246ce-d30e-4c31-a536-87730b5fb263',
+        name: 'Molly',
+        speciesId: '31f246ce-d30e-4c31-a536-87730b5fb263',
         breedId: 'e4cbc727-9bdb-476f-8434-ec89dc5c6c5a',
-        gender: 'male',
+        gender: 'female',
         birthDate: '2020-03-18',
-        available: false,
+        available: true,
         organizationId: this.currentUser.organizationId,
       };
 
@@ -72,6 +73,8 @@ export class Animals implements OnInit {
 
     } catch (error) {
       console.error('Erro:', error);
+
+      // TODO: Mostrar mensagem de animal não criado
     }
   }
 
@@ -88,5 +91,34 @@ export class Animals implements OnInit {
   }
 
 
+  /**
+   * Edita um animal
+   */
+  async editAnimal() {
+    // TODO: Obter dados através de um formulário
+    // TODO: Obter id do animal através da página/dropdown
+
+    const animalId = 'a170aefa-04e2-4dca-a615-0f98dd871cff';
+
+    const request = {
+      name: 'Molly',
+      speciesId: '31f246ce-d30e-4c31-a536-87730b5fb263',
+      breedId: '4cf11029-c341-4ffe-82e5-4a9dc2e79a1b',
+      gender: 'female',
+      birthDate: '2020-03-18',
+      available: true,
+      organizationId: this.currentUser.organizationId
+    }
+
+    try {
+      // TODO: Mensagem de animal atualizado. Atualizar campos do formulário?
+      await this.animalService.editAnimal(animalId, request);
+      console.log('Animal atualizado');
+    } catch (err) {
+      console.log('Erro ao atualizar animal');
+    }
+
+
+  }
 
 }

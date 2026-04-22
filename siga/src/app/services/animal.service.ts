@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { RegisterAnimalRequest } from '../models/animal/RegisterAnimalRequest';
 import { supabase } from '../../../supabase/supabase';
 import { AnimalResponse } from '../models/animal/AnimalResponse';
-import { data } from 'autoprefixer';
 import { AnimalFilters } from '../models/animal/AnimalFilters';
+import { EditAnimalRequest } from '../models/animal/EditAnimalRequest';
 
 
 @Injectable({
@@ -20,7 +20,7 @@ export class AnimalService {
       .from("animals")
       .insert([{
         name: request.name,
-        species_id: request.species,
+        species_id: request.speciesId,
         breed_id: request.breedId,
         gender: request.gender,
         birth_date: request.birthDate,
@@ -35,17 +35,24 @@ export class AnimalService {
     return animalData;
   }
 
-
   /**
    * Faz a busca por animais baseada em filtros como gênero,
    * espécie, raça e disponibilidade.
-   * @param filters
+   * @param filters filtro com diferentes critérios para busca
    */
   async searchAnimals(filters: AnimalFilters): Promise<AnimalResponse[]> {
     let query = supabase
       .from('animals')
-      .select('*')
-      .eq('organization_id', filters.organizationId);
+      // Busca os valores da tabela breeds e speciess
+      .select(`
+    *,
+    species:species_id (
+      name
+    ),
+    breed:breed_id (
+      name
+    )
+  `).eq('organization_id', filters.organizationId);
 
     // Filtra a espécie
     if (filters.species) {
@@ -72,14 +79,56 @@ export class AnimalService {
     return animals.map((animal) => this.toAnimalResponse(animal)) || [];
   }
 
-  // TODO: Modificar requests para obter strings para raça e espécie
 
+  /**
+   * Edita um animal existente
+   * @param animalId id do animal a ser editado
+   * @param request request contendo as informações a serem atualizadas
+   */
+  async editAnimal(animalId: string, request: EditAnimalRequest): Promise<AnimalResponse> {
+    const { data: animal, error } = await supabase
+      .from('animals')
+      .update({
+        name: request.name,
+        species_id: request.speciesId,
+        breed_id: request.breedId,
+        gender: request.gender,
+        birth_date: request.birthDate,
+        available: request.available,
+      })
+      .eq('id', animalId)
+      .eq('organization_id', request.organizationId)
+      .select(`
+      *,
+      species:species_id (name),
+      breed:breed_id (name)
+    `)
+      .single();
+
+    if (error) throw error;
+
+    return this.toAnimalResponse(animal);
+  }
+
+
+  async createAnimalBreed() {
+
+  }
+
+  async fetchAnimalBreeds() {
+
+  }
+
+  /**
+   * Converte a resposta do supabase para AnimalResponse
+   * @param response response enviada pelo supabase
+   */
   toAnimalResponse(response: any): AnimalResponse {
     return {
       id: response.id,
       name: response.name,
-      species: response.species,
-      breed: response.breed_id,
+      species: response.species.name,
+      breed: response.breed.name,
       gender: response.gender,
       birthDate: response.birth_date,
       available: response.available,
