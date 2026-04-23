@@ -4,7 +4,7 @@ import { AnimalService } from '../../../services/animal.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/User';
 import { AnimalFilters } from '../../../models/animal/AnimalFilters';
-import { AnimalResponse } from '../../../models/animal/AnimalResponse';
+import { BreedResponse } from '../../../models/animal/BreedResponse';
 
 @Component({
   selector: 'app-animals',
@@ -50,16 +50,23 @@ export class Animals implements OnInit {
    * Faz o registo de um novo animal a partir
    * dos dados inseridos no formulário
    */
-  async register() {
+  async register(): Promise<void> {
     try {
+      const name = 'King'
+      const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257';
+      const breedId = 'e4cbc727-9bdb-476f-8434-ec89dc5c6c5a';
+      const gender = 'male'
+      const birthDate = '2020-03-18';
+      const available = false;
+
       // Exemplo de request
       const request = {
-        name: 'Molly',
-        speciesId: '31f246ce-d30e-4c31-a536-87730b5fb263',
-        breedId: 'e4cbc727-9bdb-476f-8434-ec89dc5c6c5a',
-        gender: 'female',
-        birthDate: '2020-03-18',
-        available: true,
+        name: name,
+        speciesId: speciesId,
+        breedId: breedId,
+        gender: gender,
+        birthDate: birthDate,
+        available: available,
         organizationId: this.currentUser.organizationId,
       };
 
@@ -82,7 +89,7 @@ export class Animals implements OnInit {
   /**
    * Retorna uma lista com todos os animais
    */
-  async fetchAllAnimals() {
+  async fetchAllAnimals(): Promise<void> {
     try {
       const animals = await this.animalService
         .searchAnimals({organizationId: this.currentUser.organizationId, available: false} as AnimalFilters);
@@ -94,19 +101,26 @@ export class Animals implements OnInit {
   /**
    * Edita um animal
    */
-  async editAnimal() {
+  async editAnimal(): Promise<void> {
     // TODO: Obter dados através de um formulário
     // TODO: Obter id do animal através da página/dropdown
 
+    // Id para testes, remover assim que o ID possa ser obtido de outra forma
     const animalId = 'a170aefa-04e2-4dca-a615-0f98dd871cff';
+    const name = 'Molly'
+    const speciesId = '31f246ce-d30e-4c31-a536-87730b5fb263';
+    const breedId = '4cf11029-c341-4ffe-82e5-4a9dc2e79a1b';
+    const gender = 'female'
+    const birthDate = '2020-03-18';
+    const available = false;
 
     const request = {
-      name: 'Molly',
-      speciesId: '31f246ce-d30e-4c31-a536-87730b5fb263',
-      breedId: '4cf11029-c341-4ffe-82e5-4a9dc2e79a1b',
-      gender: 'female',
-      birthDate: '2020-03-18',
-      available: true,
+      name: name,
+      speciesId: speciesId,
+      breedId: breedId,
+      gender: gender,
+      birthDate: birthDate,
+      available: available,
       organizationId: this.currentUser.organizationId
     }
 
@@ -115,10 +129,46 @@ export class Animals implements OnInit {
       await this.animalService.editAnimal(animalId, request);
       console.log('Animal atualizado');
     } catch (err) {
+      // TODO: implementar mensagem de erro
       console.log('Erro ao atualizar animal');
     }
-
-
   }
 
+
+  /**
+   * Cria uma raça para uma determinada espécie de animal
+   */
+  async createBreed(): Promise<void> {
+    // TODO: Obter espécie através de dropdown/página
+
+    const name = 'Rottweiler';
+    const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257'; // cão
+
+    const request = {
+      name: name,
+      speciesId: speciesId ,
+      organizationId: this.currentUser.organizationId
+    }
+
+    try {
+      await this.animalService.createAnimalBreed(request)
+      console.log('raça criada');
+      // TODO: Implementar mensagem de raça criada
+    } catch (err) {
+      // TODO: implementar mensagem de erro
+      console.log('Erro ao criar raça');
+    }
+  }
+
+  async getBreeds(): Promise<void> {
+    try {
+      // TODO: Implementar lista/dropdown de raças
+        const breeds = await this.animalService
+          .getAnimalBreeds(this.currentUser.organizationId);
+      console.log(breeds);
+    } catch (err) {
+      // TODO: Implementar mensagem de erro
+      console.log('Erro ao buscar raças');
+    }
+  }
 }

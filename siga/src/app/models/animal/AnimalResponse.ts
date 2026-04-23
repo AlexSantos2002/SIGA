@@ -5,8 +5,14 @@
 export interface AnimalResponse {
   id: number;
   name: string;
-  species: string;
-  breed: string
+  species: {
+    id: string,
+    name: string
+  };
+  breed: {
+    id: string,
+    name: string
+  }
   gender: string;
   birthDate: string;
   available: boolean;
