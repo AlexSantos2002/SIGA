@@ -42,7 +42,7 @@ export class AuthService {
 
     if (error || !data.user) throw error;
 
-    const user = await this.fetchUserProfile(data.user.id);
+    const user = await this.getUserProfile(data.user.id);
 
     this.currentUserSubject.next(user);
 
@@ -103,7 +103,7 @@ export class AuthService {
 
     const userId = data.session.user.id;
 
-    const user = await this.fetchUserProfile(userId);
+    const user = await this.getUserProfile(userId);
 
     this.currentUserSubject.next(user);
   }
@@ -112,7 +112,7 @@ export class AuthService {
   /**
    * Busca o perfil do utilizador na base de dados.
    */
-  private async fetchUserProfile(userId: string): Promise<User> {
+  private async getUserProfile(userId: string): Promise<User> {
 
     const { data, error } = await supabase
       .from('users')

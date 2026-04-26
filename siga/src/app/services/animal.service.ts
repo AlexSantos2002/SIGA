@@ -7,7 +7,6 @@ import { EditAnimalRequest } from '../models/animal/EditAnimalRequest';
 import { CreateBreedRequest } from '../models/animal/CreateBreedRequest';
 import { BreedResponse } from '../models/animal/BreedResponse';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -135,15 +134,23 @@ export class AnimalService {
    * Cria uma raça de animal para a organização
    */
   async createAnimalBreed(request: CreateBreedRequest): Promise<BreedResponse> {
-    const {data: breedData, error} = await supabase
+    const { data: breedData, error } = await supabase
       .from('breeds')
       .insert({
         name: request.name,
         species_id: request.speciesId,
         organization_id: request.organizationId
-      }).select().single();
+      })
+      .select(`
+      *,
+      species:species_id (
+        id,
+        name
+      )
+      `)
+      .single();
 
-    if (error || !breedData || breedData.length === 0) {
+    if (error || !breedData) {
       throw error || new Error("Raça não foi criada");
     }
 
@@ -179,8 +186,18 @@ export class AnimalService {
    * Busca as raças de animais com base na
    * espécie. Ex: para cães: Rottweiler, Dobermann, ...
    */
-  async getAnimalBreedsBasedOnSpecies() {
+  async getAnimalBreedsBasedOnSpecies(speciesId: string, organizationId: string) {
+    const { data: breeds, error } = await supabase
+      .from('breeds')
+      .select('*, species:species_id (name)')
+      .eq('species_id', speciesId)
+      .eq('organization_id', organizationId);
 
+    if (error || !breeds) {
+      throw error || new Error('Não foi possível obter as raças');
+    }
+
+    return breeds.map(breed => this.toBreedResponse(breed));
   }
 
   /**

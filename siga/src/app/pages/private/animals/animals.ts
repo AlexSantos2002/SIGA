@@ -52,6 +52,7 @@ export class Animals implements OnInit {
    */
   async register(): Promise<void> {
     try {
+      // TODO: Obter dados do animal através de formulário
       const name = 'King'
       const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257';
       const breedId = 'e4cbc727-9bdb-476f-8434-ec89dc5c6c5a';
@@ -89,7 +90,7 @@ export class Animals implements OnInit {
   /**
    * Retorna uma lista com todos os animais
    */
-  async fetchAllAnimals(): Promise<void> {
+  async getAllAnimals(): Promise<void> {
     try {
       const animals = await this.animalService
         .searchAnimals({organizationId: this.currentUser.organizationId, available: false} as AnimalFilters);
@@ -141,7 +142,7 @@ export class Animals implements OnInit {
   async createBreed(): Promise<void> {
     // TODO: Obter espécie através de dropdown/página
 
-    const name = 'Rottweiler';
+    const name = 'rottweiler';
     const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257'; // cão
 
     const request = {
@@ -156,18 +157,41 @@ export class Animals implements OnInit {
       // TODO: Implementar mensagem de raça criada
     } catch (err) {
       // TODO: implementar mensagem de erro
-      console.log('Erro ao criar raça');
+      console.log('Erro ao criar raça', err);
     }
   }
 
+
+  /**
+   * Busca todas as raças de animais disponíveis
+   */
   async getBreeds(): Promise<void> {
     try {
       // TODO: Implementar lista/dropdown de raças
-        const breeds = await this.animalService
+        const breeds: BreedResponse[] = await this.animalService
           .getAnimalBreeds(this.currentUser.organizationId);
       console.log(breeds);
     } catch (err) {
       // TODO: Implementar mensagem de erro
+      console.log('Erro ao buscar raças');
+    }
+  }
+
+
+  /**
+   * Busca as raças de uma determinada espécie
+   */
+  async getBreedsBasedOnSpecies(): Promise<void> {
+    // TODO: Obter ID da espécie a partir de dropdown/página
+
+    const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257';
+
+    try {
+        const breeds: BreedResponse[] = await this.animalService
+          .getAnimalBreedsBasedOnSpecies(speciesId,
+            this.currentUser.organizationId);
+      console.log(breeds);
+    } catch (err) {
       console.log('Erro ao buscar raças');
     }
   }

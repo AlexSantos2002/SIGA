@@ -7,6 +7,8 @@ import {RegisterOrganizationRequest} from '../models/auth/RegisterOrganizationRe
 })
 export class OrganizationService {
 
+  // TODO: Modificar tabela de organizações para ter o ID do administrador
+
   /**
    * @description
    * Cria uma organizacao com nome, email, numero e morada
