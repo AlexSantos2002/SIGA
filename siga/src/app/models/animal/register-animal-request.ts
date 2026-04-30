@@ -8,5 +8,4 @@ export interface RegisterAnimalRequest {
   gender: string,
   birthDate: string,
   available: boolean,
-  organizationId: string
 }

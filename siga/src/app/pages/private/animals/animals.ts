@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AnimalService } from '../../../services/animal.service';
-import { AuthService } from '../../../services/auth.service';
-import { User } from '../../../models/User';
-import { AnimalFilters } from '../../../models/animal/AnimalFilters';
-import { BreedResponse } from '../../../models/animal/BreedResponse';
+import { AnimalService } from '../../../services/animal/animal.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { User } from '../../../models/user/user.model';
+import { AnimalFilters } from '../../../models/animal/animal-filters';
+import { Breed } from '../../../models/breed/breed.model';
+import { UpdateAnimalRequest } from '../../../models/animal/update-animal-request';
+import { RegisterBreedRequest } from '../../../models/breed/register-breed-request';
 
 @Component({
   selector: 'app-animals',
@@ -53,6 +55,9 @@ export class Animals implements OnInit {
   async register(): Promise<void> {
     try {
       // TODO: Obter dados do animal através de formulário
+      // const request = {...this.form.value,
+      //   organizationId: this.currentUser.organizationId};
+
       const name = 'King'
       const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257';
       const breedId = 'e4cbc727-9bdb-476f-8434-ec89dc5c6c5a';
@@ -71,10 +76,8 @@ export class Animals implements OnInit {
         organizationId: this.currentUser.organizationId,
       };
 
-      // const request = {...this.form.value,
-      //   organizationId: this.currentUser.organizationId};
-
-      const animal = await this.animalService.registerAnimal(request);
+      const animal = await this.animalService
+        .register(this.currentUser.organizationId, request);
       console.log('Animal criado:', animal);
 
       // TODO: Implementar mensagem de animal criado
@@ -86,23 +89,41 @@ export class Animals implements OnInit {
     }
   }
 
-
   /**
    * Retorna uma lista com todos os animais
    */
   async getAllAnimals(): Promise<void> {
     try {
       const animals = await this.animalService
-        .searchAnimals({organizationId: this.currentUser.organizationId, available: false} as AnimalFilters);
+        .search(this.currentUser.organizationId, {} as AnimalFilters);
       console.log(animals);
-    } catch (err) {}
+
+      // TODO: Adicionar animais a lista
+    } catch (err) {
+      console.log('Erro ao buscar animais');
+    }
   }
 
+  async getAnimalById(): Promise<void> {
+    // TODO: Obter ID do animal através da página/dropdown
+    const animalId = '0631320c-f027-427f-ba4d-45271b5fa97e';
+
+    try {
+        const animal = await this.animalService.getById(animalId,
+          this.currentUser.organizationId)
+      console.log(animal);
+
+        // TODO: Redirecionar para página do animal
+    } catch (err) {
+      // TODO: Mostrar mensagem de erro
+      console.log('Não foi possível encontrar o animal');
+    }
+  }
 
   /**
    * Edita um animal
    */
-  async editAnimal(): Promise<void> {
+  async update(): Promise<void> {
     // TODO: Obter dados através de um formulário
     // TODO: Obter id do animal através da página/dropdown
 
@@ -115,19 +136,19 @@ export class Animals implements OnInit {
     const birthDate = '2020-03-18';
     const available = false;
 
-    const request = {
+    const request: UpdateAnimalRequest = {
       name: name,
       speciesId: speciesId,
       breedId: breedId,
       gender: gender,
       birthDate: birthDate,
       available: available,
-      organizationId: this.currentUser.organizationId
     }
 
     try {
       // TODO: Mensagem de animal atualizado. Atualizar campos do formulário?
-      await this.animalService.editAnimal(animalId, request);
+      await this.animalService
+        .update(animalId, this.currentUser.organizationId, request);
       console.log('Animal atualizado');
     } catch (err) {
       // TODO: implementar mensagem de erro
@@ -145,14 +166,14 @@ export class Animals implements OnInit {
     const name = 'rottweiler';
     const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257'; // cão
 
-    const request = {
+    const request: RegisterBreedRequest = {
       name: name,
       speciesId: speciesId ,
-      organizationId: this.currentUser.organizationId
     }
 
     try {
-      await this.animalService.createAnimalBreed(request)
+      await this.animalService
+        .registerBreed(this.currentUser.organizationId, request)
       console.log('raça criada');
       // TODO: Implementar mensagem de raça criada
     } catch (err) {
@@ -168,8 +189,8 @@ export class Animals implements OnInit {
   async getBreeds(): Promise<void> {
     try {
       // TODO: Implementar lista/dropdown de raças
-        const breeds: BreedResponse[] = await this.animalService
-          .getAnimalBreeds(this.currentUser.organizationId);
+        const breeds: Breed[] = await this.animalService
+          .getAllBreeds(this.currentUser.organizationId);
       console.log(breeds);
     } catch (err) {
       // TODO: Implementar mensagem de erro
@@ -187,8 +208,8 @@ export class Animals implements OnInit {
     const speciesId = 'fd9a35ba-e3fe-423f-851a-02373560f257';
 
     try {
-        const breeds: BreedResponse[] = await this.animalService
-          .getAnimalBreedsBasedOnSpecies(speciesId,
+        const breeds: Breed[] = await this.animalService
+          .getBreedsBasedOnSpecies(speciesId,
             this.currentUser.organizationId);
       console.log(breeds);
     } catch (err) {

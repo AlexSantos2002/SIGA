@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { supabase } from '../../../supabase/supabase';
-import { CreateUserRequest } from '../models/CreateUserRequest';
+import { supabase } from '../../../../supabase/supabase';
+import { RegisterUserRequest } from '../../models/user/register-user-request';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
 
-  async registerUser(request: CreateUserRequest) {
+  async registerUser(request: RegisterUserRequest) {
     // Verifica se e um administrador
     const { data, error } = await supabase.auth.getUser();
 

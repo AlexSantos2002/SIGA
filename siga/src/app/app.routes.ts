@@ -11,6 +11,8 @@ import { Faq } from './pages/public/faq/faq';
 import { Login } from './pages/public/login/login';
 import { Animals } from './pages/private/animals/animals';
 import { AuthGuard } from './guards/auth.guard';
+import { Adopters } from './pages/private/adopters/adopters';
+import { Adoptions } from './pages/private/adoptions/adoptions';
 
 /**
  * @description
@@ -75,6 +77,12 @@ export const routes: Routes = [
       { path: 'animals',
         component: Animals,
       },
+      { path: 'adopters',
+        component: Adopters,
+      },
+      { path: 'adoptions',
+        component: Adoptions,
+      }
     ]
   },
   {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OrganizationService } from '../../../services/organization.service';
+import { OrganizationService } from '../../../services/organization/organization.service';
 import {
   FormBuilder,
   FormsModule,
@@ -9,7 +9,7 @@ import {
   ValidatorFn,
   AbstractControl, ValidationErrors
 } from '@angular/forms';
-import { RegisterOrganizationRequest } from '../../../models/auth/RegisterOrganizationRequest';
+import { RegisterOrganizationRequest } from '../../../models/auth/register-organization-request';
 import { CommonModule } from '@angular/common';
 
 /**

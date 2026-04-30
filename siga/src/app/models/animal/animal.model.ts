@@ -2,7 +2,7 @@
  * Representa o animal enviado
  * pela base de dados
  */
-export interface AnimalResponse {
+export interface Animal {
   id: number;
   name: string;
   species: {

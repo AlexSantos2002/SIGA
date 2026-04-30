@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { RegisterAnimalRequest } from '../models/animal/RegisterAnimalRequest';
-import { supabase } from '../../../supabase/supabase';
-import { AnimalResponse } from '../models/animal/AnimalResponse';
-import { AnimalFilters } from '../models/animal/AnimalFilters';
-import { EditAnimalRequest } from '../models/animal/EditAnimalRequest';
-import { CreateBreedRequest } from '../models/animal/CreateBreedRequest';
-import { BreedResponse } from '../models/animal/BreedResponse';
+import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
+import { supabase } from '../../../../supabase/supabase';
+import { Animal } from '../../models/animal/animal.model';
+import { AnimalFilters } from '../../models/animal/animal-filters';
+import { UpdateAnimalRequest } from '../../models/animal/update-animal-request';
+import { RegisterBreedRequest } from '../../models/breed/register-breed-request';
+import { Breed } from '../../models/breed/breed.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalService {
 
+  // TODO: Refatorar métodos para garantir consistência (obter o ID da organização separadamente)
+
   /**
    * Regista um novo animal
-   * @param request contém os dados do animal
    */
-  async registerAnimal(request: RegisterAnimalRequest): Promise<AnimalResponse> {
+  async register(organizationId: string, request: RegisterAnimalRequest): Promise<Animal> {
     const {data: animalData, error} = await supabase
       .from("animals")
       .insert({
@@ -26,7 +27,7 @@ export class AnimalService {
         gender: request.gender,
         birth_date: request.birthDate,
         available: request.available,
-        organization_id: request.organizationId
+        organization_id: organizationId
       }).select(`
     *,
     species:species_id (
@@ -43,7 +44,34 @@ export class AnimalService {
       throw error || new Error("Animal não foi criado");
     }
 
-    return this.toAnimalResponse(animalData);
+    return this.toAnimal(animalData);
+  }
+
+
+  /**
+   * Busca um animal pelo seu ID
+   */
+  async getById(animalId: string, organizationId: string): Promise<Animal> {
+    const {data: animal, error} = await supabase
+      .from('animals')
+      .select(`
+      *,
+    species:species_id (
+      id,
+      name
+    ),
+    breed:breed_id (
+      id,
+      name
+    )
+      `)
+      .eq('id', animalId)
+      .eq('organization_id', organizationId)
+      .single();
+
+    if (error) throw error;
+
+    return this.toAnimal(animal);
   }
 
   /**
@@ -51,7 +79,7 @@ export class AnimalService {
    * espécie, raça e disponibilidade.
    * @param filters filtro com diferentes critérios para busca
    */
-  async searchAnimals(filters: AnimalFilters): Promise<AnimalResponse[]> {
+  async search(organizationId: string, filters: AnimalFilters): Promise<Animal[]> {
     let query = supabase
       .from('animals')
       // Busca os valores da tabela breeds e species
@@ -65,7 +93,7 @@ export class AnimalService {
       id,
       name
     )
-  `).eq('organization_id', filters.organizationId);
+  `).eq('organization_id', organizationId);
 
     // Filtra a espécie
     if (filters.species) {
@@ -89,7 +117,7 @@ export class AnimalService {
 
     if (error) throw error;
 
-    return animals.map((animal) => this.toAnimalResponse(animal)) || [];
+    return animals.map((animal) => this.toAnimal(animal)) || [];
   }
 
 
@@ -98,7 +126,7 @@ export class AnimalService {
    * @param animalId id do animal a ser editado
    * @param request request contendo as informações a serem atualizadas
    */
-  async editAnimal(animalId: string, request: EditAnimalRequest): Promise<AnimalResponse> {
+  async update(animalId: string, organizationId: string, request: UpdateAnimalRequest): Promise<Animal> {
     const { data: animalData, error } = await supabase
       .from('animals')
       .update({
@@ -110,7 +138,7 @@ export class AnimalService {
         available: request.available,
       })
       .eq('id', animalId)
-      .eq('organization_id', request.organizationId)
+      .eq('organization_id', organizationId)
       .select(`
       *,
       species:species_id (
@@ -126,20 +154,20 @@ export class AnimalService {
 
     if (error) throw error;
 
-    return this.toAnimalResponse(animalData);
+    return this.toAnimal(animalData);
   }
 
 
   /**
    * Cria uma raça de animal para a organização
    */
-  async createAnimalBreed(request: CreateBreedRequest): Promise<BreedResponse> {
+  async registerBreed(organizationId: string, request: RegisterBreedRequest): Promise<Breed> {
     const { data: breedData, error } = await supabase
       .from('breeds')
       .insert({
         name: request.name,
         species_id: request.speciesId,
-        organization_id: request.organizationId
+        organization_id: organizationId
       })
       .select(`
       *,
@@ -154,14 +182,14 @@ export class AnimalService {
       throw error || new Error("Raça não foi criada");
     }
 
-    return this.toBreedResponse(breedData);
+    return this.toBreed(breedData);
   }
 
 
   /**
    * Busca as raças de animais disponíveis
    */
-  async getAnimalBreeds(organizationId: string) {
+  async getAllBreeds(organizationId: string) {
     const {data: breeds, error} = await supabase
       .from('breeds')
       .select(
@@ -178,7 +206,7 @@ export class AnimalService {
       throw error || new Error('Não foi possível obter as raças disponíveis');
     }
 
-    return breeds.map((breed) => this.toBreedResponse(breed));
+    return breeds.map((breed) => this.toBreed(breed));
   }
 
 
@@ -186,7 +214,7 @@ export class AnimalService {
    * Busca as raças de animais com base na
    * espécie. Ex: para cães: Rottweiler, Dobermann, ...
    */
-  async getAnimalBreedsBasedOnSpecies(speciesId: string, organizationId: string) {
+  async getBreedsBasedOnSpecies(speciesId: string, organizationId: string) {
     const { data: breeds, error } = await supabase
       .from('breeds')
       .select('*, species:species_id (name)')
@@ -197,14 +225,14 @@ export class AnimalService {
       throw error || new Error('Não foi possível obter as raças');
     }
 
-    return breeds.map(breed => this.toBreedResponse(breed));
+    return breeds.map(breed => this.toBreed(breed));
   }
 
   /**
-   * Converte a resposta do supabase para AnimalResponse
+   * Converte a resposta do supabase para Animal
    * @param response response enviada pelo supabase
    */
-  private toAnimalResponse(response: any): AnimalResponse {
+  private toAnimal(response: any): Animal {
     return {
       id: response.id,
       name: response.name,
@@ -228,10 +256,10 @@ export class AnimalService {
 
 
   /**
-   * Converte a resposta do supabase para BreedResponse
+   * Converte a resposta do supabase para Breed
    * @param response response enviada pelo supabase
    */
-  private toBreedResponse(response: any): BreedResponse {
+  private toBreed(response: any): Breed {
     return {
       id: response.id,
       name: response.name,

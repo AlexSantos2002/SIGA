@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { supabase } from '../../../supabase/supabase';
-import { LoginRequest } from '../models/auth/LoginRequest';
+import { supabase } from '../../../../supabase/supabase';
+import { LoginRequest } from '../../models/auth/login-request';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../models/User';
+import { User } from '../../models/user/user.model';
 
 /**
  * Serviço responsável pela autenticação e gestão do utilizador autenticado.
