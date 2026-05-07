@@ -42,7 +42,7 @@ export class AuthService {
 
     if (error || !data.user) throw error;
 
-    const user = await this.getUserProfile(data.user.id);
+    const user: User = await this.getUserProfile(data.user.id);
 
     this.currentUserSubject.next(user);
 
@@ -64,20 +64,6 @@ export class AuthService {
    */
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
-  }
-
-
-  /**
-   * Retorna o ID da organização do utilizador autenticado.
-   */
-  getOrganizationId(): string {
-    const user = this.getCurrentUser();
-
-    if (!user) {
-      throw new Error('Utilizador não autenticado');
-    }
-
-    return user.organizationId;
   }
 
 

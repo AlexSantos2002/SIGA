@@ -3,7 +3,7 @@
  * pela base de dados
  */
 export interface Animal {
-  id: number;
+  id: string;
   name: string;
   species: {
     id: string,

@@ -105,10 +105,12 @@ export class AnimalService {
       query = query.eq('gender', filters.gender);
     }
 
+    // Filtra a disponibilidade
     if (filters.available !== undefined) {
       query = query.eq('available', filters.available);
     }
 
+    // Filtra a raça
     if (filters.breedId) {
       query = query.eq('breed_id', filters.breedId);
     }
@@ -123,8 +125,6 @@ export class AnimalService {
 
   /**
    * Edita um animal existente
-   * @param animalId id do animal a ser editado
-   * @param request request contendo as informações a serem atualizadas
    */
   async update(animalId: string, organizationId: string, request: UpdateAnimalRequest): Promise<Animal> {
     const { data: animalData, error } = await supabase
@@ -159,6 +159,26 @@ export class AnimalService {
 
 
   /**
+   * Torna um animal indisponível
+   */
+  async makeAnimalUnavailable(animalId: string, organizationId: string): Promise<Animal> {
+    let animal: Animal = await this.getById(animalId, organizationId);
+
+    const updatedAnimal: UpdateAnimalRequest = {
+      name: animal.name,
+      speciesId: animal.species.id,
+      breedId: animal.breed.id,
+      gender: animal.gender,
+      birthDate: animal.birthDate,
+      available: false,
+    };
+
+    return await this.update(animalId,
+      organizationId, updatedAnimal);
+  }
+
+
+  /**
    * Cria uma raça de animal para a organização
    */
   async registerBreed(organizationId: string, request: RegisterBreedRequest): Promise<Breed> {
@@ -189,7 +209,7 @@ export class AnimalService {
   /**
    * Busca as raças de animais disponíveis
    */
-  async getAllBreeds(organizationId: string) {
+  async getAllBreeds(organizationId: string): Promise<Breed[]> {
     const {data: breeds, error} = await supabase
       .from('breeds')
       .select(
@@ -214,7 +234,7 @@ export class AnimalService {
    * Busca as raças de animais com base na
    * espécie. Ex: para cães: Rottweiler, Dobermann, ...
    */
-  async getBreedsBasedOnSpecies(speciesId: string, organizationId: string) {
+  async getBreedsBasedOnSpecies(speciesId: string, organizationId: string): Promise<Breed[]> {
     const { data: breeds, error } = await supabase
       .from('breeds')
       .select('*, species:species_id (name)')

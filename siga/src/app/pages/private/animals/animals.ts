@@ -158,6 +158,25 @@ export class Animals implements OnInit {
 
 
   /**
+   * Torna um animal indisponível
+   */
+  async makeAnimalUnavailable(): Promise<void> {
+    // TODO: Obter dados do animal através de dropdown/página
+    const animalId = 'a170aefa-04e2-4dca-a615-0f98dd871cff';
+
+    try {
+        const animal = this.animalService.makeAnimalUnavailable(animalId,
+          this.currentUser.organizationId);
+
+        // TODO: Mostrar mensagem de animal atualizado
+    } catch (err) {
+      // TODO: Mostrar mensagem de erro
+    }
+
+  }
+
+
+  /**
    * Cria uma raça para uma determinada espécie de animal
    */
   async createBreed(): Promise<void> {
