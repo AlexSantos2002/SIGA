@@ -1,68 +1,74 @@
 import { Routes } from '@angular/router';
 
-import { PublicLayout } from './pages/public/public-layout';
-import { PrivateLayout } from './pages/private/private-layout';
-
-import { Home } from './pages/public/home/home';
-import { Register } from './pages/public/register/register';
-import { About } from './pages/public/about/about';
-import { Contacts } from './pages/public/contacts/contacts';
-import { Faq } from './pages/public/faq/faq';
-import { Login } from './pages/public/login/login';
-
-import { Dashboard } from './pages/private/dashboard/dashboard';
-import { Animals } from './pages/private/animals/animals';
-import { Adopters } from './pages/private/adopters/adopters';
-import { Adoptions } from './pages/private/adoptions/adoptions';
-
 import { AuthGuard } from './guards/auth.guard';
 
 /**
  * @description
  * Configuração das rotas da aplicação SIGA.
  *
- * Define a navegação entre páginas públicas (antes do login)
- * e privadas (após o login), utilizando layouts diferentes.
- *
- * O PublicLayout é utilizado para páginas acessíveis a todos os utilizadores.
- * O PrivateLayout é utilizado para a área interna da aplicação.
- *
- * @returns {Routes} Lista de rotas configuradas para a aplicação
+ * Define a navegação entre páginas públicas e privadas,
+ * utilizando lazy loading para carregar cada página apenas
+ * quando for necessária.
  */
 export const routes: Routes = [
   {
     path: '',
-    component: PublicLayout,
+    loadComponent: () =>
+      import('./pages/public/public-layout').then(m => m.PublicLayout),
     children: [
       /**
        * @description Página inicial da aplicação
        */
-      { path: '', component: Home },
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/public/home/home').then(m => m.Home)
+      },
 
       /**
        * @description Página de registo de organização
        */
-      { path: 'register', component: Register },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./pages/public/register/register').then(m => m.Register)
+      },
 
       /**
        * @description Página de login
        */
-      { path: 'login', component: Login },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./pages/public/login/login').then(m => m.Login)
+      },
 
       /**
        * @description Página sobre o projeto SIGA
        */
-      { path: 'about', component: About },
+      {
+        path: 'about',
+        loadComponent: () =>
+          import('./pages/public/about/about').then(m => m.About)
+      },
 
       /**
        * @description Página de perguntas frequentes
        */
-      { path: 'faq', component: Faq },
+      {
+        path: 'faq',
+        loadComponent: () =>
+          import('./pages/public/faq/faq').then(m => m.Faq)
+      },
 
       /**
        * @description Página de contactos
        */
-      { path: 'contacts', component: Contacts }
+      {
+        path: 'contacts',
+        loadComponent: () =>
+          import('./pages/public/contacts/contacts').then(m => m.Contacts)
+      }
     ]
   },
   {
@@ -74,7 +80,8 @@ export const routes: Routes = [
      * disponíveis apenas após autenticação.
      */
     path: 'app',
-    component: PrivateLayout,
+    loadComponent: () =>
+      import('./pages/private/private-layout').then(m => m.PrivateLayout),
     canActivate: [AuthGuard],
     children: [
       /**
@@ -93,22 +100,35 @@ export const routes: Routes = [
        */
       {
         path: 'dashboard',
-        component: Dashboard
+        loadComponent: () =>
+          import('./pages/private/dashboard/dashboard').then(m => m.Dashboard)
       },
 
+      /**
+       * @description Página de gestão de animais
+       */
       {
         path: 'animals',
-        component: Animals
+        loadComponent: () =>
+          import('./pages/private/animals/animals').then(m => m.Animals)
       },
 
+      /**
+       * @description Página de gestão de adotantes
+       */
       {
         path: 'adopters',
-        component: Adopters
+        loadComponent: () =>
+          import('./pages/private/adopters/adopters').then(m => m.Adopters)
       },
 
+      /**
+       * @description Página de gestão de adoções
+       */
       {
         path: 'adoptions',
-        component: Adoptions
+        loadComponent: () =>
+          import('./pages/private/adoptions/adoptions').then(m => m.Adoptions)
       }
     ]
   },
