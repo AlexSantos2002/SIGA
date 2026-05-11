@@ -1,10 +1,8 @@
- <--Página de login da plataforma SIGA
-
+<!-- Página de login da plataforma SIGA -->
 
 <section class="pagina-login">
   <div class="container-login">
 
-    <!-- Cabeçalho da página -->
     <div class="cabecalho-login">
       <p class="etiqueta-login">LOGIN</p>
 
@@ -17,7 +15,6 @@
       </p>
     </div>
 
-    <!-- Formulário -->
     <form [formGroup]="form" (ngSubmit)="login()" class="formulario-login">
 
       <div class="grupo-campo">
@@ -28,6 +25,10 @@
           placeholder="email@exemplo.pt"
           formControlName="email"
         />
+
+        <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+          Introduza um email válido.
+        </small>
       </div>
 
       <div class="grupo-campo">
@@ -38,7 +39,15 @@
           placeholder="Introduza a palavra-passe"
           formControlName="password"
         />
+
+        <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+          Introduza a palavra-passe.
+        </small>
       </div>
+
+      <p *ngIf="errorMessage" class="mensagem-erro">
+        {{ errorMessage }}
+      </p>
 
       <div class="linha-opcoes">
         <label class="grupo-checkbox">

@@ -9,20 +9,23 @@ import { About } from './pages/public/about/about';
 import { Contacts } from './pages/public/contacts/contacts';
 import { Faq } from './pages/public/faq/faq';
 import { Login } from './pages/public/login/login';
+
+import { Dashboard } from './pages/private/dashboard/dashboard';
 import { Animals } from './pages/private/animals/animals';
-import { AuthGuard } from './guards/auth.guard';
 import { Adopters } from './pages/private/adopters/adopters';
 import { Adoptions } from './pages/private/adoptions/adoptions';
+
+import { AuthGuard } from './guards/auth.guard';
 
 /**
  * @description
  * Configuração das rotas da aplicação SIGA.
  *
  * Define a navegação entre páginas públicas (antes do login)
- * e privadas (após o login), utilizando layouts diferentes
+ * e privadas (após o login), utilizando layouts diferentes.
  *
- * O PublicLayout é utilizado para páginas acessíveis a todos os utilizadores
- * O PrivateLayout é utilizado para a área interna da aplicação
+ * O PublicLayout é utilizado para páginas acessíveis a todos os utilizadores.
+ * O PrivateLayout é utilizado para a área interna da aplicação.
  *
  * @returns {Routes} Lista de rotas configuradas para a aplicação
  */
@@ -65,23 +68,47 @@ export const routes: Routes = [
   {
     /**
      * @description
-     * Área privada da aplicação
+     * Área privada da aplicação.
      *
-     * Esta rota será utilizada para funcionalidades internas
+     * Esta rota é utilizada para funcionalidades internas
      * disponíveis apenas após autenticação.
      */
     path: 'app',
     component: PrivateLayout,
-    // canActivate: [AuthGuard], -> permite o acesso a utilizadores autenticados
+    canActivate: [AuthGuard],
     children: [
-      { path: 'animals',
-        component: Animals,
+      /**
+       * @description
+       * Quando o utilizador entra em /app,
+       * é redirecionado automaticamente para o dashboard.
+       */
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
       },
-      { path: 'adopters',
-        component: Adopters,
+
+      /**
+       * @description Página inicial privada após login
+       */
+      {
+        path: 'dashboard',
+        component: Dashboard
       },
-      { path: 'adoptions',
-        component: Adoptions,
+
+      {
+        path: 'animals',
+        component: Animals
+      },
+
+      {
+        path: 'adopters',
+        component: Adopters
+      },
+
+      {
+        path: 'adoptions',
+        component: Adoptions
       }
     ]
   },

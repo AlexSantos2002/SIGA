@@ -1,43 +1,32 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
-import { supabase } from '../../../../../supabase/supabase';
 
-/**
- * @description
- * Componente responsável pelo login
- *
- * Apresenta um formulário onde o utilizador introduz
- * as credenciais de acesso à plataforma
- *
- * Após o login redireciona para uma página
- */
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-
-  /**
-   * @description
-   * Formulário utilizado para receber as credenciais do user
-   */
   form: FormGroup;
+  errorMessage = '';
 
   /**
    * @description
-   * Construtor do componente
-   * Inicializa o formulário com validações obrigatórias
+   * Inicializa o formulário de login com os campos de email e palavra-passe.
    *
-   * @param fb Serviço FormBuilder para criação do formulário
-   * @param authService Responsável pelo login
+   * @param fb Serviço utilizado para criar formulários reativos.
+   * @param authService Serviço responsável pela autenticação do utilizador.
+   * @param router Serviço utilizado para navegar entre páginas da aplicação.
    */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -47,14 +36,12 @@ export class Login {
 
   /**
    * @description
-   * Realiza o processo de login do utilizador
+   * Valida o formulário de login e tenta autenticar o utilizador.
    *
-   * Envia as credenciais para o AuthService e em caso de sucesso, verifica o papel do utilizador
-   * para definir o redirecionamento adequado
+   * Se o login for bem-sucedido, redireciona o utilizador para o dashboard.
+   * Caso ocorra um erro, apresenta uma mensagem de erro ao utilizador.
    *
-   * Em caso de erro regista o erro e apresenta uma mensagem ao utilizador
-   *
-   * @returns {Promise<void>} Promessa resolvida após tentativa de login
+   * @returns {Promise<void>} Não retorna qualquer valor.
    */
   async login(): Promise<void> {
     if (this.form.invalid) {
@@ -63,18 +50,17 @@ export class Login {
     }
 
     try {
+      this.errorMessage = '';
+
       const user = await this.authService.login(this.form.value);
 
       if (user) {
-        console.log('Utilizador logado');
-
-        // Redirecionar para pagina principal
+        await this.router.navigate(['/app/dashboard']);
       }
 
     } catch (err) {
       console.log(err);
-
-      //Mensagem de erro ao utilizador
+      this.errorMessage = 'Email ou palavra-passe incorretos.';
     }
   }
 }
