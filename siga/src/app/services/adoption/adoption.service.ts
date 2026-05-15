@@ -4,6 +4,9 @@ import { supabase } from '../../../../supabase/supabase';
 import { Adoption } from '../../models/adoption/adoption.model';
 import { AnimalService } from '../animal/animal.service';
 import { UpdateAdoptionRequest } from '../../models/adoption/update-adoption-request';
+import { BusinessError, DBError, NotFoundError } from '../../error/app-error';
+import { ERROR_CODES } from '../../error/error-codes';
+import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +24,12 @@ export class AdoptionService {
     const animal = await this.animalService
       .getById(request.animalId, organizationId);
 
+    // Emite erro caso o animal não esteja disponível para adoção
     if (!animal.available) {
-      throw new Error('O animal não está disponível para adoção')
+      throw new BusinessError(ERROR_CODES.ANIMAL_UNAVAILABLE);
     }
 
-    const {data: adoption, error} = await supabase
+    const {data, error} = await supabase
       .from('adoptions')
       .insert({
         organization_id: organizationId,
@@ -59,16 +63,16 @@ export class AdoptionService {
       )
     `).single();
 
-    if (error || !adoption) {
-      throw error || new Error('Adoção não realizada');
+    if (error || !data) {
+      throw error || new DBError();
     }
 
-    // Atualiza o estado do animal caso a adoção já esteja aceita
+    // Atualiza o estado do animal caso a adoção já esteja aceite
     if (request.status === 'aceita') {
       await this.animalService.makeAnimalUnavailable(animal.id, organizationId);
     }
 
-    return this.toAdoption(adoption)
+    return this.toAdoption(data)
   }
 
 
@@ -76,7 +80,7 @@ export class AdoptionService {
    * Retorna todas as adoções da organização
    */
   async getAll(organizationId: string): Promise<Adoption[]> {
-    const {data: adoptions, error} = await supabase
+    const {data, error} = await supabase
       .from('adoptions')
       .select(`
         id,
@@ -103,18 +107,18 @@ export class AdoptionService {
         )
       `).eq('organization_id', organizationId)
 
-    if (error || !adoptions) {
-      throw error;
+    if (error || !data) {
+      throw new DBError();
     }
 
-    return adoptions.map((adoption) => this.toAdoption(adoption));
+    return data.map((adoption) => this.toAdoption(adoption));
   }
 
   /**
    * Obtém uma adoção pelo ID
    */
   async getById(adoptionId: string, organizationId: string): Promise<Adoption> {
-    const { data: adoption, error } = await supabase
+    const { data, error } = await supabase
       .from('adoptions')
       .select(`
       id,
@@ -138,11 +142,16 @@ export class AdoptionService {
       .eq('organization_id', organizationId)
       .single();
 
-    if (error || !adoption) {
-      throw new Error('Adoção');
+    // Emite erro se a adoção não existir
+    if (error?.code === SUPABASE_ERROR_CODES.NO_ROWS_RETURNED) {
+      throw new NotFoundError();
     }
 
-    return this.toAdoption(adoption);
+    if (error || !data) {
+      throw new DBError();
+    }
+
+    return this.toAdoption(data);
   }
 
 
@@ -150,7 +159,7 @@ export class AdoptionService {
    * Obtém adoções filtradas por status
    */
   async getByStatus(status: string, organizationId: string): Promise<Adoption[]> {
-    const { data: adoptions, error } = await supabase
+    const { data, error } = await supabase
       .from('adoptions')
       .select(`
       id,
@@ -173,11 +182,11 @@ export class AdoptionService {
       .eq('organization_id', organizationId)
       .eq('status', status);
 
-    if (error || !adoptions) {
-      throw new Error('Erro ao obter adoções por estado', error);
+    if (error || !data) {
+      throw new DBError();
     }
 
-    return adoptions.map((adoption) => this.toAdoption(adoption));
+    return data.map((adoption) => this.toAdoption(adoption));
   }
 
 
@@ -185,7 +194,7 @@ export class AdoptionService {
    * Obtém adoções de um adotante específico
    */
   async getByAdopterId(adopterId: string, organizationId: string): Promise<Adoption[]> {
-    const { data: adoptions, error } = await supabase
+    const { data, error } = await supabase
       .from('adoptions')
       .select(`
       id,
@@ -208,26 +217,26 @@ export class AdoptionService {
       .eq('organization_id', organizationId)
       .eq('adopter_id', adopterId);
 
-    if (error || !adoptions) {
-      throw new Error('Erro ao obter adoções do adotante');
+    if (error || !data) {
+      throw new DBError();
     }
 
-    return adoptions.map((adoption) => this.toAdoption(adoption));
+    return data.map((adoption) => this.toAdoption(adoption));
   }
 
 
   /**
    * Atualiza o estado de uma adoção
    */
-  async updateStatus(request: UpdateAdoptionRequest, organizationId: string): Promise<Adoption> {
-    const adoption = await this.getById(request.adoptionId, organizationId);
+  async update(request: UpdateAdoptionRequest, organizationId: string): Promise<Adoption> {
+    const adoption: Adoption = await this.getById(request.adoptionId, organizationId);
 
+    // Emite erro caso a transição de status da adoção seja inválida
     if (!this.isValidStatusTransition(request.newStatus)) {
-      throw new Error(`Não é possível alterar o estado de "${adoption.status}"
-       para "${request.newStatus}"`);
+      throw new BusinessError(ERROR_CODES.INVALID_STATUS_TRANSITION)
     }
 
-    const { data: updated, error } = await supabase
+    const { data, error } = await supabase
       .from('adoptions')
       .update({
         status: request.newStatus,
@@ -255,16 +264,16 @@ export class AdoptionService {
     `)
       .single();
 
-    if (error || !updated) {
-      throw new Error('Erro ao atualizar estado da adoção', error);
+    if (error || !data) {
+      throw new DBError();
     }
 
-    // Caso seja aceita, muda o estado do animal
+    // Caso seja aceite, muda o estado do animal
     if (request.newStatus === 'aceita') {
       await this.animalService.makeAnimalUnavailable(adoption.animal.id, organizationId);
     }
 
-    return this.toAdoption(updated);
+    return this.toAdoption(data);
   }
 
 
@@ -273,7 +282,7 @@ export class AdoptionService {
    * Remove uma adoção (apenas se estiver pendente)
    */
   async delete(adoptionId: string, organizationId: string): Promise<void> {
-    const adoption = await this.getById(adoptionId, organizationId);
+    const adoption: Adoption = await this.getById(adoptionId, organizationId);
 
     // Apenas deleta caso o status seja pendente
     if (adoption.status !== 'pendente') {

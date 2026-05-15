@@ -1,0 +1,22 @@
+export const ERROR_CODES = {
+  // Erros de negócio
+
+  // ANIMAIS
+  ANIMAL_UNAVAILABLE:        'ANIMAL_UNAVAILABLE',
+
+  // ADOÇÕES
+  ADOPTION_FAILED:           'ADOPTION_FAILED',
+  INVALID_STATUS_TRANSITION: 'INVALID_STATUS_TRANSITION',
+
+  // REGISTO
+  EMAIL_ALREADY_EXISTS:      'EMAIL_ALREADY_EXISTS',
+  ORGANIZATION_ALREADY_EXISTS: 'ORGANIZATION_ALREADY_EXISTS',
+
+  // GENÉRICOS
+  DB_ERROR:                  'DB_ERROR',
+  NOT_FOUND:                 'NOT_FOUND',
+  UNKNOWN:                   'UNKNOWN',
+  INVALID_CHANGE:            'INVALID_CHANGE'
+} as const;
+
+export type ErrorCode = typeof ERROR_CODES[keyof typeof ERROR_CODES];

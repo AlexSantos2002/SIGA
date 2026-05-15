@@ -3,6 +3,7 @@ import { supabase } from '../../../../supabase/supabase';
 import { LoginRequest } from '../../models/auth/login-request';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../models/user/user.model';
+import { DBError } from '../../error/app-error';
 
 /**
  * Serviço responsável pela autenticação e gestão do utilizador autenticado.
@@ -40,7 +41,7 @@ export class AuthService {
       password: request.password
     });
 
-    if (error || !data.user) throw error;
+    if (error || !data.user) throw new DBError();
 
     const user: User = await this.getUserProfile(data.user.id);
 
@@ -106,9 +107,7 @@ export class AuthService {
       .eq('id', userId)
       .single();
 
-    if (error || !data) {
-      throw new Error('Erro ao carregar perfil do utilizador');
-    }
+    if (error || !data) throw new DBError();
 
     return this.mapToUser(data);
   }

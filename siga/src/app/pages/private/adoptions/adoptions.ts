@@ -30,13 +30,12 @@ export class Adoptions implements OnInit {
    * Regista uma nova adoção
    */
   async register(): Promise<void> {
-    // TODO: Obter dados através de formulário
     const request: RegisterAdoptionRequest = {
       adopterId: 'be4e63e1-ecb9-4092-ae54-e8484a1de0da',
-      animalId: '0631320c-f027-427f-ba4d-45271b5fa97e',
-      status: 'aceita',
+      animalId: 'a170aefa-04e2-4dca-a615-0f98dd871cff',
+      status: 'pendente',
       applicationDate: '2026-04-23 16:35:49.641019+00',
-      decisionDate: '2026-04-23 16:35:49.641019+00'
+      decisionDate: '2026-04-24 16:50:49.641019+00'
     }
 
     try {
@@ -45,7 +44,6 @@ export class Adoptions implements OnInit {
 
       console.log(adoption);
     } catch (err) {
-      // TODO: Implementar mensagem de erro
       console.log(err);
     }
   }
@@ -56,11 +54,11 @@ export class Adoptions implements OnInit {
    */
   async getAll(): Promise<void> {
     try {
-      // TODO: Implementar lista de adoções
-        const adoptions: Adoption[] = await this.adoptionService.getAll(this.currentUser.organizationId);
+        const adoptions: Adoption[] = await this.adoptionService
+          .getAll(this.currentUser.organizationId);
+
       console.log(adoptions);
     } catch (err) {
-      // TODO: Mostrar mensagem de erro
       console.log(err);
     }
   }
@@ -71,14 +69,13 @@ export class Adoptions implements OnInit {
    */
   async getById(): Promise<void> {
     try {
-     // TODO: Obter dados da adoção através da página/dropdown
       const adoptionId = '4a370536-76a2-4ba8-9c01-c1aab7ee2a85'
       const adoption: Adoption = await this.adoptionService.getById(
         adoptionId,
         this.currentUser.organizationId);
+
       console.log(adoption);
     } catch (err) {
-      // TODO: Mostrar mensagem de erro
       console.log(err);
     }
   }
@@ -88,7 +85,6 @@ export class Adoptions implements OnInit {
    * Busca as adoções por status
    */
   async getByStatus(): Promise<void> {
-    // TODO: Obter status através de dropdown/página
     const status = 'aceita';
 
     try {
@@ -96,10 +92,8 @@ export class Adoptions implements OnInit {
           status,
           this.currentUser.organizationId);
 
-        // TODO: Atualizar lista  de adoções
       console.log(adoptions);
     } catch (err) {
-      // TODO: Mostrar mensagem de erro
       console.log(err);
     }
   }
@@ -109,17 +103,15 @@ export class Adoptions implements OnInit {
    * Busca as adoções de um determinado adotante
    */
   async getByAdopterId(): Promise<void> {
-    // TODO: Obter ID do adotante através de página/dropdown
     const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0da';
     try {
       const adoption: Adoption[] = await this.adoptionService.getByAdopterId(
         id,
         this.currentUser.organizationId,
       );
+
       console.log(adoption);
-      // TODO: Atualizar ou redirecionar para página da adoção
     } catch (err) {
-      // TODO: Mostrar mensagem de erro
       console.log(err);
     }
   }
@@ -128,23 +120,21 @@ export class Adoptions implements OnInit {
   /**
    * Atualiza o estado de uma adoção
    */
-  async updateAdoptionStatus(): Promise<void> {
-    // TODO: Obter dados através de formulário
+  async updateAdoption(): Promise<void> {
     const request: UpdateAdoptionRequest = {
-      adoptionId: '4a370536-76a2-4ba8-9c01-c1aab7ee2a85',
-      newStatus: 'aceita',
-      decisionDate: '2026-04-23 16:35:49.641019+00',
+      adoptionId: '06641b02-ccd0-4376-96a9-231b4c2fcfea',
+      newStatus: 'rejeitada',
+      decisionDate: '2026-04-27 16:35:49.641019+00',
     }
 
     try {
-        const updatedAdoption: Adoption = await this.adoptionService.updateStatus(
+        const updatedAdoption: Adoption = await this.adoptionService.update(
           request,
           this.currentUser.organizationId
         );
-      // TODO: Atualizar adoção UI
       console.log(updatedAdoption);
     } catch (err) {
-      // TODO: Mostrar mensagem de erro
+      console.log(err);
     }
   }
 }

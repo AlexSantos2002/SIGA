@@ -31,7 +31,6 @@ export class Adopters implements OnInit {
    * Regista um novo adotante
    */
   async register(): Promise<void> {
-    // TODO: Obter dados do adotante através de formulário
     const request: RegisterAdopterRequest = {
       name: 'Nicolas',
       lastName: 'Garcia',
@@ -42,9 +41,8 @@ export class Adopters implements OnInit {
     try {
         const adopter = await this.adopterService
           .register(this.currentUser.organizationId,request);
-      console.log(adopter);
 
-      // TODO: Mostrar mensagem de adotante criado
+      console.log(adopter);
     } catch (err) {
       console.log(err);
     }
@@ -60,9 +58,7 @@ export class Adopters implements OnInit {
         .getAll(this.currentUser.organizationId);
 
       console.log(adopters);
-      // TODO: Adicionar adotantes a lista ou lista vazia
     } catch (err) {
-      // TODO: Mostrar mensagem de erro
       console.log(err);
     }
   }
@@ -72,8 +68,7 @@ export class Adopters implements OnInit {
    * Busca um adotante específico
    */
   async getAdopterById(): Promise<void> {
-    // TODO: Obter ID através da página/dropdown
-    const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0da';
+    const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0db';
 
     try {
       const adopter = await this.adopterService
@@ -90,10 +85,8 @@ export class Adopters implements OnInit {
    * Edita um adotante
    */
   async editAdopter(): Promise<void> {
-    // TODO: Obter ID através da página/dropdown
     const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0da';
 
-    // TODO: Obter dados de atualização através de formulário
     const request: UpdateAdopterRequest = {
       name: 'NICOLAS',
       lastName: 'GARCIA',
@@ -105,10 +98,9 @@ export class Adopters implements OnInit {
         const updatedAdopter =  await this.adopterService
           .update(id, this.currentUser.organizationId, request)
 
-      // TODO: Adicionar mensagem de adotante atualizado
       console.log(updatedAdopter);
     } catch (err) {
-      // TODO: Implementar mensagem de erro
+      console.log(err);
     }
   }
 
@@ -117,15 +109,12 @@ export class Adopters implements OnInit {
    * Deleta um adotante
    */
   async deleteAdopter(): Promise<void> {
-    // TODO: Obter ID através da página/dropdown
     const id = '40826e21-543f-4808-b01f-9efac30879f4';
     try {
-      // TODO: Implementar mensagem de sucesso
       await this.adopterService.delete(id);
       console.log('Adotante deletado');
     } catch (err) {
-      // TODO: Implementar mensagem de erro
-      console.log('Erro ao deletar adotante');
+      console.log(err);
     }
   }
 }

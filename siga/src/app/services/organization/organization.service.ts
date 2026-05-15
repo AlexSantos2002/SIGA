@@ -1,13 +1,15 @@
 import { Injectable} from '@angular/core';
 import {supabase} from '../../../../supabase/supabase';
 import {RegisterOrganizationRequest} from '../../models/auth/register-organization-request';
+import { BusinessError, DBError } from '../../error/app-error';
+import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
+import { ERROR_CODES } from '../../error/error-codes';
+import { AuthApiError } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrganizationService {
-
-  // TODO: Modificar tabela de organizações para ter o ID do administrador
 
   /**
    * @description
@@ -17,7 +19,7 @@ export class OrganizationService {
   async registerOrganization(request: RegisterOrganizationRequest) {
 
     // Cria a organizacao
-    const { data: orgData, error: orgError } = await supabase
+    const { data: organization, error: organizationError } = await supabase
       .from('organizations')
       .insert([{
         name: request.name,
@@ -28,15 +30,25 @@ export class OrganizationService {
       .select()
       .single();
 
-    if (orgError) throw orgError;
+    // Emite erro caso o email da organização já esteja registado
+    if (organizationError?.code === SUPABASE_ERROR_CODES.UNIQUE_VIOLATION) {
+      throw new BusinessError(ERROR_CODES.ORGANIZATION_ALREADY_EXISTS);
+    }
 
-    const organizationId = orgData.id;
+    if (organizationError || !organization) throw new DBError();
+
+    const organizationId = organization.id;
 
     // Cria o administrador no supabase auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: request.adminEmail,
       password: request.adminPassword,
     });
+
+    // Emite erro caso o email do administrador já esteja registado
+    if (authError instanceof AuthApiError) {
+      throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
+    }
 
     // Deleta a organizacao caso o administrador nao seja criado
     if (authError || !authData.user) {
@@ -45,7 +57,8 @@ export class OrganizationService {
         .delete()
         .eq('id', organizationId);
 
-      throw authError;
+      console.log(authError);
+      throw new DBError();
     }
 
     // Insere na tabela de usuarios
@@ -59,8 +72,8 @@ export class OrganizationService {
         role: 'admin'
       }]);
 
-    if (userError) throw userError;
+    if (userError) throw new DBError();
 
-    return orgData;
+    return organization;
   }
 }

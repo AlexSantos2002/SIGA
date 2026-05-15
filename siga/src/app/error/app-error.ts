@@ -1,14 +1,13 @@
-/**
- * TODO: Criar global error handler
- */
+import { ERROR_MESSAGES } from './error-messages';
+import { ERROR_CODES, ErrorCode } from './error-codes';
 
 /**
  * Representa um erro na aplicação
  */
 export class AppError extends Error {
   constructor(
-    message: string,
-    public readonly code: string,
+    public readonly code: ErrorCode,
+    message = ERROR_MESSAGES[code],
   ) {
     super(message);
     this.name = 'AppError';
@@ -20,8 +19,8 @@ export class AppError extends Error {
  * exemplo: Adoção de um animal indisponível
  */
 export class BusinessError extends AppError {
-  constructor(message: string, code: string) {
-    super(message, code);
+  constructor(code: ErrorCode) {
+    super(code);
     this.name = 'BusinessError';
   }
 }
@@ -30,9 +29,9 @@ export class BusinessError extends AppError {
  * Erro causado na base de dados do supabase
  */
 export class DBError extends AppError {
-  constructor(message: string, code: string) {
-    super(message, code);
-    this.name = 'DatabaseError';
+  constructor(code: ErrorCode = ERROR_CODES.DB_ERROR) {
+    super(code);
+    this.name = 'DBError';
   }
 }
 
@@ -40,8 +39,8 @@ export class DBError extends AppError {
  * Erro de recurso não encontrado
  */
 export class NotFoundError extends AppError {
-  constructor(resource: string) {
-    super(`${resource} não encontrado`, 'NOT_FOUND');
+  constructor() {
+    super(ERROR_CODES.NOT_FOUND);
     this.name = 'NotFoundError';
   }
 }
