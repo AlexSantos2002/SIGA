@@ -31,7 +31,8 @@ export class AnimalService {
         breed_id: request.breedId,
         gender: request.gender,
         birth_date: request.birthDate,
-        available: request.available,
+        available: request.status === 'por_adotar',
+        status: request.status,
         organization_id: organizationId
       }).select(`
     *,
@@ -117,6 +118,11 @@ export class AnimalService {
       query = query.eq('available', filters.available);
     }
 
+    // Filtra o estado
+    if (filters.status) {
+      query = query.eq('status', filters.status);
+    }
+
     // Filtra a raça
     if (filters.breedId) {
       query = query.eq('breed_id', filters.breedId);
@@ -150,7 +156,8 @@ export class AnimalService {
         breed_id: request.breedId,
         gender: request.gender,
         birth_date: request.birthDate,
-        available: request.available,
+        available: request.status ? request.status === 'por_adotar' : request.available,
+        status: request.status,
       })
       .eq('id', animalId)
       .eq('organization_id', organizationId)
@@ -174,6 +181,17 @@ export class AnimalService {
 
 
   /**
+   * Atualiza o estado de um animal
+   */
+  async updateStatus(animalId: string, organizationId: string, status: string): Promise<Animal> {
+    return await this.update(animalId, organizationId, {
+      status: status,
+      available: status === 'por_adotar',
+    });
+  }
+
+
+  /**
    * Torna um animal indisponível
    */
   async makeAnimalUnavailable(animalId: string, organizationId: string): Promise<Animal> {
@@ -186,6 +204,7 @@ export class AnimalService {
       gender: animal.gender,
       birthDate: animal.birthDate,
       available: false,
+      status: 'indisponivel',
     };
 
     return await this.update(animalId,
@@ -285,6 +304,7 @@ export class AnimalService {
       gender: response.gender,
       birthDate: response.birth_date,
       available: response.available,
+      status: response.status,
       createdAt: response.created_at,
     };
   }
