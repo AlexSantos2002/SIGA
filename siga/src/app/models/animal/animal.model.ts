@@ -16,5 +16,6 @@ export interface Animal {
   gender: string;
   birthDate: string;
   available: boolean;
+  status: string;
   createdAt: string;
 }
