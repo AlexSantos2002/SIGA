@@ -1,10 +1,30 @@
 :host {
   display: block;
-  min-height: 100vh;
-  background: #f8fafc;
 }
 
-.private-content {
-  min-height: calc(100vh - 80px);
-  padding: 24px;
+.layout-privado {
+  min-height: 100vh;
+  background-color: #f4f7f6;
+}
+
+.corpo-privado {
+  display: flex;
+  min-height: calc(100vh - 78px);
+}
+
+.conteudo-privado {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .corpo-privado {
+    flex-direction: column;
+  }
+
+  .conteudo-privado {
+    padding: 1.2rem;
+  }
 }

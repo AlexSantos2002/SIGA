@@ -1,7 +1,11 @@
 <div class="layout-privado">
   <app-navbar-private></app-navbar-private>
 
-  <main class="conteudo-privado">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="corpo-privado">
+    <app-side-menu></app-side-menu>
+
+    <main class="conteudo-privado">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

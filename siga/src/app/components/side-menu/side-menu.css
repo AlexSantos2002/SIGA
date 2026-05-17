@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  flex-shrink: 0;
+}
+
+.menu-lateral {
+  width: 200px;
+  height: 100%;
+  min-height: calc(100vh - 78px);
+  background-color: #252627;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.4rem 1rem;
+  box-sizing: border-box;
+}
+
+.navegacao-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.item-menu {
+  display: block;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  color: #d8e0dd;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.item-menu:hover {
+  background-color: #4b88a2;
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* Página ativa, mas sem ficar azul */
+.item-menu.ativo {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+/* Página ativa quando se passa o rato */
+.item-menu.ativo:hover {
+  background-color: #4b88a2;
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .menu-lateral {
+    width: 100%;
+    min-height: auto;
+    padding: 0.8rem 1rem;
+    overflow-x: auto;
+  }
+
+  .navegacao-menu {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .item-menu {
+    white-space: nowrap;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .item-menu:hover {
+    transform: translateY(-2px);
+  }
+}
