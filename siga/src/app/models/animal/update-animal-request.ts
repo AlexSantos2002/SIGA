@@ -8,5 +8,4 @@ export interface UpdateAnimalRequest {
   gender?: string,
   birthDate?: string,
   available?: boolean,
-  status?: string,
 }
