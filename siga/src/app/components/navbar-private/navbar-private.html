@@ -1,0 +1,56 @@
+<header class="navbar-privada">
+  <div class="area-esquerda">
+    <div class="marca-privada">
+      <img
+        src="/favicon.ico"
+        alt="Logótipo SIGA"
+        class="logo-imagem"
+      />
+
+      <span class="nome-marca">SIGA</span>
+    </div>
+
+    <div class="info-organizacao">
+      <span class="etiqueta">Organização</span>
+
+      <strong>
+        {{ organizationId ? 'Organização associada' : 'Organização' }}
+      </strong>
+    </div>
+  </div>
+
+  <div class="area-utilizador">
+    <button
+      type="button"
+      class="botao-utilizador"
+      (click)="toggleMenu()"
+    >
+      <div class="avatar">
+        {{ userName.charAt(0).toUpperCase() }}
+      </div>
+
+      <div class="dados-utilizador">
+        <span>{{ userName }}</span>
+        <small>{{ userEmail }}</small>
+      </div>
+
+      <span class="seta">
+        {{ isMenuOpen ? '▲' : '▼' }}
+      </span>
+    </button>
+
+    <div *ngIf="isMenuOpen" class="menu-utilizador">
+      <a routerLink="/app/profile">
+        Perfil
+      </a>
+
+      <a routerLink="/app/settings">
+        Definições
+      </a>
+
+      <button type="button" (click)="logout()">
+        Terminar sessão
+      </button>
+    </div>
+  </div>
+</header>
