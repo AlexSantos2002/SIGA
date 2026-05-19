@@ -18,6 +18,5 @@ export interface Animal {
   gender: string | null;
   birthDate: string | null;
   available: boolean;
-  status: string | null;
   createdAt: string;
 }
