@@ -1,9 +1,68 @@
-<div class="flex flex-col items-start gap-y-1">
-  <button class="bg-blue-300 rounded p-1" (click)="register()">register</button>
-  <button class="bg-green-300 rounded p-1" (click)="getAllAnimals()">get animals</button>
-  <button class="bg-indigo-300 rounded p-1" (click)="getAnimalById()">get animal</button>
-  <button class="bg-purple-300 rounded p-1" (click)="createBreed()">create breed</button>
-  <button class="bg-gray-300 rounded p-1" (click)="getBreeds()">get breeds</button>
-  <button class="bg-red-300 rounded p-1" (click)="getBreedsBasedOnSpecies()">get species breeds</button>
-  <button class="bg-yellow-300 rounded p-1" (click)="update()">edit animal</button>
-</div>
+<section class="animals-page">
+  <div class="page-header">
+    <div>
+      <h1>Animais</h1>
+      <p>Lista de animais registados na organização.</p>
+    </div>
+
+    <a routerLink="/app/animals/new" class="add-animal-button">
+      Adicionar animal
+    </a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    A carregar animais...
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && animals.length === 0" class="empty-state">
+    Ainda não existem animais registados nesta organização.
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && animals.length > 0" class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Espécie</th>
+          <th>Raça</th>
+          <th>Género</th>
+          <th>Data de nascimento</th>
+          <th>Estado</th>
+          <th>Disponibilidade</th>
+          <th>Registado em</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let animal of animals">
+          <td>{{ animal.name }}</td>
+          <td>{{ animal.species?.name || '—' }}</td>
+          <td>{{ animal.breed?.name || '—' }}</td>
+          <td>{{ getGenderLabel(animal.gender) }}</td>
+
+          <td>
+            {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '—' }}
+          </td>
+
+          <td>{{ getStatusLabel(animal.status) }}</td>
+
+          <td>
+            <span
+              class="status-badge"
+              [class.available]="animal.available"
+              [class.unavailable]="!animal.available"
+            >
+              {{ animal.available ? 'Disponível' : 'Indisponível' }}
+            </span>
+          </td>
+
+          <td>{{ animal.createdAt | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

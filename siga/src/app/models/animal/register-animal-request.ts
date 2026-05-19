@@ -1,5 +1,5 @@
 /**
- * Utilizado para registar um novo animal
+ * Representa os dados necessários para registar um animal.
  */
 export interface RegisterAnimalRequest {
   name: string,
