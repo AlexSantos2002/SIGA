@@ -18,6 +18,11 @@ export class Animals implements OnInit {
   isLoading = true;
   errorMessage = '';
 
+  deletingAnimalId: string | null = null;
+
+  animalToDelete: Animal | null = null;
+  isDeleteModalOpen = false;
+
   constructor(
     private animalService: AnimalService,
     private cdr: ChangeDetectorRef
@@ -47,6 +52,65 @@ export class Animals implements OnInit {
       this.errorMessage = 'Não foi possível carregar os animais.';
     } finally {
       this.isLoading = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  /**
+   * @description
+   * Abre o modal de confirmação para eliminar um animal.
+   */
+  openDeleteModal(animal: Animal): void {
+    this.animalToDelete = animal;
+    this.isDeleteModalOpen = true;
+  }
+
+  /**
+   * @description
+   * Fecha o modal de confirmação.
+   */
+  closeDeleteModal(): void {
+    if (this.deletingAnimalId) {
+      return;
+    }
+
+    this.animalToDelete = null;
+    this.isDeleteModalOpen = false;
+  }
+
+  /**
+   * @description
+   * Elimina o animal selecionado após confirmação.
+   */
+  async confirmDeleteAnimal(): Promise<void> {
+    if (!this.animalToDelete) {
+      return;
+    }
+
+    const animalId = this.animalToDelete.id;
+
+    try {
+      this.deletingAnimalId = animalId;
+      this.errorMessage = '';
+      this.cdr.detectChanges();
+
+      await this.animalService.deleteAnimal(animalId);
+
+      this.animals = this.animals.filter(
+        animal => animal.id !== animalId
+      );
+
+      this.animalToDelete = null;
+      this.isDeleteModalOpen = false;
+    } catch (error: any) {
+      console.error('Erro ao eliminar animal:', error);
+
+      this.errorMessage =
+        error?.message ||
+        error?.details ||
+        'Não foi possível eliminar o animal.';
+    } finally {
+      this.deletingAnimalId = null;
       this.cdr.detectChanges();
     }
   }

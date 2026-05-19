@@ -350,4 +350,29 @@ async createAnimal(request: RegisterAnimalRequest): Promise<void> {
       throw error;
     }
   }
+
+    /**
+   * @description
+   * Remove um animal da organização autenticada.
+   */
+  async deleteAnimal(animalId: string): Promise<void> {
+    const organizationId = await this.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new Error('Organização não encontrada.');
+    }
+
+    const { error } = await this.withTimeout<any>(
+      supabase
+        .from('animals')
+        .delete()
+        .eq('id', animalId)
+        .eq('organization_id', organizationId)
+    );
+
+    if (error) {
+      console.error('Erro ao eliminar animal:', error.message);
+      throw error;
+    }
+  }
 }

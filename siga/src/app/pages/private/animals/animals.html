@@ -34,25 +34,31 @@
           <th>Estado</th>
           <th>Disponibilidade</th>
           <th>Registado em</th>
+          <th class="actions-column"></th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let animal of animals">
           <td>{{ animal.name }}</td>
+
           <td>{{ animal.species?.name || '—' }}</td>
+
           <td>{{ animal.breed?.name || '—' }}</td>
+
           <td>{{ getGenderLabel(animal.gender) }}</td>
 
           <td>
             {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '—' }}
           </td>
 
-          <td>{{ getStatusLabel(animal.status) }}</td>
+          <td>
+            {{ getStatusLabel(animal.status) }}
+          </td>
 
           <td>
             <span
-              class="status-badge"
+              class="availability-badge"
               [class.available]="animal.available"
               [class.unavailable]="!animal.available"
             >
@@ -61,8 +67,53 @@
           </td>
 
           <td>{{ animal.createdAt | date: 'dd/MM/yyyy' }}</td>
+
+          <td class="actions-column">
+            <button
+              type="button"
+              class="delete-animal-button"
+              title="Eliminar animal"
+              [disabled]="deletingAnimalId === animal.id"
+              (click)="openDeleteModal(animal)"
+            >
+              {{ deletingAnimalId === animal.id ? '...' : '×' }}
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div
+    *ngIf="isDeleteModalOpen"
+    class="modal-backdrop"
+    (click)="closeDeleteModal()"
+  >
+    <div class="delete-modal" (click)="$event.stopPropagation()">
+      <p>
+        Tem a certeza que quer eliminar
+        <strong>{{ animalToDelete?.name }}</strong>?
+      </p>
+
+      <div class="modal-actions">
+        <button
+          type="button"
+          class="modal-cancel-button"
+          [disabled]="!!deletingAnimalId"
+          (click)="closeDeleteModal()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="modal-delete-button"
+          [disabled]="!!deletingAnimalId"
+          (click)="confirmDeleteAnimal()"
+        >
+          {{ deletingAnimalId ? 'A eliminar...' : 'Eliminar' }}
+        </button>
+      </div>
+    </div>
   </div>
 </section>
