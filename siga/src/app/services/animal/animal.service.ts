@@ -22,28 +22,23 @@ export class AnimalService {
   /**
    * Regista um novo animal
    */
-  async register(organizationId: string, request: RegisterAnimalRequest): Promise<Animal> {
-    const {data, error} = await supabase
-      .from("animals")
-      .insert({
-        name: request.name,
-        species_id: request.speciesId,
-        breed_id: request.breedId,
-        gender: request.gender,
-        birth_date: request.birthDate,
-        available: request.available,
-        organization_id: organizationId
-      }).select(`
-    *,
-    species:species_id (
-      id,
-      name
-    ),
-    breed:breed_id (
-      id,
-      name
-    )
-  `).single();
+  private async getCurrentOrganizationId(): Promise<string | null> {
+    const {
+      data: { user },
+      error: userError,
+    } = await this.withTimeout<any>(supabase.auth.getUser());
+
+    if (userError || !user) {
+      return null;
+    }
+
+    const { data, error } = await this.withTimeout<any>(
+      supabase
+        .from('users')
+        .select('organization_id')
+        .eq('id', user.id)
+        .single()
+    );
 
     if (error || !data) {
       throw new DBError();
@@ -117,9 +112,34 @@ export class AnimalService {
       query = query.eq('available', filters.available);
     }
 
-    // Filtra a raça
-    if (filters.breedId) {
-      query = query.eq('breed_id', filters.breedId);
+    return newSpecies.id;
+  }
+
+  /**
+   * @description
+   * Procura uma raça pelo nome ou cria uma nova para a organização e espécie.
+   */
+  private async getOrCreateBreed(
+    name: string,
+    speciesId: string,
+    organizationId: string
+  ): Promise<string> {
+    const normalizedName = name.trim();
+
+    const { data: existingBreed, error: searchError } =
+      await this.withTimeout<any>(
+        supabase
+          .from('breeds')
+          .select('id')
+          .eq('organization_id', organizationId)
+          .eq('species_id', speciesId)
+          .ilike('name', normalizedName)
+          .maybeSingle()
+      );
+
+    if (searchError) {
+      console.error('Erro ao procurar raça:', searchError.message);
+      throw searchError;
     }
 
     const { data, error } = await query;
@@ -142,30 +162,15 @@ export class AnimalService {
     //   throw new BusinessError(ERROR_CODES.ANIMAL_UNAVAILABLE);
     // }
 
-    const { data, error } = await supabase
-      .from('animals')
-      .update({
-        name: request.name,
-        species_id: request.speciesId,
-        breed_id: request.breedId,
-        gender: request.gender,
-        birth_date: request.birthDate,
-        available: request.available,
-      })
-      .eq('id', animalId)
-      .eq('organization_id', organizationId)
-      .select(`
-      *,
-      species:species_id (
-        id,
-        name
-      ),
-      breed:breed_id (
-        id,
-        name
-      )
-    `)
-      .single();
+    return (data ?? []).map((animal: any) => this.mapAnimal(animal));
+  }
+
+/**
+ * @description
+ * Regista um novo animal na organização autenticada.
+ */
+async createAnimal(request: RegisterAnimalRequest): Promise<void> {
+  console.log('A obter organização atual...');
 
     if (error || !data) throw DBError;
 
@@ -173,20 +178,16 @@ export class AnimalService {
   }
 
 
-  /**
-   * Torna um animal indisponível
-   */
-  async makeAnimalUnavailable(animalId: string, organizationId: string): Promise<Animal> {
-    let animal: Animal = await this.getById(animalId, organizationId);
+  console.log('A procurar/criar espécie:', request.speciesName);
 
-    const updatedAnimal: UpdateAnimalRequest = {
-      name: animal.name,
-      speciesId: animal.species.id,
-      breedId: animal.breed.id,
-      gender: animal.gender,
-      birthDate: animal.birthDate,
-      available: false,
-    };
+  const speciesId = await this.getOrCreateSpecies(
+    request.speciesName,
+    organizationId
+  );
+
+  console.log('Espécie encontrada/criada:', speciesId);
+
+  console.log('A procurar/criar raça:', request.breedName);
 
     return await this.update(animalId,
       organizationId, updatedAnimal);
@@ -259,50 +260,5 @@ export class AnimalService {
     if (error || !data) {
       throw new DBError();
     }
-
-    return data.map(breed => this.toBreed(breed));
-  }
-
-  /**
-   * Converte a resposta do supabase para Animal
-   * @param response response enviada pelo supabase
-   */
-  private toAnimal(response: any): Animal {
-    return {
-      id: response.id,
-      name: response.name,
-
-      species: {
-        id: response.species_id,
-        name: response.species.name
-      },
-
-      breed: {
-        id: response.breed_id,
-        name: response.breed.name
-      },
-
-      gender: response.gender,
-      birthDate: response.birth_date,
-      available: response.available,
-      createdAt: response.created_at,
-    };
-  }
-
-
-  /**
-   * Converte a resposta do supabase para Breed
-   * @param response response enviada pelo supabase
-   */
-  private toBreed(response: any): Breed {
-    return {
-      id: response.id,
-      name: response.name,
-
-      species: {
-        id: response.species_id,
-        name: response.species.name
-      }
-    };
   }
 }
