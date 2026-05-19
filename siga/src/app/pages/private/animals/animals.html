@@ -4,6 +4,10 @@
       <h1>Animais</h1>
       <p>Lista de animais registados na organização.</p>
     </div>
+
+    <a routerLink="/app/animals/new" class="add-animal-button">
+      Adicionar animal
+    </a>
   </div>
 
   <div *ngIf="isLoading" class="loading">
@@ -36,20 +40,15 @@
       <tbody>
         <tr *ngFor="let animal of animals">
           <td>{{ animal.name }}</td>
-
           <td>{{ animal.species?.name || '—' }}</td>
-
           <td>{{ animal.breed?.name || '—' }}</td>
-
           <td>{{ getGenderLabel(animal.gender) }}</td>
 
           <td>
             {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '—' }}
           </td>
 
-          <td>
-            {{ getStatusLabel(animal.status) }}
-          </td>
+          <td>{{ getStatusLabel(animal.status) }}</td>
 
           <td>
             <span

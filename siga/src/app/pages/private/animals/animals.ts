@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { Animal } from '../../../models/animal/animal.model';
 import { AnimalService } from '../../../services/animal/animal.service';
@@ -7,7 +8,7 @@ import { AnimalService } from '../../../services/animal/animal.service';
 @Component({
   selector: 'app-animals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './animals.html',
   styleUrl: './animals.css',
 })
@@ -36,23 +37,17 @@ export class Animals implements OnInit {
    */
   private async loadAnimals(): Promise<void> {
     try {
-      console.log('A carregar animais...');
-
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
 
       this.animals = await this.animalService.getAnimalsFromCurrentOrganization();
-
-      console.log('Animais carregados:', this.animals);
     } catch (error) {
       console.error('Erro na página Animals:', error);
       this.errorMessage = 'Não foi possível carregar os animais.';
     } finally {
       this.isLoading = false;
       this.cdr.detectChanges();
-
-      console.log('Loading terminado');
     }
   }
 
@@ -80,6 +75,8 @@ export class Animals implements OnInit {
       por_adotar: 'Por adotar',
       adotado: 'Adotado',
       em_tratamento: 'Em tratamento',
+      reservado: 'Reservado',
+      acolhimento: 'Em acolhimento',
       indisponivel: 'Indisponível',
     };
 

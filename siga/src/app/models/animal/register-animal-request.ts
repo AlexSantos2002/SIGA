@@ -1,11 +1,11 @@
 /**
- * Utilizado para registar um novo animal
+ * Representa os dados necessários para registar um animal.
  */
 export interface RegisterAnimalRequest {
-  name: string,
-  speciesId: string,
-  breedId: string,
-  gender: string,
-  birthDate: string,
-  available: boolean,
+  name: string;
+  speciesName: string;
+  breedName: string;
+  gender: string;
+  birthDate: string | null;
+  status: string;
 }

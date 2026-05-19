@@ -115,6 +115,15 @@ export const routes: Routes = [
       },
 
       /**
+       * @description Página para adicionar um novo animal
+       */
+      {
+        path: 'animals/new',
+        loadComponent: () =>
+          import('./pages/private/animals/add-animal/add-animal').then(m => m.AddAnimal)
+      },
+
+      /**
        * @description Página de gestão de adotantes
        */
       {
