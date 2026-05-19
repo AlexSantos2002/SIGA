@@ -1,35 +1,26 @@
 import { Injectable } from '@angular/core';
-
+import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
 import { supabase } from '../../../../supabase/supabase';
 import { Animal } from '../../models/animal/animal.model';
-import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
+import { AnimalFilters } from '../../models/animal/animal-filters';
+import { UpdateAnimalRequest } from '../../models/animal/update-animal-request';
+import { RegisterBreedRequest } from '../../models/breed/register-breed-request';
+import { Breed } from '../../models/breed/breed.model';
+import { BusinessError, DBError, NotFoundError } from '../../error/app-error';
+import { data } from 'autoprefixer';
+import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
+import { ERROR_CODES } from '../../error/error-codes';
+import { AdoptionService } from '../adoption/adoption.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalService {
-  /**
-   * @description
-   * Impede que uma chamada à Supabase fique presa indefinidamente.
-   */
-  private async withTimeout<T>(
-    promise: PromiseLike<T>,
-    timeoutMs = 10000
-  ): Promise<T> {
-    return Promise.race([
-      Promise.resolve(promise),
-      new Promise<T>((_, reject) =>
-        setTimeout(
-          () => reject(new Error('Tempo limite ao contactar a Supabase.')),
-          timeoutMs
-        )
-      ),
-    ]);
-  }
+
+  // TODO: Refatorar tabela de animais para ter campo "isAdopted"
 
   /**
-   * @description
-   * Obtém o ID da organização associada ao utilizador autenticado.
+   * Regista um novo animal
    */
   async register(organizationId: string, request: RegisterAnimalRequest): Promise<Animal> {
     const {data, error} = await supabase
@@ -55,83 +46,75 @@ export class AnimalService {
   `).single();
 
     if (error || !data) {
-      console.error('Erro ao obter organização:', error?.message);
-      return null;
+      throw new DBError();
     }
 
-    return data.organization_id;
+    return this.toAnimal(data);
+  }
+
+
+  /**
+   * Busca um animal pelo seu ID
+   */
+  async getById(animalId: string, organizationId: string): Promise<Animal> {
+    const {data, error} = await supabase
+      .from('animals')
+      .select(`
+      *,
+    species:species_id (
+      id,
+      name
+    ),
+    breed:breed_id (
+      id,
+      name
+    )
+      `)
+      .eq('id', animalId)
+      .eq('organization_id', organizationId)
+      .single();
+
+    if (error?.code === SUPABASE_ERROR_CODES.NO_ROWS_RETURNED) throw new NotFoundError();
+
+    if (error || !data) throw new DBError();
+
+    return this.toAnimal(data);
   }
 
   /**
-   * @description
-   * Converte um animal vindo da base de dados para o modelo usado no frontend.
+   * Faz a busca por animais baseada em filtros como género,
+   * espécie, raça e disponibilidade.
+   * @param filters filtro com diferentes critérios para busca
    */
-  private mapAnimal(animal: any): Animal {
-    return {
-      id: animal.id,
-      name: animal.name,
-      species: animal.species,
-      breed: animal.breed,
-      gender: animal.gender,
-      birthDate: animal.birth_date,
-      available: animal.available,
-      status: animal.status,
-      createdAt: animal.created_at,
-    };
-  }
+  async search(organizationId: string, filters: AnimalFilters): Promise<Animal[]> {
+    let query = supabase
+      .from('animals')
+      // Busca os valores da tabela breeds e species
+      .select(`
+    *,
+    species:species_id (
+      id,
+      name
+    ),
+    breed:breed_id (
+      id,
+      name
+    )
+  `).eq('organization_id', organizationId);
 
-  /**
-   * @description
-   * Define automaticamente se o animal fica disponível para adoção.
-   */
-  private getAvailabilityFromStatus(status: string): boolean {
-    return status === 'por_adotar';
-  }
-
-  /**
-   * @description
-   * Procura uma espécie pelo nome ou cria uma nova para a organização.
-   */
-  private async getOrCreateSpecies(
-    name: string,
-    organizationId: string
-  ): Promise<string> {
-    const normalizedName = name.trim();
-
-    const { data: existingSpecies, error: searchError } =
-      await this.withTimeout<any>(
-        supabase
-          .from('species')
-          .select('id')
-          .eq('organization_id', organizationId)
-          .ilike('name', normalizedName)
-          .maybeSingle()
-      );
-
-    if (searchError) {
-      console.error('Erro ao procurar espécie:', searchError.message);
-      throw searchError;
+    // Filtra a espécie
+    if (filters.species) {
+      query = query.eq('species_id', filters.species);
     }
 
-    if (existingSpecies) {
-      return existingSpecies.id;
+    // Filtra o género
+    if (filters.gender) {
+      query = query.eq('gender', filters.gender);
     }
 
-    const { data: newSpecies, error: insertError } =
-      await this.withTimeout<any>(
-        supabase
-          .from('species')
-          .insert({
-            name: normalizedName,
-            organization_id: organizationId,
-          })
-          .select('id')
-          .single()
-      );
-
-    if (insertError || !newSpecies) {
-      console.error('Erro ao criar espécie:', insertError?.message);
-      throw insertError;
+    // Filtra a disponibilidade
+    if (filters.available !== undefined) {
+      query = query.eq('available', filters.available);
     }
 
     // Filtra a raça
@@ -139,70 +122,25 @@ export class AnimalService {
       query = query.eq('breed_id', filters.breedId);
     }
 
-    if (existingBreed) {
-      return existingBreed.id;
-    }
+    const { data, error } = await query;
 
-    const { data: newBreed, error: insertError } =
-      await this.withTimeout<any>(
-        supabase
-          .from('breeds')
-          .insert({
-            name: normalizedName,
-            species_id: speciesId,
-            organization_id: organizationId,
-          })
-          .select('id')
-          .single()
-      );
+    if (error || !data) throw new DBError();
 
-    if (insertError || !newBreed) {
-      console.error('Erro ao criar raça:', insertError?.message);
-      throw insertError;
-    }
-
-    return newBreed.id;
+    return data.map((animal) => this.toAnimal(animal)) || [];
   }
 
+
+  // TODO: Impedir mudança de "isAvailable = true" caso o animal esteja adotado
   /**
-   * @description
-   * Obtém todos os animais registados na organização autenticada.
+   * Edita um animal existente
    */
-  async getAnimalsFromCurrentOrganization(): Promise<Animal[]> {
-    const organizationId = await this.getCurrentOrganizationId();
+  async update(animalId: string, organizationId: string, request: UpdateAnimalRequest): Promise<Animal> {
+    const animal: Animal = await this.getById(animalId, organizationId);
 
-    if (!organizationId) {
-      return [];
-    }
 
-    const { data, error } = await this.withTimeout<any>(
-      supabase
-        .from('animals')
-        .select(`
-          id,
-          name,
-          gender,
-          birth_date,
-          available,
-          status,
-          created_at,
-          species:species_id (
-            id,
-            name
-          ),
-          breed:breed_id (
-            id,
-            name
-          )
-        `)
-        .eq('organization_id', organizationId)
-        .order('created_at', { ascending: false })
-    );
-
-    if (error) {
-      console.error('Erro ao carregar animais:', error.message);
-      return [];
-    }
+    // if (animal.isAdopted && request.available === true) {
+    //   throw new BusinessError(ERROR_CODES.ANIMAL_UNAVAILABLE);
+    // }
 
     const { data, error } = await supabase
       .from('animals')
@@ -229,13 +167,11 @@ export class AnimalService {
     `)
       .single();
 
-  const organizationId = await this.getCurrentOrganizationId();
+    if (error || !data) throw DBError;
 
-  if (!organizationId) {
-    throw new Error('Organização não encontrada.');
+    return this.toAnimal(data);
   }
 
-  console.log('Organização encontrada:', organizationId);
 
   /**
    * Torna um animal indisponível
@@ -252,101 +188,76 @@ export class AnimalService {
       available: false,
     };
 
-  const breedId = await this.getOrCreateBreed(
-    request.breedName,
-    speciesId,
-    organizationId
-  );
-
-  console.log('Raça encontrada/criada:', breedId);
-
-  console.log('A inserir animal...');
-
-  const { data, error } = await this.withTimeout<any>(
-    supabase
-      .from('animals')
-      .insert({
-        name: request.name.trim(),
-        species_id: speciesId,
-        breed_id: breedId,
-        gender: request.gender,
-        birth_date: request.birthDate,
-        status: request.status,
-        available: this.getAvailabilityFromStatus(request.status),
-        organization_id: organizationId,
-      })
-      .select('id')
-      .single()
-  );
-
-  if (error) {
-    console.error('Erro ao criar animal:', error.message);
-    throw error;
+    return await this.update(animalId,
+      organizationId, updatedAnimal);
   }
 
-  console.log('Animal criado:', data);
-}
 
   /**
-   * @description
-   * Obtém um animal pelo ID, garantindo que pertence à organização indicada.
+   * Cria uma raça de animal para a organização
    */
-  async getById(animalId: string, organizationId: string): Promise<Animal> {
-    const { data, error } = await this.withTimeout<any>(
-      supabase
-        .from('animals')
-        .select(`
-          id,
-          name,
-          gender,
-          birth_date,
-          available,
-          status,
-          created_at,
-          species:species_id (
-            id,
-            name
-          ),
-          breed:breed_id (
-            id,
-            name
-          )
-        `)
-        .eq('id', animalId)
-        .eq('organization_id', organizationId)
-        .single()
-    );
+  async registerBreed(organizationId: string, request: RegisterBreedRequest): Promise<Breed> {
+    const { data, error } = await supabase
+      .from('breeds')
+      .insert({
+        name: request.name,
+        species_id: request.speciesId,
+        organization_id: organizationId
+      })
+      .select(`
+      *,
+      species:species_id (
+        id,
+        name
+      )
+      `)
+      .single();
 
     if (error || !data) {
-      console.error('Erro ao obter animal:', error?.message);
-      throw new Error('Animal não encontrado.');
+      throw new Error();
     }
 
-    return this.mapAnimal(data);
+    return this.toBreed(data);
   }
 
-  /**
-   * @description
-   * Marca um animal como indisponível numa organização.
-   */
-  async makeAnimalUnavailable(
-    animalId: string,
-    organizationId: string
-  ): Promise<void> {
-    const { error } = await this.withTimeout<any>(
-      supabase
-        .from('animals')
-        .update({
-          available: false,
-          status: 'indisponivel',
-        })
-        .eq('id', animalId)
-        .eq('organization_id', organizationId)
-    );
 
-    if (error) {
-      console.error('Erro ao marcar animal como indisponível:', error.message);
-      throw error;
+  /**
+   * Busca as raças de animais disponíveis
+   */
+  async getAllBreeds(organizationId: string): Promise<Breed[]> {
+    const {data, error} = await supabase
+      .from('breeds')
+      .select(
+        `
+        *,
+        species:species_id (
+          id,
+          name
+        )`
+      )
+      .eq('organization_id', organizationId)
+
+    if (error || !data) {
+      throw new DBError();
+    }
+
+    return data.map((breed) => this.toBreed(breed));
+  }
+
+
+  /**
+   * Busca as raças de animais com base na
+   * espécie. Ex: para cães: Rottweiler, Dobermann, ...
+   */
+  async getBreedsBasedOnSpecies(speciesId: string, organizationId: string): Promise<Breed[]> {
+    const { data, error } = await supabase
+      .from('breeds')
+      .select('*, species:species_id (name)')
+      .eq('species_id', speciesId)
+      .eq('organization_id', organizationId);
+
+    if (error || !data) {
+      throw new DBError();
     }
 
     return data.map(breed => this.toBreed(breed));
