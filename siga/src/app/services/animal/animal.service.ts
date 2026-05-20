@@ -71,6 +71,17 @@ export class AnimalService {
       birthDate: animal.birth_date,
       available: animal.available,
       status: animal.status,
+
+      generalNotes: animal.general_notes,
+      medicalNotes: animal.medical_notes,
+
+      sterilizationStatus: animal.sterilization_status,
+      sterilizationDate: animal.sterilization_date,
+
+      hasMicrochip: animal.has_microchip ?? false,
+      microchipNumber: animal.microchip_number,
+      microchipDate: animal.microchip_date,
+
       createdAt: animal.created_at,
     };
   }
@@ -205,6 +216,13 @@ export class AnimalService {
           birth_date,
           available,
           status,
+          general_notes,
+          medical_notes,
+          sterilization_status,
+          sterilization_date,
+          has_microchip,
+          microchip_number,
+          microchip_date,
           created_at,
           species:species_id (
             id,
@@ -227,66 +245,62 @@ export class AnimalService {
     return (data ?? []).map((animal: any) => this.mapAnimal(animal));
   }
 
-/**
- * @description
- * Regista um novo animal na organização autenticada.
- */
-async createAnimal(request: RegisterAnimalRequest): Promise<void> {
-  console.log('A obter organização atual...');
+  /**
+   * @description
+   * Regista um novo animal na organização autenticada.
+   */
+  async createAnimal(request: RegisterAnimalRequest): Promise<void> {
+    const organizationId = await this.getCurrentOrganizationId();
 
-  const organizationId = await this.getCurrentOrganizationId();
+    if (!organizationId) {
+      throw new Error('Organização não encontrada.');
+    }
 
-  if (!organizationId) {
-    throw new Error('Organização não encontrada.');
+    const speciesId = await this.getOrCreateSpecies(
+      request.speciesName,
+      organizationId
+    );
+
+    const breedId = await this.getOrCreateBreed(
+      request.breedName,
+      speciesId,
+      organizationId
+    );
+
+    const { data, error } = await this.withTimeout<any>(
+      supabase
+        .from('animals')
+        .insert({
+          name: request.name.trim(),
+          species_id: speciesId,
+          breed_id: breedId,
+          gender: request.gender,
+          birth_date: request.birthDate,
+          status: request.status,
+          available: this.getAvailabilityFromStatus(request.status),
+          organization_id: organizationId,
+
+          general_notes: request.generalNotes ?? null,
+          medical_notes: request.medicalNotes ?? null,
+
+          sterilization_status: request.sterilizationStatus ?? null,
+          sterilization_date: request.sterilizationDate ?? null,
+
+          has_microchip: request.hasMicrochip ?? false,
+          microchip_number: request.microchipNumber ?? null,
+          microchip_date: request.microchipDate ?? null,
+        })
+        .select('id')
+        .single()
+    );
+
+    if (error) {
+      console.error('Erro ao criar animal:', error.message);
+      throw error;
+    }
+
+    console.log('Animal criado:', data);
   }
-
-  console.log('Organização encontrada:', organizationId);
-
-  console.log('A procurar/criar espécie:', request.speciesName);
-
-  const speciesId = await this.getOrCreateSpecies(
-    request.speciesName,
-    organizationId
-  );
-
-  console.log('Espécie encontrada/criada:', speciesId);
-
-  console.log('A procurar/criar raça:', request.breedName);
-
-  const breedId = await this.getOrCreateBreed(
-    request.breedName,
-    speciesId,
-    organizationId
-  );
-
-  console.log('Raça encontrada/criada:', breedId);
-
-  console.log('A inserir animal...');
-
-  const { data, error } = await this.withTimeout<any>(
-    supabase
-      .from('animals')
-      .insert({
-        name: request.name.trim(),
-        species_id: speciesId,
-        breed_id: breedId,
-        gender: request.gender,
-        birth_date: request.birthDate,
-        status: request.status,
-        available: this.getAvailabilityFromStatus(request.status),
-        organization_id: organizationId,
-      })
-      .select('id')
-      .single()
-  );
-
-  if (error) {
-    console.error('Erro ao criar animal:', error.message);
-    throw error;
-  }
-
-  console.log('Animal criado:', data);
-}
 
   /**
    * @description
@@ -303,6 +317,13 @@ async createAnimal(request: RegisterAnimalRequest): Promise<void> {
           birth_date,
           available,
           status,
+          general_notes,
+          medical_notes,
+          sterilization_status,
+          sterilization_date,
+          has_microchip,
+          microchip_number,
+          microchip_date,
           created_at,
           species:species_id (
             id,
@@ -351,7 +372,7 @@ async createAnimal(request: RegisterAnimalRequest): Promise<void> {
     }
   }
 
-    /**
+  /**
    * @description
    * Remove um animal da organização autenticada.
    */
@@ -376,7 +397,7 @@ async createAnimal(request: RegisterAnimalRequest): Promise<void> {
     }
   }
 
-    /**
+  /**
    * @description
    * Obtém um animal pelo ID usando a organização autenticada.
    */
@@ -426,6 +447,16 @@ async createAnimal(request: RegisterAnimalRequest): Promise<void> {
           birth_date: request.birthDate,
           status: request.status,
           available: this.getAvailabilityFromStatus(request.status),
+
+          general_notes: request.generalNotes ?? null,
+          medical_notes: request.medicalNotes ?? null,
+
+          sterilization_status: request.sterilizationStatus ?? null,
+          sterilization_date: request.sterilizationDate ?? null,
+
+          has_microchip: request.hasMicrochip ?? false,
+          microchip_number: request.microchipNumber ?? null,
+          microchip_date: request.microchipDate ?? null,
         })
         .eq('id', animalId)
         .eq('organization_id', organizationId)
