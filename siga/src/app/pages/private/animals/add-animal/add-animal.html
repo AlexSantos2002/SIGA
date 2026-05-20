@@ -5,7 +5,7 @@
       <p>Regista um novo animal associado à tua organização.</p>
     </div>
 
-    <a routerLink="/app/animals" class="back-link">
+    <a routerLink="/app/animals" class="back-button">
       Voltar à lista
     </a>
   </div>
@@ -71,42 +71,42 @@
           </small>
         </div>
 
-    <div class="form-field full-date-field">
-      <label>Data de nascimento</label>
+        <div class="form-field full-date-field">
+          <label>Data de nascimento</label>
 
-      <div class="date-selects">
-        <select formControlName="birthDay">
-          <option value="" disabled>Dia</option>
-          <option *ngFor="let day of days" [value]="day">
-            {{ day }}
-          </option>
-        </select>
+          <div class="date-selects">
+            <select formControlName="birthDay">
+              <option value="" disabled>Dia</option>
+              <option *ngFor="let day of days" [value]="day">
+                {{ day }}
+              </option>
+            </select>
 
-        <select formControlName="birthMonth">
-          <option value="" disabled>Mês</option>
-          <option *ngFor="let month of months" [value]="month.value">
-            {{ month.label }}
-          </option>
-        </select>
+            <select formControlName="birthMonth">
+              <option value="" disabled>Mês</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.label }}
+              </option>
+            </select>
 
-        <select formControlName="birthYear">
-          <option value="" disabled>Ano</option>
-          <option *ngFor="let year of years" [value]="year">
-            {{ year }}
-          </option>
-        </select>
-      </div>
+            <select formControlName="birthYear">
+              <option value="" disabled>Ano</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
 
-  <small
-    *ngIf="
-      (form.get('birthDay')?.touched && form.get('birthDay')?.invalid) ||
-      (form.get('birthMonth')?.touched && form.get('birthMonth')?.invalid) ||
-      (form.get('birthYear')?.touched && form.get('birthYear')?.invalid)
-    "
-  >
-    A data de nascimento é obrigatória.
-  </small>
-</div>
+          <small
+            *ngIf="
+              (form.get('birthDay')?.touched && form.get('birthDay')?.invalid) ||
+              (form.get('birthMonth')?.touched && form.get('birthMonth')?.invalid) ||
+              (form.get('birthYear')?.touched && form.get('birthYear')?.invalid)
+            "
+          >
+            A data de nascimento é obrigatória.
+          </small>
+        </div>
 
         <div class="form-field">
           <label for="status">Estado do animal</label>
