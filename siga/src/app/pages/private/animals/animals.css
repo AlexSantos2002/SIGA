@@ -3,24 +3,27 @@
   width: 100%;
 }
 
+/* Cabeçalho da página */
+
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
+  font-weight: 500;
   color: #1f2937;
 }
 
 .page-header p {
   margin: 6px 0 0;
   color: #6b7280;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .add-animal-button {
@@ -32,7 +35,7 @@
   color: #ffffff;
   font-weight: 600;
   font-size: 14px;
-  padding: 10px 16px;
+  padding: 11px 18px;
   border-radius: 8px;
   white-space: nowrap;
 }
@@ -40,6 +43,8 @@
 .add-animal-button:hover {
   background: #1d4ed8;
 }
+
+/* Estados da página */
 
 .loading,
 .empty-state,
@@ -58,6 +63,8 @@
   margin-bottom: 16px;
 }
 
+/* Tabela */
+
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -69,7 +76,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 860px;
+  min-width: 900px;
 }
 
 thead {
@@ -101,6 +108,8 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
+/* Disponibilidade */
+
 .availability-badge {
   display: inline-block;
   padding: 5px 10px;
@@ -121,14 +130,24 @@ tbody tr:last-child td {
   color: #374151;
 }
 
+/* Botões de ação: editar e eliminar */
+
 .actions-column {
-  width: 48px;
-  min-width: 48px;
+  width: 80px;
+  min-width: 80px;
   text-align: center;
   padding-left: 8px;
   padding-right: 8px;
 }
 
+.actions-buttons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.edit-animal-button,
 .delete-animal-button {
   width: 28px;
   height: 28px;
@@ -136,9 +155,22 @@ tbody tr:last-child td {
   border-radius: 999px;
   background: transparent;
   color: #94a3b8;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-animal-button:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.delete-animal-button {
+  font-size: 24px;
 }
 
 .delete-animal-button:hover {
@@ -224,6 +256,8 @@ tbody tr:last-child td {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* Responsivo */
 
 @media (max-width: 768px) {
   .animals-page {

@@ -375,4 +375,65 @@ async createAnimal(request: RegisterAnimalRequest): Promise<void> {
       throw error;
     }
   }
+
+    /**
+   * @description
+   * Obtém um animal pelo ID usando a organização autenticada.
+   */
+  async getAnimalFromCurrentOrganization(animalId: string): Promise<Animal> {
+    const organizationId = await this.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new Error('Organização não encontrada.');
+    }
+
+    return this.getById(animalId, organizationId);
+  }
+
+  /**
+   * @description
+   * Atualiza os dados de um animal da organização autenticada.
+   */
+  async updateAnimal(
+    animalId: string,
+    request: RegisterAnimalRequest
+  ): Promise<void> {
+    const organizationId = await this.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new Error('Organização não encontrada.');
+    }
+
+    const speciesId = await this.getOrCreateSpecies(
+      request.speciesName,
+      organizationId
+    );
+
+    const breedId = await this.getOrCreateBreed(
+      request.breedName,
+      speciesId,
+      organizationId
+    );
+
+    const { error } = await this.withTimeout<any>(
+      supabase
+        .from('animals')
+        .update({
+          name: request.name.trim(),
+          species_id: speciesId,
+          breed_id: breedId,
+          gender: request.gender,
+          birth_date: request.birthDate,
+          status: request.status,
+          available: this.getAvailabilityFromStatus(request.status),
+        })
+        .eq('id', animalId)
+        .eq('organization_id', organizationId)
+    );
+
+    if (error) {
+      console.error('Erro ao atualizar animal:', error.message);
+      throw error;
+    }
+  }
 }

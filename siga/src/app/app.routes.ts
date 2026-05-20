@@ -124,6 +124,15 @@ export const routes: Routes = [
       },
 
       /**
+       * @description Página para editar um animal existente
+       */
+      {
+        path: 'animals/:id/edit',
+        loadComponent: () =>
+          import('./pages/private/animals/edit-animal/edit-animal').then(m => m.EditAnimal)
+      },
+
+      /**
        * @description Página de gestão de adotantes
        */
       {

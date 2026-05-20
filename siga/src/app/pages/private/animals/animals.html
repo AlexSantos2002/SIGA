@@ -2,7 +2,7 @@
   <div class="page-header">
     <div>
       <h1>Animais</h1>
-      <p>Lista de animais registados na organização.</p>
+      <p>Consulta e gere os animais registados na tua organização.</p>
     </div>
 
     <a routerLink="/app/animals/new" class="add-animal-button">
@@ -69,15 +69,25 @@
           <td>{{ animal.createdAt | date: 'dd/MM/yyyy' }}</td>
 
           <td class="actions-column">
-            <button
-              type="button"
-              class="delete-animal-button"
-              title="Eliminar animal"
-              [disabled]="deletingAnimalId === animal.id"
-              (click)="openDeleteModal(animal)"
-            >
-              {{ deletingAnimalId === animal.id ? '...' : '×' }}
-            </button>
+            <div class="actions-buttons">
+              <a
+                class="edit-animal-button"
+                title="Editar animal"
+                [routerLink]="['/app/animals', animal.id, 'edit']"
+              >
+                ✎
+              </a>
+
+              <button
+                type="button"
+                class="delete-animal-button"
+                title="Eliminar animal"
+                [disabled]="deletingAnimalId === animal.id"
+                (click)="openDeleteModal(animal)"
+              >
+                {{ deletingAnimalId === animal.id ? '...' : '×' }}
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

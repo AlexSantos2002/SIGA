@@ -1,0 +1,149 @@
+<section class="edit-animal-page">
+  <div class="page-header">
+    <div>
+      <h1>Editar animal</h1>
+      <p>Atualiza os dados do animal selecionado.</p>
+    </div>
+
+    <a routerLink="/app/animals" class="back-button">
+      Voltar à lista
+    </a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    A carregar dados do animal...
+  </div>
+
+  <form
+    *ngIf="!isLoading"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    class="animal-form"
+  >
+    <div class="form-section">
+      <h2>Informação principal</h2>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="name">Nome do animal</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="Ex: Rex"
+          />
+
+          <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+            O nome é obrigatório.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="speciesName">Espécie</label>
+          <input
+            id="speciesName"
+            type="text"
+            formControlName="speciesName"
+            placeholder="Ex: Cão, Gato, Ave"
+          />
+
+          <small *ngIf="form.get('speciesName')?.touched && form.get('speciesName')?.invalid">
+            A espécie é obrigatória.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="breedName">Raça</label>
+          <input
+            id="breedName"
+            type="text"
+            formControlName="breedName"
+            placeholder="Ex: Labrador, Pastor Alemão, Mista"
+          />
+
+          <small *ngIf="form.get('breedName')?.touched && form.get('breedName')?.invalid">
+            A raça é obrigatória.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="gender">Género</label>
+          <select id="gender" formControlName="gender">
+            <option value="" disabled>Seleciona o género</option>
+            <option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.label }}
+            </option>
+          </select>
+
+          <small *ngIf="form.get('gender')?.touched && form.get('gender')?.invalid">
+            O género é obrigatório.
+          </small>
+        </div>
+
+        <div class="form-field full-date-field">
+          <label>Data de nascimento</label>
+
+          <div class="date-selects">
+            <select formControlName="birthDay">
+              <option value="" disabled>Dia</option>
+              <option *ngFor="let day of days" [value]="day">
+                {{ day }}
+              </option>
+            </select>
+
+            <select formControlName="birthMonth">
+              <option value="" disabled>Mês</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.label }}
+              </option>
+            </select>
+
+            <select formControlName="birthYear">
+              <option value="" disabled>Ano</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+
+          <small
+            *ngIf="
+              (form.get('birthDay')?.touched && form.get('birthDay')?.invalid) ||
+              (form.get('birthMonth')?.touched && form.get('birthMonth')?.invalid) ||
+              (form.get('birthYear')?.touched && form.get('birthYear')?.invalid)
+            "
+          >
+            A data de nascimento é obrigatória.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="status">Estado do animal</label>
+          <select id="status" formControlName="status">
+            <option *ngFor="let status of statuses" [value]="status.value">
+              {{ status.label }}
+            </option>
+          </select>
+
+          <small *ngIf="form.get('status')?.touched && form.get('status')?.invalid">
+            O estado é obrigatório.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/app/animals" class="cancel-button">
+        Cancelar
+      </a>
+
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'A guardar...' : 'Guardar alterações' }}
+      </button>
+    </div>
+  </form>
+</section>
