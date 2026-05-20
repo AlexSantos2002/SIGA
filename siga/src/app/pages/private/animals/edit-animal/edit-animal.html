@@ -1,8 +1,8 @@
 <section class="edit-animal-page">
   <div class="page-header">
     <div>
-      <h1>Editar animal</h1>
-      <p>Atualiza os dados do animal selecionado.</p>
+      <h1>Ficha do animal</h1>
+      <p>Consulta e gere os dados associados ao animal.</p>
     </div>
 
     <a routerLink="/app/animals" class="back-button">
@@ -11,139 +11,679 @@
   </div>
 
   <div *ngIf="isLoading" class="loading">
-    A carregar dados do animal...
+    A carregar ficha do animal...
   </div>
 
-  <form
-    *ngIf="!isLoading"
-    [formGroup]="form"
-    (ngSubmit)="submit()"
-    class="animal-form"
-  >
-    <div class="form-section">
-      <h2>Informação principal</h2>
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
 
-      <div class="form-grid">
-        <div class="form-field">
-          <label for="name">Nome do animal</label>
-          <input
-            id="name"
-            type="text"
-            formControlName="name"
-            placeholder="Ex: Rex"
-          />
+  <ng-container *ngIf="!isLoading && animal">
+    <div class="details-grid">
+      <section class="details-card">
+        <div class="card-header">
+          <h3>Informação principal</h3>
 
-          <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
-            O nome é obrigatório.
-          </small>
+          <button type="button" (click)="openModal('main')">
+            Editar
+          </button>
         </div>
 
-        <div class="form-field">
-          <label for="speciesName">Espécie</label>
-          <input
-            id="speciesName"
-            type="text"
-            formControlName="speciesName"
-            placeholder="Ex: Cão, Gato, Ave"
-          />
-
-          <small *ngIf="form.get('speciesName')?.touched && form.get('speciesName')?.invalid">
-            A espécie é obrigatória.
-          </small>
-        </div>
-
-        <div class="form-field">
-          <label for="breedName">Raça</label>
-          <input
-            id="breedName"
-            type="text"
-            formControlName="breedName"
-            placeholder="Ex: Labrador, Pastor Alemão, Mista"
-          />
-
-          <small *ngIf="form.get('breedName')?.touched && form.get('breedName')?.invalid">
-            A raça é obrigatória.
-          </small>
-        </div>
-
-        <div class="form-field">
-          <label for="gender">Género</label>
-          <select id="gender" formControlName="gender">
-            <option value="" disabled>Seleciona o género</option>
-            <option *ngFor="let gender of genders" [value]="gender.value">
-              {{ gender.label }}
-            </option>
-          </select>
-
-          <small *ngIf="form.get('gender')?.touched && form.get('gender')?.invalid">
-            O género é obrigatório.
-          </small>
-        </div>
-
-        <div class="form-field full-date-field">
-          <label>Data de nascimento</label>
-
-          <div class="date-selects">
-            <select formControlName="birthDay">
-              <option value="" disabled>Dia</option>
-              <option *ngFor="let day of days" [value]="day">
-                {{ day }}
-              </option>
-            </select>
-
-            <select formControlName="birthMonth">
-              <option value="" disabled>Mês</option>
-              <option *ngFor="let month of months" [value]="month.value">
-                {{ month.label }}
-              </option>
-            </select>
-
-            <select formControlName="birthYear">
-              <option value="" disabled>Ano</option>
-              <option *ngFor="let year of years" [value]="year">
-                {{ year }}
-              </option>
-            </select>
+        <dl class="details-list">
+          <div>
+            <dt>Nome</dt>
+            <dd>{{ animal.name }}</dd>
           </div>
 
-          <small
-            *ngIf="
-              (form.get('birthDay')?.touched && form.get('birthDay')?.invalid) ||
-              (form.get('birthMonth')?.touched && form.get('birthMonth')?.invalid) ||
-              (form.get('birthYear')?.touched && form.get('birthYear')?.invalid)
-            "
-          >
-            A data de nascimento é obrigatória.
-          </small>
+          <div>
+            <dt>Espécie</dt>
+            <dd>{{ animal.species?.name || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>Raça</dt>
+            <dd>{{ animal.breed?.name || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>Género</dt>
+            <dd>{{ getGenderLabel(animal.gender) }}</dd>
+          </div>
+
+          <div>
+            <dt>Data de nascimento</dt>
+            <dd>
+              {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '—' }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>Estado</dt>
+            <dd>{{ getStatusLabel(animal.status) }}</dd>
+          </div>
+
+          <div>
+            <dt>Disponibilidade</dt>
+            <dd>{{ animal.available ? 'Disponível' : 'Indisponível' }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="details-card">
+        <div class="card-header">
+          <h3>Notas</h3>
+
+          <button type="button" (click)="openModal('notes')">
+            Editar notas
+          </button>
         </div>
 
-        <div class="form-field">
-          <label for="status">Estado do animal</label>
-          <select id="status" formControlName="status">
-            <option *ngFor="let status of statuses" [value]="status.value">
-              {{ status.label }}
-            </option>
-          </select>
-
-          <small *ngIf="form.get('status')?.touched && form.get('status')?.invalid">
-            O estado é obrigatório.
-          </small>
+        <div class="note-box">
+          <h4>Notas gerais</h4>
+          <p>{{ animal.generalNotes || 'Ainda não existem notas gerais.' }}</p>
         </div>
+
+        <div class="note-box">
+          <h4>Notas médicas</h4>
+          <p>{{ animal.medicalNotes || 'Ainda não existem notas médicas.' }}</p>
+        </div>
+      </section>
+
+      <section class="details-card">
+        <div class="card-header">
+          <h3>Saúde</h3>
+
+          <button type="button" (click)="openModal('health')">
+            Editar saúde
+          </button>
+        </div>
+
+        <dl class="details-list">
+          <div>
+            <dt>Esterilização / castração</dt>
+            <dd>{{ getSterilizationStatusLabel(animal.sterilizationStatus) }}</dd>
+          </div>
+
+          <div>
+            <dt>Data da esterilização</dt>
+            <dd>
+              {{
+                animal.sterilizationDate
+                  ? (animal.sterilizationDate | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </dd>
+          </div>
+
+          <div>
+            <dt>Microchip</dt>
+            <dd>{{ animal.hasMicrochip ? 'Sim' : 'Não' }}</dd>
+          </div>
+
+          <div>
+            <dt>Número do microchip</dt>
+            <dd>{{ animal.microchipNumber || '—' }}</dd>
+          </div>
+
+          <div>
+            <dt>Data de colocação</dt>
+            <dd>
+              {{
+                animal.microchipDate
+                  ? (animal.microchipDate | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+    <section class="records-section">
+      <div class="records-header">
+        <div>
+          <h3>Vacinas</h3>
+          <p>Vacinas tomadas ou ainda pendentes.</p>
+        </div>
+
+        <button type="button" (click)="openModal('vaccine')">
+          Adicionar vacina
+        </button>
       </div>
-    </div>
 
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
+      <div *ngIf="vaccines.length === 0" class="empty-card">
+        Ainda não existem vacinas registadas.
+      </div>
 
-    <div class="form-actions">
-      <a routerLink="/app/animals" class="cancel-button">
-        Cancelar
-      </a>
+      <div *ngIf="vaccines.length > 0" class="record-card-list">
+        <article *ngFor="let vaccine of vaccines" class="record-card">
+          <div>
+            <h4>{{ vaccine.name }}</h4>
 
-      <button type="submit" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'A guardar...' : 'Guardar alterações' }}
-      </button>
+            <p>
+              Estado:
+              <strong>{{ getVaccineStatusLabel(vaccine.status) }}</strong>
+            </p>
+
+            <p>
+              Tomada em:
+              {{
+                vaccine.dateTaken
+                  ? (vaccine.dateTaken | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </p>
+
+            <p>
+              Prevista para:
+              {{
+                vaccine.scheduledDate
+                  ? (vaccine.scheduledDate | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </p>
+
+            <p>
+              Próxima dose:
+              {{
+                vaccine.nextDueDate
+                  ? (vaccine.nextDueDate | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </p>
+
+            <p *ngIf="vaccine.notes">
+              Observações: {{ vaccine.notes }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="remove-record-button"
+            (click)="deleteVaccine(vaccine.id)"
+          >
+            Remover
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section class="records-section">
+      <div class="records-header">
+        <div>
+          <h3>Desparasitação</h3>
+          <p>Registos de desparasitação interna ou externa.</p>
+        </div>
+
+        <button type="button" (click)="openModal('deworming')">
+          Adicionar desparasitação
+        </button>
+      </div>
+
+      <div *ngIf="dewormingRecords.length === 0" class="empty-card">
+        Ainda não existem desparasitações registadas.
+      </div>
+
+      <div *ngIf="dewormingRecords.length > 0" class="record-card-list">
+        <article *ngFor="let record of dewormingRecords" class="record-card">
+          <div>
+            <h4>{{ getDewormingTypeLabel(record.type) }}</h4>
+
+            <p>
+              Realizada em:
+              {{ record.dateDone | date: 'dd/MM/yyyy' }}
+            </p>
+
+            <p>
+              Próxima:
+              {{
+                record.nextDueDate
+                  ? (record.nextDueDate | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </p>
+
+            <p>Produto: {{ record.productName || '—' }}</p>
+
+            <p *ngIf="record.notes">
+              Observações: {{ record.notes }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="remove-record-button"
+            (click)="deleteDeworming(record.id)"
+          >
+            Remover
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section class="records-section">
+      <div class="records-header">
+        <div>
+          <h3>Consultas veterinárias</h3>
+          <p>Histórico de consultas e acompanhamento veterinário.</p>
+        </div>
+
+        <button type="button" (click)="openModal('appointment')">
+          Adicionar consulta
+        </button>
+      </div>
+
+      <div *ngIf="vetAppointments.length === 0" class="empty-card">
+        Ainda não existem consultas registadas.
+      </div>
+
+      <div *ngIf="vetAppointments.length > 0" class="record-card-list">
+        <article
+          *ngFor="let appointment of vetAppointments"
+          class="record-card"
+        >
+          <div>
+            <h4>{{ appointment.appointmentDate | date: 'dd/MM/yyyy' }}</h4>
+
+            <p>Motivo: {{ appointment.reason }}</p>
+            <p>Clínica: {{ appointment.clinicName || '—' }}</p>
+            <p>Veterinário: {{ appointment.veterinarianName || '—' }}</p>
+            <p>Resultado: {{ appointment.result || '—' }}</p>
+
+            <p>
+              Próxima consulta:
+              {{
+                appointment.nextAppointmentDate
+                  ? (appointment.nextAppointmentDate | date: 'dd/MM/yyyy')
+                  : '—'
+              }}
+            </p>
+
+            <p *ngIf="appointment.notes">
+              Observações: {{ appointment.notes }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="remove-record-button"
+            (click)="deleteVetAppointment(appointment.id)"
+          >
+            Remover
+          </button>
+        </article>
+      </div>
+    </section>
+  </ng-container>
+
+  <div
+    *ngIf="activeModal"
+    class="modal-backdrop"
+    (click)="closeModal()"
+  >
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <ng-container [ngSwitch]="activeModal">
+        <form
+          *ngSwitchCase="'main'"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+        >
+          <div class="modal-header">
+            <h3>Editar informação principal</h3>
+          </div>
+
+          <div class="modal-grid">
+            <div class="form-field">
+              <label for="name">Nome</label>
+              <input id="name" type="text" formControlName="name" />
+            </div>
+
+            <div class="form-field">
+              <label for="speciesName">Espécie</label>
+              <input id="speciesName" type="text" formControlName="speciesName" />
+            </div>
+
+            <div class="form-field">
+              <label for="breedName">Raça</label>
+              <input id="breedName" type="text" formControlName="breedName" />
+            </div>
+
+            <div class="form-field">
+              <label for="gender">Género</label>
+              <select id="gender" formControlName="gender">
+                <option value="" disabled>Seleciona o género</option>
+                <option *ngFor="let gender of genders" [value]="gender.value">
+                  {{ gender.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field full-width">
+              <label>Data de nascimento</label>
+
+              <div class="date-selects">
+                <select formControlName="birthDay">
+                  <option value="" disabled>Dia</option>
+                  <option *ngFor="let day of days" [value]="day">
+                    {{ day }}
+                  </option>
+                </select>
+
+                <select formControlName="birthMonth">
+                  <option value="" disabled>Mês</option>
+                  <option *ngFor="let month of months" [value]="month.value">
+                    {{ month.label }}
+                  </option>
+                </select>
+
+                <select formControlName="birthYear">
+                  <option value="" disabled>Ano</option>
+                  <option *ngFor="let year of years" [value]="year">
+                    {{ year }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="status">Estado</label>
+              <select id="status" formControlName="status">
+                <option *ngFor="let status of statuses" [value]="status.value">
+                  {{ status.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="closeModal()">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          *ngSwitchCase="'notes'"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+        >
+          <div class="modal-header">
+            <h3>Editar notas</h3>
+          </div>
+
+          <div class="modal-grid">
+            <div class="form-field full-width">
+              <label for="generalNotes">Notas gerais</label>
+              <textarea
+                id="generalNotes"
+                rows="5"
+                formControlName="generalNotes"
+              ></textarea>
+            </div>
+
+            <div class="form-field full-width">
+              <label for="medicalNotes">Notas médicas</label>
+              <textarea
+                id="medicalNotes"
+                rows="5"
+                formControlName="medicalNotes"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="closeModal()">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          *ngSwitchCase="'health'"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+        >
+          <div class="modal-header">
+            <h3>Editar saúde</h3>
+          </div>
+
+          <div class="modal-grid">
+            <div class="form-field">
+              <label for="sterilizationStatus">Esterilização / castração</label>
+              <select
+                id="sterilizationStatus"
+                formControlName="sterilizationStatus"
+              >
+                <option
+                  *ngFor="let status of sterilizationStatuses"
+                  [value]="status.value"
+                >
+                  {{ status.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="sterilizationDate">Data da esterilização</label>
+              <input
+                id="sterilizationDate"
+                type="date"
+                formControlName="sterilizationDate"
+              />
+            </div>
+
+            <div class="checkbox-field full-width">
+              <label>
+                <input type="checkbox" formControlName="hasMicrochip" />
+                Tem microchip
+              </label>
+            </div>
+
+            <div class="form-field">
+              <label for="microchipNumber">Número do microchip</label>
+              <input
+                id="microchipNumber"
+                type="text"
+                formControlName="microchipNumber"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="microchipDate">Data de colocação</label>
+              <input
+                id="microchipDate"
+                type="date"
+                formControlName="microchipDate"
+              />
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="closeModal()">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          *ngSwitchCase="'vaccine'"
+          [formGroup]="vaccineForm"
+          (ngSubmit)="addVaccine()"
+        >
+          <div class="modal-header">
+            <h3>Adicionar vacina</h3>
+          </div>
+
+          <div class="modal-grid">
+            <div class="form-field">
+              <label>Nome da vacina</label>
+              <input type="text" formControlName="name" />
+            </div>
+
+            <div class="form-field">
+              <label>Estado</label>
+              <select formControlName="status">
+                <option
+                  *ngFor="let status of vaccineStatuses"
+                  [value]="status.value"
+                >
+                  {{ status.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Data tomada</label>
+              <input type="date" formControlName="dateTaken" />
+            </div>
+
+            <div class="form-field">
+              <label>Data prevista</label>
+              <input type="date" formControlName="scheduledDate" />
+            </div>
+
+            <div class="form-field">
+              <label>Próxima dose</label>
+              <input type="date" formControlName="nextDueDate" />
+            </div>
+
+            <div class="form-field full-width">
+              <label>Observações</label>
+              <textarea rows="3" formControlName="notes"></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="closeModal()">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          *ngSwitchCase="'deworming'"
+          [formGroup]="dewormingForm"
+          (ngSubmit)="addDeworming()"
+        >
+          <div class="modal-header">
+            <h3>Adicionar desparasitação</h3>
+          </div>
+
+          <div class="modal-grid">
+            <div class="form-field">
+              <label>Tipo</label>
+              <select formControlName="type">
+                <option *ngFor="let type of dewormingTypes" [value]="type.value">
+                  {{ type.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Data realizada</label>
+              <input type="date" formControlName="dateDone" />
+            </div>
+
+            <div class="form-field">
+              <label>Próxima data</label>
+              <input type="date" formControlName="nextDueDate" />
+            </div>
+
+            <div class="form-field">
+              <label>Produto usado</label>
+              <input type="text" formControlName="productName" />
+            </div>
+
+            <div class="form-field full-width">
+              <label>Observações</label>
+              <textarea rows="3" formControlName="notes"></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="closeModal()">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          *ngSwitchCase="'appointment'"
+          [formGroup]="appointmentForm"
+          (ngSubmit)="addVetAppointment()"
+        >
+          <div class="modal-header">
+            <h3>Adicionar consulta veterinária</h3>
+          </div>
+
+          <div class="modal-grid">
+            <div class="form-field">
+              <label>Data da consulta</label>
+              <input type="date" formControlName="appointmentDate" />
+            </div>
+
+            <div class="form-field">
+              <label>Motivo</label>
+              <input type="text" formControlName="reason" />
+            </div>
+
+            <div class="form-field">
+              <label>Clínica</label>
+              <input type="text" formControlName="clinicName" />
+            </div>
+
+            <div class="form-field">
+              <label>Veterinário</label>
+              <input type="text" formControlName="veterinarianName" />
+            </div>
+
+            <div class="form-field">
+              <label>Resultado</label>
+              <input type="text" formControlName="result" />
+            </div>
+
+            <div class="form-field">
+              <label>Próxima consulta</label>
+              <input type="date" formControlName="nextAppointmentDate" />
+            </div>
+
+            <div class="form-field full-width">
+              <label>Observações</label>
+              <textarea rows="3" formControlName="notes"></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="closeModal()">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary-button" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+            </button>
+          </div>
+        </form>
+      </ng-container>
     </div>
-  </form>
+  </div>
 </section>

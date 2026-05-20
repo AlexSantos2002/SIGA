@@ -18,7 +18,6 @@ import { DBError } from '../../error/app-error';
   providedIn: 'root',
 })
 export class AuthService {
-
   /**
    * BehaviorSubject mantém sempre o último valor do utilizador autenticado.
    * Permite que qualquer componente subscreva e reaja a mudanças.
@@ -30,35 +29,41 @@ export class AuthService {
    */
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-
   /**
    * Realiza o login de um utilizador existente.
    */
   async login(request: LoginRequest): Promise<User> {
-
     const { data, error } = await supabase.auth.signInWithPassword({
       email: request.email,
-      password: request.password
+      password: request.password,
     });
 
-    if (error || !data.user) throw new DBError();
+    if (error || !data.user) {
+      throw new DBError();
+    }
 
-    const user: User = await this.getUserProfile(data.user.id);
+    const user = await this.getUserProfile(data.user.id);
+
+    if (!user) {
+      await this.logout();
+
+      throw new Error(
+        'O utilizador existe no Supabase Auth, mas não tem perfil associado na base de dados.'
+      );
+    }
 
     this.currentUserSubject.next(user);
 
     return user;
   }
 
-
   /**
    * Termina a sessão do utilizador autenticado.
    */
-  async logout() {
+  async logout(): Promise<void> {
     await supabase.auth.signOut();
     this.currentUserSubject.next(null);
   }
-
 
   /**
    * Retorna o utilizador atual.
@@ -67,7 +72,6 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-
   /**
    * Indica se existe um utilizador autenticado.
    */
@@ -75,43 +79,61 @@ export class AuthService {
     return !!this.currentUserSubject.value;
   }
 
-
   /**
    * Carrega o utilizador a partir da sessão persistida do Supabase.
-   * evita que o utilizador tenha de fazer login novamente
+   * Evita que o utilizador tenha de fazer login novamente.
    *
-   * Deve ser utilizado na inicialização da aplicação
+   * Deve ser utilizado na inicialização da aplicação.
    */
-  async loadUserFromSession() {
-
+  async loadUserFromSession(): Promise<void> {
     const { data, error } = await supabase.auth.getSession();
 
-    if (error || !data.session) return;
+    if (error || !data.session) {
+      this.currentUserSubject.next(null);
+      return;
+    }
 
     const userId = data.session.user.id;
 
     const user = await this.getUserProfile(userId);
 
+    if (!user) {
+      await this.logout();
+      return;
+    }
+
     this.currentUserSubject.next(user);
   }
 
-
   /**
    * Busca o perfil do utilizador na base de dados.
+   *
+   * Usa maybeSingle() em vez de single() para evitar erro 406 quando
+   * o utilizador existe no Auth, mas ainda não existe em public.users.
    */
-  private async getUserProfile(userId: string): Promise<User> {
-
+  private async getUserProfile(userId: string): Promise<User | null> {
     const { data, error } = await supabase
       .from('users')
       .select('*')
       .eq('id', userId)
-      .single();
+      .maybeSingle();
 
-    if (error || !data) throw new DBError();
+    if (error) {
+      console.error('Erro ao carregar perfil do utilizador:', error);
+      throw new DBError();
+    }
+
+    if (!data) {
+      console.warn(
+        'Perfil não encontrado em public.users para o utilizador:',
+        userId
+      );
+
+      return null;
+    }
 
     return this.mapToUser(data);
   }
-
 
   /**
    * Converte o objeto da base de dados para o modelo da aplicação.
@@ -121,8 +143,7 @@ export class AuthService {
       name: profile.name,
       email: profile.email,
       role: profile.role,
-      organizationId: profile.organization_id
+      organizationId: profile.organization_id,
     };
   }
-
 }

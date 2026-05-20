@@ -99,14 +99,26 @@ export class AddAnimal {
 
   /**
    * @description
-   * Cria uma data no formato aceite pela base de dados: YYYY-MM-DD.
+   * Cria e valida a data de nascimento no formato aceite pela base de dados:
+   * YYYY-MM-DD.
    */
   private getBirthDate(): string {
-    const day = String(this.form.value.birthDay).padStart(2, '0');
-    const month = String(this.form.value.birthMonth).padStart(2, '0');
-    const year = this.form.value.birthYear;
+    const day = Number(this.form.value.birthDay);
+    const month = Number(this.form.value.birthMonth);
+    const year = Number(this.form.value.birthYear);
 
-    return `${year}-${month}-${day}`;
+    const date = new Date(year, month - 1, day);
+
+    const isValidDate =
+      date.getFullYear() === year &&
+      date.getMonth() === month - 1 &&
+      date.getDate() === day;
+
+    if (!isValidDate) {
+      throw new Error('A data de nascimento não é válida.');
+    }
+
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   }
 
   /**
@@ -126,9 +138,9 @@ export class AddAnimal {
 
       await this.withTimeout(
         this.animalService.createAnimal({
-          name: this.form.value.name,
-          speciesName: this.form.value.speciesName,
-          breedName: this.form.value.breedName,
+          name: this.form.value.name.trim(),
+          speciesName: this.form.value.speciesName.trim(),
+          breedName: this.form.value.breedName.trim(),
           gender: this.form.value.gender,
           birthDate: this.getBirthDate(),
           status: this.form.value.status,
