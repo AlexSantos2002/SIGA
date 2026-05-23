@@ -4,35 +4,14 @@ import { supabase } from '../../../../supabase/supabase';
 import { AnimalDeworming } from '../../models/animal/animal-deworming.model';
 import { RegisterAnimalDewormingRequest } from '../../models/animal/register-animal-deworming-request';
 import { withTimeout } from '../../utils/utils';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalDewormingService {
-  private async getCurrentOrganizationId(): Promise<string | null> {
-    const {
-      data: { user },
-      error: userError,
-    } = await withTimeout<any>(supabase.auth.getUser());
 
-    if (userError || !user) {
-      return null;
-    }
-
-    const { data, error } = await withTimeout<any>(
-      supabase
-        .from('users')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-    );
-
-    if (error || !data) {
-      console.error('Erro ao obter organização:', error?.message);
-      return null;
-    }
-
-    return data.organization_id;
+  constructor(private authService: AuthService) {
   }
 
   private mapDeworming(deworming: any): AnimalDeworming {
@@ -54,7 +33,7 @@ export class AnimalDewormingService {
    * Obtém os registos de desparasitação associados a um animal.
    */
   async getByAnimalId(animalId: string): Promise<AnimalDeworming[]> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       return [];
@@ -94,7 +73,7 @@ export class AnimalDewormingService {
    * Cria um registo de desparasitação associado a um animal.
    */
   async create(request: RegisterAnimalDewormingRequest): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -123,7 +102,7 @@ export class AnimalDewormingService {
    * Remove um registo de desparasitação.
    */
   async delete(dewormingId: string): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');

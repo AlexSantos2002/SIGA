@@ -4,36 +4,14 @@ import { supabase } from '../../../../supabase/supabase';
 import { AnimalVetAppointment } from '../../models/animal/animal-vet-appointment.model';
 import { RegisterAnimalVetAppointmentRequest } from '../../models/animal/register-animal-vet-appointment-request';
 import { withTimeout } from '../../utils/utils';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalVetAppointmentService {
 
-  private async getCurrentOrganizationId(): Promise<string | null> {
-    const {
-      data: { user },
-      error: userError,
-    } = await withTimeout<any>(supabase.auth.getUser());
-
-    if (userError || !user) {
-      return null;
-    }
-
-    const { data, error } = await withTimeout<any>(
-      supabase
-        .from('users')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-    );
-
-    if (error || !data) {
-      console.error('Erro ao obter organização:', error?.message);
-      return null;
-    }
-
-    return data.organization_id;
+  constructor(private authService: AuthService) {
   }
 
   private mapAppointment(appointment: any): AnimalVetAppointment {
@@ -57,7 +35,7 @@ export class AnimalVetAppointmentService {
    * Obtém as consultas veterinárias associadas a um animal.
    */
   async getByAnimalId(animalId: string): Promise<AnimalVetAppointment[]> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       return [];
@@ -99,7 +77,7 @@ export class AnimalVetAppointmentService {
    * Cria uma consulta veterinária associada a um animal.
    */
   async create(request: RegisterAnimalVetAppointmentRequest): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -130,7 +108,7 @@ export class AnimalVetAppointmentService {
    * Remove uma consulta veterinária.
    */
   async delete(appointmentId: string): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');

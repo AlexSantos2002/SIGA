@@ -4,36 +4,13 @@ import { supabase } from '../../../../supabase/supabase';
 import { AnimalVaccine } from '../../models/vaccines/animal-vaccines.model';
 import { RegisterAnimalVaccineRequest } from '../../models/vaccines/register-animal-vaccine-request';
 import { withTimeout } from '../../utils/utils';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalVaccineService {
-  private async getCurrentOrganizationId(): Promise<string | null> {
-    const {
-      data: { user },
-      error: userError,
-    } = await withTimeout<any>(supabase.auth.getUser());
-
-    if (userError || !user) {
-      return null;
-    }
-
-    const { data, error } = await withTimeout<any>(
-      supabase
-        .from('users')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-    );
-
-    if (error || !data) {
-      console.error('Erro ao obter organização:', error?.message);
-      return null;
-    }
-
-    return data.organization_id;
-  }
+  constructor(private authService: AuthService) {}
 
   private mapVaccine(vaccine: any): AnimalVaccine {
     return {
@@ -55,7 +32,7 @@ export class AnimalVaccineService {
    * Obtém as vacinas associadas a um animal.
    */
   async getByAnimalId(animalId: string): Promise<AnimalVaccine[]> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       return [];
@@ -64,7 +41,8 @@ export class AnimalVaccineService {
     const { data, error } = await withTimeout<any>(
       supabase
         .from('animal_vaccines')
-        .select(`
+        .select(
+          `
           id,
           animal_id,
           organization_id,
@@ -75,10 +53,11 @@ export class AnimalVaccineService {
           next_due_date,
           notes,
           created_at
-        `)
+        `,
+        )
         .eq('animal_id', animalId)
         .eq('organization_id', organizationId)
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: false }),
     );
 
     if (error) {
@@ -94,7 +73,7 @@ export class AnimalVaccineService {
    * Cria uma vacina associada a um animal.
    */
   async create(request: RegisterAnimalVaccineRequest): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -110,7 +89,7 @@ export class AnimalVaccineService {
         scheduled_date: request.scheduledDate || null,
         next_due_date: request.nextDueDate || null,
         notes: request.notes || null,
-      })
+      }),
     );
 
     if (error) {
@@ -124,7 +103,7 @@ export class AnimalVaccineService {
    * Remove uma vacina associada a um animal.
    */
   async delete(vaccineId: string): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -135,7 +114,7 @@ export class AnimalVaccineService {
         .from('animal_vaccines')
         .delete()
         .eq('id', vaccineId)
-        .eq('organization_id', organizationId)
+        .eq('organization_id', organizationId),
     );
 
     if (error) {

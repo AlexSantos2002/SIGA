@@ -4,39 +4,14 @@ import { supabase } from '../../../../supabase/supabase';
 import { Animal } from '../../models/animal/animal.model';
 import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
 import { withTimeout } from '../../utils/utils';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalService {
-  /**
-   * @description
-   * Obtém o ID da organização associada ao utilizador autenticado.
-   */
-  private async getCurrentOrganizationId(): Promise<string | null> {
-    const {
-      data: { user },
-      error: userError,
-    } = await withTimeout<any>(supabase.auth.getUser());
 
-    if (userError || !user) {
-      return null;
-    }
-
-    const { data, error } = await withTimeout<any>(
-      supabase
-        .from('users')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-    );
-
-    if (error || !data) {
-      console.error('Erro ao obter organização:', error?.message);
-      return null;
-    }
-
-    return data.organization_id;
+  constructor(private authService: AuthService) {
   }
 
   /**
@@ -182,7 +157,7 @@ export class AnimalService {
    * Obtém todos os animais registados na organização autenticada.
    */
   async getAnimalsFromCurrentOrganization(): Promise<Animal[]> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       return [];
@@ -232,7 +207,7 @@ export class AnimalService {
    * Regista um novo animal na organização autenticada.
    */
   async createAnimal(request: RegisterAnimalRequest): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -359,7 +334,7 @@ export class AnimalService {
    * Remove um animal da organização autenticada.
    */
   async deleteAnimal(animalId: string): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -384,7 +359,7 @@ export class AnimalService {
    * Obtém um animal pelo ID usando a organização autenticada.
    */
   async getAnimalFromCurrentOrganization(animalId: string): Promise<Animal> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
@@ -401,7 +376,7 @@ export class AnimalService {
     animalId: string,
     request: RegisterAnimalRequest
   ): Promise<void> {
-    const organizationId = await this.getCurrentOrganizationId();
+    const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new Error('Organização não encontrada.');
