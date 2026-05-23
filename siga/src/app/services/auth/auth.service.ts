@@ -72,6 +72,15 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+
+  /**
+   * Retorna o ID da organização a qual o utilizador
+   * autenticado pertence
+   */
+  getCurrentOrganizationId(): string | null {
+    return this.currentUserSubject.value?.organizationId ?? null;
+  }
+
   /**
    * Indica se existe um utilizador autenticado.
    */

@@ -3,37 +3,24 @@ import { Injectable } from '@angular/core';
 import { supabase } from '../../../../supabase/supabase';
 import { AnimalVetAppointment } from '../../models/animal/animal-vet-appointment.model';
 import { RegisterAnimalVetAppointmentRequest } from '../../models/animal/register-animal-vet-appointment-request';
+import { withTimeout } from '../../utils/utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalVetAppointmentService {
-  private async withTimeout<T>(
-    promise: PromiseLike<T>,
-    timeoutMs = 10000
-  ): Promise<T> {
-    return Promise.race([
-      Promise.resolve(promise),
-      new Promise<T>((_, reject) =>
-        setTimeout(
-          () => reject(new Error('Tempo limite ao contactar a Supabase.')),
-          timeoutMs
-        )
-      ),
-    ]);
-  }
 
   private async getCurrentOrganizationId(): Promise<string | null> {
     const {
       data: { user },
       error: userError,
-    } = await this.withTimeout<any>(supabase.auth.getUser());
+    } = await withTimeout<any>(supabase.auth.getUser());
 
     if (userError || !user) {
       return null;
     }
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('users')
         .select('organization_id')
@@ -76,7 +63,7 @@ export class AnimalVetAppointmentService {
       return [];
     }
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('animal_vet_appointments')
         .select(`
@@ -118,7 +105,7 @@ export class AnimalVetAppointmentService {
       throw new Error('Organização não encontrada.');
     }
 
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase.from('animal_vet_appointments').insert({
         animal_id: request.animalId,
         organization_id: organizationId,
@@ -149,7 +136,7 @@ export class AnimalVetAppointmentService {
       throw new Error('Organização não encontrada.');
     }
 
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase
         .from('animal_vet_appointments')
         .delete()

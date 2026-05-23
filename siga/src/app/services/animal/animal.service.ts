@@ -3,30 +3,12 @@ import { Injectable } from '@angular/core';
 import { supabase } from '../../../../supabase/supabase';
 import { Animal } from '../../models/animal/animal.model';
 import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
+import { withTimeout } from '../../utils/utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalService {
-  /**
-   * @description
-   * Impede que uma chamada à Supabase fique presa indefinidamente.
-   */
-  private async withTimeout<T>(
-    promise: PromiseLike<T>,
-    timeoutMs = 10000
-  ): Promise<T> {
-    return Promise.race([
-      Promise.resolve(promise),
-      new Promise<T>((_, reject) =>
-        setTimeout(
-          () => reject(new Error('Tempo limite ao contactar a Supabase.')),
-          timeoutMs
-        )
-      ),
-    ]);
-  }
-
   /**
    * @description
    * Obtém o ID da organização associada ao utilizador autenticado.
@@ -35,13 +17,13 @@ export class AnimalService {
     const {
       data: { user },
       error: userError,
-    } = await this.withTimeout<any>(supabase.auth.getUser());
+    } = await withTimeout<any>(supabase.auth.getUser());
 
     if (userError || !user) {
       return null;
     }
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('users')
         .select('organization_id')
@@ -105,7 +87,7 @@ export class AnimalService {
     const normalizedName = name.trim();
 
     const { data: existingSpecies, error: searchError } =
-      await this.withTimeout<any>(
+      await withTimeout<any>(
         supabase
           .from('species')
           .select('id')
@@ -124,7 +106,7 @@ export class AnimalService {
     }
 
     const { data: newSpecies, error: insertError } =
-      await this.withTimeout<any>(
+      await withTimeout<any>(
         supabase
           .from('species')
           .insert({
@@ -155,7 +137,7 @@ export class AnimalService {
     const normalizedName = name.trim();
 
     const { data: existingBreed, error: searchError } =
-      await this.withTimeout<any>(
+      await withTimeout<any>(
         supabase
           .from('breeds')
           .select('id')
@@ -175,7 +157,7 @@ export class AnimalService {
     }
 
     const { data: newBreed, error: insertError } =
-      await this.withTimeout<any>(
+      await withTimeout<any>(
         supabase
           .from('breeds')
           .insert({
@@ -206,7 +188,7 @@ export class AnimalService {
       return [];
     }
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('animals')
         .select(`
@@ -267,7 +249,7 @@ export class AnimalService {
       organizationId
     );
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('animals')
         .insert({
@@ -307,7 +289,7 @@ export class AnimalService {
    * Obtém um animal pelo ID, garantindo que pertence à organização indicada.
    */
   async getById(animalId: string, organizationId: string): Promise<Animal> {
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('animals')
         .select(`
@@ -355,7 +337,7 @@ export class AnimalService {
     animalId: string,
     organizationId: string
   ): Promise<void> {
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase
         .from('animals')
         .update({
@@ -383,7 +365,7 @@ export class AnimalService {
       throw new Error('Organização não encontrada.');
     }
 
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase
         .from('animals')
         .delete()
@@ -436,7 +418,7 @@ export class AnimalService {
       organizationId
     );
 
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase
         .from('animals')
         .update({

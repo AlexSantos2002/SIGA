@@ -9,6 +9,7 @@ import {
 import { Router, RouterModule } from '@angular/router';
 
 import { AnimalService } from '../../../../services/animal/animal.service';
+import { withTimeout } from '../../../../utils/utils';
 
 @Component({
   selector: 'app-add-animal',
@@ -80,25 +81,6 @@ export class AddAnimal {
 
   /**
    * @description
-   * Impede que o formulário fique preso eternamente ao guardar.
-   */
-  private async withTimeout<T>(
-    promise: Promise<T>,
-    timeoutMs = 10000
-  ): Promise<T> {
-    return Promise.race([
-      promise,
-      new Promise<T>((_, reject) =>
-        setTimeout(
-          () => reject(new Error('Tempo limite ao guardar animal.')),
-          timeoutMs
-        )
-      ),
-    ]);
-  }
-
-  /**
-   * @description
    * Cria e valida a data de nascimento no formato aceite pela base de dados:
    * YYYY-MM-DD.
    */
@@ -136,7 +118,7 @@ export class AddAnimal {
       this.errorMessage = '';
       this.cdr.detectChanges();
 
-      await this.withTimeout(
+      await withTimeout(
         this.animalService.createAnimal({
           name: this.form.value.name.trim(),
           speciesName: this.form.value.speciesName.trim(),

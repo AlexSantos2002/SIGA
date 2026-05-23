@@ -3,37 +3,23 @@ import { Injectable } from '@angular/core';
 import { supabase } from '../../../../supabase/supabase';
 import { AnimalDeworming } from '../../models/animal/animal-deworming.model';
 import { RegisterAnimalDewormingRequest } from '../../models/animal/register-animal-deworming-request';
+import { withTimeout } from '../../utils/utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalDewormingService {
-  private async withTimeout<T>(
-    promise: PromiseLike<T>,
-    timeoutMs = 10000
-  ): Promise<T> {
-    return Promise.race([
-      Promise.resolve(promise),
-      new Promise<T>((_, reject) =>
-        setTimeout(
-          () => reject(new Error('Tempo limite ao contactar a Supabase.')),
-          timeoutMs
-        )
-      ),
-    ]);
-  }
-
   private async getCurrentOrganizationId(): Promise<string | null> {
     const {
       data: { user },
       error: userError,
-    } = await this.withTimeout<any>(supabase.auth.getUser());
+    } = await withTimeout<any>(supabase.auth.getUser());
 
     if (userError || !user) {
       return null;
     }
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('users')
         .select('organization_id')
@@ -74,7 +60,7 @@ export class AnimalDewormingService {
       return [];
     }
 
-    const { data, error } = await this.withTimeout<any>(
+    const { data, error } = await withTimeout<any>(
       supabase
         .from('animal_deworming')
         .select(`
@@ -114,7 +100,7 @@ export class AnimalDewormingService {
       throw new Error('Organização não encontrada.');
     }
 
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase.from('animal_deworming').insert({
         animal_id: request.animalId,
         organization_id: organizationId,
@@ -143,7 +129,7 @@ export class AnimalDewormingService {
       throw new Error('Organização não encontrada.');
     }
 
-    const { error } = await this.withTimeout<any>(
+    const { error } = await withTimeout<any>(
       supabase
         .from('animal_deworming')
         .delete()
