@@ -11,22 +11,10 @@ import { UpdateAdopterRequest } from '../../../models/adopter/update-adopter-req
   templateUrl: './adopters.html',
   styleUrl: './adopters.css',
 })
-export class Adopters implements OnInit {
+export class Adopters {
 
-  // Utilizador atual
-  private currentUser!: User;
-
-  constructor(private authService: AuthService, private adopterService: AdoptersService) {
+  constructor(private adopterService: AdoptersService) {
   }
-
-  /**
-   * Inicializa o utilizador atual para
-   * efetuar requests
-   */
-  ngOnInit(): void {
-    this.currentUser = this.authService.getCurrentUser() as User;
-  }
-
   /**
    * Regista um novo adotante
    */
@@ -39,8 +27,7 @@ export class Adopters implements OnInit {
     }
 
     try {
-        const adopter = await this.adopterService
-          .register(this.currentUser.organizationId,request);
+        const adopter = await this.adopterService.register(request);
 
       console.log(adopter);
     } catch (err) {
@@ -55,7 +42,7 @@ export class Adopters implements OnInit {
   async getAdopters(): Promise<void> {
     try {
       const adopters = await this.adopterService
-        .getAll(this.currentUser.organizationId);
+        .getAll();
 
       console.log(adopters);
     } catch (err) {
@@ -72,7 +59,7 @@ export class Adopters implements OnInit {
 
     try {
       const adopter = await this.adopterService
-        .getById(id, this.currentUser.organizationId);
+        .getById(id);
 
       console.log(adopter);
     } catch (err) {
@@ -96,7 +83,7 @@ export class Adopters implements OnInit {
 
     try {
         const updatedAdopter =  await this.adopterService
-          .update(id, this.currentUser.organizationId, request)
+          .update(id, request)
 
       console.log(updatedAdopter);
     } catch (err) {

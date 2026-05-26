@@ -40,7 +40,7 @@ export class Adoptions implements OnInit {
 
     try {
       const adoption = await this.adoptionService
-        .register(this.currentUser.organizationId, request)
+        .register(request)
 
       console.log(adoption);
     } catch (err) {
@@ -55,7 +55,7 @@ export class Adoptions implements OnInit {
   async getAll(): Promise<void> {
     try {
         const adoptions: Adoption[] = await this.adoptionService
-          .getAll(this.currentUser.organizationId);
+          .getAll();
 
       console.log(adoptions);
     } catch (err) {
@@ -70,9 +70,7 @@ export class Adoptions implements OnInit {
   async getById(): Promise<void> {
     try {
       const adoptionId = '4a370536-76a2-4ba8-9c01-c1aab7ee2a85'
-      const adoption: Adoption = await this.adoptionService.getById(
-        adoptionId,
-        this.currentUser.organizationId);
+      const adoption: Adoption = await this.adoptionService.getById(adoptionId);
 
       console.log(adoption);
     } catch (err) {
@@ -88,9 +86,7 @@ export class Adoptions implements OnInit {
     const status = 'aceita';
 
     try {
-        const adoptions: Adoption[] = await this.adoptionService.getByStatus(
-          status,
-          this.currentUser.organizationId);
+        const adoptions: Adoption[] = await this.adoptionService.getByStatus(status);
 
       console.log(adoptions);
     } catch (err) {
@@ -105,10 +101,7 @@ export class Adoptions implements OnInit {
   async getByAdopterId(): Promise<void> {
     const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0da';
     try {
-      const adoption: Adoption[] = await this.adoptionService.getByAdopterId(
-        id,
-        this.currentUser.organizationId,
-      );
+      const adoption: Adoption[] = await this.adoptionService.getByAdopterId(id);
 
       console.log(adoption);
     } catch (err) {
@@ -128,10 +121,7 @@ export class Adoptions implements OnInit {
     }
 
     try {
-        const updatedAdoption: Adoption = await this.adoptionService.update(
-          request,
-          this.currentUser.organizationId
-        );
+        const updatedAdoption: Adoption = await this.adoptionService.update(request);
       console.log(updatedAdoption);
     } catch (err) {
       console.log(err);

@@ -263,7 +263,9 @@ export class AnimalService {
    * @description
    * Obtém um animal pelo ID, garantindo que pertence à organização indicada.
    */
-  async getById(animalId: string, organizationId: string): Promise<Animal> {
+  async getById(animalId: string): Promise<Animal> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
     const { data, error } = await withTimeout<any>(
       supabase
         .from('animals')
@@ -310,8 +312,9 @@ export class AnimalService {
    */
   async makeAnimalUnavailable(
     animalId: string,
-    organizationId: string
   ): Promise<void> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
     const { error } = await withTimeout<any>(
       supabase
         .from('animals')
@@ -365,7 +368,7 @@ export class AnimalService {
       throw new Error('Organização não encontrada.');
     }
 
-    return this.getById(animalId, organizationId);
+    return this.getById(animalId);
   }
 
   /**

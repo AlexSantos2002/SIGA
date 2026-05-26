@@ -8,14 +8,19 @@ import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
 import { ERROR_CODES } from '../../error/error-codes';
 import { RegisterOrganizationRequest } from '../../models/auth/register-organization-request';
 import { AuthApiError } from '@supabase/supabase-js';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdoptersService {
 
+  constructor(private authService: AuthService) {
+  }
 
-  async getAll(organizationId: string): Promise<Adopter[]> {
+  async getAll(): Promise<Adopter[]> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
     const { data, error } = await supabase
       .from('adopters')
       .select('*')
@@ -26,7 +31,9 @@ export class AdoptersService {
     return data;
   }
 
-  async getById(adopterId: string, organizationId: string): Promise<Adopter> {
+  async getById(adopterId: string): Promise<Adopter> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
     const { data, error } = await supabase
       .from('adopters')
       .select('*')
@@ -43,7 +50,9 @@ export class AdoptersService {
     return data;
   }
 
-  async register(organizationId: string, request: RegisterAdopterRequest): Promise<Adopter> {
+  async register(request: RegisterAdopterRequest): Promise<Adopter> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
     const { data, error } = await supabase
       .from('adopters')
       .insert({
@@ -66,7 +75,9 @@ export class AdoptersService {
     return data;
   }
 
-  async update(adopterId: string, organizationId: string, request: UpdateAdopterRequest): Promise<Adopter> {
+  async update(adopterId: string, request: UpdateAdopterRequest): Promise<Adopter> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
     const { data, error } = await supabase
       .from('adopters')
       .update({
