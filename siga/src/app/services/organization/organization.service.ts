@@ -45,19 +45,17 @@ export class OrganizationService {
       password: request.adminPassword,
     });
 
-    // Emite erro caso o email do administrador já esteja registado
-    if (authError instanceof AuthApiError) {
-      throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
-    }
-
     // Deleta a organizacao caso o administrador nao seja criado
     if (authError || !authData.user) {
       await supabase
         .from('organizations')
         .delete()
-        .eq('id', organizationId);
+        .eq('id', organizationId).select().single();
 
-      console.log(authError);
+      // Emite erro caso o email do administrador já esteja registado
+      if (authError instanceof AuthApiError) {
+        throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
+      }
       throw new DBError();
     }
 
@@ -73,6 +71,9 @@ export class OrganizationService {
       }]);
 
     if (userError) throw new DBError();
+
+    // Faz o logout do usuário (permite com que mais de uma organização seja criada)
+    await supabase.auth.signOut();
 
     return organization;
   }

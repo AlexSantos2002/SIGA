@@ -6,6 +6,8 @@ import { UpdateAdopterRequest } from '../../models/adopter/update-adopter-reques
 import { BusinessError, DBError, NotFoundError } from '../../error/app-error';
 import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
 import { ERROR_CODES } from '../../error/error-codes';
+import { RegisterOrganizationRequest } from '../../models/auth/register-organization-request';
+import { AuthApiError } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',
@@ -97,5 +99,4 @@ export class AdoptersService {
 
     if (error) throw error;
   }
-
 }
