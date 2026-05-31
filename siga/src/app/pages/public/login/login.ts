@@ -16,6 +16,7 @@ export class Login {
   form: FormGroup;
   errorMessage = "";
 
+
   /**
    * @description
    * Inicializa o formulário de login com os campos de email e palavra-passe.
@@ -23,6 +24,7 @@ export class Login {
    * @param fb Serviço utilizado para criar formulários reativos.
    * @param authService Serviço responsável pela autenticação do utilizador.
    * @param router Serviço utilizado para navegar entre páginas da aplicação.
+   * @param cdr Utilizado para gerar as mudanças na UI após submissão do formulário
    */
   constructor(
     private fb: FormBuilder,
@@ -66,5 +68,9 @@ export class Login {
       }
       this.cdr.detectChanges();
     }
+  }
+
+  resetErrorMessage(): void {
+    this.errorMessage = '';
   }
 }

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { AuthGuard } from './guards/auth.guard';
+import { authGuard } from './guards/auth.guard';
+import { guestGuard } from './guards/guest.guard';
 
 /**
  * @description
@@ -15,6 +16,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./pages/public/public-layout').then(m => m.PublicLayout),
+    canActivate: [guestGuard],
     children: [
       /**
        * @description Página inicial da aplicação
@@ -83,7 +85,7 @@ export const routes: Routes = [
     path: 'app',
     loadComponent: () =>
       import('./pages/private/private-layout').then(m => m.PrivateLayout),
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
     children: [
       /**
        * @description

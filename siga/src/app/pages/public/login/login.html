@@ -24,6 +24,7 @@
           type="email"
           placeholder="email@exemplo.pt"
           formControlName="email"
+          (click)="resetErrorMessage()"
         />
 
         <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-red-500">
@@ -38,6 +39,7 @@
           type="password"
           placeholder="Introduza a palavra-passe"
           formControlName="password"
+          (click)="resetErrorMessage()"
         />
 
         <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-red-500">
@@ -45,16 +47,11 @@
         </small>
       </div>
 
-      <p *ngIf="errorMessage" class="text-red-500">
+      <p *ngIf="errorMessage" class="text-red-500 mb-4">
         {{ errorMessage }}
       </p>
 
       <div class="linha-opcoes">
-        <label class="grupo-checkbox">
-          <input type="checkbox" />
-          <span>Manter sessão iniciada</span>
-        </label>
-
         <a routerLink="/recover-password" class="link-secundario">
           Esqueci-me da palavra-passe
         </a>

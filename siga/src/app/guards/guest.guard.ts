@@ -3,14 +3,14 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
 /**
- * Redireciona utilizadores não autenticados para a página de login
+ * Redireciona utilizadores autenticados para o dashboard
  */
-export const authGuard: CanActivateFn = () => {
+export const guestGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (!authService.isAuthenticated()) {
-    router.navigate(['/login']);
+  if (authService.isAuthenticated()) {
+    router.navigate(['/app/dashboard']);
     return false;
   }
   return true;

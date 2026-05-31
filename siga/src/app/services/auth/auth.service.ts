@@ -96,8 +96,9 @@ export class AuthService {
    * Deve ser utilizado na inicialização da aplicação.
    */
   async loadUserFromSession(): Promise<void> {
+    console.log('Session started');
     const { data, error } = await supabase.auth.getSession();
-
+    console.log('session done');
     if (error || !data.session) {
       this.currentUserSubject.next(null);
       return;
