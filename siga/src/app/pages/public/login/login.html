@@ -26,7 +26,7 @@
           formControlName="email"
         />
 
-        <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-red-500">
           Introduza um email válido.
         </small>
       </div>
@@ -40,12 +40,12 @@
           formControlName="password"
         />
 
-        <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+        <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-red-500">
           Introduza a palavra-passe.
         </small>
       </div>
 
-      <p *ngIf="errorMessage" class="mensagem-erro">
+      <p *ngIf="errorMessage" class="text-red-500">
         {{ errorMessage }}
       </p>
 

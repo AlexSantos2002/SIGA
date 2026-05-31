@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { OrganizationService } from '../../../services/organization/organization.service';
 import {
   FormBuilder,
@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { RegisterOrganizationRequest } from '../../../models/auth/register-organization-request';
 import { CommonModule } from '@angular/common';
+import { AppError } from '../../../error/app-error';
+import { Router } from '@angular/router';
 
 /**
  * @description
@@ -48,7 +50,9 @@ export class Register {
    */
   constructor(
     private fb: FormBuilder,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
       // Organização
@@ -84,17 +88,16 @@ export class Register {
     const request: RegisterOrganizationRequest = this.form.value;
 
     try {
-      const org = await this.organizationService.registerOrganization(request);
-
-      console.log('Organização registada');
+      await this.organizationService.registerOrganization(request);
+      await this.router.navigate(['/login']);
       this.form.reset();
-
-      // falta fazer:  Redirecionar para a página da organização
-
     } catch (err) {
-      console.log('Erro: ', err);
+      if (err instanceof AppError) {
+        console.log(err);
+        this.errorMessage = err.message;
+      }
 
-      // falta fazer:  Implementar mensagem de erro para o utilizador
+      this.cdr.detectChanges();
     }
   }
 

@@ -10,7 +10,7 @@ export class AppError extends Error {
     message = ERROR_MESSAGES[code],
   ) {
     super(message);
-    this.name = 'AppError';
+    this.name = new.target.name;
   }
 }
 
@@ -29,7 +29,7 @@ export class BusinessError extends AppError {
  * Erro causado na base de dados do supabase
  */
 export class DBError extends AppError {
-  constructor(code: ErrorCode = ERROR_CODES.DB_ERROR) {
+  constructor(code: ErrorCode) {
     super(code);
     this.name = 'DBError';
   }
@@ -39,8 +39,18 @@ export class DBError extends AppError {
  * Erro de recurso não encontrado
  */
 export class NotFoundError extends AppError {
-  constructor() {
-    super(ERROR_CODES.NOT_FOUND);
+  constructor(code: ErrorCode) {
+    super(code);
     this.name = 'NotFoundError';
+  }
+}
+
+/**
+ * Erro de autenticação
+ */
+export class AuthenticationError extends AppError {
+  constructor(code: ErrorCode) {
+    super(code);
+    this.name = 'AuthenticationError';
   }
 }

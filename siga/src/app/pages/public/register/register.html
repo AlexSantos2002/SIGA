@@ -181,6 +181,10 @@
         </div>
       </div>
 
+      <p *ngIf="errorMessage" class="text-red-500">
+        {{ errorMessage }}
+      </p>
+
       <!-- Confirmação de dados -->
       <label class="grupo-checkbox">
         <input type="checkbox" />

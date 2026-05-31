@@ -5,6 +5,8 @@ import { AnimalVaccine } from '../../models/vaccines/animal-vaccines.model';
 import { RegisterAnimalVaccineRequest } from '../../models/vaccines/register-animal-vaccine-request';
 import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
+import { AuthenticationError, DBError } from '../../error/app-error';
+import { ERROR_CODES } from '../../error/error-codes';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +37,7 @@ export class AnimalVaccineService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      return [];
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const { data, error } = await withTimeout<any>(
@@ -61,8 +63,7 @@ export class AnimalVaccineService {
     );
 
     if (error) {
-      console.error('Erro ao carregar vacinas:', error.message);
-      return [];
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_VACCINE);
     }
 
     return (data ?? []).map((vaccine: any) => this.mapVaccine(vaccine));
@@ -76,7 +77,7 @@ export class AnimalVaccineService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      throw new Error('Organização não encontrada.');
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const { error } = await withTimeout<any>(
@@ -93,8 +94,7 @@ export class AnimalVaccineService {
     );
 
     if (error) {
-      console.error('Erro ao criar vacina:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 
@@ -106,7 +106,7 @@ export class AnimalVaccineService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      throw new Error('Organização não encontrada.');
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const { error } = await withTimeout<any>(
@@ -118,8 +118,7 @@ export class AnimalVaccineService {
     );
 
     if (error) {
-      console.error('Erro ao eliminar vacina:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 }

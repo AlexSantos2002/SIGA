@@ -5,6 +5,8 @@ import { Animal } from '../../models/animal/animal.model';
 import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
 import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
+import { AuthenticationError, DBError, NotFoundError } from '../../error/app-error';
+import { ERROR_CODES } from '../../error/error-codes';
 
 @Injectable({
   providedIn: 'root',
@@ -57,8 +59,13 @@ export class AnimalService {
    */
   private async getOrCreateSpecies(
     name: string,
-    organizationId: string
   ): Promise<string> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
     const normalizedName = name.trim();
 
     const { data: existingSpecies, error: searchError } =
@@ -72,8 +79,7 @@ export class AnimalService {
       );
 
     if (searchError) {
-      console.error('Erro ao procurar espécie:', searchError.message);
-      throw searchError;
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_SPECIES);
     }
 
     if (existingSpecies) {
@@ -92,9 +98,8 @@ export class AnimalService {
           .single()
       );
 
-    if (insertError || !newSpecies) {
-      console.error('Erro ao criar espécie:', insertError?.message);
-      throw insertError;
+    if (insertError) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
     return newSpecies.id;
@@ -107,8 +112,13 @@ export class AnimalService {
   private async getOrCreateBreed(
     name: string,
     speciesId: string,
-    organizationId: string
   ): Promise<string> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
     const normalizedName = name.trim();
 
     const { data: existingBreed, error: searchError } =
@@ -123,8 +133,7 @@ export class AnimalService {
       );
 
     if (searchError) {
-      console.error('Erro ao procurar raça:', searchError.message);
-      throw searchError;
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_BREEDS);
     }
 
     if (existingBreed) {
@@ -144,9 +153,8 @@ export class AnimalService {
           .single()
       );
 
-    if (insertError || !newBreed) {
-      console.error('Erro ao criar raça:', insertError?.message);
-      throw insertError;
+    if (insertError) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
     return newBreed.id;
@@ -160,7 +168,7 @@ export class AnimalService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      return [];
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const { data, error } = await withTimeout<any>(
@@ -195,8 +203,7 @@ export class AnimalService {
     );
 
     if (error) {
-      console.error('Erro ao carregar animais:', error.message);
-      return [];
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ANIMALS)
     }
 
     return (data ?? []).map((animal: any) => this.mapAnimal(animal));
@@ -210,18 +217,16 @@ export class AnimalService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      throw new Error('Organização não encontrada.');
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const speciesId = await this.getOrCreateSpecies(
-      request.speciesName,
-      organizationId
+      request.speciesName
     );
 
     const breedId = await this.getOrCreateBreed(
       request.breedName,
-      speciesId,
-      organizationId
+      speciesId
     );
 
     const { data, error } = await withTimeout<any>(
@@ -252,11 +257,8 @@ export class AnimalService {
     );
 
     if (error) {
-      console.error('Erro ao criar animal:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
-
-    console.log('Animal criado:', data);
   }
 
   /**
@@ -265,6 +267,10 @@ export class AnimalService {
    */
   async getById(animalId: string): Promise<Animal> {
     const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
 
     const { data, error } = await withTimeout<any>(
       supabase
@@ -298,9 +304,8 @@ export class AnimalService {
         .single()
     );
 
-    if (error || !data) {
-      console.error('Erro ao obter animal:', error?.message);
-      throw new Error('Animal não encontrado.');
+    if (error) {
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ANIMAL);
     }
 
     return this.mapAnimal(data);
@@ -315,6 +320,10 @@ export class AnimalService {
   ): Promise<void> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
     const { error } = await withTimeout<any>(
       supabase
         .from('animals')
@@ -327,8 +336,7 @@ export class AnimalService {
     );
 
     if (error) {
-      console.error('Erro ao marcar animal como indisponível:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 
@@ -340,7 +348,7 @@ export class AnimalService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      throw new Error('Organização não encontrada.');
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const { error } = await withTimeout<any>(
@@ -352,8 +360,7 @@ export class AnimalService {
     );
 
     if (error) {
-      console.error('Erro ao eliminar animal:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 
@@ -365,7 +372,7 @@ export class AnimalService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      throw new Error('Organização não encontrada.');
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     return this.getById(animalId);
@@ -382,18 +389,16 @@ export class AnimalService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      throw new Error('Organização não encontrada.');
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const speciesId = await this.getOrCreateSpecies(
-      request.speciesName,
-      organizationId
+      request.speciesName
     );
 
     const breedId = await this.getOrCreateBreed(
       request.breedName,
-      speciesId,
-      organizationId
+      speciesId
     );
 
     const { error } = await withTimeout<any>(
@@ -423,8 +428,7 @@ export class AnimalService {
     );
 
     if (error) {
-      console.error('Erro ao atualizar animal:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 }

@@ -17,63 +17,65 @@ export class OrganizationService {
    * Cria tambem o administrador principal da organizacao
    */
   async registerOrganization(request: RegisterOrganizationRequest) {
+    // Verifica se o email da organização já existe
+    const { data: existingOrg } = await supabase
+      .from('organizations')
+      .select('id')
+      .eq('email', request.email)
+      .maybeSingle();
 
-    // Cria a organizacao
+    if (existingOrg) {
+      throw new BusinessError(ERROR_CODES.ORGANIZATION_ALREADY_EXISTS);
+    }
+
+    // Cria o administrador
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: request.adminEmail,
+      password: request.adminPassword,
+    });
+
+    if (authError instanceof AuthApiError) {
+      throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
+    }
+
+    if (authError || !authData.user) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+
+    // Cria a organização
     const { data: organization, error: organizationError } = await supabase
       .from('organizations')
       .insert([{
         name: request.name,
         phone: request.phone,
         email: request.email,
-        address: request.address
+        address: request.address,
       }])
       .select()
       .single();
 
-    // Emite erro caso o email da organização já esteja registado
-    if (organizationError?.code === SUPABASE_ERROR_CODES.UNIQUE_VIOLATION) {
+    if (
+      organizationError?.code === SUPABASE_ERROR_CODES.UNIQUE_VIOLATION ||
+      organizationError?.code === SUPABASE_ERROR_CODES.RLS_VIOLATION
+    ) {
       throw new BusinessError(ERROR_CODES.ORGANIZATION_ALREADY_EXISTS);
     }
 
-    if (organizationError || !organization) throw new DBError();
-
-    const organizationId = organization.id;
-
-    // Cria o administrador no supabase auth
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: request.adminEmail,
-      password: request.adminPassword,
-    });
-
-    // Deleta a organizacao caso o administrador nao seja criado
-    if (authError || !authData.user) {
-      await supabase
-        .from('organizations')
-        .delete()
-        .eq('id', organizationId).select().single();
-
-      // Emite erro caso o email do administrador já esteja registado
-      if (authError instanceof AuthApiError) {
-        throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
-      }
-      throw new DBError();
+    if (organizationError) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
-    // Insere na tabela de usuarios
-    const { error: userError } = await supabase
-      .from('users')
-      .insert([{
-        id: authData.user.id,
-        name: request.adminName,
-        email: request.adminEmail,
-        organization_id: organizationId,
-        role: 'admin'
-      }]);
+    const { error: userError } = await supabase.from('users').insert([{
+      id: authData.user.id,
+      name: request.adminName,
+      email: request.adminEmail,
+      organization_id: organization.id,
+      role: 'admin',
+    }]);
 
-    if (userError) throw new DBError();
-
-    // Faz o logout do usuário (permite com que mais de uma organização seja criada)
-    await supabase.auth.signOut();
+    if (userError) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
 
     return organization;
   }

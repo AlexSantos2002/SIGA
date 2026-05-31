@@ -4,7 +4,7 @@ import { supabase } from '../../../../supabase/supabase';
 import { Adoption } from '../../models/adoption/adoption.model';
 import { AnimalService } from '../animal/animal.service';
 import { UpdateAdoptionRequest } from '../../models/adoption/update-adoption-request';
-import { BusinessError, DBError, NotFoundError } from '../../error/app-error';
+import { AuthenticationError, BusinessError, DBError, NotFoundError } from '../../error/app-error';
 import { ERROR_CODES } from '../../error/error-codes';
 import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
 import { AuthService } from '../auth/auth.service';
@@ -22,6 +22,10 @@ export class AdoptionService {
    */
   async register(request: RegisterAdoptionRequest): Promise<Adoption> {
     const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
 
     // Verifica se o animal está disponível para adoção
     const animal = await this.animalService
@@ -67,7 +71,7 @@ export class AdoptionService {
     `).single();
 
     if (error || !data) {
-      throw error || new DBError();
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
     // Atualiza o estado do animal caso a adoção já esteja aceite
@@ -112,11 +116,11 @@ export class AdoptionService {
         )
       `).eq('organization_id', organizationId)
 
-    if (error || !data) {
-      throw new DBError();
+    if (error) {
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTIONS);
     }
 
-    return data.map((adoption) => this.toAdoption(adoption));
+    return (data ?? []).map((adoption) => this.toAdoption(adoption));
   }
 
   /**
@@ -149,13 +153,8 @@ export class AdoptionService {
       .eq('organization_id', organizationId)
       .single();
 
-    // Emite erro se a adoção não existir
-    if (error?.code === SUPABASE_ERROR_CODES.NO_ROWS_RETURNED) {
-      throw new NotFoundError();
-    }
-
-    if (error || !data) {
-      throw new DBError();
+    if (error) {
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTION);
     }
 
     return this.toAdoption(data);
@@ -191,8 +190,8 @@ export class AdoptionService {
       .eq('organization_id', organizationId)
       .eq('status', status);
 
-    if (error || !data) {
-      throw new DBError();
+    if (error) {
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTION);
     }
 
     return data.map((adoption) => this.toAdoption(adoption));
@@ -229,7 +228,7 @@ export class AdoptionService {
       .eq('adopter_id', adopterId);
 
     if (error || !data) {
-      throw new DBError();
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTION);
     }
 
     return data.map((adoption) => this.toAdoption(adoption));
@@ -276,8 +275,8 @@ export class AdoptionService {
     `)
       .single();
 
-    if (error || !data) {
-      throw new DBError();
+    if (error) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
     // Caso seja aceite, muda o estado do animal
@@ -311,7 +310,7 @@ export class AdoptionService {
       .eq('organization_id', organizationId);
 
     if (error) {
-      throw new Error('Erro ao eliminar adoção');
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 

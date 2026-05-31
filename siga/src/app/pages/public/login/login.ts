@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { AuthenticationError } from '../../../error/app-error';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 })
 export class Login {
   form: FormGroup;
-  errorMessage = '';
+  errorMessage = "";
 
   /**
    * @description
@@ -26,7 +27,8 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -59,8 +61,10 @@ export class Login {
       }
 
     } catch (err) {
-      console.log(err);
-      this.errorMessage = 'Email ou palavra-passe incorretos.';
+      if (err instanceof AuthenticationError) {
+        this.errorMessage = err.message;
+      }
+      this.cdr.detectChanges();
     }
   }
 }

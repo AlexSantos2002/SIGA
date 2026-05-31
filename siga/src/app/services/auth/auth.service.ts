@@ -3,7 +3,8 @@ import { supabase } from '../../../../supabase/supabase';
 import { LoginRequest } from '../../models/auth/login-request';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../models/user/user.model';
-import { DBError } from '../../error/app-error';
+import { AuthenticationError, DBError } from '../../error/app-error';
+import { ERROR_CODES } from '../../error/error-codes';
 
 /**
  * Serviço responsável pela autenticação e gestão do utilizador autenticado.
@@ -38,8 +39,8 @@ export class AuthService {
       password: request.password,
     });
 
-    if (error || !data.user) {
-      throw new DBError();
+    if (error) {
+      throw new AuthenticationError(ERROR_CODES.INVALID_CREDENTIALS);
     }
 
     const user = await this.getUserProfile(data.user.id);
@@ -47,8 +48,8 @@ export class AuthService {
     if (!user) {
       await this.logout();
 
-      throw new Error(
-        'O utilizador existe no Supabase Auth, mas não tem perfil associado na base de dados.'
+      throw new DBError(
+        ERROR_CODES.DB_ERROR_UPDATE
       );
     }
 
@@ -128,8 +129,7 @@ export class AuthService {
       .maybeSingle();
 
     if (error) {
-      console.error('Erro ao carregar perfil do utilizador:', error);
-      throw new DBError();
+      throw new AuthenticationError(ERROR_CODES.AUTHENTICATION_ERROR);
     }
 
     if (!data) {

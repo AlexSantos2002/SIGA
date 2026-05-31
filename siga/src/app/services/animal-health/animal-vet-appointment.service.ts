@@ -5,6 +5,8 @@ import { AnimalVetAppointment } from '../../models/animal/animal-vet-appointment
 import { RegisterAnimalVetAppointmentRequest } from '../../models/animal/register-animal-vet-appointment-request';
 import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
+import { AuthenticationError, DBError } from '../../error/app-error';
+import { ERROR_CODES } from '../../error/error-codes';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +40,7 @@ export class AnimalVetAppointmentService {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
-      return [];
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
     const { data, error } = await withTimeout<any>(
@@ -63,8 +65,7 @@ export class AnimalVetAppointmentService {
     );
 
     if (error) {
-      console.error('Erro ao carregar consultas:', error.message);
-      return [];
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_VET_APPT);
     }
 
     return (data ?? []).map((appointment: any) =>
@@ -98,8 +99,7 @@ export class AnimalVetAppointmentService {
     );
 
     if (error) {
-      console.error('Erro ao criar consulta veterinária:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 
@@ -123,8 +123,7 @@ export class AnimalVetAppointmentService {
     );
 
     if (error) {
-      console.error('Erro ao eliminar consulta veterinária:', error.message);
-      throw error;
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 }
