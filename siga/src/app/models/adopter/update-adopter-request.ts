@@ -1,6 +1,3 @@
-export interface UpdateAdopterRequest {
-  name: string,
-  lastName: string,
-  email: string,
-  phone: string
-}
+import { RegisterAdopterRequest } from './register-adopter-request';
+
+export interface UpdateAdopterRequest extends RegisterAdopterRequest {}

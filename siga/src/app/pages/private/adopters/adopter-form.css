@@ -1,0 +1,222 @@
+.adopter-form-page {
+  padding: 28px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2933;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #cfd8dc;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: normal;
+  color: #111827;
+}
+
+.page-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.back-button {
+  display: inline-block;
+  text-decoration: none;
+  background: #2f6fd6;
+  border: 1px solid #1f4f9f;
+  border-radius: 2px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 7px 12px;
+  white-space: nowrap;
+}
+
+.back-button:hover,
+.form-actions button:hover {
+  background: #245bb3;
+}
+
+.adopter-form {
+  width: 100%;
+}
+
+.form-section {
+  background: #ffffff;
+  border: 1px solid #cfd8dc;
+  margin-bottom: 18px;
+}
+
+.form-section > h2 {
+  margin: 0;
+  background: #eef1f4;
+  border-bottom: 1px solid #cfd8dc;
+  padding: 10px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1f2933;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label,
+.checkbox-field span {
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #1f2933;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  border: 1px solid #9ca3af;
+  border-radius: 2px;
+  padding: 7px 8px;
+  font-size: 14px;
+  color: #111827;
+  background: #ffffff;
+}
+
+.form-field input,
+.form-field select {
+  height: 38px;
+}
+
+.form-field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 1px solid #2f6fd6;
+}
+
+.form-field small {
+  margin-top: 5px;
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.checkbox-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 24px;
+}
+
+.checkbox-field input {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.checkbox-field p {
+  margin: 2px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.loading,
+.error-message {
+  background: #ffffff;
+  border: 1px solid #cfd8dc;
+  padding: 14px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.error-message {
+  color: #a40000;
+  background: #fff2f2;
+  border-color: #e0a0a0;
+  margin-bottom: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  background: #f5f5f5;
+  border: 1px solid #cfd8dc;
+  padding: 12px 14px;
+}
+
+.cancel-button,
+.form-actions button {
+  display: inline-block;
+  border-radius: 2px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: #f8f8f8;
+  border: 1px solid #9ca3af;
+  color: #333333;
+}
+
+.cancel-button:hover {
+  background: #e5e7eb;
+}
+
+.form-actions button {
+  background: #2f6fd6;
+  border: 1px solid #1f4f9f;
+  color: #ffffff;
+}
+
+.form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .adopter-form-page {
+    padding: 18px;
+  }
+
+  .page-header,
+  .form-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .back-button,
+  .cancel-button,
+  .form-actions button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

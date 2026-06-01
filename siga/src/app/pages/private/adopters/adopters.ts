@@ -1,107 +1,112 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { Adopter } from '../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
-import { User } from '../../../models/user/user.model';
-import { AuthService } from '../../../services/auth/auth.service';
-import { RegisterAdopterRequest } from '../../../models/adopter/register-adopter-request';
-import { UpdateAdopterRequest } from '../../../models/adopter/update-adopter-request';
 
 @Component({
   selector: 'app-adopters',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './adopters.html',
   styleUrl: './adopters.css',
 })
-export class Adopters {
+export class Adopters implements OnInit {
+  adopters: Adopter[] = [];
 
-  constructor(private adopterService: AdoptersService) {
-  }
-  /**
-   * Regista um novo adotante
-   */
-  async register(): Promise<void> {
-    const request: RegisterAdopterRequest = {
-      name: 'Nicolas',
-      lastName: 'Garcia',
-      email: 'nicolas@email.com',
-      phone: '123456789',
-    }
+  isLoading = true;
+  errorMessage = '';
 
-    try {
-        const adopter = await this.adopterService.register(request);
+  isDeleteModalOpen = false;
+  adopterToDelete: Adopter | null = null;
+  deletingAdopterId: string | null = null;
 
-      console.log(adopter);
-    } catch (err) {
-      console.log(err);
-    }
+  constructor(
+    private adopterService: AdoptersService,
+    private cdr: ChangeDetectorRef,
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    await this.loadAdopters();
   }
 
-
-  /**
-   * Busca todos os adotantes da organização
-   */
-  async getAdopters(): Promise<void> {
+  private async loadAdopters(): Promise<void> {
     try {
-      const adopters = await this.adopterService
-        .getAll();
+      this.isLoading = true;
+      this.errorMessage = '';
+      this.cdr.detectChanges();
 
-      console.log(adopters);
-    } catch (err) {
-      console.log(err);
+      this.adopters = await this.adopterService.getAll();
+    } catch (error: any) {
+      console.error('Erro ao carregar adotantes:', error);
+      this.errorMessage =
+        error?.message || error?.details || 'Nao foi possivel carregar os adotantes.';
+    } finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
     }
   }
 
+  openDeleteModal(adopter: Adopter): void {
+    this.adopterToDelete = adopter;
+    this.isDeleteModalOpen = true;
+    this.errorMessage = '';
+  }
 
-  /**
-   * Busca um adotante específico
-   */
-  async getAdopterById(): Promise<void> {
-    const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0db';
+  closeDeleteModal(): void {
+    if (this.deletingAdopterId) {
+      return;
+    }
+
+    this.adopterToDelete = null;
+    this.isDeleteModalOpen = false;
+  }
+
+  async confirmDeleteAdopter(): Promise<void> {
+    if (!this.adopterToDelete) {
+      return;
+    }
+
+    const adopterId = this.adopterToDelete.id;
 
     try {
-      const adopter = await this.adopterService
-        .getById(id);
+      this.deletingAdopterId = adopterId;
+      this.errorMessage = '';
+      this.cdr.detectChanges();
 
-      console.log(adopter);
-    } catch (err) {
-      console.log(err);
+      await this.adopterService.delete(adopterId);
+
+      this.adopters = this.adopters.filter((adopter) => adopter.id !== adopterId);
+
+      this.adopterToDelete = null;
+      this.isDeleteModalOpen = false;
+    } catch (error: any) {
+      console.error('Erro ao eliminar adotante:', error);
+      this.errorMessage =
+        error?.message || error?.details || 'Nao foi possivel eliminar o adotante.';
+    } finally {
+      this.deletingAdopterId = null;
+      this.cdr.detectChanges();
     }
   }
 
-
-  /**
-   * Edita um adotante
-   */
-  async editAdopter(): Promise<void> {
-    const id = 'be4e63e1-ecb9-4092-ae54-e8484a1de0da';
-
-    const request: UpdateAdopterRequest = {
-      name: 'NICOLAS',
-      lastName: 'GARCIA',
-      email: 'EMAIL@EMAIL.com',
-      phone: '999999999'
+  getFullName(adopter: Adopter | null): string {
+    if (!adopter) {
+      return '';
     }
 
-    try {
-        const updatedAdopter =  await this.adopterService
-          .update(id, request)
-
-      console.log(updatedAdopter);
-    } catch (err) {
-      console.log(err);
-    }
+    return `${adopter.name} ${adopter.lastName}`.trim();
   }
 
+  getHousingTypeLabel(housingType: string | null | undefined): string {
+    const labels: Record<string, string> = {
+      apartamento: 'Apartamento',
+      moradia: 'Moradia',
+      quinta: 'Quinta',
+      outro: 'Outro',
+    };
 
-  /**
-   * Deleta um adotante
-   */
-  async deleteAdopter(): Promise<void> {
-    const id = '40826e21-543f-4808-b01f-9efac30879f4';
-    try {
-      await this.adopterService.delete(id);
-      console.log('Adotante deletado');
-    } catch (err) {
-      console.log(err);
-    }
+    return housingType ? (labels[housingType] ?? housingType) : '-';
   }
 }

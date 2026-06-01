@@ -3,164 +3,88 @@ import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
 
-/**
- * @description
- * Configuração das rotas da aplicação SIGA.
- *
- * Define a navegação entre páginas públicas e privadas,
- * utilizando lazy loading para carregar cada página apenas
- * quando for necessária.
- */
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/public/public-layout').then(m => m.PublicLayout),
+    loadComponent: () => import('./pages/public/public-layout').then((m) => m.PublicLayout),
     canActivate: [guestGuard],
     children: [
-      /**
-       * @description Página inicial da aplicação
-       */
       {
         path: '',
-        loadComponent: () =>
-          import('./pages/public/home/home').then(m => m.Home)
+        loadComponent: () => import('./pages/public/home/home').then((m) => m.Home),
       },
-
-      /**
-       * @description Página de registo de organização
-       */
       {
         path: 'register',
-        loadComponent: () =>
-          import('./pages/public/register/register').then(m => m.Register)
+        loadComponent: () => import('./pages/public/register/register').then((m) => m.Register),
       },
-
-      /**
-       * @description Página de login
-       */
       {
         path: 'login',
-        loadComponent: () =>
-          import('./pages/public/login/login').then(m => m.Login)
+        loadComponent: () => import('./pages/public/login/login').then((m) => m.Login),
       },
-
-      /**
-       * @description Página sobre o projeto SIGA
-       */
       {
         path: 'about',
-        loadComponent: () =>
-          import('./pages/public/about/about').then(m => m.About)
+        loadComponent: () => import('./pages/public/about/about').then((m) => m.About),
       },
-
-      /**
-       * @description Página de perguntas frequentes
-       */
       {
         path: 'faq',
-        loadComponent: () =>
-          import('./pages/public/faq/faq').then(m => m.Faq)
+        loadComponent: () => import('./pages/public/faq/faq').then((m) => m.Faq),
       },
-
-      /**
-       * @description Página de contactos
-       */
       {
         path: 'contacts',
-        loadComponent: () =>
-          import('./pages/public/contacts/contacts').then(m => m.Contacts)
-      }
-    ]
+        loadComponent: () => import('./pages/public/contacts/contacts').then((m) => m.Contacts),
+      },
+    ],
   },
-
   {
-    /**
-     * @description
-     * Área privada da aplicação.
-     *
-     * Esta rota é utilizada para funcionalidades internas
-     * disponíveis apenas após autenticação.
-     */
     path: 'app',
-    loadComponent: () =>
-      import('./pages/private/private-layout').then(m => m.PrivateLayout),
+    loadComponent: () => import('./pages/private/private-layout').then((m) => m.PrivateLayout),
     canActivate: [authGuard],
     children: [
-      /**
-       * @description
-       * Quando o utilizador entra em /app,
-       * é redirecionado automaticamente para o dashboard.
-       */
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
-
-      /**
-       * @description Página inicial privada após login
-       */
       {
         path: 'dashboard',
-        loadComponent: () =>
-          import('./pages/private/dashboard/dashboard').then(m => m.Dashboard)
+        loadComponent: () => import('./pages/private/dashboard/dashboard').then((m) => m.Dashboard),
       },
-
-      /**
-       * @description Página de gestão de animais
-       */
       {
         path: 'animals',
-        loadComponent: () =>
-          import('./pages/private/animals/animals').then(m => m.Animals)
+        loadComponent: () => import('./pages/private/animals/animals').then((m) => m.Animals),
       },
-
-      /**
-       * @description Página para adicionar um novo animal
-       */
       {
         path: 'animals/new',
         loadComponent: () =>
-          import('./pages/private/animals/add-animal/add-animal').then(m => m.AddAnimal)
+          import('./pages/private/animals/add-animal/add-animal').then((m) => m.AddAnimal),
       },
-
-      /**
-       * @description Página para editar um animal existente
-       */
       {
         path: 'animals/:id/edit',
         loadComponent: () =>
-          import('./pages/private/animals/edit-animal/edit-animal').then(m => m.EditAnimal)
+          import('./pages/private/animals/edit-animal/edit-animal').then((m) => m.EditAnimal),
       },
-
-      /**
-       * @description Página de gestão de adotantes
-       */
       {
         path: 'adopters',
-        loadComponent: () =>
-          import('./pages/private/adopters/adopters').then(m => m.Adopters)
+        loadComponent: () => import('./pages/private/adopters/adopters').then((m) => m.Adopters),
       },
-
-      /**
-       * @description Página de gestão de adoções
-       */
+      {
+        path: 'adopters/new',
+        loadComponent: () =>
+          import('./pages/private/adopters/add-adopter/add-adopter').then((m) => m.AddAdopter),
+      },
+      {
+        path: 'adopters/:id/edit',
+        loadComponent: () =>
+          import('./pages/private/adopters/edit-adopter/edit-adopter').then((m) => m.EditAdopter),
+      },
       {
         path: 'adoptions',
-        loadComponent: () =>
-          import('./pages/private/adoptions/adoptions').then(m => m.Adoptions)
-      }
-    ]
+        loadComponent: () => import('./pages/private/adoptions/adoptions').then((m) => m.Adoptions),
+      },
+    ],
   },
-
   {
-    /**
-     * @description
-     * Rota para capturar URLs inválidos.
-     * Redireciona o utilizador para a página inicial.
-     */
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

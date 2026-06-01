@@ -1,0 +1,195 @@
+<section class="adopter-form-page">
+  <div class="page-header">
+    <div>
+      <h1>Registar adotante</h1>
+      <p>Regista a informacao completa do adotante na tua organizacao.</p>
+    </div>
+
+    <a routerLink="/app/adopters" class="back-button">Voltar a lista</a>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="adopter-form">
+    <div class="form-section">
+      <h2>Informacao pessoal</h2>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="name">Nome</label>
+          <input id="name" type="text" formControlName="name" placeholder="Ex: Ana" />
+          <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+            O nome e obrigatorio.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="lastName">Apelido</label>
+          <input id="lastName" type="text" formControlName="lastName" placeholder="Ex: Silva" />
+          <small *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+            O apelido e obrigatorio.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" placeholder="Ex: ana@email.com" />
+          <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+            Introduz um email valido.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="phone">Telefone</label>
+          <input id="phone" type="tel" formControlName="phone" placeholder="Ex: 912345678" />
+          <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+            O telefone e obrigatorio.
+          </small>
+        </div>
+
+        <div class="form-field">
+          <label for="documentType">Tipo de documento</label>
+          <select id="documentType" formControlName="documentType">
+            <option value="">Nao definido</option>
+            <option *ngFor="let documentType of documentTypes" [value]="documentType.value">
+              {{ documentType.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="documentNumber">Numero do documento</label>
+          <input id="documentNumber" type="text" formControlName="documentNumber" />
+        </div>
+
+        <div class="form-field">
+          <label for="birthDate">Data de nascimento</label>
+          <input id="birthDate" type="date" formControlName="birthDate" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Morada e habitacao</h2>
+
+      <div class="form-grid">
+        <div class="form-field full-width">
+          <label for="address">Morada</label>
+          <input id="address" type="text" formControlName="address" />
+        </div>
+
+        <div class="form-field">
+          <label for="city">Cidade</label>
+          <input id="city" type="text" formControlName="city" />
+        </div>
+
+        <div class="form-field">
+          <label for="postalCode">Codigo postal</label>
+          <input id="postalCode" type="text" formControlName="postalCode" />
+        </div>
+
+        <div class="form-field">
+          <label for="housingType">Tipo de habitacao</label>
+          <select id="housingType" formControlName="housingType">
+            <option value="">Nao definido</option>
+            <option *ngFor="let housingType of housingTypes" [value]="housingType.value">
+              {{ housingType.label }}
+            </option>
+          </select>
+        </div>
+
+        <label class="checkbox-field">
+          <input type="checkbox" formControlName="hasOutdoorSpace" />
+          <span>Tem espaco exterior</span>
+        </label>
+
+        <div class="form-field full-width">
+          <label for="householdMembers">Agregado familiar</label>
+          <textarea id="householdMembers" formControlName="householdMembers"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="employmentStatus">Situacao profissional</label>
+          <select id="employmentStatus" formControlName="employmentStatus">
+            <option value="">Nao definido</option>
+            <option *ngFor="let status of employmentStatuses" [value]="status.value">
+              {{ status.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Experiencia e adocao</h2>
+
+      <div class="form-grid">
+        <label class="checkbox-field">
+          <input type="checkbox" formControlName="hasOtherAnimals" />
+          <span>Tem outros animais</span>
+        </label>
+
+        <div class="form-field">
+          <label for="preferredSpecies">Preferencia</label>
+          <select id="preferredSpecies" formControlName="preferredSpecies">
+            <option value="">Nao definido</option>
+            <option *ngFor="let species of preferredSpecies" [value]="species.value">
+              {{ species.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="otherAnimalsDescription">Outros animais</label>
+          <textarea
+            id="otherAnimalsDescription"
+            formControlName="otherAnimalsDescription"
+          ></textarea>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="experienceWithAnimals">Experiencia com animais</label>
+          <textarea id="experienceWithAnimals" formControlName="experienceWithAnimals"></textarea>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="adoptionMotivation">Motivo da adocao</label>
+          <textarea id="adoptionMotivation" formControlName="adoptionMotivation"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section flag-section">
+      <h2>Gestao interna</h2>
+
+      <div class="form-grid">
+        <div class="form-field full-width">
+          <label for="notes">Notas internas</label>
+          <textarea id="notes" formControlName="notes"></textarea>
+        </div>
+
+        <label class="checkbox-field">
+          <input type="checkbox" formControlName="isFlagged" />
+          <span>Sinalizar adotante</span>
+        </label>
+
+        <div class="form-field full-width" *ngIf="form.value.isFlagged">
+          <label for="flagReason">Motivo da sinalizacao</label>
+          <textarea id="flagReason" formControlName="flagReason"></textarea>
+          <small *ngIf="form.get('flagReason')?.touched && form.get('flagReason')?.invalid">
+            O motivo e obrigatorio quando o adotante esta sinalizado.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/app/adopters" class="cancel-button">Cancelar</a>
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'A guardar...' : 'Guardar adotante' }}
+      </button>
+    </div>
+  </form>
+</section>

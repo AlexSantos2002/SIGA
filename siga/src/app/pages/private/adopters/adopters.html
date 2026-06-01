@@ -1,7 +1,115 @@
-<div class="flex flex-col items-start gap-y-1">
-  <button class="bg-blue-300 rounded p-1" (click)="register()">register</button>
-  <button class="bg-green-300 rounded p-1" (click)="getAdopters()">get adopters</button>
-  <button class="bg-purple-300 rounded p-1" (click)="getAdopterById()">get adopter</button>
-  <button class="bg-gray-300 rounded p-1" (click)="editAdopter()">edit adopter</button>
-  <button class="bg-red-300 rounded p-1" (click)="deleteAdopter()">delete adopter</button>
-</div>
+<section class="adopters-page">
+  <div class="page-header">
+    <div>
+      <h1>Adotantes</h1>
+      <p>Consulta e gere os adotantes registados na tua organizacao.</p>
+    </div>
+
+    <a routerLink="/app/adopters/new" class="add-adopter-button"> Registar adotante </a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">A carregar adotantes...</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && adopters.length === 0" class="empty-state">
+    Ainda nao existem adotantes registados nesta organizacao.
+  </div>
+
+  <div *ngIf="!isLoading && adopters.length > 0" class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Cidade</th>
+          <th>Habitacao</th>
+          <th>Estado</th>
+          <th>Registado em</th>
+          <th class="actions-column"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let adopter of adopters" [class.flagged-row]="adopter.isFlagged">
+          <td>
+            <strong>{{ getFullName(adopter) }}</strong>
+            <span *ngIf="adopter.documentNumber" class="secondary-line">
+              Doc: {{ adopter.documentNumber }}
+            </span>
+          </td>
+          <td>{{ adopter.email }}</td>
+          <td>{{ adopter.phone || '-' }}</td>
+          <td>{{ adopter.city || '-' }}</td>
+          <td>{{ getHousingTypeLabel(adopter.housingType) }}</td>
+          <td>
+            <span
+              class="status-badge"
+              [class.flagged]="adopter.isFlagged"
+              [class.clear]="!adopter.isFlagged"
+            >
+              {{ adopter.isFlagged ? 'Sinalizado' : 'Ativo' }}
+            </span>
+          </td>
+          <td>{{ adopter.createdAt | date: 'dd/MM/yyyy' }}</td>
+
+          <td class="actions-column">
+            <div class="actions-buttons">
+              <a
+                class="edit-adopter-button"
+                title="Editar adotante"
+                [routerLink]="['/app/adopters', adopter.id, 'edit']"
+              >
+                &#9998;
+              </a>
+
+              <button
+                type="button"
+                class="delete-adopter-button"
+                title="Eliminar adotante"
+                [disabled]="deletingAdopterId === adopter.id"
+                (click)="openDeleteModal(adopter)"
+              >
+                <span *ngIf="deletingAdopterId === adopter.id">...</span>
+                <span *ngIf="deletingAdopterId !== adopter.id">&times;</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="isDeleteModalOpen" class="modal-backdrop" (click)="closeDeleteModal()">
+    <div class="delete-modal" (click)="$event.stopPropagation()">
+      <p>
+        Tem a certeza que quer eliminar
+        <strong>{{ getFullName(adopterToDelete) }}</strong
+        >?
+      </p>
+
+      <div class="modal-actions">
+        <button
+          type="button"
+          class="modal-cancel-button"
+          [disabled]="!!deletingAdopterId"
+          (click)="closeDeleteModal()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="modal-delete-button"
+          [disabled]="!!deletingAdopterId"
+          (click)="confirmDeleteAdopter()"
+        >
+          {{ deletingAdopterId ? 'A eliminar...' : 'Eliminar' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

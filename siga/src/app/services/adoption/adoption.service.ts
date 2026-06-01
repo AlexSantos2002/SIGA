@@ -8,14 +8,17 @@ import { AuthenticationError, BusinessError, DBError, NotFoundError } from '../.
 import { ERROR_CODES } from '../../error/error-codes';
 import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
 import { AuthService } from '../auth/auth.service';
+import { AdoptersService } from '../adopter/adopters.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdoptionService {
-
-  constructor(private authService: AuthService, private animalService: AnimalService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private animalService: AnimalService,
+    private adoptersService: AdoptersService,
+  ) {}
 
   /**
    * Regista uma adoção
@@ -28,15 +31,20 @@ export class AdoptionService {
     }
 
     // Verifica se o animal está disponível para adoção
-    const animal = await this.animalService
-      .getById(request.animalId);
+    const adopter = await this.adoptersService.getById(request.adopterId);
+
+    if (adopter.isFlagged) {
+      throw new BusinessError(ERROR_CODES.ADOPTER_FLAGGED);
+    }
+
+    const animal = await this.animalService.getById(request.animalId);
 
     // Emite erro caso o animal não esteja disponível para adoção
     if (!animal.available) {
       throw new BusinessError(ERROR_CODES.ANIMAL_UNAVAILABLE);
     }
 
-    const {data, error} = await supabase
+    const { data, error } = await supabase
       .from('adoptions')
       .insert({
         organization_id: organizationId,
@@ -44,8 +52,10 @@ export class AdoptionService {
         adopter_id: request.adopterId,
         status: request.status,
         application_date: request.applicationDate,
-        decision_date: request.decisionDate
-      }).select(`
+        decision_date: request.decisionDate,
+      })
+      .select(
+        `
       id,
       application_date,
       decision_date,
@@ -68,7 +78,9 @@ export class AdoptionService {
         name,
         email
       )
-    `).single();
+    `,
+      )
+      .single();
 
     if (error || !data) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
@@ -79,9 +91,8 @@ export class AdoptionService {
       await this.animalService.makeAnimalUnavailable(animal.id);
     }
 
-    return this.toAdoption(data)
+    return this.toAdoption(data);
   }
-
 
   /**
    * Retorna todas as adoções da organização
@@ -89,9 +100,10 @@ export class AdoptionService {
   async getAll(): Promise<Adoption[]> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
-    const {data, error} = await supabase
+    const { data, error } = await supabase
       .from('adoptions')
-      .select(`
+      .select(
+        `
         id,
         application_date,
         decision_date,
@@ -114,7 +126,9 @@ export class AdoptionService {
           name,
           email
         )
-      `).eq('organization_id', organizationId)
+      `,
+      )
+      .eq('organization_id', organizationId);
 
     if (error) {
       throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTIONS);
@@ -131,7 +145,8 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(`
+      .select(
+        `
       id,
       application_date,
       decision_date,
@@ -148,7 +163,8 @@ export class AdoptionService {
         name,
         email
       )
-    `)
+    `,
+      )
       .eq('id', adoptionId)
       .eq('organization_id', organizationId)
       .single();
@@ -160,7 +176,6 @@ export class AdoptionService {
     return this.toAdoption(data);
   }
 
-
   /**
    * Obtém adoções filtradas por status
    */
@@ -169,7 +184,8 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(`
+      .select(
+        `
       id,
       application_date,
       decision_date,
@@ -186,7 +202,8 @@ export class AdoptionService {
         name,
         email
       )
-    `)
+    `,
+      )
       .eq('organization_id', organizationId)
       .eq('status', status);
 
@@ -197,7 +214,6 @@ export class AdoptionService {
     return data.map((adoption) => this.toAdoption(adoption));
   }
 
-
   /**
    * Obtém adoções de um adotante específico
    */
@@ -206,7 +222,8 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(`
+      .select(
+        `
       id,
       application_date,
       decision_date,
@@ -223,7 +240,8 @@ export class AdoptionService {
         name,
         email
       )
-    `)
+    `,
+      )
       .eq('organization_id', organizationId)
       .eq('adopter_id', adopterId);
 
@@ -234,7 +252,6 @@ export class AdoptionService {
     return data.map((adoption) => this.toAdoption(adoption));
   }
 
-
   /**
    * Atualiza o estado de uma adoção
    */
@@ -244,18 +261,19 @@ export class AdoptionService {
 
     // Emite erro caso a transição de status da adoção seja inválida
     if (!this.isValidStatusTransition(request.newStatus)) {
-      throw new BusinessError(ERROR_CODES.INVALID_STATUS_TRANSITION)
+      throw new BusinessError(ERROR_CODES.INVALID_STATUS_TRANSITION);
     }
 
     const { data, error } = await supabase
       .from('adoptions')
       .update({
         status: request.newStatus,
-        decision_date: request.decisionDate ?? new Date().toISOString()
+        decision_date: request.decisionDate ?? new Date().toISOString(),
       })
       .eq('id', request.adoptionId)
       .eq('organization_id', organizationId)
-      .select(`
+      .select(
+        `
       id,
       application_date,
       decision_date,
@@ -272,7 +290,8 @@ export class AdoptionService {
         name,
         email
       )
-    `)
+    `,
+      )
       .single();
 
     if (error) {
@@ -287,7 +306,6 @@ export class AdoptionService {
     return this.toAdoption(data);
   }
 
-
   // TODO: Permitir a remoção de adoções aceitas/rejeitadas?
   /**
    * Remove uma adoção (apenas se estiver pendente)
@@ -298,9 +316,7 @@ export class AdoptionService {
 
     // Apenas deleta caso o status seja pendente
     if (adoption.status !== 'pendente') {
-      throw new Error(
-        'Só é possível eliminar adoções com estado pendente',
-      );
+      throw new Error('Só é possível eliminar adoções com estado pendente');
     }
 
     const { error } = await supabase
@@ -314,7 +330,6 @@ export class AdoptionService {
     }
   }
 
-
   // TODO: Permitir mudança de aceita para rejeitada por exemplo?
   /**
    * Valida se a transição de estado é permitida.
@@ -323,7 +338,6 @@ export class AdoptionService {
     const allowedTransitions = ['aceita', 'rejeitada', 'pendente'];
     return allowedTransitions.includes(newStatus) ?? false;
   }
-
 
   /**
    * Converte a response do supabase para um Adoption model
@@ -335,8 +349,7 @@ export class AdoptionService {
       animal: response.animal,
       status: response.status,
       applicationDate: response.application_date,
-      decisionDate: response.decision_date
-    }
+      decisionDate: response.decision_date,
+    };
   }
-
 }
