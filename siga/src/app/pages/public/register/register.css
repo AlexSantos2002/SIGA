@@ -129,6 +129,23 @@
   accent-color: #4b88a2;
 }
 
+.politica-dados-registo {
+  margin: -18px 0 34px;
+  color: #5d6b78;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.politica-dados-registo a {
+  color: #4b88a2;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.politica-dados-registo a:hover {
+  text-decoration: underline;
+}
+
 /* Ações de botoes e links */
 
 .acoes-formulario {

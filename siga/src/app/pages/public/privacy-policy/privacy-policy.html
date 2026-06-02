@@ -1,0 +1,29 @@
+<section class="pagina-politica">
+  <article class="documento-politica">
+    <header class="cabecalho-politica">
+      <p class="rotulo-politica">{{ content.label }}</p>
+
+      <h1>{{ content.title }}</h1>
+
+      <p class="data-atualizacao">{{ content.updatedAt }}</p>
+
+      <p *ngFor="let paragraph of content.intro" class="introducao-politica">
+        {{ paragraph }}
+      </p>
+    </header>
+
+    <section class="secao-politica" *ngFor="let section of content.sections">
+      <h2>{{ section.title }}</h2>
+
+      <p *ngFor="let paragraph of section.paragraphs">
+        {{ paragraph }}
+      </p>
+
+      <ul *ngIf="section.items" class="lista-politica">
+        <li *ngFor="let item of section.items">
+          {{ item }}
+        </li>
+      </ul>
+    </section>
+  </article>
+</section>

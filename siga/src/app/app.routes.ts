@@ -33,6 +33,11 @@ export const routes: Routes = [
         path: 'contacts',
         loadComponent: () => import('./pages/public/contacts/contacts').then((m) => m.Contacts),
       },
+      {
+        path: 'privacy-policy',
+        loadComponent: () =>
+          import('./pages/public/privacy-policy/privacy-policy').then((m) => m.PrivacyPolicy),
+      },
     ],
   },
   {
