@@ -5,6 +5,25 @@ import { RouterModule } from '@angular/router';
 import { ADOPTER_HOUSING_TYPES, getOptionLabel } from '../../../constants/form-options';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
+import {
+  createSortState,
+  getInitialSortDirection,
+  getNextSortState,
+  getSortAriaLabel,
+  getSortIndicator,
+  SortConfig,
+  SortState,
+  sortItems,
+} from '../../../utils/table-sort';
+
+type AdopterSortField =
+  | 'name'
+  | 'email'
+  | 'phone'
+  | 'city'
+  | 'housingType'
+  | 'status'
+  | 'createdAt';
 
 @Component({
   selector: 'app-adopters',
@@ -15,6 +34,8 @@ import { AdoptersService } from '../../../services/adopter/adopters.service';
 })
 export class Adopters implements OnInit {
   adopters: Adopter[] = [];
+
+  sortState: SortState<AdopterSortField> = createSortState();
 
   isLoading = true;
   errorMessage = '';
@@ -30,6 +51,30 @@ export class Adopters implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadAdopters();
+  }
+
+  get sortedAdopters(): Adopter[] {
+    return sortItems(this.adopters, this.sortState, this.adopterSortConfig);
+  }
+
+  get sortField(): AdopterSortField | null {
+    return this.sortState.field;
+  }
+
+  sortBy(field: AdopterSortField): void {
+    this.sortState = getNextSortState(
+      this.sortState,
+      field,
+      getInitialSortDirection(this.adopterSortConfig, field),
+    );
+  }
+
+  getSortIndicator(field: AdopterSortField): string {
+    return getSortIndicator(this.sortState, field);
+  }
+
+  getSortAriaLabel(label: string, field: AdopterSortField): string {
+    return getSortAriaLabel(label, this.sortState, field);
   }
 
   private async loadAdopters(): Promise<void> {
@@ -103,4 +148,32 @@ export class Adopters implements OnInit {
   getHousingTypeLabel(housingType: string | null | undefined): string {
     return getOptionLabel(ADOPTER_HOUSING_TYPES, housingType);
   }
+
+  private readonly adopterSortConfig: SortConfig<Adopter, AdopterSortField> = {
+    name: {
+      value: (adopter) => this.getFullName(adopter),
+    },
+    email: {
+      value: (adopter) => adopter.email,
+    },
+    phone: {
+      value: (adopter) => adopter.phone,
+    },
+    city: {
+      value: (adopter) => adopter.city,
+    },
+    housingType: {
+      value: (adopter) =>
+        adopter.housingType ? this.getHousingTypeLabel(adopter.housingType) : null,
+    },
+    status: {
+      value: (adopter) => (adopter.isFlagged ? 'Sinalizado' : 'Ativo'),
+      priority: (adopter) => (adopter.isFlagged ? 1 : 0),
+    },
+    createdAt: {
+      value: (adopter) => adopter.createdAt,
+      type: 'date',
+      initialDirection: 'desc',
+    },
+  };
 }

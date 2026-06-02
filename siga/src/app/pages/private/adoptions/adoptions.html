@@ -356,17 +356,67 @@
         <table>
           <thead>
             <tr>
-              <th>Animal</th>
-              <th>Adotante</th>
-              <th>Contacto</th>
-              <th>Decisão</th>
-              <th>Estado</th>
+              <th>
+                <button
+                  type="button"
+                  class="sort-header"
+                  [class.active]="completedSortField === 'animal'"
+                  [attr.aria-label]="getCompletedSortAriaLabel('Animal', 'animal')"
+                  (click)="sortCompletedBy('animal')"
+                >
+                  Animal <span>{{ getCompletedSortIndicator('animal') }}</span>
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  class="sort-header"
+                  [class.active]="completedSortField === 'adopter'"
+                  [attr.aria-label]="getCompletedSortAriaLabel('Adotante', 'adopter')"
+                  (click)="sortCompletedBy('adopter')"
+                >
+                  Adotante <span>{{ getCompletedSortIndicator('adopter') }}</span>
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  class="sort-header"
+                  [class.active]="completedSortField === 'contact'"
+                  [attr.aria-label]="getCompletedSortAriaLabel('Contacto', 'contact')"
+                  (click)="sortCompletedBy('contact')"
+                >
+                  Contacto <span>{{ getCompletedSortIndicator('contact') }}</span>
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  class="sort-header"
+                  [class.active]="completedSortField === 'decisionDate'"
+                  [attr.aria-label]="getCompletedSortAriaLabel('Decisão', 'decisionDate')"
+                  (click)="sortCompletedBy('decisionDate')"
+                >
+                  Decisão <span>{{ getCompletedSortIndicator('decisionDate') }}</span>
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  class="sort-header"
+                  [class.active]="completedSortField === 'status'"
+                  [attr.aria-label]="getCompletedSortAriaLabel('Estado', 'status')"
+                  (click)="sortCompletedBy('status')"
+                >
+                  Estado <span>{{ getCompletedSortIndicator('status') }}</span>
+                </button>
+              </th>
               <th class="actions-column"></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let adoption of completedAdoptions">
+            <tr *ngFor="let adoption of sortedCompletedAdoptions">
               <td>
                 <a class="primary-link" [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
                   {{ adoption.animal.name }}

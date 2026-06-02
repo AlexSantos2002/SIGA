@@ -5,14 +5,10 @@
       <p>Consulta e gere os animais registados na tua organização.</p>
     </div>
 
-    <a routerLink="/app/animals/new" class="add-animal-button">
-      Adicionar animal
-    </a>
+    <a routerLink="/app/animals/new" class="add-animal-button"> Adicionar animal </a>
   </div>
 
-  <div *ngIf="isLoading" class="loading">
-    A carregar animais...
-  </div>
+  <div *ngIf="isLoading" class="loading">A carregar animais...</div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
@@ -26,20 +22,100 @@
     <table>
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Espécie</th>
-          <th>Raça</th>
-          <th>Género</th>
-          <th>Data de nascimento</th>
-          <th>Estado</th>
-          <th>Disponibilidade</th>
-          <th>Registado em</th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'name'"
+              [attr.aria-label]="getSortAriaLabel('Nome', 'name')"
+              (click)="sortBy('name')"
+            >
+              Nome <span>{{ getSortIndicator('name') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'species'"
+              [attr.aria-label]="getSortAriaLabel('Espécie', 'species')"
+              (click)="sortBy('species')"
+            >
+              Espécie <span>{{ getSortIndicator('species') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'breed'"
+              [attr.aria-label]="getSortAriaLabel('Raça', 'breed')"
+              (click)="sortBy('breed')"
+            >
+              Raça <span>{{ getSortIndicator('breed') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'gender'"
+              [attr.aria-label]="getSortAriaLabel('Género', 'gender')"
+              (click)="sortBy('gender')"
+            >
+              Género <span>{{ getSortIndicator('gender') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'birthDate'"
+              [attr.aria-label]="getSortAriaLabel('Data de nascimento', 'birthDate')"
+              (click)="sortBy('birthDate')"
+            >
+              Data de nascimento <span>{{ getSortIndicator('birthDate') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'status'"
+              [attr.aria-label]="getSortAriaLabel('Estado', 'status')"
+              (click)="sortBy('status')"
+            >
+              Estado <span>{{ getSortIndicator('status') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'availability'"
+              [attr.aria-label]="getSortAriaLabel('Disponibilidade', 'availability')"
+              (click)="sortBy('availability')"
+            >
+              Disponibilidade <span>{{ getSortIndicator('availability') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'createdAt'"
+              [attr.aria-label]="getSortAriaLabel('Registado em', 'createdAt')"
+              (click)="sortBy('createdAt')"
+            >
+              Registado em <span>{{ getSortIndicator('createdAt') }}</span>
+            </button>
+          </th>
           <th class="actions-column"></th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let animal of animals">
+        <tr *ngFor="let animal of sortedAnimals">
           <td>{{ animal.name }}</td>
 
           <td>{{ animal.species?.name || '—' }}</td>
@@ -94,15 +170,12 @@
     </table>
   </div>
 
-  <div
-    *ngIf="isDeleteModalOpen"
-    class="modal-backdrop"
-    (click)="closeDeleteModal()"
-  >
+  <div *ngIf="isDeleteModalOpen" class="modal-backdrop" (click)="closeDeleteModal()">
     <div class="delete-modal" (click)="$event.stopPropagation()">
       <p>
         Tem a certeza que quer eliminar
-        <strong>{{ animalToDelete?.name }}</strong>?
+        <strong>{{ animalToDelete?.name }}</strong
+        >?
       </p>
 
       <div class="modal-actions">

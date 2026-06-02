@@ -22,19 +22,89 @@
     <table>
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Telefone</th>
-          <th>Cidade</th>
-          <th>Habitacao</th>
-          <th>Estado</th>
-          <th>Registado em</th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'name'"
+              [attr.aria-label]="getSortAriaLabel('Nome', 'name')"
+              (click)="sortBy('name')"
+            >
+              Nome <span>{{ getSortIndicator('name') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'email'"
+              [attr.aria-label]="getSortAriaLabel('Email', 'email')"
+              (click)="sortBy('email')"
+            >
+              Email <span>{{ getSortIndicator('email') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'phone'"
+              [attr.aria-label]="getSortAriaLabel('Telefone', 'phone')"
+              (click)="sortBy('phone')"
+            >
+              Telefone <span>{{ getSortIndicator('phone') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'city'"
+              [attr.aria-label]="getSortAriaLabel('Cidade', 'city')"
+              (click)="sortBy('city')"
+            >
+              Cidade <span>{{ getSortIndicator('city') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'housingType'"
+              [attr.aria-label]="getSortAriaLabel('Habitação', 'housingType')"
+              (click)="sortBy('housingType')"
+            >
+              Habitação <span>{{ getSortIndicator('housingType') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'status'"
+              [attr.aria-label]="getSortAriaLabel('Estado', 'status')"
+              (click)="sortBy('status')"
+            >
+              Estado <span>{{ getSortIndicator('status') }}</span>
+            </button>
+          </th>
+          <th>
+            <button
+              type="button"
+              class="sort-header"
+              [class.active]="sortField === 'createdAt'"
+              [attr.aria-label]="getSortAriaLabel('Registado em', 'createdAt')"
+              (click)="sortBy('createdAt')"
+            >
+              Registado em <span>{{ getSortIndicator('createdAt') }}</span>
+            </button>
+          </th>
           <th class="actions-column"></th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let adopter of adopters" [class.flagged-row]="adopter.isFlagged">
+        <tr *ngFor="let adopter of sortedAdopters" [class.flagged-row]="adopter.isFlagged">
           <td>
             <strong>{{ getFullName(adopter) }}</strong>
             <span *ngIf="adopter.documentNumber" class="secondary-line">

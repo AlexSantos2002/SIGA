@@ -1,7 +1,5 @@
 .adoptions-page {
   padding: 28px;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
   color: #1f2933;
 }
 
@@ -124,11 +122,9 @@
 .form-field select,
 .form-field textarea {
   border: 1px solid #9ca3af;
-  border-radius: 2px;
   padding: 7px 8px;
   font-size: 14px;
   color: #111827;
-  background: #ffffff;
 }
 
 .form-field input,
@@ -169,7 +165,6 @@
 .checkbox-field input {
   width: 18px;
   height: 18px;
-  margin-top: 1px;
 }
 
 .form-actions {
@@ -241,6 +236,27 @@ td {
 th {
   color: #1f2933;
   font-weight: bold;
+}
+
+.sort-header {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sort-header:hover {
+  color: #2f6fd6;
+}
+
+.sort-header span {
+  opacity: 0;
+}
+
+th:hover .sort-header span,
+.sort-header.active span {
+  opacity: 1;
 }
 
 .primary-link {

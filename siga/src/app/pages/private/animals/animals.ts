@@ -9,6 +9,26 @@ import {
 } from '../../../constants/form-options';
 import { Animal } from '../../../models/animal/animal.model';
 import { AnimalService } from '../../../services/animal/animal.service';
+import {
+  createSortState,
+  getInitialSortDirection,
+  getNextSortState,
+  getSortAriaLabel,
+  getSortIndicator,
+  SortConfig,
+  SortState,
+  sortItems,
+} from '../../../utils/table-sort';
+
+type AnimalSortField =
+  | 'name'
+  | 'species'
+  | 'breed'
+  | 'gender'
+  | 'birthDate'
+  | 'status'
+  | 'availability'
+  | 'createdAt';
 
 @Component({
   selector: 'app-animals',
@@ -19,6 +39,8 @@ import { AnimalService } from '../../../services/animal/animal.service';
 })
 export class Animals implements OnInit {
   animals: Animal[] = [];
+
+  sortState: SortState<AnimalSortField> = createSortState();
 
   isLoading = true;
   errorMessage = '';
@@ -34,6 +56,30 @@ export class Animals implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadAnimals();
+  }
+
+  get sortedAnimals(): Animal[] {
+    return sortItems(this.animals, this.sortState, this.animalSortConfig);
+  }
+
+  get sortField(): AnimalSortField | null {
+    return this.sortState.field;
+  }
+
+  sortBy(field: AnimalSortField): void {
+    this.sortState = getNextSortState(
+      this.sortState,
+      field,
+      getInitialSortDirection(this.animalSortConfig, field),
+    );
+  }
+
+  getSortIndicator(field: AnimalSortField): string {
+    return getSortIndicator(this.sortState, field);
+  }
+
+  getSortAriaLabel(label: string, field: AnimalSortField): string {
+    return getSortAriaLabel(label, this.sortState, field);
   }
 
   openDeleteModal(animal: Animal): void {
@@ -100,4 +146,46 @@ export class Animals implements OnInit {
       this.cdr.detectChanges();
     }
   }
+
+  private readonly animalStatusPriority: Record<string, number> = {
+    por_adotar: 0,
+    em_tratamento: 1,
+    acolhimento: 2,
+    reservado: 3,
+    indisponivel: 4,
+    adotado: 5,
+  };
+
+  private readonly animalSortConfig: SortConfig<Animal, AnimalSortField> = {
+    name: {
+      value: (animal) => animal.name,
+    },
+    species: {
+      value: (animal) => animal.species?.name,
+    },
+    breed: {
+      value: (animal) => animal.breed?.name,
+    },
+    gender: {
+      value: (animal) => (animal.gender ? this.getGenderLabel(animal.gender) : null),
+    },
+    birthDate: {
+      value: (animal) => animal.birthDate,
+      type: 'date',
+      initialDirection: 'desc',
+    },
+    status: {
+      value: (animal) => (animal.status ? this.getStatusLabel(animal.status) : null),
+      priority: (animal) => (animal.status ? this.animalStatusPriority[animal.status] : undefined),
+    },
+    availability: {
+      value: (animal) => (animal.available ? 0 : 1),
+      type: 'number',
+    },
+    createdAt: {
+      value: (animal) => animal.createdAt,
+      type: 'date',
+      initialDirection: 'desc',
+    },
+  };
 }

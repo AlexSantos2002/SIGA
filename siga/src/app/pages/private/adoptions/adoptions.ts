@@ -25,6 +25,18 @@ import { Animal } from '../../../models/animal/animal.model';
 import { AdoptionService } from '../../../services/adoption/adoption.service';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalService } from '../../../services/animal/animal.service';
+import {
+  createSortState,
+  getInitialSortDirection,
+  getNextSortState,
+  getSortAriaLabel,
+  getSortIndicator,
+  SortConfig,
+  SortState,
+  sortItems,
+} from '../../../utils/table-sort';
+
+type CompletedAdoptionSortField = 'animal' | 'adopter' | 'contact' | 'decisionDate' | 'status';
 
 @Component({
   selector: 'app-adoptions',
@@ -44,6 +56,8 @@ export class Adoptions implements OnInit, OnDestroy {
   isSubmitting = false;
   errorMessage = '';
   updatingAdoptionId: string | null = null;
+
+  completedSortState: SortState<CompletedAdoptionSortField> = createSortState();
 
   readonly documentTypes = ADOPTER_DOCUMENT_TYPES;
   readonly housingTypes = ADOPTER_HOUSING_TYPES;
@@ -130,6 +144,18 @@ export class Adoptions implements OnInit, OnDestroy {
     return this.adoptions.filter((adoption) => adoption.status !== 'pendente');
   }
 
+  get sortedCompletedAdoptions(): Adoption[] {
+    return sortItems(
+      this.completedAdoptions,
+      this.completedSortState,
+      this.completedAdoptionSortConfig,
+    );
+  }
+
+  get completedSortField(): CompletedAdoptionSortField | null {
+    return this.completedSortState.field;
+  }
+
   get availableAnimals(): Animal[] {
     const pendingAnimalIds = new Set(this.pendingAdoptions.map((adoption) => adoption.animal.id));
 
@@ -147,6 +173,22 @@ export class Adoptions implements OnInit, OnDestroy {
 
   get isExistingAdopterMode(): boolean {
     return this.form.value.adopterMode === 'existing';
+  }
+
+  sortCompletedBy(field: CompletedAdoptionSortField): void {
+    this.completedSortState = getNextSortState(
+      this.completedSortState,
+      field,
+      getInitialSortDirection(this.completedAdoptionSortConfig, field),
+    );
+  }
+
+  getCompletedSortIndicator(field: CompletedAdoptionSortField): string {
+    return getSortIndicator(this.completedSortState, field);
+  }
+
+  getCompletedSortAriaLabel(label: string, field: CompletedAdoptionSortField): string {
+    return getSortAriaLabel(label, this.completedSortState, field);
   }
 
   async startProcess(): Promise<void> {
@@ -378,4 +420,31 @@ export class Adoptions implements OnInit, OnDestroy {
 
     return trimmedValue ? trimmedValue : null;
   }
+
+  private readonly completedStatusPriority: Record<Adoption['status'], number> = {
+    pendente: 0,
+    aceita: 1,
+    devolvida: 2,
+    rejeitada: 3,
+  };
+
+  private readonly completedAdoptionSortConfig: SortConfig<Adoption, CompletedAdoptionSortField> = {
+    animal: {
+      value: (adoption) => adoption.animal.name,
+    },
+    adopter: {
+      value: (adoption) => this.getAdopterFullName(adoption.adopter),
+    },
+    contact: {
+      value: (adoption) => adoption.adopter.phone || adoption.adopter.city || null,
+    },
+    decisionDate: {
+      value: (adoption) => this.getProcessDate(adoption),
+      type: 'date',
+    },
+    status: {
+      value: (adoption) => this.getStatusLabel(adoption.status),
+      priority: (adoption) => this.completedStatusPriority[adoption.status],
+    },
+  };
 }
