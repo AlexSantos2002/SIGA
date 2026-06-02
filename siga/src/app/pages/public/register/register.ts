@@ -12,7 +12,7 @@ import {
 import { RegisterOrganizationRequest } from '../../../models/auth/register-organization-request';
 import { CommonModule } from '@angular/common';
 import { AppError } from '../../../error/app-error';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 /**
  * @description
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
  */
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
   standalone: true
