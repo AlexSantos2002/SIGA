@@ -171,7 +171,8 @@
   outline: 1px solid #2f6fd6;
 }
 
-.adopter-form-page .form-field small {
+.adopter-form-page .form-field small,
+.edit-animal-page .form-field small {
   margin-top: 5px;
   color: #dc2626;
   font-size: 12px;

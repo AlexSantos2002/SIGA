@@ -342,6 +342,35 @@ export class AnimalService {
 
   /**
    * @description
+   * Marca um animal como adotado numa organizaÃ§Ã£o.
+   */
+  async markAnimalAsAdopted(
+    animalId: string,
+  ): Promise<void> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const { error } = await withTimeout<any>(
+      supabase
+        .from('animals')
+        .update({
+          available: false,
+          status: 'adotado',
+        })
+        .eq('id', animalId)
+        .eq('organization_id', organizationId)
+    );
+
+    if (error) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+  }
+
+  /**
+   * @description
    * Remove um animal da organização autenticada.
    */
   async deleteAnimal(animalId: string): Promise<void> {

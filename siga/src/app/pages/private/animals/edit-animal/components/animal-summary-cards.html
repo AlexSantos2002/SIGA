@@ -37,6 +37,11 @@
         <dd>{{ getStatusLabel(animal.status) }}</dd>
       </div>
 
+      <div *ngIf="animal.status === 'adotado'">
+        <dt>Adotante</dt>
+        <dd>{{ getAdopterLabel() }}</dd>
+      </div>
+
       <div>
         <dt>Disponibilidade</dt>
         <dd>{{ animal.available ? 'Disponível' : 'Indisponível' }}</dd>

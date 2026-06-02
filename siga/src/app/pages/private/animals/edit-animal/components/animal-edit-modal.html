@@ -67,6 +67,21 @@
               </option>
             </select>
           </div>
+
+          <div class="form-field" *ngIf="isAdoptedStatus()">
+            <label for="adopterId">Adotante</label>
+            <select id="adopterId" formControlName="adopterId">
+              <option value="" disabled>
+                {{ adopters.length ? 'Seleciona o adotante' : 'Nenhum adotante registado' }}
+              </option>
+              <option *ngFor="let adopter of adopters" [value]="adopter.id">
+                {{ getAdopterLabel(adopter) }}
+              </option>
+            </select>
+            <small *ngIf="form.get('adopterId')?.touched && form.get('adopterId')?.invalid">
+              O adotante e obrigatorio quando o animal esta adotado.
+            </small>
+          </div>
         </div>
 
         <div class="modal-actions">

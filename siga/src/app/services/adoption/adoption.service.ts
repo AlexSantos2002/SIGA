@@ -14,6 +14,31 @@ import { AdoptersService } from '../adopter/adopters.service';
   providedIn: 'root',
 })
 export class AdoptionService {
+  private readonly adoptionSelect = `
+    id,
+    application_date,
+    decision_date,
+    status,
+    animal:animal_id (
+      id,
+      name,
+      gender,
+      species:species_id (
+        id,
+        name
+      ),
+      breed:breed_id (
+        id,
+        name
+      )
+    ),
+    adopter:adopter_id (
+      id,
+      name,
+      email
+    )
+  `;
+
   constructor(
     private authService: AuthService,
     private animalService: AnimalService,
@@ -88,7 +113,7 @@ export class AdoptionService {
 
     // Atualiza o estado do animal caso a adoção já esteja aceite
     if (request.status === 'aceita') {
-      await this.animalService.makeAnimalUnavailable(animal.id);
+      await this.animalService.markAnimalAsAdopted(animal.id);
     }
 
     return this.toAdoption(data);
@@ -253,6 +278,92 @@ export class AdoptionService {
   }
 
   /**
+   * Obtem a adocao aceite associada ao animal, caso exista.
+   */
+  async getAcceptedByAnimalId(animalId: string): Promise<Adoption | null> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const { data, error } = await supabase
+      .from('adoptions')
+      .select(this.adoptionSelect)
+      .eq('organization_id', organizationId)
+      .eq('animal_id', animalId)
+      .eq('status', 'aceita')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (error) {
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTION);
+    }
+
+    return data ? this.toAdoption(data) : null;
+  }
+
+  /**
+   * Liga um animal adotado ao adotante que o adotou.
+   */
+  async linkAcceptedAdoptionToAnimal(
+    animalId: string,
+    adopterId: string,
+  ): Promise<Adoption> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const [animal, adopter] = await Promise.all([
+      this.animalService.getById(animalId),
+      this.adoptersService.getById(adopterId),
+    ]);
+
+    if (adopter.isFlagged) {
+      throw new BusinessError(ERROR_CODES.ADOPTER_FLAGGED);
+    }
+
+    const existingAdoption = await this.getAcceptedByAnimalId(animal.id);
+    const now = new Date().toISOString();
+
+    const request = existingAdoption
+      ? supabase
+          .from('adoptions')
+          .update({
+            adopter_id: adopter.id,
+            status: 'aceita',
+            decision_date: now,
+          })
+          .eq('id', existingAdoption.id)
+          .eq('organization_id', organizationId)
+      : supabase
+          .from('adoptions')
+          .insert({
+            organization_id: organizationId,
+            animal_id: animal.id,
+            adopter_id: adopter.id,
+            status: 'aceita',
+            application_date: now,
+            decision_date: now,
+          });
+
+    const { data, error } = await request
+      .select(this.adoptionSelect)
+      .single();
+
+    if (error || !data) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+
+    await this.animalService.markAnimalAsAdopted(animal.id);
+
+    return this.toAdoption(data);
+  }
+
+  /**
    * Atualiza o estado de uma adoção
    */
   async update(request: UpdateAdoptionRequest): Promise<Adoption> {
@@ -300,7 +411,7 @@ export class AdoptionService {
 
     // Caso seja aceite, muda o estado do animal
     if (request.newStatus === 'aceita') {
-      await this.animalService.makeAnimalUnavailable(adoption.animal.id);
+      await this.animalService.markAnimalAsAdopted(adoption.animal.id);
     }
 
     return this.toAdoption(data);

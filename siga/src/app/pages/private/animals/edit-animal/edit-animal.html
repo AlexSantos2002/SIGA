@@ -17,6 +17,7 @@
   <ng-container *ngIf="!isLoading && animal">
     <app-animal-summary-cards
       [animal]="animal"
+      [acceptedAdoption]="acceptedAdoption"
       (editSection)="openModal($event)"
     ></app-animal-summary-cards>
 
@@ -46,6 +47,7 @@
     [vaccineForm]="vaccineForm"
     [dewormingForm]="dewormingForm"
     [appointmentForm]="appointmentForm"
+    [adopters]="adopters"
     [isSubmitting]="isSubmitting"
     (close)="closeModal()"
     (submitAnimal)="submit()"
