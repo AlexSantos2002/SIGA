@@ -1,0 +1,34 @@
+<section class="records-section">
+  <div class="records-header">
+    <div>
+      <h3>Desparasitação</h3>
+      <p>Registos de desparasitação interna ou externa.</p>
+    </div>
+
+    <button type="button" (click)="addDeworming.emit()">Adicionar desparasitação</button>
+  </div>
+
+  <div *ngIf="records.length === 0" class="empty-card">
+    Ainda não existem desparasitações registadas.
+  </div>
+
+  <div *ngIf="records.length > 0" class="record-card-list">
+    <article *ngFor="let record of records" class="record-card">
+      <div>
+        <h4>{{ getDewormingTypeLabel(record.type) }}</h4>
+
+        <p>Realizada em: {{ record.dateDone | date: 'dd/MM/yyyy' }}</p>
+
+        <p>Próxima: {{ record.nextDueDate ? (record.nextDueDate | date: 'dd/MM/yyyy') : '-' }}</p>
+
+        <p>Produto: {{ record.productName || '-' }}</p>
+
+        <p *ngIf="record.notes">Observações: {{ record.notes }}</p>
+      </div>
+
+      <button type="button" class="remove-record-button" (click)="removeDeworming.emit(record.id)">
+        Remover
+      </button>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<section class="records-section">
+  <div class="records-header">
+    <div>
+      <h3>Consultas veterinárias</h3>
+      <p>Histórico de consultas e acompanhamento veterinário.</p>
+    </div>
+
+    <button type="button" (click)="addAppointment.emit()">Adicionar consulta</button>
+  </div>
+
+  <div *ngIf="appointments.length === 0" class="empty-card">
+    Ainda não existem consultas registadas.
+  </div>
+
+  <div *ngIf="appointments.length > 0" class="record-card-list">
+    <article *ngFor="let appointment of appointments" class="record-card">
+      <div>
+        <h4>{{ appointment.appointmentDate | date: 'dd/MM/yyyy' }}</h4>
+
+        <p>Motivo: {{ appointment.reason }}</p>
+        <p>Clínica: {{ appointment.clinicName || '-' }}</p>
+        <p>Veterinário: {{ appointment.veterinarianName || '-' }}</p>
+        <p>Resultado: {{ appointment.result || '-' }}</p>
+
+        <p>
+          Próxima consulta:
+          {{
+            appointment.nextAppointmentDate
+              ? (appointment.nextAppointmentDate | date: 'dd/MM/yyyy')
+              : '-'
+          }}
+        </p>
+
+        <p *ngIf="appointment.notes">Observações: {{ appointment.notes }}</p>
+      </div>
+
+      <button
+        type="button"
+        class="remove-record-button"
+        (click)="removeAppointment.emit(appointment.id)"
+      >
+        Remover
+      </button>
+    </article>
+  </div>
+</section>

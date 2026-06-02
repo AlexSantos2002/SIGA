@@ -1,0 +1,101 @@
+<div class="details-grid">
+  <section class="details-card">
+    <div class="card-header">
+      <h3>Informação principal</h3>
+
+      <button type="button" (click)="editSection.emit('main')">Editar</button>
+    </div>
+
+    <dl class="details-list">
+      <div>
+        <dt>Nome</dt>
+        <dd>{{ animal.name }}</dd>
+      </div>
+
+      <div>
+        <dt>Espécie</dt>
+        <dd>{{ animal.species?.name || '-' }}</dd>
+      </div>
+
+      <div>
+        <dt>Raça</dt>
+        <dd>{{ animal.breed?.name || '-' }}</dd>
+      </div>
+
+      <div>
+        <dt>Género</dt>
+        <dd>{{ getGenderLabel(animal.gender) }}</dd>
+      </div>
+
+      <div>
+        <dt>Data de nascimento</dt>
+        <dd>{{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '-' }}</dd>
+      </div>
+
+      <div>
+        <dt>Estado</dt>
+        <dd>{{ getStatusLabel(animal.status) }}</dd>
+      </div>
+
+      <div>
+        <dt>Disponibilidade</dt>
+        <dd>{{ animal.available ? 'Disponível' : 'Indisponível' }}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="details-card">
+    <div class="card-header">
+      <h3>Notas</h3>
+
+      <button type="button" (click)="editSection.emit('notes')">Editar notas</button>
+    </div>
+
+    <div class="note-box">
+      <h4>Notas gerais</h4>
+      <p>{{ animal.generalNotes || 'Ainda não existem notas gerais.' }}</p>
+    </div>
+
+    <div class="note-box">
+      <h4>Notas médicas</h4>
+      <p>{{ animal.medicalNotes || 'Ainda não existem notas médicas.' }}</p>
+    </div>
+  </section>
+
+  <section class="details-card">
+    <div class="card-header">
+      <h3>Saúde</h3>
+
+      <button type="button" (click)="editSection.emit('health')">Editar saúde</button>
+    </div>
+
+    <dl class="details-list">
+      <div>
+        <dt>Esterilização / castração</dt>
+        <dd>{{ getSterilizationStatusLabel(animal.sterilizationStatus) }}</dd>
+      </div>
+
+      <div>
+        <dt>Data da esterilização</dt>
+        <dd>
+          {{ animal.sterilizationDate ? (animal.sterilizationDate | date: 'dd/MM/yyyy') : '-' }}
+        </dd>
+      </div>
+
+      <div>
+        <dt>Microchip</dt>
+        <dd>{{ animal.hasMicrochip ? 'Sim' : 'Não' }}</dd>
+      </div>
+
+      <div>
+        <dt>Número do microchip</dt>
+        <dd>{{ animal.microchipNumber || '-' }}</dd>
+      </div>
+
+      <div>
+        <dt>Data de colocação</dt>
+        <dd>{{ animal.microchipDate ? (animal.microchipDate | date: 'dd/MM/yyyy') : '-' }}</dd>
+      </div>
+    </dl>
+  </section>
+</div>

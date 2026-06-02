@@ -1,0 +1,425 @@
+.adopter-form-page,
+.edit-animal-page {
+  padding: 28px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2933;
+}
+
+.adopter-form-page .page-header,
+.edit-animal-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #cfd8dc;
+}
+
+.adopter-form-page .page-header h1,
+.edit-animal-page .page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: normal;
+  color: #111827;
+}
+
+.adopter-form-page .page-header p,
+.edit-animal-page .page-header p,
+.edit-animal-page .records-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.adopter-form-page .back-button,
+.adopter-form-page .cancel-button,
+.adopter-form-page .form-actions button,
+.edit-animal-page .back-button,
+.edit-animal-page .primary-button,
+.edit-animal-page .secondary-button,
+.edit-animal-page .card-header button,
+.edit-animal-page .records-header button,
+.edit-animal-page .remove-record-button {
+  display: inline-block;
+  border-radius: 2px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.adopter-form-page .back-button,
+.adopter-form-page .form-actions button,
+.edit-animal-page .back-button,
+.edit-animal-page .primary-button {
+  background: #2f6fd6;
+  border: 1px solid #1f4f9f;
+  color: #ffffff;
+}
+
+.adopter-form-page .back-button:hover,
+.adopter-form-page .form-actions button:hover,
+.edit-animal-page .back-button:hover,
+.edit-animal-page .primary-button:hover {
+  background: #245bb3;
+}
+
+.adopter-form-page .cancel-button,
+.edit-animal-page .secondary-button,
+.edit-animal-page .card-header button,
+.edit-animal-page .records-header button,
+.edit-animal-page .remove-record-button {
+  background: #f8f8f8;
+  border: 1px solid #9ca3af;
+  color: #333333;
+}
+
+.adopter-form-page .cancel-button:hover,
+.edit-animal-page .secondary-button:hover,
+.edit-animal-page .card-header button:hover,
+.edit-animal-page .records-header button:hover {
+  background: #e5e7eb;
+}
+
+.edit-animal-page .remove-record-button:hover {
+  background: #ffe5e5;
+  border-color: #cc7777;
+  color: #a40000;
+}
+
+.adopter-form-page .loading,
+.adopter-form-page .error-message,
+.edit-animal-page .loading,
+.edit-animal-page .error-message,
+.edit-animal-page .empty-card {
+  background: #ffffff;
+  border: 1px solid #cfd8dc;
+  padding: 14px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.adopter-form-page .error-message,
+.edit-animal-page .error-message {
+  color: #a40000;
+  background: #fff2f2;
+  border-color: #e0a0a0;
+  margin-bottom: 16px;
+}
+
+.edit-animal-page .empty-card {
+  margin: 12px;
+  background: #fbfbfb;
+  border-color: #d7dee5;
+  color: #64748b;
+}
+
+.adopter-form-page .form-field,
+.edit-animal-page .form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.adopter-form-page .form-field label,
+.adopter-form-page .checkbox-field span,
+.edit-animal-page .form-field label,
+.edit-animal-page .checkbox-field {
+  margin-bottom: 5px;
+  color: #1f2933;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.adopter-form-page .form-field input,
+.adopter-form-page .form-field select,
+.adopter-form-page .form-field textarea,
+.edit-animal-page .form-field input,
+.edit-animal-page .form-field select,
+.edit-animal-page .form-field textarea,
+.edit-animal-page .date-selects select {
+  border: 1px solid #9ca3af;
+  border-radius: 2px;
+  padding: 7px 8px;
+  font-size: 14px;
+  color: #111827;
+  background: #ffffff;
+}
+
+.adopter-form-page .form-field input,
+.adopter-form-page .form-field select,
+.edit-animal-page .form-field input,
+.edit-animal-page .form-field select,
+.edit-animal-page .date-selects select {
+  height: 38px;
+}
+
+.adopter-form-page .form-field textarea,
+.edit-animal-page .form-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.adopter-form-page .form-field input:focus,
+.adopter-form-page .form-field select:focus,
+.adopter-form-page .form-field textarea:focus,
+.edit-animal-page .form-field input:focus,
+.edit-animal-page .form-field select:focus,
+.edit-animal-page .form-field textarea:focus,
+.edit-animal-page .date-selects select:focus {
+  outline: 1px solid #2f6fd6;
+}
+
+.adopter-form-page .form-field small {
+  margin-top: 5px;
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.adopter-form-page .full-width,
+.edit-animal-page .full-width {
+  grid-column: 1 / -1;
+}
+
+.adopter-form-page .checkbox-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 24px;
+}
+
+.adopter-form-page .checkbox-field input,
+.edit-animal-page .checkbox-field input {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.adopter-form-page .checkbox-field p {
+  margin: 2px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.adopter-form-page .adopter-form {
+  width: 100%;
+}
+
+.adopter-form-page .form-section {
+  background: #ffffff;
+  border: 1px solid #cfd8dc;
+  margin-bottom: 18px;
+}
+
+.adopter-form-page .form-section > h2 {
+  margin: 0;
+  background: #eef1f4;
+  border-bottom: 1px solid #cfd8dc;
+  padding: 10px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1f2933;
+}
+
+.adopter-form-page .form-grid,
+.edit-animal-page .modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 16px;
+}
+
+.adopter-form-page .form-actions,
+.edit-animal-page .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  background: #f5f5f5;
+  border: 1px solid #cfd8dc;
+  padding: 12px 14px;
+}
+
+.adopter-form-page .form-actions button,
+.adopter-form-page .cancel-button {
+  border-radius: 2px;
+}
+
+.adopter-form-page .form-actions button:disabled,
+.edit-animal-page .primary-button:disabled,
+.edit-animal-page .secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.edit-animal-page .details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.edit-animal-page .details-card,
+.edit-animal-page .records-section {
+  background: #ffffff;
+  border: 1px solid #cfd8dc;
+  margin-bottom: 18px;
+}
+
+.edit-animal-page .card-header,
+.edit-animal-page .records-header,
+.edit-animal-page .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eef1f4;
+  border-bottom: 1px solid #cfd8dc;
+  padding: 10px 12px;
+}
+
+.edit-animal-page .card-header h3,
+.edit-animal-page .records-header h3,
+.edit-animal-page .modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1f2933;
+}
+
+.edit-animal-page .details-list {
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.edit-animal-page .details-list div {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  padding: 8px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.edit-animal-page .details-list div:last-child {
+  border-bottom: none;
+}
+
+.edit-animal-page .details-list dt {
+  color: #5f6b7a;
+  font-size: 13px;
+}
+
+.edit-animal-page .details-list dd {
+  margin: 0;
+  color: #111827;
+  font-size: 14px;
+}
+
+.edit-animal-page .note-box,
+.edit-animal-page .record-card {
+  margin: 12px;
+  padding: 12px;
+  border: 1px solid #d7dee5;
+  background: #fbfbfb;
+}
+
+.edit-animal-page .note-box h4,
+.edit-animal-page .record-card h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.edit-animal-page .note-box p,
+.edit-animal-page .record-card p {
+  margin: 4px 0;
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.edit-animal-page .record-card-list {
+  display: grid;
+  gap: 10px;
+}
+
+.edit-animal-page .record-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.edit-animal-page .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+}
+
+.edit-animal-page .modal-card {
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #555555;
+}
+
+.edit-animal-page .date-selects {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 8px;
+}
+
+.edit-animal-page .checkbox-field {
+  display: flex;
+  align-items: center;
+}
+
+.edit-animal-page .checkbox-field input {
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .adopter-form-page,
+  .edit-animal-page {
+    padding: 18px;
+  }
+
+  .adopter-form-page .page-header,
+  .adopter-form-page .form-actions,
+  .edit-animal-page .page-header,
+  .edit-animal-page .card-header,
+  .edit-animal-page .records-header,
+  .edit-animal-page .record-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .adopter-form-page .back-button,
+  .adopter-form-page .cancel-button,
+  .adopter-form-page .form-actions button,
+  .edit-animal-page .back-button,
+  .edit-animal-page .card-header button,
+  .edit-animal-page .records-header button,
+  .edit-animal-page .primary-button,
+  .edit-animal-page .secondary-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .adopter-form-page .form-grid,
+  .edit-animal-page .details-list div,
+  .edit-animal-page .modal-grid,
+  .edit-animal-page .date-selects {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-animal-page .modal-actions {
+    flex-direction: column-reverse;
+  }
+}

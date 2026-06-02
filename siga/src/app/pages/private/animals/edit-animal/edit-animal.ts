@@ -1,36 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { Animal } from '../../../../models/animal/animal.model';
 import { AnimalDeworming } from '../../../../models/animal/animal-deworming.model';
 import { AnimalVetAppointment } from '../../../../models/animal/animal-vet-appointment.model';
 import { AnimalVaccine } from '../../../../models/vaccines/animal-vaccines.model';
-
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { AnimalDewormingService } from '../../../../services/animal-health/animal-deworming.service';
-import { AnimalVetAppointmentService } from '../../../../services/animal-health/animal-vet-appointment.service';
 import { AnimalVaccineService } from '../../../../services/animal-health/animal-vaccine.service';
-
-type EditModal =
-  | 'main'
-  | 'notes'
-  | 'health'
-  | 'vaccine'
-  | 'deworming'
-  | 'appointment'
-  | null;
+import { AnimalVetAppointmentService } from '../../../../services/animal-health/animal-vet-appointment.service';
+import { AnimalDewormingSection } from './components/animal-deworming-section';
+import { AnimalEditModal } from './components/animal-edit-modal';
+import { AnimalSummaryCards } from './components/animal-summary-cards';
+import { AnimalVaccinesSection } from './components/animal-vaccines-section';
+import { AnimalVetAppointmentsSection } from './components/animal-vet-appointments-section';
+import { EditAnimalModal } from './edit-animal.types';
 
 @Component({
   selector: 'app-edit-animal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AnimalSummaryCards,
+    AnimalVaccinesSection,
+    AnimalDewormingSection,
+    AnimalVetAppointmentsSection,
+    AnimalEditModal,
+  ],
   templateUrl: './edit-animal.html',
   styleUrl: './edit-animal.css',
 })
@@ -51,56 +51,7 @@ export class EditAnimal implements OnInit {
   isSubmitting = false;
   errorMessage = '';
 
-  activeModal: EditModal = null;
-
-  statuses = [
-    { value: 'por_adotar', label: 'Por adotar' },
-    { value: 'em_tratamento', label: 'Em tratamento' },
-    { value: 'adotado', label: 'Adotado' },
-  ];
-
-  genders = [
-    { value: 'male', label: 'Macho' },
-    { value: 'female', label: 'Fêmea' },
-  ];
-
-  sterilizationStatuses = [
-    { value: '', label: 'Não definido' },
-    { value: 'nao_realizada', label: 'Não realizada' },
-    { value: 'realizada', label: 'Realizada' },
-    { value: 'agendada', label: 'Agendada' },
-    { value: 'nao_aplicavel', label: 'Não aplicável' },
-    { value: 'desconhecido', label: 'Desconhecido' },
-  ];
-
-  vaccineStatuses = [
-    { value: 'pendente', label: 'Pendente' },
-    { value: 'tomada', label: 'Tomada' },
-  ];
-
-  dewormingTypes = [
-    { value: 'interna', label: 'Interna' },
-    { value: 'externa', label: 'Externa' },
-  ];
-
-  days = Array.from({ length: 31 }, (_, index) => index + 1);
-
-  months = [
-    { value: 1, label: 'Janeiro' },
-    { value: 2, label: 'Fevereiro' },
-    { value: 3, label: 'Março' },
-    { value: 4, label: 'Abril' },
-    { value: 5, label: 'Maio' },
-    { value: 6, label: 'Junho' },
-    { value: 7, label: 'Julho' },
-    { value: 8, label: 'Agosto' },
-    { value: 9, label: 'Setembro' },
-    { value: 10, label: 'Outubro' },
-    { value: 11, label: 'Novembro' },
-    { value: 12, label: 'Dezembro' },
-  ];
-
-  years: number[] = [];
+  activeModal: EditAnimalModal = null;
 
   constructor(
     private fb: FormBuilder,
@@ -109,15 +60,8 @@ export class EditAnimal implements OnInit {
     private dewormingService: AnimalDewormingService,
     private vetAppointmentService: AnimalVetAppointmentService,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
-    const currentYear = new Date().getFullYear();
-
-    this.years = Array.from(
-      { length: 60 },
-      (_, index) => currentYear - index
-    );
-
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(80)]],
       speciesName: ['', [Validators.required, Validators.maxLength(60)]],
@@ -127,13 +71,10 @@ export class EditAnimal implements OnInit {
       birthMonth: ['', Validators.required],
       birthYear: ['', Validators.required],
       status: ['por_adotar', Validators.required],
-
       generalNotes: [''],
       medicalNotes: [''],
-
       sterilizationStatus: [''],
       sterilizationDate: [null],
-
       hasMicrochip: [false],
       microchipNumber: [''],
       microchipDate: [null],
@@ -171,7 +112,7 @@ export class EditAnimal implements OnInit {
     this.animalId = this.route.snapshot.paramMap.get('id') || '';
 
     if (!this.animalId) {
-      this.errorMessage = 'Animal não encontrado.';
+      this.errorMessage = 'Animal nao encontrado.';
       this.isLoading = false;
       return;
     }
@@ -179,65 +120,7 @@ export class EditAnimal implements OnInit {
     await this.loadPageData();
   }
 
-  private async loadPageData(): Promise<void> {
-    try {
-      this.isLoading = true;
-      this.errorMessage = '';
-      this.cdr.detectChanges();
-
-      const [animal, vaccines, dewormingRecords, vetAppointments] =
-        await Promise.all([
-          this.animalService.getAnimalFromCurrentOrganization(this.animalId),
-          this.vaccineService.getByAnimalId(this.animalId),
-          this.dewormingService.getByAnimalId(this.animalId),
-          this.vetAppointmentService.getByAnimalId(this.animalId),
-        ]);
-
-      this.animal = animal;
-      this.vaccines = vaccines;
-      this.dewormingRecords = dewormingRecords;
-      this.vetAppointments = vetAppointments;
-
-      this.patchAnimalForm(animal);
-    } catch (error: any) {
-      console.error('Erro ao carregar ficha do animal:', error);
-
-      this.errorMessage =
-        error?.message ||
-        error?.details ||
-        'Não foi possível carregar a ficha do animal.';
-    } finally {
-      this.isLoading = false;
-      this.cdr.detectChanges();
-    }
-  }
-
-  private patchAnimalForm(animal: Animal): void {
-    const birthDateParts = this.getBirthDateParts(animal.birthDate);
-
-    this.form.patchValue({
-      name: animal.name,
-      speciesName: animal.species?.name || '',
-      breedName: animal.breed?.name || '',
-      gender: animal.gender || '',
-      birthDay: birthDateParts.day,
-      birthMonth: birthDateParts.month,
-      birthYear: birthDateParts.year,
-      status: animal.status || 'por_adotar',
-
-      generalNotes: animal.generalNotes || '',
-      medicalNotes: animal.medicalNotes || '',
-
-      sterilizationStatus: animal.sterilizationStatus || '',
-      sterilizationDate: animal.sterilizationDate || null,
-
-      hasMicrochip: animal.hasMicrochip || false,
-      microchipNumber: animal.microchipNumber || '',
-      microchipDate: animal.microchipDate || null,
-    });
-  }
-
-  openModal(modal: EditModal): void {
+  openModal(modal: EditAnimalModal): void {
     this.errorMessage = '';
 
     if (modal === 'vaccine') {
@@ -284,36 +167,6 @@ export class EditAnimal implements OnInit {
     this.activeModal = null;
   }
 
-  private getBirthDateParts(birthDate: string | null): {
-    day: string;
-    month: string;
-    year: string;
-  } {
-    if (!birthDate) {
-      return {
-        day: '',
-        month: '',
-        year: '',
-      };
-    }
-
-    const [year, month, day] = birthDate.split('-');
-
-    return {
-      day: String(Number(day)),
-      month: String(Number(month)),
-      year,
-    };
-  }
-
-  private getBirthDate(): string {
-    const day = String(this.form.value.birthDay).padStart(2, '0');
-    const month = String(this.form.value.birthMonth).padStart(2, '0');
-    const year = this.form.value.birthYear;
-
-    return `${year}-${month}-${day}`;
-  }
-
   async submit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -334,35 +187,26 @@ export class EditAnimal implements OnInit {
         gender: this.form.value.gender,
         birthDate: this.getBirthDate(),
         status: this.form.value.status,
-
         generalNotes: this.form.value.generalNotes || null,
         medicalNotes: this.form.value.medicalNotes || null,
-
         sterilizationStatus: this.form.value.sterilizationStatus || null,
         sterilizationDate: this.form.value.sterilizationDate || null,
-
         hasMicrochip,
-        microchipNumber: hasMicrochip
-          ? this.form.value.microchipNumber || null
-          : null,
-        microchipDate: hasMicrochip
-          ? this.form.value.microchipDate || null
-          : null,
+        microchipNumber: hasMicrochip ? this.form.value.microchipNumber || null : null,
+        microchipDate: hasMicrochip ? this.form.value.microchipDate || null : null,
       });
 
-      const updatedAnimal =
-        await this.animalService.getAnimalFromCurrentOrganization(this.animalId);
+      const updatedAnimal = await this.animalService.getAnimalFromCurrentOrganization(
+        this.animalId,
+      );
 
       this.animal = updatedAnimal;
       this.patchAnimalForm(updatedAnimal);
       this.activeModal = null;
     } catch (error: any) {
       console.error('Erro ao atualizar animal:', error);
-
       this.errorMessage =
-        error?.message ||
-        error?.details ||
-        'Não foi possível atualizar o animal.';
+        error?.message || error?.details || 'Nao foi possivel atualizar o animal.';
     } finally {
       this.isSubmitting = false;
       this.cdr.detectChanges();
@@ -393,8 +237,7 @@ export class EditAnimal implements OnInit {
       this.activeModal = null;
     } catch (error: any) {
       console.error('Erro ao adicionar vacina:', error);
-      this.errorMessage =
-        error?.message || 'Não foi possível adicionar a vacina.';
+      this.errorMessage = error?.message || 'Nao foi possivel adicionar a vacina.';
     } finally {
       this.isSubmitting = false;
       this.cdr.detectChanges();
@@ -404,14 +247,10 @@ export class EditAnimal implements OnInit {
   async deleteVaccine(vaccineId: string): Promise<void> {
     try {
       await this.vaccineService.delete(vaccineId);
-
-      this.vaccines = this.vaccines.filter(
-        vaccine => vaccine.id !== vaccineId
-      );
+      this.vaccines = this.vaccines.filter((vaccine) => vaccine.id !== vaccineId);
     } catch (error: any) {
       console.error('Erro ao remover vacina:', error);
-      this.errorMessage =
-        error?.message || 'Não foi possível remover a vacina.';
+      this.errorMessage = error?.message || 'Nao foi possivel remover a vacina.';
     } finally {
       this.cdr.detectChanges();
     }
@@ -436,14 +275,11 @@ export class EditAnimal implements OnInit {
         notes: this.dewormingForm.value.notes || null,
       });
 
-      this.dewormingRecords =
-        await this.dewormingService.getByAnimalId(this.animalId);
-
+      this.dewormingRecords = await this.dewormingService.getByAnimalId(this.animalId);
       this.activeModal = null;
     } catch (error: any) {
-      console.error('Erro ao adicionar desparasitação:', error);
-      this.errorMessage =
-        error?.message || 'Não foi possível adicionar a desparasitação.';
+      console.error('Erro ao adicionar desparasitacao:', error);
+      this.errorMessage = error?.message || 'Nao foi possivel adicionar a desparasitacao.';
     } finally {
       this.isSubmitting = false;
       this.cdr.detectChanges();
@@ -453,14 +289,10 @@ export class EditAnimal implements OnInit {
   async deleteDeworming(dewormingId: string): Promise<void> {
     try {
       await this.dewormingService.delete(dewormingId);
-
-      this.dewormingRecords = this.dewormingRecords.filter(
-        record => record.id !== dewormingId
-      );
+      this.dewormingRecords = this.dewormingRecords.filter((record) => record.id !== dewormingId);
     } catch (error: any) {
-      console.error('Erro ao remover desparasitação:', error);
-      this.errorMessage =
-        error?.message || 'Não foi possível remover a desparasitação.';
+      console.error('Erro ao remover desparasitacao:', error);
+      this.errorMessage = error?.message || 'Nao foi possivel remover a desparasitacao.';
     } finally {
       this.cdr.detectChanges();
     }
@@ -483,19 +315,15 @@ export class EditAnimal implements OnInit {
         clinicName: this.appointmentForm.value.clinicName || null,
         veterinarianName: this.appointmentForm.value.veterinarianName || null,
         result: this.appointmentForm.value.result || null,
-        nextAppointmentDate:
-          this.appointmentForm.value.nextAppointmentDate || null,
+        nextAppointmentDate: this.appointmentForm.value.nextAppointmentDate || null,
         notes: this.appointmentForm.value.notes || null,
       });
 
-      this.vetAppointments =
-        await this.vetAppointmentService.getByAnimalId(this.animalId);
-
+      this.vetAppointments = await this.vetAppointmentService.getByAnimalId(this.animalId);
       this.activeModal = null;
     } catch (error: any) {
-      console.error('Erro ao adicionar consulta veterinária:', error);
-      this.errorMessage =
-        error?.message || 'Não foi possível adicionar a consulta veterinária.';
+      console.error('Erro ao adicionar consulta veterinaria:', error);
+      this.errorMessage = error?.message || 'Nao foi possivel adicionar a consulta veterinaria.';
     } finally {
       this.isSubmitting = false;
       this.cdr.detectChanges();
@@ -505,68 +333,95 @@ export class EditAnimal implements OnInit {
   async deleteVetAppointment(appointmentId: string): Promise<void> {
     try {
       await this.vetAppointmentService.delete(appointmentId);
-
       this.vetAppointments = this.vetAppointments.filter(
-        appointment => appointment.id !== appointmentId
+        (appointment) => appointment.id !== appointmentId,
       );
     } catch (error: any) {
-      console.error('Erro ao remover consulta veterinária:', error);
-      this.errorMessage =
-        error?.message || 'Não foi possível remover a consulta veterinária.';
+      console.error('Erro ao remover consulta veterinaria:', error);
+      this.errorMessage = error?.message || 'Nao foi possivel remover a consulta veterinaria.';
     } finally {
       this.cdr.detectChanges();
     }
   }
 
-  getGenderLabel(gender: string | null): string {
-    const labels: Record<string, string> = {
-      male: 'Macho',
-      female: 'Fêmea',
-    };
+  private async loadPageData(): Promise<void> {
+    try {
+      this.isLoading = true;
+      this.errorMessage = '';
+      this.cdr.detectChanges();
 
-    return gender ? labels[gender] ?? gender : '—';
+      const [animal, vaccines, dewormingRecords, vetAppointments] = await Promise.all([
+        this.animalService.getAnimalFromCurrentOrganization(this.animalId),
+        this.vaccineService.getByAnimalId(this.animalId),
+        this.dewormingService.getByAnimalId(this.animalId),
+        this.vetAppointmentService.getByAnimalId(this.animalId),
+      ]);
+
+      this.animal = animal;
+      this.vaccines = vaccines;
+      this.dewormingRecords = dewormingRecords;
+      this.vetAppointments = vetAppointments;
+
+      this.patchAnimalForm(animal);
+    } catch (error: any) {
+      console.error('Erro ao carregar ficha do animal:', error);
+      this.errorMessage =
+        error?.message || error?.details || 'Nao foi possivel carregar a ficha do animal.';
+    } finally {
+      this.isLoading = false;
+      this.cdr.detectChanges();
+    }
   }
 
-  getStatusLabel(status: string | null): string {
-    const labels: Record<string, string> = {
-      por_adotar: 'Por adotar',
-      em_tratamento: 'Em tratamento',
-      adotado: 'Adotado',
-      reservado: 'Reservado',
-      acolhimento: 'Em acolhimento',
-      indisponivel: 'Indisponível',
-    };
+  private patchAnimalForm(animal: Animal): void {
+    const birthDateParts = this.getBirthDateParts(animal.birthDate);
 
-    return status ? labels[status] ?? status : '—';
+    this.form.patchValue({
+      name: animal.name,
+      speciesName: animal.species?.name || '',
+      breedName: animal.breed?.name || '',
+      gender: animal.gender || '',
+      birthDay: birthDateParts.day,
+      birthMonth: birthDateParts.month,
+      birthYear: birthDateParts.year,
+      status: animal.status || 'por_adotar',
+      generalNotes: animal.generalNotes || '',
+      medicalNotes: animal.medicalNotes || '',
+      sterilizationStatus: animal.sterilizationStatus || '',
+      sterilizationDate: animal.sterilizationDate || null,
+      hasMicrochip: animal.hasMicrochip || false,
+      microchipNumber: animal.microchipNumber || '',
+      microchipDate: animal.microchipDate || null,
+    });
   }
 
-  getSterilizationStatusLabel(status: string | null): string {
-    const labels: Record<string, string> = {
-      nao_realizada: 'Não realizada',
-      realizada: 'Realizada',
-      agendada: 'Agendada',
-      nao_aplicavel: 'Não aplicável',
-      desconhecido: 'Desconhecido',
-    };
+  private getBirthDateParts(birthDate: string | null): {
+    day: string;
+    month: string;
+    year: string;
+  } {
+    if (!birthDate) {
+      return {
+        day: '',
+        month: '',
+        year: '',
+      };
+    }
 
-    return status ? labels[status] ?? status : 'Não definido';
+    const [year, month, day] = birthDate.split('-');
+
+    return {
+      day: String(Number(day)),
+      month: String(Number(month)),
+      year,
+    };
   }
 
-  getVaccineStatusLabel(status: string): string {
-    const labels: Record<string, string> = {
-      pendente: 'Pendente',
-      tomada: 'Tomada',
-    };
+  private getBirthDate(): string {
+    const day = String(this.form.value.birthDay).padStart(2, '0');
+    const month = String(this.form.value.birthMonth).padStart(2, '0');
+    const year = this.form.value.birthYear;
 
-    return labels[status] ?? status;
-  }
-
-  getDewormingTypeLabel(type: string): string {
-    const labels: Record<string, string> = {
-      interna: 'Interna',
-      externa: 'Externa',
-    };
-
-    return labels[type] ?? type;
+    return `${year}-${month}-${day}`;
   }
 }

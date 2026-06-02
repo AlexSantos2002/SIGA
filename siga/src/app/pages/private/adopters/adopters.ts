@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ADOPTER_HOUSING_TYPES, getOptionLabel } from '../../../constants/form-options';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 
@@ -100,13 +101,6 @@ export class Adopters implements OnInit {
   }
 
   getHousingTypeLabel(housingType: string | null | undefined): string {
-    const labels: Record<string, string> = {
-      apartamento: 'Apartamento',
-      moradia: 'Moradia',
-      quinta: 'Quinta',
-      outro: 'Outro',
-    };
-
-    return housingType ? (labels[housingType] ?? housingType) : '-';
+    return getOptionLabel(ADOPTER_HOUSING_TYPES, housingType);
   }
 }

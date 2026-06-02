@@ -1,0 +1,309 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <ng-container [ngSwitch]="activeModal">
+      <form *ngSwitchCase="'main'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
+        <div class="modal-header">
+          <h3>Editar informação principal</h3>
+        </div>
+
+        <div class="modal-grid">
+          <div class="form-field">
+            <label for="name">Nome</label>
+            <input id="name" type="text" formControlName="name" />
+          </div>
+
+          <div class="form-field">
+            <label for="speciesName">Espécie</label>
+            <input id="speciesName" type="text" formControlName="speciesName" />
+          </div>
+
+          <div class="form-field">
+            <label for="breedName">Raça</label>
+            <input id="breedName" type="text" formControlName="breedName" />
+          </div>
+
+          <div class="form-field">
+            <label for="gender">Género</label>
+            <select id="gender" formControlName="gender">
+              <option value="" disabled>Seleciona o género</option>
+              <option *ngFor="let gender of genders" [value]="gender.value">
+                {{ gender.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field full-width">
+            <label>Data de nascimento</label>
+
+            <div class="date-selects">
+              <select formControlName="birthDay">
+                <option value="" disabled>Dia</option>
+                <option *ngFor="let day of days" [value]="day">
+                  {{ day }}
+                </option>
+              </select>
+
+              <select formControlName="birthMonth">
+                <option value="" disabled>Mês</option>
+                <option *ngFor="let month of months" [value]="month.value">
+                  {{ month.label }}
+                </option>
+              </select>
+
+              <select formControlName="birthYear">
+                <option value="" disabled>Ano</option>
+                <option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="status">Estado</label>
+            <select id="status" formControlName="status">
+              <option *ngFor="let status of statuses" [value]="status.value">
+                {{ status.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+
+          <button type="submit" class="primary-button" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+
+      <form *ngSwitchCase="'notes'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
+        <div class="modal-header">
+          <h3>Editar notas</h3>
+        </div>
+
+        <div class="modal-grid">
+          <div class="form-field full-width">
+            <label for="generalNotes">Notas gerais</label>
+            <textarea id="generalNotes" rows="5" formControlName="generalNotes"></textarea>
+          </div>
+
+          <div class="form-field full-width">
+            <label for="medicalNotes">Notas médicas</label>
+            <textarea id="medicalNotes" rows="5" formControlName="medicalNotes"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+
+          <button type="submit" class="primary-button" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+
+      <form *ngSwitchCase="'health'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
+        <div class="modal-header">
+          <h3>Editar saúde</h3>
+        </div>
+
+        <div class="modal-grid">
+          <div class="form-field">
+            <label for="sterilizationStatus">Esterilização / castração</label>
+            <select id="sterilizationStatus" formControlName="sterilizationStatus">
+              <option *ngFor="let status of sterilizationStatuses" [value]="status.value">
+                {{ status.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="sterilizationDate">Data da esterilização</label>
+            <input id="sterilizationDate" type="date" formControlName="sterilizationDate" />
+          </div>
+
+          <div class="checkbox-field full-width">
+            <label>
+              <input type="checkbox" formControlName="hasMicrochip" />
+              Tem microchip
+            </label>
+          </div>
+
+          <div class="form-field">
+            <label for="microchipNumber">Número do microchip</label>
+            <input id="microchipNumber" type="text" formControlName="microchipNumber" />
+          </div>
+
+          <div class="form-field">
+            <label for="microchipDate">Data de colocação</label>
+            <input id="microchipDate" type="date" formControlName="microchipDate" />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+
+          <button type="submit" class="primary-button" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+
+      <form *ngSwitchCase="'vaccine'" [formGroup]="vaccineForm" (ngSubmit)="submitVaccine.emit()">
+        <div class="modal-header">
+          <h3>Adicionar vacina</h3>
+        </div>
+
+        <div class="modal-grid">
+          <div class="form-field">
+            <label>Nome da vacina</label>
+            <input type="text" formControlName="name" />
+          </div>
+
+          <div class="form-field">
+            <label>Estado</label>
+            <select formControlName="status">
+              <option *ngFor="let status of vaccineStatuses" [value]="status.value">
+                {{ status.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Data tomada</label>
+            <input type="date" formControlName="dateTaken" />
+          </div>
+
+          <div class="form-field">
+            <label>Data prevista</label>
+            <input type="date" formControlName="scheduledDate" />
+          </div>
+
+          <div class="form-field">
+            <label>Próxima dose</label>
+            <input type="date" formControlName="nextDueDate" />
+          </div>
+
+          <div class="form-field full-width">
+            <label>Observações</label>
+            <textarea rows="3" formControlName="notes"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+
+          <button type="submit" class="primary-button" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+          </button>
+        </div>
+      </form>
+
+      <form
+        *ngSwitchCase="'deworming'"
+        [formGroup]="dewormingForm"
+        (ngSubmit)="submitDeworming.emit()"
+      >
+        <div class="modal-header">
+          <h3>Adicionar desparasitação</h3>
+        </div>
+
+        <div class="modal-grid">
+          <div class="form-field">
+            <label>Tipo</label>
+            <select formControlName="type">
+              <option *ngFor="let type of dewormingTypes" [value]="type.value">
+                {{ type.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Data realizada</label>
+            <input type="date" formControlName="dateDone" />
+          </div>
+
+          <div class="form-field">
+            <label>Próxima data</label>
+            <input type="date" formControlName="nextDueDate" />
+          </div>
+
+          <div class="form-field">
+            <label>Produto usado</label>
+            <input type="text" formControlName="productName" />
+          </div>
+
+          <div class="form-field full-width">
+            <label>Observações</label>
+            <textarea rows="3" formControlName="notes"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+
+          <button type="submit" class="primary-button" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+          </button>
+        </div>
+      </form>
+
+      <form
+        *ngSwitchCase="'appointment'"
+        [formGroup]="appointmentForm"
+        (ngSubmit)="submitAppointment.emit()"
+      >
+        <div class="modal-header">
+          <h3>Adicionar consulta veterinária</h3>
+        </div>
+
+        <div class="modal-grid">
+          <div class="form-field">
+            <label>Data da consulta</label>
+            <input type="date" formControlName="appointmentDate" />
+          </div>
+
+          <div class="form-field">
+            <label>Motivo</label>
+            <input type="text" formControlName="reason" />
+          </div>
+
+          <div class="form-field">
+            <label>Clínica</label>
+            <input type="text" formControlName="clinicName" />
+          </div>
+
+          <div class="form-field">
+            <label>Veterinário</label>
+            <input type="text" formControlName="veterinarianName" />
+          </div>
+
+          <div class="form-field">
+            <label>Resultado</label>
+            <input type="text" formControlName="result" />
+          </div>
+
+          <div class="form-field">
+            <label>Próxima consulta</label>
+            <input type="date" formControlName="nextAppointmentDate" />
+          </div>
+
+          <div class="form-field full-width">
+            <label>Observações</label>
+            <textarea rows="3" formControlName="notes"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+
+          <button type="submit" class="primary-button" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+          </button>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+</div>
