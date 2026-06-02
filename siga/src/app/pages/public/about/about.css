@@ -163,20 +163,6 @@
   box-shadow: 0 14px 28px rgba(75, 136, 162, 0.25);
 }
 
-.botao-secundario {
-  padding: 14px 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(75, 136, 162, 0.4);
-  color: #4b88a2;
-  background: transparent;
-}
-
-.botao-secundario:hover {
-  transform: translateY(-3px);
-  background: rgba(75, 136, 162, 0.08);
-  box-shadow: 0 10px 22px rgba(75, 136, 162, 0.08);
-}
-
 /* Responsividade */
 
 /* Tablets */
