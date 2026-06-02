@@ -10,9 +10,9 @@ import {
   MONTHS,
   STERILIZATION_STATUSES,
   VACCINE_STATUSES,
+  SelectOption,
   createYearOptions,
 } from '../../../../../constants/form-options';
-import { Adopter } from '../../../../../models/adopter/adopter.model';
 import { EditAnimalModal } from '../edit-animal.types';
 
 @Component({
@@ -27,7 +27,6 @@ export class AnimalEditModal {
   @Input() vaccineForm!: FormGroup;
   @Input() dewormingForm!: FormGroup;
   @Input() appointmentForm!: FormGroup;
-  @Input() adopters: Adopter[] = [];
   @Input() isSubmitting = false;
 
   @Output() close = new EventEmitter<void>();
@@ -45,11 +44,13 @@ export class AnimalEditModal {
   readonly months = MONTHS;
   readonly years = createYearOptions();
 
-  isAdoptedStatus(): boolean {
-    return this.form?.get('status')?.value === 'adotado';
-  }
+  get statusOptions(): SelectOption[] {
+    const currentStatus = this.form?.get('status')?.value;
 
-  getAdopterLabel(adopter: Adopter): string {
-    return `${adopter.name} ${adopter.lastName} - ${adopter.email}`;
+    if (currentStatus === 'adotado') {
+      return [{ value: 'adotado', label: 'Adotado' }, ...this.statuses];
+    }
+
+    return this.statuses;
   }
 }

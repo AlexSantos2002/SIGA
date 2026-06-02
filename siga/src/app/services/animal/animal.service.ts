@@ -12,9 +12,7 @@ import { ERROR_CODES } from '../../error/error-codes';
   providedIn: 'root',
 })
 export class AnimalService {
-
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService) {}
 
   /**
    * @description
@@ -57,9 +55,7 @@ export class AnimalService {
    * @description
    * Procura uma espécie pelo nome ou cria uma nova para a organização.
    */
-  private async getOrCreateSpecies(
-    name: string,
-  ): Promise<string> {
+  private async getOrCreateSpecies(name: string): Promise<string> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -68,15 +64,14 @@ export class AnimalService {
 
     const normalizedName = name.trim();
 
-    const { data: existingSpecies, error: searchError } =
-      await withTimeout<any>(
-        supabase
-          .from('species')
-          .select('id')
-          .eq('organization_id', organizationId)
-          .ilike('name', normalizedName)
-          .maybeSingle()
-      );
+    const { data: existingSpecies, error: searchError } = await withTimeout<any>(
+      supabase
+        .from('species')
+        .select('id')
+        .eq('organization_id', organizationId)
+        .ilike('name', normalizedName)
+        .maybeSingle(),
+    );
 
     if (searchError) {
       throw new DBError(ERROR_CODES.UNABLE_TO_GET_SPECIES);
@@ -86,17 +81,16 @@ export class AnimalService {
       return existingSpecies.id;
     }
 
-    const { data: newSpecies, error: insertError } =
-      await withTimeout<any>(
-        supabase
-          .from('species')
-          .insert({
-            name: normalizedName,
-            organization_id: organizationId,
-          })
-          .select('id')
-          .single()
-      );
+    const { data: newSpecies, error: insertError } = await withTimeout<any>(
+      supabase
+        .from('species')
+        .insert({
+          name: normalizedName,
+          organization_id: organizationId,
+        })
+        .select('id')
+        .single(),
+    );
 
     if (insertError) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
@@ -109,10 +103,7 @@ export class AnimalService {
    * @description
    * Procura uma raça pelo nome ou cria uma nova para a organização e espécie.
    */
-  private async getOrCreateBreed(
-    name: string,
-    speciesId: string,
-  ): Promise<string> {
+  private async getOrCreateBreed(name: string, speciesId: string): Promise<string> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -121,16 +112,15 @@ export class AnimalService {
 
     const normalizedName = name.trim();
 
-    const { data: existingBreed, error: searchError } =
-      await withTimeout<any>(
-        supabase
-          .from('breeds')
-          .select('id')
-          .eq('organization_id', organizationId)
-          .eq('species_id', speciesId)
-          .ilike('name', normalizedName)
-          .maybeSingle()
-      );
+    const { data: existingBreed, error: searchError } = await withTimeout<any>(
+      supabase
+        .from('breeds')
+        .select('id')
+        .eq('organization_id', organizationId)
+        .eq('species_id', speciesId)
+        .ilike('name', normalizedName)
+        .maybeSingle(),
+    );
 
     if (searchError) {
       throw new DBError(ERROR_CODES.UNABLE_TO_GET_BREEDS);
@@ -140,18 +130,17 @@ export class AnimalService {
       return existingBreed.id;
     }
 
-    const { data: newBreed, error: insertError } =
-      await withTimeout<any>(
-        supabase
-          .from('breeds')
-          .insert({
-            name: normalizedName,
-            species_id: speciesId,
-            organization_id: organizationId,
-          })
-          .select('id')
-          .single()
-      );
+    const { data: newBreed, error: insertError } = await withTimeout<any>(
+      supabase
+        .from('breeds')
+        .insert({
+          name: normalizedName,
+          species_id: speciesId,
+          organization_id: organizationId,
+        })
+        .select('id')
+        .single(),
+    );
 
     if (insertError) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
@@ -174,7 +163,8 @@ export class AnimalService {
     const { data, error } = await withTimeout<any>(
       supabase
         .from('animals')
-        .select(`
+        .select(
+          `
           id,
           name,
           gender,
@@ -197,13 +187,14 @@ export class AnimalService {
             id,
             name
           )
-        `)
+        `,
+        )
         .eq('organization_id', organizationId)
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: false }),
     );
 
     if (error) {
-      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ANIMALS)
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ANIMALS);
     }
 
     return (data ?? []).map((animal: any) => this.mapAnimal(animal));
@@ -220,14 +211,9 @@ export class AnimalService {
       throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
-    const speciesId = await this.getOrCreateSpecies(
-      request.speciesName
-    );
+    const speciesId = await this.getOrCreateSpecies(request.speciesName);
 
-    const breedId = await this.getOrCreateBreed(
-      request.breedName,
-      speciesId
-    );
+    const breedId = await this.getOrCreateBreed(request.breedName, speciesId);
 
     const { data, error } = await withTimeout<any>(
       supabase
@@ -253,7 +239,7 @@ export class AnimalService {
           microchip_date: request.microchipDate ?? null,
         })
         .select('id')
-        .single()
+        .single(),
     );
 
     if (error) {
@@ -275,7 +261,8 @@ export class AnimalService {
     const { data, error } = await withTimeout<any>(
       supabase
         .from('animals')
-        .select(`
+        .select(
+          `
           id,
           name,
           gender,
@@ -298,10 +285,11 @@ export class AnimalService {
             id,
             name
           )
-        `)
+        `,
+        )
         .eq('id', animalId)
         .eq('organization_id', organizationId)
-        .single()
+        .single(),
     );
 
     if (error) {
@@ -315,9 +303,7 @@ export class AnimalService {
    * @description
    * Marca um animal como indisponível numa organização.
    */
-  async makeAnimalUnavailable(
-    animalId: string,
-  ): Promise<void> {
+  async makeAnimalUnavailable(animalId: string): Promise<void> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -332,7 +318,7 @@ export class AnimalService {
           status: 'indisponivel',
         })
         .eq('id', animalId)
-        .eq('organization_id', organizationId)
+        .eq('organization_id', organizationId),
     );
 
     if (error) {
@@ -344,9 +330,7 @@ export class AnimalService {
    * @description
    * Marca um animal como adotado numa organizaÃ§Ã£o.
    */
-  async markAnimalAsAdopted(
-    animalId: string,
-  ): Promise<void> {
+  async markAnimalAsAdopted(animalId: string): Promise<void> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -361,7 +345,34 @@ export class AnimalService {
           status: 'adotado',
         })
         .eq('id', animalId)
-        .eq('organization_id', organizationId)
+        .eq('organization_id', organizationId),
+    );
+
+    if (error) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+  }
+
+  /**
+   * @description
+   * Volta a disponibilizar um animal para adopcao depois de uma devolucao.
+   */
+  async markAnimalAsAvailableForAdoption(animalId: string): Promise<void> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const { error } = await withTimeout<any>(
+      supabase
+        .from('animals')
+        .update({
+          available: true,
+          status: 'por_adotar',
+        })
+        .eq('id', animalId)
+        .eq('organization_id', organizationId),
     );
 
     if (error) {
@@ -381,11 +392,7 @@ export class AnimalService {
     }
 
     const { error } = await withTimeout<any>(
-      supabase
-        .from('animals')
-        .delete()
-        .eq('id', animalId)
-        .eq('organization_id', organizationId)
+      supabase.from('animals').delete().eq('id', animalId).eq('organization_id', organizationId),
     );
 
     if (error) {
@@ -411,24 +418,16 @@ export class AnimalService {
    * @description
    * Atualiza os dados de um animal da organização autenticada.
    */
-  async updateAnimal(
-    animalId: string,
-    request: RegisterAnimalRequest
-  ): Promise<void> {
+  async updateAnimal(animalId: string, request: RegisterAnimalRequest): Promise<void> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
       throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
     }
 
-    const speciesId = await this.getOrCreateSpecies(
-      request.speciesName
-    );
+    const speciesId = await this.getOrCreateSpecies(request.speciesName);
 
-    const breedId = await this.getOrCreateBreed(
-      request.breedName,
-      speciesId
-    );
+    const breedId = await this.getOrCreateBreed(request.breedName, speciesId);
 
     const { error } = await withTimeout<any>(
       supabase
@@ -453,7 +452,7 @@ export class AnimalService {
           microchip_date: request.microchipDate ?? null,
         })
         .eq('id', animalId)
-        .eq('organization_id', organizationId)
+        .eq('organization_id', organizationId),
     );
 
     if (error) {

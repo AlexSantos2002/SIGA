@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RegisterAdoptionRequest } from '../../models/adoption/register-adoption-request';
 import { supabase } from '../../../../supabase/supabase';
 import { Adoption } from '../../models/adoption/adoption.model';
+import { Adopter } from '../../models/adopter/adopter.model';
 import { AnimalService } from '../animal/animal.service';
 import { UpdateAdoptionRequest } from '../../models/adoption/update-adoption-request';
 import { AuthenticationError, BusinessError, DBError, NotFoundError } from '../../error/app-error';
@@ -23,6 +24,8 @@ export class AdoptionService {
       id,
       name,
       gender,
+      status,
+      available,
       species:species_id (
         id,
         name
@@ -35,7 +38,29 @@ export class AdoptionService {
     adopter:adopter_id (
       id,
       name,
-      email
+      last_name,
+      email,
+      phone,
+      document_type,
+      document_number,
+      birth_date,
+      address,
+      city,
+      postal_code,
+      housing_type,
+      has_outdoor_space,
+      has_other_animals,
+      other_animals_description,
+      household_members,
+      employment_status,
+      experience_with_animals,
+      preferred_species,
+      adoption_motivation,
+      notes,
+      is_flagged,
+      flag_reason,
+      flagged_at,
+      created_at
     )
   `;
 
@@ -79,32 +104,7 @@ export class AdoptionService {
         application_date: request.applicationDate,
         decision_date: request.decisionDate,
       })
-      .select(
-        `
-      id,
-      application_date,
-      decision_date,
-      status,
-      animal:animal_id (
-        id,
-        name,
-        gender,
-        species:species_id (
-          id,
-          name
-        ),
-        breed:breed_id (
-          id,
-          name
-        )
-      ),
-      adopter:adopter_id (
-        id,
-        name,
-        email
-      )
-    `,
-      )
+      .select(this.adoptionSelect)
       .single();
 
     if (error || !data) {
@@ -127,33 +127,10 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(
-        `
-        id,
-        application_date,
-        decision_date,
-        status,
-        animal:animal_id (
-          id,
-          name,
-          gender,
-          species:species_id (
-            id,
-            name
-          ),
-          breed:breed_id (
-            id,
-            name
-          )
-        ),
-        adopter:adopter_id (
-          id,
-          name,
-          email
-        )
-      `,
-      )
-      .eq('organization_id', organizationId);
+      .select(this.adoptionSelect)
+      .eq('organization_id', organizationId)
+      .order('decision_date', { ascending: false, nullsFirst: false })
+      .order('application_date', { ascending: false });
 
     if (error) {
       throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTIONS);
@@ -170,26 +147,7 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(
-        `
-      id,
-      application_date,
-      decision_date,
-      status,
-      animal:animal_id (
-        id,
-        name,
-        gender,
-        species:species_id (id, name),
-        breed:breed_id (id, name)
-      ),
-      adopter:adopter_id (
-        id,
-        name,
-        email
-      )
-    `,
-      )
+      .select(this.adoptionSelect)
       .eq('id', adoptionId)
       .eq('organization_id', organizationId)
       .single();
@@ -209,34 +167,17 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(
-        `
-      id,
-      application_date,
-      decision_date,
-      status,
-      animal:animal_id (
-        id,
-        name,
-        gender,
-        species:species_id (id, name),
-        breed:breed_id (id, name)
-      ),
-      adopter:adopter_id (
-        id,
-        name,
-        email
-      )
-    `,
-      )
+      .select(this.adoptionSelect)
       .eq('organization_id', organizationId)
-      .eq('status', status);
+      .eq('status', status)
+      .order('decision_date', { ascending: false, nullsFirst: false })
+      .order('application_date', { ascending: false });
 
     if (error) {
       throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTION);
     }
 
-    return data.map((adoption) => this.toAdoption(adoption));
+    return (data ?? []).map((adoption) => this.toAdoption(adoption));
   }
 
   /**
@@ -247,34 +188,17 @@ export class AdoptionService {
 
     const { data, error } = await supabase
       .from('adoptions')
-      .select(
-        `
-      id,
-      application_date,
-      decision_date,
-      status,
-      animal:animal_id (
-        id,
-        name,
-        gender,
-        species:species_id (id, name),
-        breed:breed_id (id, name)
-      ),
-      adopter:adopter_id (
-        id,
-        name,
-        email
-      )
-    `,
-      )
+      .select(this.adoptionSelect)
       .eq('organization_id', organizationId)
-      .eq('adopter_id', adopterId);
+      .eq('adopter_id', adopterId)
+      .order('decision_date', { ascending: false, nullsFirst: false })
+      .order('application_date', { ascending: false });
 
     if (error || !data) {
       throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTION);
     }
 
-    return data.map((adoption) => this.toAdoption(adoption));
+    return (data ?? []).map((adoption) => this.toAdoption(adoption));
   }
 
   /**
@@ -307,10 +231,7 @@ export class AdoptionService {
   /**
    * Liga um animal adotado ao adotante que o adotou.
    */
-  async linkAcceptedAdoptionToAnimal(
-    animalId: string,
-    adopterId: string,
-  ): Promise<Adoption> {
+  async linkAcceptedAdoptionToAnimal(animalId: string, adopterId: string): Promise<Adoption> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -339,20 +260,16 @@ export class AdoptionService {
           })
           .eq('id', existingAdoption.id)
           .eq('organization_id', organizationId)
-      : supabase
-          .from('adoptions')
-          .insert({
-            organization_id: organizationId,
-            animal_id: animal.id,
-            adopter_id: adopter.id,
-            status: 'aceita',
-            application_date: now,
-            decision_date: now,
-          });
+      : supabase.from('adoptions').insert({
+          organization_id: organizationId,
+          animal_id: animal.id,
+          adopter_id: adopter.id,
+          status: 'aceita',
+          application_date: now,
+          decision_date: now,
+        });
 
-    const { data, error } = await request
-      .select(this.adoptionSelect)
-      .single();
+    const { data, error } = await request.select(this.adoptionSelect).single();
 
     if (error || !data) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
@@ -375,34 +292,25 @@ export class AdoptionService {
       throw new BusinessError(ERROR_CODES.INVALID_STATUS_TRANSITION);
     }
 
+    if (request.newStatus === 'devolvida' && adoption.status !== 'aceita') {
+      throw new BusinessError(ERROR_CODES.INVALID_STATUS_TRANSITION);
+    }
+
+    const decisionDate = request.decisionDate ?? new Date().toISOString();
+    const updatePayload: Record<string, string> = {
+      status: request.newStatus,
+    };
+
+    if (request.newStatus !== 'devolvida') {
+      updatePayload['decision_date'] = decisionDate;
+    }
+
     const { data, error } = await supabase
       .from('adoptions')
-      .update({
-        status: request.newStatus,
-        decision_date: request.decisionDate ?? new Date().toISOString(),
-      })
+      .update(updatePayload)
       .eq('id', request.adoptionId)
       .eq('organization_id', organizationId)
-      .select(
-        `
-      id,
-      application_date,
-      decision_date,
-      status,
-      animal:animal_id (
-        id,
-        name,
-        gender,
-        species:species_id (id, name),
-        breed:breed_id (id, name)
-      ),
-      adopter:adopter_id (
-        id,
-        name,
-        email
-      )
-    `,
-      )
+      .select(this.adoptionSelect)
       .single();
 
     if (error) {
@@ -412,6 +320,25 @@ export class AdoptionService {
     // Caso seja aceite, muda o estado do animal
     if (request.newStatus === 'aceita') {
       await this.animalService.markAnimalAsAdopted(adoption.animal.id);
+
+      const { error: rejectPendingError } = await supabase
+        .from('adoptions')
+        .update({
+          status: 'rejeitada',
+          decision_date: decisionDate,
+        })
+        .eq('organization_id', organizationId)
+        .eq('animal_id', adoption.animal.id)
+        .eq('status', 'pendente')
+        .neq('id', request.adoptionId);
+
+      if (rejectPendingError) {
+        throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+      }
+    }
+
+    if (request.newStatus === 'devolvida') {
+      await this.animalService.markAnimalAsAvailableForAdoption(adoption.animal.id);
     }
 
     return this.toAdoption(data);
@@ -446,7 +373,7 @@ export class AdoptionService {
    * Valida se a transição de estado é permitida.
    */
   private isValidStatusTransition(newStatus: string): boolean {
-    const allowedTransitions = ['aceita', 'rejeitada', 'pendente'];
+    const allowedTransitions = ['aceita', 'rejeitada', 'pendente', 'devolvida'];
     return allowedTransitions.includes(newStatus) ?? false;
   }
 
@@ -456,11 +383,54 @@ export class AdoptionService {
   private toAdoption(response: any): Adoption {
     return {
       id: response.id,
-      adopter: response.adopter,
+      adopter: this.toAdopter(response.adopter),
       animal: response.animal,
       status: response.status,
       applicationDate: response.application_date,
       decisionDate: response.decision_date,
+    };
+  }
+
+  private toAdopter(response: any): Adopter {
+    if (!response) {
+      return {
+        id: '',
+        name: 'Adotante removido',
+        lastName: '',
+        email: '',
+        hasOutdoorSpace: false,
+        hasOtherAnimals: false,
+        isFlagged: false,
+        createdAt: '',
+      };
+    }
+
+    return {
+      id: response.id,
+      name: response.name,
+      lastName: response.last_name ?? '',
+      email: response.email,
+      phone: response.phone,
+      documentType: response.document_type,
+      documentNumber: response.document_number,
+      birthDate: response.birth_date,
+      address: response.address,
+      city: response.city,
+      postalCode: response.postal_code,
+      housingType: response.housing_type,
+      hasOutdoorSpace: response.has_outdoor_space ?? false,
+      hasOtherAnimals: response.has_other_animals ?? false,
+      otherAnimalsDescription: response.other_animals_description,
+      householdMembers: response.household_members,
+      employmentStatus: response.employment_status,
+      experienceWithAnimals: response.experience_with_animals,
+      preferredSpecies: response.preferred_species,
+      adoptionMotivation: response.adoption_motivation,
+      notes: response.notes,
+      isFlagged: response.is_flagged ?? false,
+      flagReason: response.flag_reason,
+      flaggedAt: response.flagged_at,
+      createdAt: response.created_at,
     };
   }
 }

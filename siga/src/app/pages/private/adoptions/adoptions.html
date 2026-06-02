@@ -1,8 +1,433 @@
-<div class="flex flex-col items-start gap-y-1">
-  <button class="bg-blue-300 rounded p-1" (click)="register()">register</button>
-  <button class="bg-purple-300 rounded p-1" (click)="getAll()">get all</button>
-  <button class="bg-green-300 rounded p-1" (click)="getById()">get by id</button>
-  <button class="bg-gray-300 rounded p-1" (click)="getByStatus()">get by status</button>
-  <button class="bg-red-300 rounded p-1" (click)="getByAdopterId()">get by adopter id</button>
-  <button class="bg-yellow-300 rounded p-1" (click)="updateAdoption()">update adoption</button>
-</div>
+<section class="adoptions-page">
+  <div class="page-header">
+    <div>
+      <h1>Processos de adoção</h1>
+      <p>Inicia, acompanha e conclui os processos de adoção da organização.</p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">A carregar processos de adoção...</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <ng-container *ngIf="!isLoading">
+    <div class="summary-grid">
+      <article class="summary-card">
+        <span>Processos em aberto</span>
+        <strong>{{ pendingAdoptions.length }}</strong>
+      </article>
+
+      <article class="summary-card">
+        <span>Adoções concluídas</span>
+        <strong>{{ completedAdoptions.length }}</strong>
+      </article>
+
+      <article class="summary-card">
+        <span>Animais disponíveis</span>
+        <strong>{{ availableAnimals.length }}</strong>
+      </article>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="startProcess()" class="adoption-process-form">
+      <div class="form-section">
+        <h2>Novo processo</h2>
+
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label for="animalId">Animal</label>
+            <select id="animalId" formControlName="animalId">
+              <option value="" disabled>
+                {{
+                  availableAnimals.length
+                    ? 'Seleciona o animal'
+                    : 'Nenhum animal disponível para adoção'
+                }}
+              </option>
+              <option *ngFor="let animal of availableAnimals" [value]="animal.id">
+                {{ getAnimalLabel(animal) }}
+              </option>
+            </select>
+            <small *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid">
+              Seleciona o animal para iniciar o processo.
+            </small>
+          </div>
+
+          <div class="adopter-mode full-width">
+            <label>
+              <input type="radio" formControlName="adopterMode" value="new" />
+              Novo adotante
+            </label>
+
+            <label>
+              <input type="radio" formControlName="adopterMode" value="existing" />
+              Adotante registado
+            </label>
+          </div>
+
+          <small
+            class="mode-error full-width"
+            *ngIf="form.get('adopterMode')?.touched && form.get('adopterMode')?.invalid"
+          >
+            Seleciona se é um novo adotante ou um adotante registado.
+          </small>
+
+          <div class="form-field full-width" *ngIf="isExistingAdopterMode">
+            <label for="existingAdopterId">Adotante</label>
+            <select id="existingAdopterId" formControlName="existingAdopterId">
+              <option value="" disabled>
+                {{ adopters.length ? 'Seleciona o adotante' : 'Nenhum adotante registado' }}
+              </option>
+              <option *ngFor="let adopter of adopters" [value]="adopter.id">
+                {{ getAdopterLabel(adopter) }}
+              </option>
+            </select>
+            <small
+              *ngIf="
+                form.get('existingAdopterId')?.touched && form.get('existingAdopterId')?.invalid
+              "
+            >
+              Seleciona o adotante registado.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="isNewAdopterMode">
+        <div class="form-section">
+          <h2>Informação pessoal</h2>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Nome</label>
+              <input id="name" type="text" formControlName="name" />
+              <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+                O nome é obrigatório.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="lastName">Apelido</label>
+              <input id="lastName" type="text" formControlName="lastName" />
+              <small *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+                O apelido é obrigatório.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" type="email" formControlName="email" />
+              <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+                Introduz um email válido.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Telefone</label>
+              <input id="phone" type="tel" formControlName="phone" />
+              <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+                O telefone é obrigatório.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="documentType">Tipo de documento</label>
+              <select id="documentType" formControlName="documentType">
+                <option value="">Não definido</option>
+                <option *ngFor="let documentType of documentTypes" [value]="documentType.value">
+                  {{ documentType.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="documentNumber">Número do documento</label>
+              <input id="documentNumber" type="text" formControlName="documentNumber" />
+            </div>
+
+            <div class="form-field">
+              <label for="birthDate">Data de nascimento</label>
+              <input id="birthDate" type="date" formControlName="birthDate" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Morada e habitação</h2>
+
+          <div class="form-grid">
+            <div class="form-field full-width">
+              <label for="address">Morada</label>
+              <input id="address" type="text" formControlName="address" />
+            </div>
+
+            <div class="form-field">
+              <label for="city">Cidade</label>
+              <input id="city" type="text" formControlName="city" />
+            </div>
+
+            <div class="form-field">
+              <label for="postalCode">Código postal</label>
+              <input id="postalCode" type="text" formControlName="postalCode" />
+            </div>
+
+            <div class="form-field">
+              <label for="housingType">Tipo de habitação</label>
+              <select id="housingType" formControlName="housingType">
+                <option value="">Não definido</option>
+                <option *ngFor="let housingType of housingTypes" [value]="housingType.value">
+                  {{ housingType.label }}
+                </option>
+              </select>
+            </div>
+
+            <label class="checkbox-field">
+              <input type="checkbox" formControlName="hasOutdoorSpace" />
+              <span>Tem espaço exterior</span>
+            </label>
+
+            <div class="form-field full-width">
+              <label for="householdMembers">Agregado familiar</label>
+              <textarea id="householdMembers" formControlName="householdMembers"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label for="employmentStatus">Situação profissional</label>
+              <select id="employmentStatus" formControlName="employmentStatus">
+                <option value="">Não definido</option>
+                <option *ngFor="let status of employmentStatuses" [value]="status.value">
+                  {{ status.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Experiência e motivação</h2>
+
+          <div class="form-grid">
+            <label class="checkbox-field">
+              <input type="checkbox" formControlName="hasOtherAnimals" />
+              <span>Tem outros animais</span>
+            </label>
+
+            <div class="form-field">
+              <label for="preferredSpecies">Preferência</label>
+              <select id="preferredSpecies" formControlName="preferredSpecies">
+                <option value="">Não definido</option>
+                <option *ngFor="let species of preferredSpecies" [value]="species.value">
+                  {{ species.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field full-width">
+              <label for="otherAnimalsDescription">Outros animais</label>
+              <textarea
+                id="otherAnimalsDescription"
+                formControlName="otherAnimalsDescription"
+              ></textarea>
+            </div>
+
+            <div class="form-field full-width">
+              <label for="experienceWithAnimals">Experiência com animais</label>
+              <textarea
+                id="experienceWithAnimals"
+                formControlName="experienceWithAnimals"
+              ></textarea>
+            </div>
+
+            <div class="form-field full-width">
+              <label for="adoptionMotivation">Motivo da adoção</label>
+              <textarea id="adoptionMotivation" formControlName="adoptionMotivation"></textarea>
+            </div>
+
+            <div class="form-field full-width">
+              <label for="notes">Notas internas</label>
+              <textarea id="notes" formControlName="notes"></textarea>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="form-actions">
+        <button type="submit" class="primary-button" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'A iniciar...' : 'Iniciar processo' }}
+        </button>
+      </div>
+    </form>
+
+    <section class="process-section">
+      <div class="section-header">
+        <h2>Processos em aberto</h2>
+      </div>
+
+      <div *ngIf="pendingAdoptions.length === 0" class="empty-state">
+        Não existem processos de adoção em aberto.
+      </div>
+
+      <div *ngIf="pendingAdoptions.length > 0" class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Animal</th>
+              <th>Adotante</th>
+              <th>Contacto</th>
+              <th>Pedido em</th>
+              <th>Estado</th>
+              <th class="actions-column"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let adoption of pendingAdoptions">
+              <td>
+                <a class="primary-link" [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
+                  {{ adoption.animal.name }}
+                </a>
+                <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
+                <span class="tertiary-line"
+                  >Género: {{ getGenderLabel(adoption.animal.gender) }}</span
+                >
+              </td>
+
+              <td>
+                <a
+                  class="primary-link"
+                  [routerLink]="['/app/adopters', adoption.adopter.id, 'edit']"
+                >
+                  {{ getAdopterFullName(adoption.adopter) }}
+                </a>
+                <span class="secondary-line">{{ adoption.adopter.email || '-' }}</span>
+              </td>
+
+              <td>
+                <span>{{ adoption.adopter.phone || '-' }}</span>
+                <span class="secondary-line">{{
+                  adoption.adopter.city || 'Cidade não indicada'
+                }}</span>
+              </td>
+
+              <td>{{ adoption.applicationDate | date: 'dd/MM/yyyy' }}</td>
+
+              <td>
+                <span class="status-badge pending">{{ getStatusLabel(adoption.status) }}</span>
+              </td>
+
+              <td class="actions-column">
+                <div class="actions-buttons">
+                  <button
+                    type="button"
+                    class="approve-button"
+                    [disabled]="updatingAdoptionId === adoption.id"
+                    (click)="concludeProcess(adoption, 'aceita')"
+                  >
+                    Aprovar
+                  </button>
+
+                  <button
+                    type="button"
+                    class="reject-button"
+                    [disabled]="updatingAdoptionId === adoption.id"
+                    (click)="concludeProcess(adoption, 'rejeitada')"
+                  >
+                    Rejeitar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <div class="section-header">
+        <h2>Processos concluídos</h2>
+      </div>
+
+      <div *ngIf="completedAdoptions.length === 0" class="empty-state">
+        Ainda não existem processos concluídos.
+      </div>
+
+      <div *ngIf="completedAdoptions.length > 0" class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Animal</th>
+              <th>Adotante</th>
+              <th>Contacto</th>
+              <th>Decisão</th>
+              <th>Estado</th>
+              <th class="actions-column"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let adoption of completedAdoptions">
+              <td>
+                <a class="primary-link" [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
+                  {{ adoption.animal.name }}
+                </a>
+                <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
+              </td>
+
+              <td>
+                <a
+                  class="primary-link"
+                  [routerLink]="['/app/adopters', adoption.adopter.id, 'edit']"
+                >
+                  {{ getAdopterFullName(adoption.adopter) }}
+                </a>
+                <span class="secondary-line">{{ adoption.adopter.email || '-' }}</span>
+              </td>
+
+              <td>
+                <span>{{ adoption.adopter.phone || '-' }}</span>
+                <span class="secondary-line">{{
+                  adoption.adopter.city || 'Cidade não indicada'
+                }}</span>
+              </td>
+
+              <td>
+                <span>
+                  {{
+                    getProcessDate(adoption) ? (getProcessDate(adoption) | date: 'dd/MM/yyyy') : '-'
+                  }}
+                </span>
+                <span class="secondary-line">
+                  Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}
+                </span>
+              </td>
+
+              <td>
+                <span
+                  class="status-badge"
+                  [class.accepted]="adoption.status === 'aceita'"
+                  [class.rejected]="adoption.status === 'rejeitada'"
+                  [class.returned]="adoption.status === 'devolvida'"
+                >
+                  {{ getStatusLabel(adoption.status) }}
+                </span>
+              </td>
+
+              <td class="actions-column">
+                <button
+                  *ngIf="adoption.status === 'aceita'"
+                  type="button"
+                  class="return-button"
+                  [disabled]="updatingAdoptionId === adoption.id"
+                  (click)="concludeProcess(adoption, 'devolvida')"
+                >
+                  Registar devolução
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </ng-container>
+</section>

@@ -3,7 +3,7 @@
  * uma adoção
  */
 export interface UpdateAdoptionRequest {
-  adoptionId: string,
-  newStatus: 'aceita' | 'rejeitada' | 'pendente',
-  decisionDate?: string
+  adoptionId: string;
+  newStatus: 'aceita' | 'rejeitada' | 'pendente' | 'devolvida';
+  decisionDate?: string;
 }

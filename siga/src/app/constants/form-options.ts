@@ -6,7 +6,9 @@ export interface SelectOption {
 export const ANIMAL_STATUSES: SelectOption[] = [
   { value: 'por_adotar', label: 'Por adotar' },
   { value: 'em_tratamento', label: 'Em tratamento' },
-  { value: 'adotado', label: 'Adotado' },
+  { value: 'acolhimento', label: 'Em acolhimento' },
+  { value: 'reservado', label: 'Reservado' },
+  { value: 'indisponivel', label: 'Indisponível' },
 ];
 
 export const ANIMAL_STATUS_LABELS: Record<string, string> = {

@@ -1,17 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 import { Adoption } from '../../../../models/adoption/adoption.model';
-import { Adopter } from '../../../../models/adopter/adopter.model';
 import { Animal } from '../../../../models/animal/animal.model';
 import { AnimalDeworming } from '../../../../models/animal/animal-deworming.model';
 import { AnimalVetAppointment } from '../../../../models/animal/animal-vet-appointment.model';
 import { AnimalVaccine } from '../../../../models/vaccines/animal-vaccines.model';
 import { AdoptionService } from '../../../../services/adoption/adoption.service';
-import { AdoptersService } from '../../../../services/adopter/adopters.service';
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { AnimalDewormingService } from '../../../../services/animal-health/animal-deworming.service';
 import { AnimalVaccineService } from '../../../../services/animal-health/animal-vaccine.service';
@@ -39,7 +36,7 @@ import { EditAnimalModal } from './edit-animal.types';
   templateUrl: './edit-animal.html',
   styleUrl: './edit-animal.css',
 })
-export class EditAnimal implements OnInit, OnDestroy {
+export class EditAnimal implements OnInit {
   animal: Animal | null = null;
   animalId = '';
   acceptedAdoption: Adoption | null = null;
@@ -52,20 +49,17 @@ export class EditAnimal implements OnInit, OnDestroy {
   vaccines: AnimalVaccine[] = [];
   dewormingRecords: AnimalDeworming[] = [];
   vetAppointments: AnimalVetAppointment[] = [];
-  adopters: Adopter[] = [];
 
   isLoading = true;
   isSubmitting = false;
   errorMessage = '';
 
   activeModal: EditAnimalModal = null;
-  private statusSubscription: Subscription | null = null;
 
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
     private adoptionService: AdoptionService,
-    private adoptersService: AdoptersService,
     private vaccineService: AnimalVaccineService,
     private dewormingService: AnimalDewormingService,
     private vetAppointmentService: AnimalVetAppointmentService,
@@ -81,7 +75,6 @@ export class EditAnimal implements OnInit, OnDestroy {
       birthMonth: ['', Validators.required],
       birthYear: ['', Validators.required],
       status: ['por_adotar', Validators.required],
-      adopterId: [''],
       generalNotes: [''],
       medicalNotes: [''],
       sterilizationStatus: [''],
@@ -117,10 +110,6 @@ export class EditAnimal implements OnInit, OnDestroy {
       nextAppointmentDate: [null],
       notes: [''],
     });
-
-    this.statusSubscription = this.form.get('status')?.valueChanges.subscribe((status) => {
-      this.updateAdopterValidators(status);
-    }) ?? null;
   }
 
   async ngOnInit(): Promise<void> {
@@ -133,10 +122,6 @@ export class EditAnimal implements OnInit, OnDestroy {
     }
 
     await this.loadPageData();
-  }
-
-  ngOnDestroy(): void {
-    this.statusSubscription?.unsubscribe();
   }
 
   openModal(modal: EditAnimalModal): void {
@@ -187,8 +172,6 @@ export class EditAnimal implements OnInit, OnDestroy {
   }
 
   async submit(): Promise<void> {
-    this.updateAdopterValidators(this.form.value.status);
-
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -196,19 +179,11 @@ export class EditAnimal implements OnInit, OnDestroy {
 
     const hasMicrochip = !!this.form.value.hasMicrochip;
     const selectedStatus = this.form.value.status;
-    const selectedAdopterId = this.form.value.adopterId || '';
 
     try {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
-
-      if (selectedStatus === 'adotado') {
-        this.acceptedAdoption = await this.adoptionService.linkAcceptedAdoptionToAnimal(
-          this.animalId,
-          selectedAdopterId,
-        );
-      }
 
       await this.animalService.updateAnimal(this.animalId, {
         name: this.form.value.name,
@@ -232,9 +207,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       ]);
 
       this.animal = updatedAnimal;
-      this.acceptedAdoption = updatedAnimal.status === 'adotado'
-        ? updatedAcceptedAdoption
-        : null;
+      this.acceptedAdoption = updatedAnimal.status === 'adotado' ? updatedAcceptedAdoption : null;
       this.patchAnimalForm(updatedAnimal);
       this.activeModal = null;
     } catch (error: any) {
@@ -384,30 +357,20 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.errorMessage = '';
       this.cdr.detectChanges();
 
-      const [
-        animal,
-        vaccines,
-        dewormingRecords,
-        vetAppointments,
-        adopters,
-        acceptedAdoption,
-      ] = await Promise.all([
-        this.animalService.getAnimalFromCurrentOrganization(this.animalId),
-        this.vaccineService.getByAnimalId(this.animalId),
-        this.dewormingService.getByAnimalId(this.animalId),
-        this.vetAppointmentService.getByAnimalId(this.animalId),
-        this.adoptersService.getAll(),
-        this.adoptionService.getAcceptedByAnimalId(this.animalId),
-      ]);
+      const [animal, vaccines, dewormingRecords, vetAppointments, acceptedAdoption] =
+        await Promise.all([
+          this.animalService.getAnimalFromCurrentOrganization(this.animalId),
+          this.vaccineService.getByAnimalId(this.animalId),
+          this.dewormingService.getByAnimalId(this.animalId),
+          this.vetAppointmentService.getByAnimalId(this.animalId),
+          this.adoptionService.getAcceptedByAnimalId(this.animalId),
+        ]);
 
       this.animal = animal;
       this.vaccines = vaccines;
       this.dewormingRecords = dewormingRecords;
       this.vetAppointments = vetAppointments;
-      this.adopters = adopters;
-      this.acceptedAdoption = animal.status === 'adotado'
-        ? acceptedAdoption
-        : null;
+      this.acceptedAdoption = animal.status === 'adotado' ? acceptedAdoption : null;
 
       this.patchAnimalForm(animal);
     } catch (error: any) {
@@ -422,9 +385,6 @@ export class EditAnimal implements OnInit, OnDestroy {
 
   private patchAnimalForm(animal: Animal): void {
     const birthDateParts = this.getBirthDateParts(animal.birthDate);
-    const adopterId = animal.status === 'adotado'
-      ? this.acceptedAdoption?.adopter?.id ?? ''
-      : '';
 
     this.form.patchValue({
       name: animal.name,
@@ -435,7 +395,6 @@ export class EditAnimal implements OnInit, OnDestroy {
       birthMonth: birthDateParts.month,
       birthYear: birthDateParts.year,
       status: animal.status || 'por_adotar',
-      adopterId,
       generalNotes: animal.generalNotes || '',
       medicalNotes: animal.medicalNotes || '',
       sterilizationStatus: animal.sterilizationStatus || '',
@@ -444,25 +403,6 @@ export class EditAnimal implements OnInit, OnDestroy {
       microchipNumber: animal.microchipNumber || '',
       microchipDate: animal.microchipDate || null,
     });
-
-    this.updateAdopterValidators(animal.status || 'por_adotar');
-  }
-
-  private updateAdopterValidators(status: string | null): void {
-    const adopterControl = this.form.get('adopterId');
-
-    if (!adopterControl) {
-      return;
-    }
-
-    if (status === 'adotado') {
-      adopterControl.setValidators([Validators.required]);
-    } else {
-      adopterControl.clearValidators();
-      adopterControl.setValue('', { emitEvent: false });
-    }
-
-    adopterControl.updateValueAndValidity({ emitEvent: false });
   }
 
   private getBirthDateParts(birthDate: string | null): {
