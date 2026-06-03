@@ -1,0 +1,324 @@
+<section class="care-page">
+  <div class="page-header">
+    <div>
+      <h1>Cuidados</h1>
+      <p>Regista e acompanha vacinas, desparasitações, consultas e tratamentos dos animais.</p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">A carregar cuidados...</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <ng-container *ngIf="!isLoading">
+    <div class="summary-grid">
+      <article class="summary-card warning">
+        <span>Em atraso</span>
+        <strong>{{ overdueCount }}</strong>
+      </article>
+
+      <article class="summary-card attention">
+        <span>Próximos 30 dias</span>
+        <strong>{{ dueSoonCount }}</strong>
+      </article>
+
+      <article class="summary-card">
+        <span>Pendentes</span>
+        <strong>{{ pendingCount }}</strong>
+      </article>
+
+      <article class="summary-card">
+        <span>Concluídos</span>
+        <strong>{{ completedCount }}</strong>
+      </article>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submitCare()" class="care-form">
+      <section class="form-section">
+        <h2>Novo cuidado</h2>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="careType">Tipo</label>
+            <select id="careType" formControlName="careType">
+              <option *ngFor="let type of careTypes" [value]="type.value">
+                {{ type.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="animalId">Animal</label>
+            <select id="animalId" formControlName="animalId">
+              <option value="" disabled>
+                {{ animals.length ? 'Seleciona o animal' : 'Nenhum animal registado' }}
+              </option>
+              <option *ngFor="let animal of animals" [value]="animal.id">
+                {{ getAnimalOptionLabel(animal) }}
+              </option>
+            </select>
+            <small *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid">
+              Seleciona o animal associado ao cuidado.
+            </small>
+          </div>
+
+          <ng-container *ngIf="careType === 'vaccine'">
+            <div class="form-field">
+              <label for="name">Nome da vacina</label>
+              <input id="name" type="text" formControlName="name" />
+              <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+                Indica o nome da vacina.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="vaccineStatus">Estado</label>
+              <select id="vaccineStatus" formControlName="vaccineStatus">
+                <option *ngFor="let status of vaccineStatuses" [value]="status.value">
+                  {{ status.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="dateTaken">Data tomada</label>
+              <input id="dateTaken" type="date" formControlName="dateTaken" />
+            </div>
+
+            <div class="form-field">
+              <label for="scheduledDate">Data prevista</label>
+              <input id="scheduledDate" type="date" formControlName="scheduledDate" />
+            </div>
+
+            <div class="form-field">
+              <label for="nextDueDate">Próxima dose</label>
+              <input id="nextDueDate" type="date" formControlName="nextDueDate" />
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="careType === 'deworming'">
+            <div class="form-field">
+              <label for="dewormingType">Tipo</label>
+              <select id="dewormingType" formControlName="dewormingType">
+                <option *ngFor="let type of dewormingTypes" [value]="type.value">
+                  {{ type.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="dateDone">Data realizada</label>
+              <input id="dateDone" type="date" formControlName="dateDone" />
+              <small *ngIf="form.get('dateDone')?.touched && form.get('dateDone')?.invalid">
+                Indica a data da desparasitação.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="dewormingNextDueDate">Próxima data</label>
+              <input id="dewormingNextDueDate" type="date" formControlName="nextDueDate" />
+            </div>
+
+            <div class="form-field">
+              <label for="productName">Produto usado</label>
+              <input id="productName" type="text" formControlName="productName" />
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="careType === 'appointment'">
+            <div class="form-field">
+              <label for="appointmentDate">Data</label>
+              <input id="appointmentDate" type="date" formControlName="appointmentDate" />
+              <small
+                *ngIf="form.get('appointmentDate')?.touched && form.get('appointmentDate')?.invalid"
+              >
+                Indica a data da consulta ou tratamento.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="reason">Motivo / tratamento</label>
+              <input id="reason" type="text" formControlName="reason" />
+              <small *ngIf="form.get('reason')?.touched && form.get('reason')?.invalid">
+                Indica o motivo ou tratamento.
+              </small>
+            </div>
+
+            <div class="form-field">
+              <label for="clinicName">Clínica</label>
+              <input id="clinicName" type="text" formControlName="clinicName" />
+            </div>
+
+            <div class="form-field">
+              <label for="veterinarianName">Veterinário</label>
+              <input id="veterinarianName" type="text" formControlName="veterinarianName" />
+            </div>
+
+            <div class="form-field">
+              <label for="result">Resultado</label>
+              <input id="result" type="text" formControlName="result" />
+            </div>
+
+            <div class="form-field">
+              <label for="nextAppointmentDate">Próxima consulta</label>
+              <input id="nextAppointmentDate" type="date" formControlName="nextAppointmentDate" />
+            </div>
+          </ng-container>
+
+          <div class="form-field full-width">
+            <label for="notes">Observações</label>
+            <textarea id="notes" formControlName="notes"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="submit" class="primary-button" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'A registar...' : 'Registar cuidado' }}
+        </button>
+      </div>
+    </form>
+
+    <section class="records-section">
+      <div class="section-header">
+        <h2>Registos e próximos cuidados</h2>
+      </div>
+
+      <div class="filters-grid">
+        <div class="form-field">
+          <label for="filterType">Tipo</label>
+          <select id="filterType" [(ngModel)]="filterType">
+            <option value="all">Todos</option>
+            <option *ngFor="let type of careTypes" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="filterAnimal">Animal</label>
+          <select id="filterAnimal" [(ngModel)]="filterAnimalId">
+            <option value="all">Todos</option>
+            <option *ngFor="let animal of animals" [value]="animal.id">
+              {{ getAnimalOptionLabel(animal) }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="filterState">Aviso</label>
+          <select id="filterState" [(ngModel)]="filterState">
+            <option value="all">Todos</option>
+            <option *ngFor="let state of timelineStates" [value]="state.value">
+              {{ state.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="careRecords.length === 0" class="empty-state">
+        Ainda não existem cuidados registados.
+      </div>
+
+      <div *ngIf="careRecords.length > 0 && filteredCareRecords.length === 0" class="empty-state">
+        Não existem cuidados com os filtros selecionados.
+      </div>
+
+      <div *ngIf="filteredCareRecords.length > 0" class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Animal</th>
+              <th>Tipo</th>
+              <th>Cuidado</th>
+              <th>Datas</th>
+              <th>Aviso</th>
+              <th>Observações</th>
+              <th class="actions-column"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let record of filteredCareRecords">
+              <td>
+                <a class="primary-link" [routerLink]="['/app/animals', record.animalId, 'edit']">
+                  {{ record.animal.name }}
+                </a>
+                <span class="secondary-line">{{ getAnimalDescription(record) }}</span>
+              </td>
+
+              <td>{{ getCareTypeLabel(record.type) }}</td>
+
+              <td>
+                <strong>{{ record.title }}</strong>
+                <span class="secondary-line">{{ record.detail || '-' }}</span>
+              </td>
+
+              <td>
+                <span>
+                  Previsto:
+                  {{ record.scheduledDate ? (record.scheduledDate | date: 'dd/MM/yyyy') : '-' }}
+                </span>
+                <span class="secondary-line">
+                  Realizado:
+                  {{ record.completedDate ? (record.completedDate | date: 'dd/MM/yyyy') : '-' }}
+                </span>
+                <span class="secondary-line">
+                  Próximo:
+                  {{ record.nextDueDate ? (record.nextDueDate | date: 'dd/MM/yyyy') : '-' }}
+                </span>
+              </td>
+
+              <td>
+                <span
+                  class="timeline-badge"
+                  [class.overdue]="getTimelineState(record) === 'overdue'"
+                  [class.due-soon]="getTimelineState(record) === 'due_soon'"
+                  [class.scheduled]="getTimelineState(record) === 'scheduled'"
+                  [class.completed]="getTimelineState(record) === 'completed'"
+                  [class.unscheduled]="getTimelineState(record) === 'unscheduled'"
+                >
+                  {{ getTimelineLabel(record) }}
+                </span>
+                <span class="secondary-line">{{ getTimelineDescription(record) }}</span>
+              </td>
+
+              <td>{{ record.notes || '-' }}</td>
+
+              <td class="actions-column">
+                <div class="record-actions">
+                  <button
+                    *ngIf="record.status === 'pending'"
+                    type="button"
+                    class="primary-button"
+                    [disabled]="
+                      confirmingRecordKey === getRecordKey(record) ||
+                      deletingRecordKey === getRecordKey(record)
+                    "
+                    (click)="confirmRecord(record)"
+                  >
+                    {{ confirmingRecordKey === getRecordKey(record) ? '...' : 'Confirmar' }}
+                  </button>
+
+                  <button
+                    type="button"
+                    class="remove-button"
+                    [disabled]="
+                      deletingRecordKey === getRecordKey(record) ||
+                      confirmingRecordKey === getRecordKey(record)
+                    "
+                    (click)="deleteRecord(record)"
+                  >
+                    {{ deletingRecordKey === getRecordKey(record) ? '...' : 'Remover' }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </ng-container>
+</section>

@@ -86,6 +86,10 @@ export const routes: Routes = [
         path: 'adoptions',
         loadComponent: () => import('./pages/private/adoptions/adoptions').then((m) => m.Adoptions),
       },
+      {
+        path: 'care',
+        loadComponent: () => import('./pages/private/care/care').then((m) => m.Care),
+      },
     ],
   },
   {

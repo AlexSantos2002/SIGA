@@ -105,6 +105,32 @@ export class AnimalVetAppointmentService {
 
   /**
    * @description
+   * Confirma que uma consulta ou tratamento agendado foi realizado.
+   */
+  async confirmCompleted(appointmentId: string): Promise<void> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const { error } = await withTimeout<any>(
+      supabase
+        .from('animal_vet_appointments')
+        .update({
+          result: 'Realizada',
+        })
+        .eq('id', appointmentId)
+        .eq('organization_id', organizationId)
+    );
+
+    if (error) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+  }
+
+  /**
+   * @description
    * Remove uma consulta veterinária.
    */
   async delete(appointmentId: string): Promise<void> {

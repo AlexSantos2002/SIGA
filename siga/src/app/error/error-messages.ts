@@ -20,6 +20,9 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   // VET APPOINTMENT
   UNABLE_TO_GET_VET_APPT: 'Não foi possível encontrar o agendamento',
 
+  // CUIDADOS
+  UNABLE_TO_GET_CARE_RECORDS: 'Não foi possível carregar os cuidados dos animais',
+
   // ADOÇÕES
   ADOPTION_FAILED: 'Não foi possível registar a adoção.',
   INVALID_STATUS_TRANSITION: 'Não é possível realizar a transição do status da adoção',

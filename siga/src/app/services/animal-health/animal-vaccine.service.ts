@@ -100,6 +100,33 @@ export class AnimalVaccineService {
 
   /**
    * @description
+   * Confirma que uma vacina pendente foi tomada.
+   */
+  async confirmTaken(vaccineId: string, dateTaken: string): Promise<void> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const { error } = await withTimeout<any>(
+      supabase
+        .from('animal_vaccines')
+        .update({
+          status: 'tomada',
+          date_taken: dateTaken,
+        })
+        .eq('id', vaccineId)
+        .eq('organization_id', organizationId),
+    );
+
+    if (error) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+  }
+
+  /**
+   * @description
    * Remove uma vacina associada a um animal.
    */
   async delete(vaccineId: string): Promise<void> {
