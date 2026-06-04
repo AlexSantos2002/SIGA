@@ -72,37 +72,11 @@
         </div>
 
         <div class="form-field full-date-field">
-          <label>Data de nascimento</label>
-
-          <div class="date-selects">
-            <select formControlName="birthDay">
-              <option value="" disabled>Dia</option>
-              <option *ngFor="let day of days" [value]="day">
-                {{ day }}
-              </option>
-            </select>
-
-            <select formControlName="birthMonth">
-              <option value="" disabled>Mês</option>
-              <option *ngFor="let month of months" [value]="month.value">
-                {{ month.label }}
-              </option>
-            </select>
-
-            <select formControlName="birthYear">
-              <option value="" disabled>Ano</option>
-              <option *ngFor="let year of years" [value]="year">
-                {{ year }}
-              </option>
-            </select>
-          </div>
+          <label for="birthDate">Data de nascimento</label>
+          <app-date-picker inputId="birthDate" formControlName="birthDate"></app-date-picker>
 
           <small
-            *ngIf="
-              (form.get('birthDay')?.touched && form.get('birthDay')?.invalid) ||
-              (form.get('birthMonth')?.touched && form.get('birthMonth')?.invalid) ||
-              (form.get('birthYear')?.touched && form.get('birthYear')?.invalid)
-            "
+            *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid"
           >
             A data de nascimento é obrigatória.
           </small>

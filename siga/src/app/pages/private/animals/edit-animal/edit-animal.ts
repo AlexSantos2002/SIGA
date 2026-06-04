@@ -71,9 +71,7 @@ export class EditAnimal implements OnInit {
       speciesName: ['', [Validators.required, Validators.maxLength(60)]],
       breedName: ['', [Validators.required, Validators.maxLength(80)]],
       gender: ['', Validators.required],
-      birthDay: ['', Validators.required],
-      birthMonth: ['', Validators.required],
-      birthYear: ['', Validators.required],
+      birthDate: [null, Validators.required],
       status: ['por_adotar', Validators.required],
       generalNotes: [''],
       medicalNotes: [''],
@@ -384,16 +382,12 @@ export class EditAnimal implements OnInit {
   }
 
   private patchAnimalForm(animal: Animal): void {
-    const birthDateParts = this.getBirthDateParts(animal.birthDate);
-
     this.form.patchValue({
       name: animal.name,
       speciesName: animal.species?.name || '',
       breedName: animal.breed?.name || '',
       gender: animal.gender || '',
-      birthDay: birthDateParts.day,
-      birthMonth: birthDateParts.month,
-      birthYear: birthDateParts.year,
+      birthDate: animal.birthDate || null,
       status: animal.status || 'por_adotar',
       generalNotes: animal.generalNotes || '',
       medicalNotes: animal.medicalNotes || '',
@@ -405,33 +399,7 @@ export class EditAnimal implements OnInit {
     });
   }
 
-  private getBirthDateParts(birthDate: string | null): {
-    day: string;
-    month: string;
-    year: string;
-  } {
-    if (!birthDate) {
-      return {
-        day: '',
-        month: '',
-        year: '',
-      };
-    }
-
-    const [year, month, day] = birthDate.split('-');
-
-    return {
-      day: String(Number(day)),
-      month: String(Number(month)),
-      year,
-    };
-  }
-
   private getBirthDate(): string {
-    const day = String(this.form.value.birthDay).padStart(2, '0');
-    const month = String(this.form.value.birthMonth).padStart(2, '0');
-    const year = this.form.value.birthYear;
-
-    return `${year}-${month}-${day}`;
+    return this.form.value.birthDate;
   }
 }

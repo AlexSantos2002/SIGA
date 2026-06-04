@@ -137,8 +137,7 @@
 .adopter-form-page .form-field textarea,
 .edit-animal-page .form-field input,
 .edit-animal-page .form-field select,
-.edit-animal-page .form-field textarea,
-.edit-animal-page .date-selects select {
+.edit-animal-page .form-field textarea {
   border: 1px solid #9ca3af;
   border-radius: 2px;
   padding: 7px 8px;
@@ -150,8 +149,7 @@
 .adopter-form-page .form-field input,
 .adopter-form-page .form-field select,
 .edit-animal-page .form-field input,
-.edit-animal-page .form-field select,
-.edit-animal-page .date-selects select {
+.edit-animal-page .form-field select {
   height: 38px;
 }
 
@@ -166,8 +164,7 @@
 .adopter-form-page .form-field textarea:focus,
 .edit-animal-page .form-field input:focus,
 .edit-animal-page .form-field select:focus,
-.edit-animal-page .form-field textarea:focus,
-.edit-animal-page .date-selects select:focus {
+.edit-animal-page .form-field textarea:focus {
   outline: 1px solid #2f6fd6;
 }
 
@@ -370,12 +367,6 @@
   border: 1px solid #555555;
 }
 
-.edit-animal-page .date-selects {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 8px;
-}
-
 .edit-animal-page .checkbox-field {
   display: flex;
   align-items: center;
@@ -415,8 +406,7 @@
 
   .adopter-form-page .form-grid,
   .edit-animal-page .details-list div,
-  .edit-animal-page .modal-grid,
-  .edit-animal-page .date-selects {
+  .edit-animal-page .modal-grid {
     grid-template-columns: 1fr;
   }
 

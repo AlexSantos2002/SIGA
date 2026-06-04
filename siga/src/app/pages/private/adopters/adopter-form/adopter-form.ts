@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { DatePicker } from '../../../../components/date-picker/date-picker';
 import {
   ADOPTER_DOCUMENT_TYPES,
   ADOPTER_EMPLOYMENT_STATUSES,
@@ -13,7 +14,7 @@ import {
 @Component({
   selector: 'app-adopter-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, DatePicker, ReactiveFormsModule, RouterModule],
   templateUrl: './adopter-form.html',
   styleUrl: '../adopter-form.css',
 })

@@ -100,10 +100,11 @@
   width: 100%;
 }
 
-.date-selects {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 10px;
+.form-field app-date-picker {
+  --date-picker-border-color: #cbd5e1;
+  --date-picker-focus-color: #2563eb;
+  --date-picker-height: 42px;
+  --date-picker-radius: 8px;
 }
 
 .error-message {
@@ -163,10 +164,6 @@
   }
 
   .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .date-selects {
     grid-template-columns: 1fr;
   }
 

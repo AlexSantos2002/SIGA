@@ -88,27 +88,6 @@ export const ADOPTER_PREFERRED_SPECIES: SelectOption[] = [
   { value: 'outro', label: 'Outro' },
 ];
 
-export const DAYS = Array.from({ length: 31 }, (_, index) => index + 1);
-
-export const MONTHS: SelectOption[] = [
-  { value: 1, label: 'Janeiro' },
-  { value: 2, label: 'Fevereiro' },
-  { value: 3, label: 'Março' },
-  { value: 4, label: 'Abril' },
-  { value: 5, label: 'Maio' },
-  { value: 6, label: 'Junho' },
-  { value: 7, label: 'Julho' },
-  { value: 8, label: 'Agosto' },
-  { value: 9, label: 'Setembro' },
-  { value: 10, label: 'Outubro' },
-  { value: 11, label: 'Novembro' },
-  { value: 12, label: 'Dezembro' },
-];
-
-export function createYearOptions(referenceYear = new Date().getFullYear(), length = 60): number[] {
-  return Array.from({ length }, (_, index) => referenceYear - index);
-}
-
 export function getOptionLabel(
   options: SelectOption[],
   value: string | number | null | undefined,

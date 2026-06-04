@@ -84,17 +84,17 @@
 
             <div class="form-field">
               <label for="dateTaken">Data tomada</label>
-              <input id="dateTaken" type="date" formControlName="dateTaken" />
+              <app-date-picker inputId="dateTaken" formControlName="dateTaken"></app-date-picker>
             </div>
 
             <div class="form-field">
               <label for="scheduledDate">Data prevista</label>
-              <input id="scheduledDate" type="date" formControlName="scheduledDate" />
+              <app-date-picker inputId="scheduledDate" formControlName="scheduledDate"></app-date-picker>
             </div>
 
             <div class="form-field">
               <label for="nextDueDate">Próxima dose</label>
-              <input id="nextDueDate" type="date" formControlName="nextDueDate" />
+              <app-date-picker inputId="nextDueDate" formControlName="nextDueDate"></app-date-picker>
             </div>
           </ng-container>
 
@@ -110,7 +110,7 @@
 
             <div class="form-field">
               <label for="dateDone">Data realizada</label>
-              <input id="dateDone" type="date" formControlName="dateDone" />
+              <app-date-picker inputId="dateDone" formControlName="dateDone"></app-date-picker>
               <small *ngIf="form.get('dateDone')?.touched && form.get('dateDone')?.invalid">
                 Indica a data da desparasitação.
               </small>
@@ -118,7 +118,10 @@
 
             <div class="form-field">
               <label for="dewormingNextDueDate">Próxima data</label>
-              <input id="dewormingNextDueDate" type="date" formControlName="nextDueDate" />
+              <app-date-picker
+                inputId="dewormingNextDueDate"
+                formControlName="nextDueDate"
+              ></app-date-picker>
             </div>
 
             <div class="form-field">
@@ -130,7 +133,10 @@
           <ng-container *ngIf="careType === 'appointment'">
             <div class="form-field">
               <label for="appointmentDate">Data</label>
-              <input id="appointmentDate" type="date" formControlName="appointmentDate" />
+              <app-date-picker
+                inputId="appointmentDate"
+                formControlName="appointmentDate"
+              ></app-date-picker>
               <small
                 *ngIf="form.get('appointmentDate')?.touched && form.get('appointmentDate')?.invalid"
               >
@@ -163,7 +169,10 @@
 
             <div class="form-field">
               <label for="nextAppointmentDate">Próxima consulta</label>
-              <input id="nextAppointmentDate" type="date" formControlName="nextAppointmentDate" />
+              <app-date-picker
+                inputId="nextAppointmentDate"
+                formControlName="nextAppointmentDate"
+              ></app-date-picker>
             </div>
           </ng-container>
 

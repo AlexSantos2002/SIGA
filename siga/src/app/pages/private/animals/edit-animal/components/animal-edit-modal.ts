@@ -2,23 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
+import { DatePicker } from '../../../../../components/date-picker/date-picker';
 import {
   ANIMAL_GENDERS,
   ANIMAL_STATUSES,
-  DAYS,
   DEWORMING_TYPES,
-  MONTHS,
   STERILIZATION_STATUSES,
   VACCINE_STATUSES,
   SelectOption,
-  createYearOptions,
 } from '../../../../../constants/form-options';
 import { EditAnimalModal } from '../edit-animal.types';
 
 @Component({
   selector: 'app-animal-edit-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, DatePicker, ReactiveFormsModule],
   templateUrl: './animal-edit-modal.html',
 })
 export class AnimalEditModal {
@@ -40,9 +38,6 @@ export class AnimalEditModal {
   readonly sterilizationStatuses = STERILIZATION_STATUSES;
   readonly vaccineStatuses = VACCINE_STATUSES;
   readonly dewormingTypes = DEWORMING_TYPES;
-  readonly days = DAYS;
-  readonly months = MONTHS;
-  readonly years = createYearOptions();
 
   get statusOptions(): SelectOption[] {
     const currentStatus = this.form?.get('status')?.value;

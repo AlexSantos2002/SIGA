@@ -33,30 +33,11 @@
           </div>
 
           <div class="form-field full-width">
-            <label>Data de nascimento</label>
-
-            <div class="date-selects">
-              <select formControlName="birthDay">
-                <option value="" disabled>Dia</option>
-                <option *ngFor="let day of days" [value]="day">
-                  {{ day }}
-                </option>
-              </select>
-
-              <select formControlName="birthMonth">
-                <option value="" disabled>Mês</option>
-                <option *ngFor="let month of months" [value]="month.value">
-                  {{ month.label }}
-                </option>
-              </select>
-
-              <select formControlName="birthYear">
-                <option value="" disabled>Ano</option>
-                <option *ngFor="let year of years" [value]="year">
-                  {{ year }}
-                </option>
-              </select>
-            </div>
+            <label for="animalBirthDate">Data de nascimento</label>
+            <app-date-picker
+              inputId="animalBirthDate"
+              formControlName="birthDate"
+            ></app-date-picker>
           </div>
 
           <div class="form-field">
@@ -125,7 +106,10 @@
 
           <div class="form-field">
             <label for="sterilizationDate">Data da esterilização</label>
-            <input id="sterilizationDate" type="date" formControlName="sterilizationDate" />
+            <app-date-picker
+              inputId="sterilizationDate"
+              formControlName="sterilizationDate"
+            ></app-date-picker>
           </div>
 
           <div class="checkbox-field full-width">
@@ -142,7 +126,10 @@
 
           <div class="form-field">
             <label for="microchipDate">Data de colocação</label>
-            <input id="microchipDate" type="date" formControlName="microchipDate" />
+            <app-date-picker
+              inputId="microchipDate"
+              formControlName="microchipDate"
+            ></app-date-picker>
           </div>
         </div>
 
@@ -177,17 +164,17 @@
 
           <div class="form-field">
             <label>Data tomada</label>
-            <input type="date" formControlName="dateTaken" />
+            <app-date-picker formControlName="dateTaken"></app-date-picker>
           </div>
 
           <div class="form-field">
             <label>Data prevista</label>
-            <input type="date" formControlName="scheduledDate" />
+            <app-date-picker formControlName="scheduledDate"></app-date-picker>
           </div>
 
           <div class="form-field">
             <label>Próxima dose</label>
-            <input type="date" formControlName="nextDueDate" />
+            <app-date-picker formControlName="nextDueDate"></app-date-picker>
           </div>
 
           <div class="form-field full-width">
@@ -226,12 +213,12 @@
 
           <div class="form-field">
             <label>Data realizada</label>
-            <input type="date" formControlName="dateDone" />
+            <app-date-picker formControlName="dateDone"></app-date-picker>
           </div>
 
           <div class="form-field">
             <label>Próxima data</label>
-            <input type="date" formControlName="nextDueDate" />
+            <app-date-picker formControlName="nextDueDate"></app-date-picker>
           </div>
 
           <div class="form-field">
@@ -266,7 +253,7 @@
         <div class="modal-grid">
           <div class="form-field">
             <label>Data da consulta</label>
-            <input type="date" formControlName="appointmentDate" />
+            <app-date-picker formControlName="appointmentDate"></app-date-picker>
           </div>
 
           <div class="form-field">
@@ -291,7 +278,7 @@
 
           <div class="form-field">
             <label>Próxima consulta</label>
-            <input type="date" formControlName="nextAppointmentDate" />
+            <app-date-picker formControlName="nextAppointmentDate"></app-date-picker>
           </div>
 
           <div class="form-field full-width">

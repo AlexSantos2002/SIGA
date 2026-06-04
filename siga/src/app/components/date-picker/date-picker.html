@@ -1,0 +1,97 @@
+<div class="date-picker" [class.open]="isOpen">
+  <div class="date-picker-control" [class.disabled]="isDisabled">
+    <input
+      class="date-picker-input"
+      type="text"
+      [id]="inputId"
+      [value]="displayValue"
+      [placeholder]="placeholder"
+      [disabled]="isDisabled"
+      [attr.aria-expanded]="isOpen"
+      [attr.aria-controls]="panelId"
+      aria-haspopup="dialog"
+      readonly
+      (click)="openCalendar()"
+      (blur)="markAsTouched()"
+      (keydown)="handleInputKeydown($event)"
+    />
+
+    <button
+      *ngIf="value"
+      class="date-picker-icon-button"
+      type="button"
+      title="Limpar data"
+      aria-label="Limpar data"
+      [disabled]="isDisabled"
+      (click)="clearDate($event)"
+    >
+      ×
+    </button>
+
+    <button
+      class="date-picker-icon-button"
+      type="button"
+      title="Abrir calendario"
+      aria-label="Abrir calendario"
+      [disabled]="isDisabled"
+      (click)="toggleCalendar()"
+    >
+      ▾
+    </button>
+  </div>
+
+  <div *ngIf="isOpen" class="date-picker-panel" [id]="panelId" role="dialog">
+    <div class="date-picker-toolbar">
+      <button type="button" class="date-picker-nav-button" aria-label="Mes anterior" (click)="previousMonth()">
+        ‹
+      </button>
+
+      <div class="date-picker-selects">
+        <select aria-label="Mes" [value]="viewMonth" (change)="changeMonth($any($event.target).value)">
+          <option *ngFor="let month of months; let index = index" [value]="index">
+            {{ month }}
+          </option>
+        </select>
+
+        <select aria-label="Ano" [value]="viewYear" (change)="changeYear($any($event.target).value)">
+          <option *ngFor="let year of years" [value]="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+
+      <button type="button" class="date-picker-nav-button" aria-label="Mes seguinte" (click)="nextMonth()">
+        ›
+      </button>
+    </div>
+
+    <div class="date-picker-weekdays" aria-hidden="true">
+      <span *ngFor="let weekDay of weekDays">{{ weekDay }}</span>
+    </div>
+
+    <div class="date-picker-days">
+      <button
+        *ngFor="let day of calendarDays; trackBy: trackByDateValue"
+        class="date-picker-day"
+        type="button"
+        [class.outside-month]="!day.isCurrentMonth"
+        [class.today]="day.isToday"
+        [class.selected]="day.isSelected"
+        [disabled]="day.disabled"
+        (click)="selectDate(day)"
+      >
+        {{ day.dayNumber }}
+      </button>
+    </div>
+
+    <div class="date-picker-footer">
+      <button type="button" class="date-picker-text-button" [disabled]="isTodayDisabled" (click)="selectToday()">
+        Hoje
+      </button>
+
+      <button type="button" class="date-picker-text-button" (click)="closeCalendar()">
+        Fechar
+      </button>
+    </div>
+  </div>
+</div>

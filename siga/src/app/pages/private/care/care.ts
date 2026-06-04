@@ -10,6 +10,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { DatePicker } from '../../../components/date-picker/date-picker';
 import {
   DEWORMING_TYPES,
   SelectOption,
@@ -34,7 +35,7 @@ type CareFilterState = 'all' | AnimalCareTimelineState;
 @Component({
   selector: 'app-care',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, DatePicker, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './care.html',
   styleUrl: './care.css',
 })

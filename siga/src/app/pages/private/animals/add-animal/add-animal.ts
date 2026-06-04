@@ -6,17 +6,15 @@ import { Router, RouterModule } from '@angular/router';
 import {
   ANIMAL_GENDERS,
   ANIMAL_STATUSES,
-  DAYS,
-  MONTHS,
-  createYearOptions,
 } from '../../../../constants/form-options';
+import { DatePicker } from '../../../../components/date-picker/date-picker';
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { withTimeout } from '../../../../utils/utils';
 
 @Component({
   selector: 'app-add-animal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, DatePicker, ReactiveFormsModule, RouterModule],
   templateUrl: './add-animal.html',
   styleUrl: './add-animal.css',
 })
@@ -28,9 +26,6 @@ export class AddAnimal {
 
   readonly statuses = ANIMAL_STATUSES;
   readonly genders = ANIMAL_GENDERS;
-  readonly days = DAYS;
-  readonly months = MONTHS;
-  readonly years = createYearOptions();
 
   constructor(
     private fb: FormBuilder,
@@ -43,28 +38,19 @@ export class AddAnimal {
       speciesName: ['', [Validators.required, Validators.maxLength(60)]],
       breedName: ['', [Validators.required, Validators.maxLength(80)]],
       gender: ['', Validators.required],
-      birthDay: ['', Validators.required],
-      birthMonth: ['', Validators.required],
-      birthYear: ['', Validators.required],
+      birthDate: [null, Validators.required],
       status: ['por_adotar', Validators.required],
     });
   }
 
   private getBirthDate(): string {
-    const day = Number(this.form.value.birthDay);
-    const month = Number(this.form.value.birthMonth);
-    const year = Number(this.form.value.birthYear);
+    const birthDate = this.form.value.birthDate;
 
-    const date = new Date(year, month - 1, day);
-
-    const isValidDate =
-      date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
-
-    if (!isValidDate) {
+    if (!birthDate) {
       throw new Error('A data de nascimento nao e valida.');
     }
 
-    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return birthDate;
   }
 
   async submit(): Promise<void> {

@@ -10,6 +10,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { DatePicker } from '../../../components/date-picker/date-picker';
 import {
   ADOPTER_DOCUMENT_TYPES,
   ADOPTER_EMPLOYMENT_STATUSES,
@@ -41,7 +42,7 @@ type CompletedAdoptionSortField = 'animal' | 'adopter' | 'contact' | 'decisionDa
 @Component({
   selector: 'app-adoptions',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, DatePicker, ReactiveFormsModule, RouterModule],
   templateUrl: './adoptions.html',
   styleUrl: './adoptions.css',
 })
