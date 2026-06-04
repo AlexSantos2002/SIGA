@@ -71,6 +71,9 @@
 
 .area-utilizador {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   flex-shrink: 0;
 }
 
@@ -190,6 +193,10 @@
 
   .dados-utilizador {
     display: none;
+  }
+
+  .area-utilizador {
+    gap: 0.75rem;
   }
 
   .nome-marca {

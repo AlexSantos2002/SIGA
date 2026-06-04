@@ -1,6 +1,5 @@
 <header class="barra-topo">
   <div class="conteudo-barra">
-
     <!-- Ícone e ligação à página inicial -->
     <a routerLink="/" class="logo">
       <img src="/favicon.ico" alt="Logótipo SIGA" class="logo-imagem" />
@@ -17,22 +16,10 @@
 
     <!-- Ações do utilizador -->
     <div class="acoes-barra">
-
-      <!-- Botão de troca de idioma -->
-      <div class="language-switcher">
-        <button type="button" class="botao-linguagem" (click)="toggleLangMenu()" i18n>
-          PT | EN
-        </button>
-
-        <div class="menu-linguagem" *ngIf="showLangMenu">
-          <button type="button" (click)="changeLang('pt')" i18n>Português</button>
-          <button type="button" (click)="changeLang('en')" i18n>English</button>
-        </div>
-      </div>
+      <app-language-switcher></app-language-switcher>
 
       <a routerLink="/login" class="link-entrar" i18n>Entrar</a>
       <a routerLink="/register" class="botao-topo" i18n>Começar agora</a>
     </div>
-
   </div>
 </header>

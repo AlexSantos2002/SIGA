@@ -4,12 +4,13 @@ import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { LanguageSwitcher } from '../language-switcher/language-switcher';
 import { User } from '../../models/user/user.model';
 
 @Component({
   selector: 'app-navbar-private',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LanguageSwitcher],
   templateUrl: './navbar-private.html',
   styleUrl: './navbar-private.css',
 })
@@ -33,7 +34,7 @@ export class NavbarPrivate implements OnInit, OnDestroy {
    */
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   /**
@@ -49,7 +50,7 @@ export class NavbarPrivate implements OnInit, OnDestroy {
       this.setUserData(currentUser);
     }
 
-    this.userSubscription = this.authService.currentUser$.subscribe(user => {
+    this.userSubscription = this.authService.currentUser$.subscribe((user) => {
       if (user) {
         this.setUserData(user);
       }

@@ -1,0 +1,47 @@
+<div class="language-switcher">
+  <button
+    type="button"
+    class="language-button"
+    [class.open]="isOpen"
+    [attr.aria-expanded]="isOpen"
+    aria-haspopup="menu"
+    aria-label="Mudar idioma"
+    (click)="toggleMenu()"
+  >
+    <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M3 12h18"></path>
+      <path d="M12 3c2.25 2.4 3.5 5.4 3.5 9s-1.25 6.6-3.5 9"></path>
+      <path d="M12 3c-2.25 2.4-3.5 5.4-3.5 9s1.25 6.6 3.5 9"></path>
+    </svg>
+
+    <span class="language-code">{{ currentLanguage.shortLabel }}</span>
+
+    <svg class="language-chevron" viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M5 7.5 10 12.5 15 7.5"></path>
+    </svg>
+  </button>
+
+  <div *ngIf="isOpen" class="language-menu" role="menu">
+    <button
+      *ngFor="let language of languages"
+      type="button"
+      class="language-option"
+      [class.active]="language.code === currentLocale"
+      role="menuitem"
+      (click)="changeLanguage(language.code)"
+    >
+      <span class="language-option-code">{{ language.shortLabel }}</span>
+      <span class="language-option-label">{{ language.label }}</span>
+
+      <svg
+        *ngIf="language.code === currentLocale"
+        class="language-check"
+        viewBox="0 0 20 20"
+        aria-hidden="true"
+      >
+        <path d="m4 10 4 4 8-8"></path>
+      </svg>
+    </button>
+  </div>
+</div>
