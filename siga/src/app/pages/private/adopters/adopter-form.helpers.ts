@@ -2,6 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { RegisterAdopterRequest } from '../../../models/adopter/register-adopter-request';
+import { toNullableString } from '../../../utils/utils';
 
 export function createAdopterForm(formBuilder: FormBuilder): FormGroup {
   return formBuilder.group({
@@ -98,10 +99,4 @@ export function buildAdopterRequest(form: FormGroup): RegisterAdopterRequest {
     isFlagged: !!form.value.isFlagged,
     flagReason: toNullableString(form.value.flagReason),
   };
-}
-
-function toNullableString(value: string | null | undefined): string | null {
-  const trimmedValue = value?.trim();
-
-  return trimmedValue ? trimmedValue : null;
 }

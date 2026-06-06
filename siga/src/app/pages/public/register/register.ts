@@ -7,7 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
   ValidatorFn,
-  AbstractControl, ValidationErrors
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { RegisterOrganizationRequest } from '../../../models/auth/register-organization-request';
 import { CommonModule } from '@angular/common';
@@ -24,10 +25,9 @@ import { Router, RouterLink } from '@angular/router';
   imports: [ReactiveFormsModule, FormsModule, CommonModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
-  standalone: true
+  standalone: true,
 })
 export class Register {
-
   /**
    * @description
    * Formulário reativo utilizado para capturar os dados da organização
@@ -38,7 +38,6 @@ export class Register {
   isLoading = false;
   errorMessage: string | null = null;
   successMessage: string | null = null;
-
 
   /**
    * @description
@@ -52,21 +51,24 @@ export class Register {
     private fb: FormBuilder,
     private organizationService: OrganizationService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
-    this.form = this.fb.group({
-      // Organização
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
-      address: ['', [Validators.required]],
+    this.form = this.fb.group(
+      {
+        // Organização
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
+        address: ['', [Validators.required]],
 
-      // Admin
-      adminName: ['', [Validators.required, Validators.minLength(3)]],
-      adminEmail: ['', [Validators.required, Validators.email]],
-      adminPassword: ['', [Validators.required, Validators.minLength(6)]],
-      adminPasswordConfirm: ['', [Validators.required]]
-    }, {validators: this.passwordMatchValidator});
+        // Admin
+        adminName: ['', [Validators.required, Validators.minLength(3)]],
+        adminEmail: ['', [Validators.required, Validators.email]],
+        adminPassword: ['', [Validators.required, Validators.minLength(6)]],
+        adminPasswordConfirm: ['', [Validators.required]],
+      },
+      { validators: this.passwordMatchValidator },
+    );
   }
 
   /**
@@ -93,14 +95,12 @@ export class Register {
       this.form.reset();
     } catch (err) {
       if (err instanceof AppError) {
-        console.log(err);
         this.errorMessage = err.message;
       }
 
       this.cdr.detectChanges();
     }
   }
-
 
   /**
    * Verifica se o input contém erro
@@ -110,12 +110,10 @@ export class Register {
     return !!(control && control.invalid && (control.dirty || control.touched));
   }
 
-
   passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     const password = group.get('adminPassword')?.value;
     const confirm = group.get('adminPasswordConfirm')?.value;
 
     return password === confirm ? null : { passwordMismatch: true };
   };
-
 }

@@ -1,6 +1,7 @@
 import { Adopter } from '../../models/adopter/adopter.model';
 import { RegisterAdopterRequest } from '../../models/adopter/register-adopter-request';
 import { UpdateAdopterRequest } from '../../models/adopter/update-adopter-request';
+import { toNullableString } from '../../utils/utils';
 
 export interface AdopterRow {
   id: string;
@@ -116,10 +117,4 @@ export function buildAdopterPayload(
     flag_reason: isFlagged ? toNullableString(request.flagReason) : null,
     flagged_at: isFlagged ? new Date().toISOString() : null,
   };
-}
-
-function toNullableString(value?: string | null): string | null {
-  const trimmedValue = value?.trim();
-
-  return trimmedValue ? trimmedValue : null;
 }

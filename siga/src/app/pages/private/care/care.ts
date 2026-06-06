@@ -1,12 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +13,6 @@ import {
 } from '../../../constants/form-options';
 import {
   AnimalCareRecord,
-  AnimalCareTimelineState,
   AnimalCareType,
 } from '../../../models/animal-health/animal-care-record.model';
 import { Animal } from '../../../models/animal/animal.model';
@@ -28,9 +21,24 @@ import { AnimalDewormingService } from '../../../services/animal-health/animal-d
 import { AnimalVaccineService } from '../../../services/animal-health/animal-vaccine.service';
 import { AnimalVetAppointmentService } from '../../../services/animal-health/animal-vet-appointment.service';
 import { AnimalService } from '../../../services/animal/animal.service';
-
-type CareFilterType = 'all' | AnimalCareType;
-type CareFilterState = 'all' | AnimalCareTimelineState;
+import { getTodayDate, toNullableString } from '../../../utils/utils';
+import {
+  createCareForm,
+  getCareTypeFromForm,
+  resetCareForm,
+  updateCareTypeValidators,
+} from './care-form.helpers';
+import {
+  CareFilterState,
+  CareFilterType,
+  compareCareRecords,
+  getAlertDate,
+  getCareRecordKey,
+  getTimelineDescription,
+  getTimelineLabel,
+  getTimelineState,
+  matchesCareFilters,
+} from './care-timeline.helpers';
 
 @Component({
   selector: 'app-care',
@@ -69,16 +77,13 @@ export class Care implements OnInit, OnDestroy {
     { value: 'completed', label: 'Concluídos sem próxima data' },
     { value: 'unscheduled', label: 'Sem data' },
   ];
+  readonly getTimelineState = getTimelineState;
+  readonly getTimelineLabel = getTimelineLabel;
+  readonly getTimelineDescription = getTimelineDescription;
+  readonly getRecordKey = getCareRecordKey;
+  readonly getAlertDate = getAlertDate;
 
   private careTypeSubscription: Subscription | null = null;
-
-  private readonly timelinePriority: Record<AnimalCareTimelineState, number> = {
-    overdue: 0,
-    due_soon: 1,
-    scheduled: 2,
-    unscheduled: 3,
-    completed: 4,
-  };
 
   constructor(
     private fb: FormBuilder,
@@ -89,32 +94,14 @@ export class Care implements OnInit, OnDestroy {
     private vetAppointmentService: AnimalVetAppointmentService,
     private cdr: ChangeDetectorRef,
   ) {
-    this.form = this.fb.group({
-      careType: ['vaccine', Validators.required],
-      animalId: ['', Validators.required],
-      name: ['', [Validators.required, Validators.maxLength(120)]],
-      vaccineStatus: ['pendente', Validators.required],
-      dateTaken: [null],
-      scheduledDate: [null],
-      nextDueDate: [null],
-      dewormingType: ['interna'],
-      dateDone: [null],
-      productName: [''],
-      appointmentDate: [null],
-      reason: [''],
-      clinicName: [''],
-      veterinarianName: [''],
-      result: [''],
-      nextAppointmentDate: [null],
-      notes: [''],
-    });
+    this.form = createCareForm(this.fb);
 
     this.careTypeSubscription =
       this.form.get('careType')?.valueChanges.subscribe((type) => {
-        this.updateCareTypeValidators(type);
+        updateCareTypeValidators(this.form, type);
       }) ?? null;
 
-    this.updateCareTypeValidators(this.careType);
+    updateCareTypeValidators(this.form, this.careType);
   }
 
   async ngOnInit(): Promise<void> {
@@ -126,15 +113,19 @@ export class Care implements OnInit, OnDestroy {
   }
 
   get careType(): AnimalCareType {
-    const type = this.form.get('careType')?.value;
-
-    return this.isCareType(type) ? type : 'vaccine';
+    return getCareTypeFromForm(this.form);
   }
 
   get filteredCareRecords(): AnimalCareRecord[] {
     return this.careRecords
-      .filter((record) => this.matchesFilters(record))
-      .sort((firstRecord, secondRecord) => this.compareCareRecords(firstRecord, secondRecord));
+      .filter((record) =>
+        matchesCareFilters(record, {
+          animalId: this.filterAnimalId,
+          state: this.filterState,
+          type: this.filterType,
+        }),
+      )
+      .sort(compareCareRecords);
   }
 
   get overdueCount(): number {
@@ -154,7 +145,7 @@ export class Care implements OnInit, OnDestroy {
   }
 
   async submitCare(): Promise<void> {
-    this.updateCareTypeValidators(this.careType);
+    updateCareTypeValidators(this.form, this.careType);
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -167,7 +158,7 @@ export class Care implements OnInit, OnDestroy {
       this.cdr.detectChanges();
 
       await this.createCareRecord();
-      this.resetForm();
+      resetCareForm(this.form, this.careType);
       this.careRecords = await this.careService.getAll();
     } catch (error: any) {
       console.error('Erro ao registar cuidado:', error);
@@ -224,7 +215,7 @@ export class Care implements OnInit, OnDestroy {
       this.cdr.detectChanges();
 
       if (record.type === 'vaccine') {
-        await this.vaccineService.confirmTaken(record.id, this.getTodayDate());
+        await this.vaccineService.confirmTaken(record.id, getTodayDate());
       }
 
       if (record.type === 'appointment') {
@@ -246,64 +237,6 @@ export class Care implements OnInit, OnDestroy {
     return getOptionLabel(this.careTypes, type);
   }
 
-  getTimelineState(record: AnimalCareRecord): AnimalCareTimelineState {
-    const alertDate = this.getAlertDate(record);
-
-    if (!alertDate) {
-      return record.status === 'completed' ? 'completed' : 'unscheduled';
-    }
-
-    const daysUntil = this.getDaysUntil(alertDate);
-
-    if (daysUntil < 0) {
-      return 'overdue';
-    }
-
-    if (daysUntil <= 30) {
-      return 'due_soon';
-    }
-
-    return 'scheduled';
-  }
-
-  getTimelineLabel(record: AnimalCareRecord): string {
-    const labels: Record<AnimalCareTimelineState, string> = {
-      overdue: 'Em atraso',
-      due_soon: 'Próximo',
-      scheduled: 'Agendado',
-      completed: 'Concluído',
-      unscheduled: 'Sem data',
-    };
-
-    return labels[this.getTimelineState(record)];
-  }
-
-  getTimelineDescription(record: AnimalCareRecord): string {
-    const alertDate = this.getAlertDate(record);
-
-    if (!alertDate) {
-      return record.status === 'completed'
-        ? 'Sem próxima data registada'
-        : 'Ainda sem data prevista';
-    }
-
-    const daysUntil = this.getDaysUntil(alertDate);
-
-    if (daysUntil < 0) {
-      return `${Math.abs(daysUntil)} dia(s) em atraso`;
-    }
-
-    if (daysUntil === 0) {
-      return 'Marcado para hoje';
-    }
-
-    return `Faltam ${daysUntil} dia(s)`;
-  }
-
-  getRecordKey(record: AnimalCareRecord): string {
-    return `${record.type}:${record.id}`;
-  }
-
   getAnimalOptionLabel(animal: Animal): string {
     const description = [animal.species?.name, animal.breed?.name].filter(Boolean).join(' / ');
 
@@ -312,14 +245,6 @@ export class Care implements OnInit, OnDestroy {
 
   getAnimalDescription(record: AnimalCareRecord): string {
     return [record.animal.speciesName, record.animal.breedName].filter(Boolean).join(' / ') || '-';
-  }
-
-  getAlertDate(record: AnimalCareRecord): string | null {
-    if (record.status === 'pending') {
-      return record.scheduledDate || record.nextDueDate;
-    }
-
-    return record.nextDueDate;
   }
 
   private async loadPageData(): Promise<void> {
@@ -347,16 +272,16 @@ export class Care implements OnInit, OnDestroy {
 
   private async createCareRecord(): Promise<void> {
     const animalId = this.form.value.animalId;
-    const notes = this.toNullableString(this.form.value.notes);
+    const notes = toNullableString(this.form.value.notes);
 
     if (this.careType === 'vaccine') {
       await this.vaccineService.create({
         animalId,
         name: this.form.value.name.trim(),
         status: this.form.value.vaccineStatus,
-        dateTaken: this.toNullableString(this.form.value.dateTaken),
-        scheduledDate: this.toNullableString(this.form.value.scheduledDate),
-        nextDueDate: this.toNullableString(this.form.value.nextDueDate),
+        dateTaken: toNullableString(this.form.value.dateTaken),
+        scheduledDate: toNullableString(this.form.value.scheduledDate),
+        nextDueDate: toNullableString(this.form.value.nextDueDate),
         notes,
       });
       return;
@@ -367,8 +292,8 @@ export class Care implements OnInit, OnDestroy {
         animalId,
         type: this.form.value.dewormingType,
         dateDone: this.form.value.dateDone,
-        nextDueDate: this.toNullableString(this.form.value.nextDueDate),
-        productName: this.toNullableString(this.form.value.productName),
+        nextDueDate: toNullableString(this.form.value.nextDueDate),
+        productName: toNullableString(this.form.value.productName),
         notes,
       });
       return;
@@ -378,168 +303,11 @@ export class Care implements OnInit, OnDestroy {
       animalId,
       appointmentDate: this.form.value.appointmentDate,
       reason: this.form.value.reason.trim(),
-      clinicName: this.toNullableString(this.form.value.clinicName),
-      veterinarianName: this.toNullableString(this.form.value.veterinarianName),
-      result: this.toNullableString(this.form.value.result),
-      nextAppointmentDate: this.toNullableString(this.form.value.nextAppointmentDate),
+      clinicName: toNullableString(this.form.value.clinicName),
+      veterinarianName: toNullableString(this.form.value.veterinarianName),
+      result: toNullableString(this.form.value.result),
+      nextAppointmentDate: toNullableString(this.form.value.nextAppointmentDate),
       notes,
     });
-  }
-
-  private updateCareTypeValidators(typeValue: unknown): void {
-    const type = this.isCareType(typeValue) ? typeValue : 'vaccine';
-    const controlsToReset = [
-      'name',
-      'vaccineStatus',
-      'dateTaken',
-      'scheduledDate',
-      'nextDueDate',
-      'dewormingType',
-      'dateDone',
-      'productName',
-      'appointmentDate',
-      'reason',
-      'clinicName',
-      'veterinarianName',
-      'result',
-      'nextAppointmentDate',
-    ];
-
-    controlsToReset.forEach((controlName) => {
-      this.form.get(controlName)?.clearValidators();
-      this.form.get(controlName)?.updateValueAndValidity({ emitEvent: false });
-    });
-
-    if (type === 'vaccine') {
-      this.form.get('name')?.setValidators([Validators.required, Validators.maxLength(120)]);
-      this.form.get('vaccineStatus')?.setValidators([Validators.required]);
-    }
-
-    if (type === 'deworming') {
-      this.form.get('dewormingType')?.setValidators([Validators.required]);
-      this.form.get('dateDone')?.setValidators([Validators.required]);
-    }
-
-    if (type === 'appointment') {
-      this.form.get('appointmentDate')?.setValidators([Validators.required]);
-      this.form.get('reason')?.setValidators([Validators.required, Validators.maxLength(160)]);
-    }
-
-    controlsToReset.forEach((controlName) => {
-      this.form.get(controlName)?.updateValueAndValidity({ emitEvent: false });
-    });
-  }
-
-  private resetForm(): void {
-    const careType = this.careType;
-
-    this.form.reset({
-      careType,
-      animalId: '',
-      name: '',
-      vaccineStatus: 'pendente',
-      dateTaken: null,
-      scheduledDate: null,
-      nextDueDate: null,
-      dewormingType: 'interna',
-      dateDone: null,
-      productName: '',
-      appointmentDate: null,
-      reason: '',
-      clinicName: '',
-      veterinarianName: '',
-      result: '',
-      nextAppointmentDate: null,
-      notes: '',
-    });
-    this.updateCareTypeValidators(careType);
-    this.form.markAsPristine();
-    this.form.markAsUntouched();
-  }
-
-  private matchesFilters(record: AnimalCareRecord): boolean {
-    const matchesType = this.filterType === 'all' || record.type === this.filterType;
-    const matchesAnimal = this.filterAnimalId === 'all' || record.animalId === this.filterAnimalId;
-    const matchesState =
-      this.filterState === 'all' || this.getTimelineState(record) === this.filterState;
-
-    return matchesType && matchesAnimal && matchesState;
-  }
-
-  private compareCareRecords(
-    firstRecord: AnimalCareRecord,
-    secondRecord: AnimalCareRecord,
-  ): number {
-    const firstState = this.getTimelineState(firstRecord);
-    const secondState = this.getTimelineState(secondRecord);
-    const stateResult = this.timelinePriority[firstState] - this.timelinePriority[secondState];
-
-    if (stateResult !== 0) {
-      return stateResult;
-    }
-
-    const firstDate = this.getSortDate(firstRecord);
-    const secondDate = this.getSortDate(secondRecord);
-
-    if (firstDate && secondDate && firstDate !== secondDate) {
-      return firstDate.localeCompare(secondDate);
-    }
-
-    if (firstDate && !secondDate) {
-      return -1;
-    }
-
-    if (!firstDate && secondDate) {
-      return 1;
-    }
-
-    return firstRecord.createdAt.localeCompare(secondRecord.createdAt);
-  }
-
-  private getSortDate(record: AnimalCareRecord): string | null {
-    return this.getAlertDate(record) || record.completedDate || record.createdAt || null;
-  }
-
-  private getDaysUntil(dateValue: string): number {
-    const targetDate = this.parseDateOnly(dateValue);
-
-    if (!targetDate) {
-      return 0;
-    }
-
-    const today = new Date();
-    const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const millisecondsPerDay = 1000 * 60 * 60 * 24;
-
-    return Math.round((targetDate.getTime() - todayDate.getTime()) / millisecondsPerDay);
-  }
-
-  private getTodayDate(): string {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  }
-
-  private parseDateOnly(dateValue: string): Date | null {
-    const [year, month, day] = dateValue.split('-').map((part) => Number(part));
-
-    if (!year || !month || !day) {
-      return null;
-    }
-
-    return new Date(year, month - 1, day);
-  }
-
-  private toNullableString(value: string | null | undefined): string | null {
-    const trimmedValue = value?.trim();
-
-    return trimmedValue ? trimmedValue : null;
-  }
-
-  private isCareType(value: unknown): value is AnimalCareType {
-    return value === 'vaccine' || value === 'deworming' || value === 'appointment';
   }
 }
