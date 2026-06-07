@@ -1,9 +1,188 @@
-<section class="pagina-dashboard">
-  <div class="caixa-dashboard">
-    <h1>Login feito com sucesso</h1>
+<section class="dashboard-page">
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Olá, {{ userName }}. Aqui está o resumo da organização para hoje.</p>
+    </div>
 
-    <p>
-      Esta é a página privada pós login
-    </p>
+    <span class="today-label">{{ today | date: 'dd/MM/yyyy' }}</span>
   </div>
+
+  <div *ngIf="isLoading" class="loading">A carregar dashboard...</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <div class="summary-grid">
+      <article class="summary-card">
+        <span>Animais registados</span>
+        <strong>{{ totalAnimals }}</strong>
+        <small>{{ availableAnimalsCount }} disponíveis</small>
+      </article>
+
+      <article class="summary-card">
+        <span>Em acompanhamento</span>
+        <strong>{{ inCareAnimalsCount }}</strong>
+        <small>Tratamento ou acolhimento</small>
+      </article>
+
+      <article class="summary-card">
+        <span>Processos em aberto</span>
+        <strong>{{ pendingAdoptions.length }}</strong>
+        <small>{{ completedAdoptionsCount }} adoções concluídas</small>
+      </article>
+
+      <article class="summary-card warning">
+        <span>Avisos de cuidados</span>
+        <strong>{{ overdueCareRecords.length + dueSoonCareRecords.length }}</strong>
+        <small>{{ overdueCareRecords.length }} em atraso</small>
+      </article>
+    </div>
+
+    <section class="notices-section">
+      <div class="section-header">
+        <h2>Avisos importantes</h2>
+      </div>
+
+      <div *ngIf="!hasImportantNotices" class="empty-state">
+        Não existem avisos importantes neste momento.
+      </div>
+
+      <div *ngIf="hasImportantNotices" class="notice-list">
+        <a
+          *ngFor="let notice of importantNotices"
+          class="notice-item"
+          [class.danger]="notice.severity === 'danger'"
+          [class.warning]="notice.severity === 'warning'"
+          [class.info]="notice.severity === 'info'"
+          [routerLink]="notice.route"
+        >
+          <span class="notice-count">{{ notice.count || 'Ver' }}</span>
+
+          <span>
+            <strong>{{ notice.title }}</strong>
+            <small>{{ notice.description }}</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="dashboard-grid">
+      <section class="dashboard-panel">
+        <div class="section-header">
+          <h2>Próximos cuidados</h2>
+          <a routerLink="/app/care">Ver cuidados</a>
+        </div>
+
+        <div *ngIf="urgentCareRecords.length === 0" class="empty-state">
+          Não existem cuidados em atraso ou próximos.
+        </div>
+
+        <div *ngIf="urgentCareRecords.length > 0" class="record-list">
+          <a
+            *ngFor="let record of urgentCareRecords"
+            class="record-row"
+            [routerLink]="['/app/animals', record.animalId, 'edit']"
+          >
+            <span>
+              <strong>{{ record.animal.name }}</strong>
+              <small>{{ getCareTypeLabel(record.type) }} · {{ record.title }}</small>
+              <small>{{ getCareRecordDescription(record) }}</small>
+            </span>
+
+            <span class="record-meta">
+              <span
+                class="timeline-badge"
+                [class.overdue]="getTimelineState(record) === 'overdue'"
+                [class.due-soon]="getTimelineState(record) === 'due_soon'"
+              >
+                {{ getTimelineLabel(record) }}
+              </span>
+              <small>{{ getTimelineDescription(record) }}</small>
+              <small>
+                {{
+                  getCareRecordDate(record) ? (getCareRecordDate(record) | date: 'dd/MM/yyyy') : '-'
+                }}
+              </small>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="dashboard-panel">
+        <div class="section-header">
+          <h2>Adoções pendentes</h2>
+          <a routerLink="/app/adoptions">Ver processos</a>
+        </div>
+
+        <div *ngIf="recentPendingAdoptions.length === 0" class="empty-state">
+          Não existem processos de adoção em aberto.
+        </div>
+
+        <div *ngIf="recentPendingAdoptions.length > 0" class="record-list">
+          <a
+            *ngFor="let adoption of recentPendingAdoptions"
+            class="record-row"
+            [routerLink]="['/app/animals', adoption.animal.id, 'edit']"
+          >
+            <span>
+              <strong>{{ adoption.animal.name }}</strong>
+              <small>{{ getAdoptionAnimalDescription(adoption) }}</small>
+              <small>Adotante: {{ getAdoptionAdopterName(adoption) }}</small>
+            </span>
+
+            <span class="record-meta">
+              <span class="status-badge">Em aberto</span>
+              <small>Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}</small>
+            </span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <section class="dashboard-panel">
+      <div class="section-header">
+        <h2>Animais recentes</h2>
+        <a routerLink="/app/animals">Ver animais</a>
+      </div>
+
+      <div *ngIf="recentAnimals.length === 0" class="empty-state">
+        Ainda não existem animais registados nesta organização.
+      </div>
+
+      <div *ngIf="recentAnimals.length > 0" class="record-list">
+        <a
+          *ngFor="let animal of recentAnimals"
+          class="record-row"
+          [routerLink]="['/app/animals', animal.id, 'edit']"
+        >
+          <span>
+            <strong>{{ animal.name }}</strong>
+            <small>{{ getAnimalDescription(animal) }}</small>
+            <small>{{ getAnimalStatusLabel(animal.status) }}</small>
+          </span>
+
+          <span class="record-meta">
+            <span
+              class="availability-badge"
+              [class.available]="animal.available"
+              [class.unavailable]="!animal.available"
+            >
+              {{ animal.available ? 'Disponível' : 'Indisponível' }}
+            </span>
+            <small>Registado em {{ animal.createdAt | date: 'dd/MM/yyyy' }}</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <nav class="quick-actions" aria-label="Ações rápidas">
+      <a routerLink="/app/animals/new">Adicionar animal</a>
+      <a routerLink="/app/adopters/new">Registar adotante</a>
+      <a routerLink="/app/adoptions">Iniciar adoção</a>
+      <a routerLink="/app/care">Registar cuidado</a>
+    </nav>
+  </ng-container>
 </section>
