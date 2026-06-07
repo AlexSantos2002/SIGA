@@ -48,7 +48,9 @@ export class AuthService {
     if (!user) {
       await this.logout();
 
-      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+      throw new DBError(
+        ERROR_CODES.DB_ERROR_UPDATE
+      );
     }
 
     this.currentUserSubject.next(user);
@@ -70,6 +72,7 @@ export class AuthService {
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
+
 
   /**
    * Retorna o ID da organização a qual o utilizador
@@ -119,14 +122,21 @@ export class AuthService {
    * o utilizador existe no Auth, mas ainda não existe em public.users.
    */
   private async getUserProfile(userId: string): Promise<User | null> {
-    const { data, error } = await supabase.from('users').select('*').eq('id', userId).maybeSingle();
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', userId)
+      .maybeSingle();
 
     if (error) {
       throw new AuthenticationError(ERROR_CODES.AUTHENTICATION_ERROR);
     }
 
     if (!data) {
-      console.warn('Perfil não encontrado em public.users para o utilizador:', userId);
+      console.warn(
+        'Perfil não encontrado em public.users para o utilizador:',
+        userId
+      );
 
       return null;
     }

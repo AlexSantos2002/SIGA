@@ -47,6 +47,10 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   INVALID_CREDENTIALS: 'Email ou palavra-passe incorretos',
   NOT_AUTHENTICATED: 'Usuário não autenticado',
 
+  // STORAGE
+  IMAGE_UPLOAD_FAILED: 'Falha ao armazenar imagem',
+  IMAGE_DELETE_FAILED: 'Falha ao deletar imagem',
+
   // GENÉRICOS
   DB_ERROR: 'Ocorreu um erro na base de dados.',
   DB_ERROR_UPDATE: 'Não foi possível realizar a operação.',

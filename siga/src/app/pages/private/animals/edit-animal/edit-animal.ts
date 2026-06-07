@@ -19,6 +19,7 @@ import { AnimalSummaryCards } from './components/animal-summary-cards';
 import { AnimalVaccinesSection } from './components/animal-vaccines-section';
 import { AnimalVetAppointmentsSection } from './components/animal-vet-appointments-section';
 import { EditAnimalModal } from './edit-animal.types';
+import { ImageService } from '../../../../services/image.service';
 
 @Component({
   selector: 'app-edit-animal',
@@ -40,6 +41,8 @@ export class EditAnimal implements OnInit {
   animal: Animal | null = null;
   animalId = '';
   acceptedAdoption: Adoption | null = null;
+  animalImage: string | null = null;
+  selectedImageFile: File | null = null;
 
   form: FormGroup;
   vaccineForm: FormGroup;
@@ -63,6 +66,7 @@ export class EditAnimal implements OnInit {
     private vaccineService: AnimalVaccineService,
     private dewormingService: AnimalDewormingService,
     private vetAppointmentService: AnimalVetAppointmentService,
+    private imageService: ImageService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
   ) {
@@ -365,6 +369,7 @@ export class EditAnimal implements OnInit {
         ]);
 
       this.animal = animal;
+      this.animalImage = this.imageService.getAnimalImage(animal.imagePath);
       this.vaccines = vaccines;
       this.dewormingRecords = dewormingRecords;
       this.vetAppointments = vetAppointments;

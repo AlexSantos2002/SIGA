@@ -106,9 +106,24 @@
         Cancelar
       </a>
 
+      <label for="image-upload" class="upload-button">
+        {{ selectedFile?.name || 'Adicionar imagem' }}
+      </label>
+
+        <input
+          id="image-upload"
+          class="image-button"
+          type="file"
+          hidden
+          accept="image/jpeg,image/png,image/webp"
+          (change)="onFileSelected($event)"
+        >
+
       <button type="submit" [disabled]="isSubmitting">
         {{ isSubmitting ? 'A guardar...' : 'Guardar animal' }}
       </button>
+
+
     </div>
   </form>
 </section>

@@ -5,7 +5,7 @@ import { Animal } from '../../models/animal/animal.model';
 import { RegisterAnimalRequest } from '../../models/animal/register-animal-request';
 import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
-import { AuthenticationError, DBError, NotFoundError } from '../../error/app-error';
+import { AuthenticationError, DBError } from '../../error/app-error';
 import { ERROR_CODES } from '../../error/error-codes';
 
 @Injectable({
@@ -38,6 +38,8 @@ export class AnimalService {
       hasMicrochip: animal.has_microchip ?? false,
       microchipNumber: animal.microchip_number,
       microchipDate: animal.microchip_date,
+
+      imagePath: animal.image_path,
 
       createdAt: animal.created_at,
     };
@@ -179,6 +181,7 @@ export class AnimalService {
           microchip_number,
           microchip_date,
           created_at,
+          image_path,
           species:species_id (
             id,
             name
@@ -204,7 +207,7 @@ export class AnimalService {
    * @description
    * Regista um novo animal na organização autenticada.
    */
-  async createAnimal(request: RegisterAnimalRequest): Promise<void> {
+  async createAnimal(request: RegisterAnimalRequest): Promise<Animal> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -245,6 +248,8 @@ export class AnimalService {
     if (error) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
+
+    return this.mapAnimal(data);
   }
 
   /**
@@ -277,6 +282,7 @@ export class AnimalService {
           microchip_number,
           microchip_date,
           created_at,
+          image_path,
           species:species_id (
             id,
             name

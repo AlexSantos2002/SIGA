@@ -10,6 +10,8 @@ import {
 import { DatePicker } from '../../../../components/date-picker/date-picker';
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { withTimeout } from '../../../../utils/utils';
+import { ImageService } from '../../../../services/image.service';
+import { DBError } from '../../../../error/app-error';
 
 @Component({
   selector: 'app-add-animal',
@@ -21,6 +23,8 @@ import { withTimeout } from '../../../../utils/utils';
 export class AddAnimal {
   form: FormGroup;
 
+  selectedFile: File | null = null;
+
   isSubmitting = false;
   errorMessage = '';
 
@@ -30,6 +34,7 @@ export class AddAnimal {
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
+    private imageService: ImageService,
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
@@ -53,6 +58,22 @@ export class AddAnimal {
     return birthDate;
   }
 
+  onFileSelected(event: Event): void {
+
+    const input = event.target as HTMLInputElement;
+
+
+    if (!input.files?.length) {
+      return;
+    }
+
+    this.selectedFile = input.files[0];
+  }
+
+  /**
+   * @description
+   * Regista o animal na organização autenticada.
+   */
   async submit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -64,7 +85,7 @@ export class AddAnimal {
       this.errorMessage = '';
       this.cdr.detectChanges();
 
-      await withTimeout(
+      const animal = await withTimeout(
         this.animalService.createAnimal({
           name: this.form.value.name.trim(),
           speciesName: this.form.value.speciesName.trim(),
@@ -75,8 +96,14 @@ export class AddAnimal {
         }),
       );
 
+      // Faz o upload da imagem
+      if (this.selectedFile) {
+        await this.imageService.uploadImage(animal.id, this.selectedFile);
+      }
+
       await this.router.navigate(['/app/animals']);
     } catch (error: any) {
+
       console.error('Erro ao adicionar animal:', error);
 
       this.errorMessage =
