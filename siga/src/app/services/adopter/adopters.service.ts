@@ -60,12 +60,15 @@ export class AdoptersService {
 
   async register(request: RegisterAdopterRequest): Promise<Adopter> {
     const organizationId = this.getCurrentOrganizationId();
+    const payload = buildAdopterPayload(request);
+
+    await this.ensureEmailAvailableInOrganization(payload.email, organizationId);
 
     const { data, error } = await withTimeout<any>(
       supabase
         .from('adopters')
         .insert({
-          ...buildAdopterPayload(request),
+          ...payload,
           organization_id: organizationId,
         })
         .select()
@@ -73,6 +76,10 @@ export class AdoptersService {
     );
 
     if (error?.code === SUPABASE_ERROR_CODES.UNIQUE_VIOLATION) {
+      if (this.isGlobalEmailConstraintError(error)) {
+        throw new DBError(ERROR_CODES.ADOPTERS_EMAIL_SCOPE_OUTDATED);
+      }
+
       throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
     }
 
@@ -89,11 +96,14 @@ export class AdoptersService {
 
   async update(adopterId: string, request: UpdateAdopterRequest): Promise<Adopter> {
     const organizationId = this.getCurrentOrganizationId();
+    const payload = buildAdopterPayload(request);
+
+    await this.ensureEmailAvailableInOrganization(payload.email, organizationId, adopterId);
 
     const { data, error } = await withTimeout<any>(
       supabase
         .from('adopters')
-        .update(buildAdopterPayload(request))
+        .update(payload)
         .eq('id', adopterId)
         .eq('organization_id', organizationId)
         .select()
@@ -101,6 +111,10 @@ export class AdoptersService {
     );
 
     if (error?.code === SUPABASE_ERROR_CODES.UNIQUE_VIOLATION) {
+      if (this.isGlobalEmailConstraintError(error)) {
+        throw new DBError(ERROR_CODES.ADOPTERS_EMAIL_SCOPE_OUTDATED);
+      }
+
       throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
     }
 
@@ -143,6 +157,33 @@ export class AdoptersService {
     return organizationId;
   }
 
+  private async ensureEmailAvailableInOrganization(
+    email: string,
+    organizationId: string,
+    ignoredAdopterId?: string,
+  ): Promise<void> {
+    let query = supabase
+      .from('adopters')
+      .select('id')
+      .eq('organization_id', organizationId)
+      .eq('email', email)
+      .limit(1);
+
+    if (ignoredAdopterId) {
+      query = query.neq('id', ignoredAdopterId);
+    }
+
+    const { data, error } = await withTimeout<any>(query);
+
+    if (error) {
+      throw new DBError(ERROR_CODES.UNABLE_TO_GET_ADOPTER);
+    }
+
+    if ((data ?? []).length > 0) {
+      throw new BusinessError(ERROR_CODES.EMAIL_ALREADY_EXISTS);
+    }
+  }
+
   private isMissingAdopterColumnError(error: any): boolean {
     const message = `${error?.message ?? ''} ${error?.details ?? ''}`;
 
@@ -154,5 +195,11 @@ export class AdoptersService {
       message.includes('document_type') ||
       message.includes('is_flagged')
     );
+  }
+
+  private isGlobalEmailConstraintError(error: any): boolean {
+    const message = `${error?.message ?? ''} ${error?.details ?? ''}`;
+
+    return message.includes('adopters_email_key');
   }
 }

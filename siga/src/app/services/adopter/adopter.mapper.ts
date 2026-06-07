@@ -95,7 +95,7 @@ export function buildAdopterPayload(
   return {
     name: request.name.trim(),
     last_name: request.lastName.trim(),
-    email: request.email.trim(),
+    email: request.email.trim().toLowerCase(),
     phone: toNullableString(request.phone),
     document_type: toNullableString(request.documentType),
     document_number: toNullableString(request.documentNumber),

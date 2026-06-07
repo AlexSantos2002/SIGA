@@ -10,6 +10,7 @@ import { ERROR_CODES } from '../../error/error-codes';
 import { SUPABASE_ERROR_CODES } from '../../error/supabase-error-codes';
 import { AuthService } from '../auth/auth.service';
 import { AdoptersService } from '../adopter/adopters.service';
+import { AnimalCareService } from '../animal-health/animal-care.service';
 
 @Injectable({
   providedIn: 'root',
@@ -68,6 +69,7 @@ export class AdoptionService {
     private authService: AuthService,
     private animalService: AnimalService,
     private adoptersService: AdoptersService,
+    private animalCareService: AnimalCareService,
   ) {}
 
   /**
@@ -113,7 +115,7 @@ export class AdoptionService {
 
     // Atualiza o estado do animal caso a adoção já esteja aceite
     if (request.status === 'aceita') {
-      await this.animalService.markAnimalAsAdopted(animal.id);
+      await this.finalizeAnimalAdoption(animal.id);
     }
 
     return this.toAdoption(data);
@@ -275,7 +277,7 @@ export class AdoptionService {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
-    await this.animalService.markAnimalAsAdopted(animal.id);
+    await this.finalizeAnimalAdoption(animal.id);
 
     return this.toAdoption(data);
   }
@@ -319,7 +321,7 @@ export class AdoptionService {
 
     // Caso seja aceite, muda o estado do animal
     if (request.newStatus === 'aceita') {
-      await this.animalService.markAnimalAsAdopted(adoption.animal.id);
+      await this.finalizeAnimalAdoption(adoption.animal.id);
 
       const { error: rejectPendingError } = await supabase
         .from('adoptions')
@@ -375,6 +377,11 @@ export class AdoptionService {
   private isValidStatusTransition(newStatus: string): boolean {
     const allowedTransitions = ['aceita', 'rejeitada', 'pendente', 'devolvida'];
     return allowedTransitions.includes(newStatus) ?? false;
+  }
+
+  private async finalizeAnimalAdoption(animalId: string): Promise<void> {
+    await this.animalService.markAnimalAsAdopted(animalId);
+    await this.animalCareService.clearScheduledCareForAdoptedAnimal(animalId);
   }
 
   /**

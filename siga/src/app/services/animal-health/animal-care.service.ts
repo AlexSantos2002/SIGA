@@ -16,6 +16,71 @@ import { AuthService } from '../auth/auth.service';
 export class AnimalCareService {
   constructor(private authService: AuthService) {}
 
+  async clearScheduledCareForAdoptedAnimal(animalId: string): Promise<void> {
+    const organizationId = this.authService.getCurrentOrganizationId();
+
+    if (!organizationId) {
+      throw new AuthenticationError(ERROR_CODES.NOT_AUTHENTICATED);
+    }
+
+    const [
+      pendingVaccinesResult,
+      takenVaccinesResult,
+      dewormingResult,
+      pendingAppointmentsResult,
+      completedAppointmentsResult,
+    ] = await Promise.all([
+      withTimeout<any>(
+        supabase
+          .from('animal_vaccines')
+          .delete()
+          .eq('animal_id', animalId)
+          .eq('organization_id', organizationId)
+          .eq('status', 'pendente'),
+      ),
+      withTimeout<any>(
+        supabase
+          .from('animal_vaccines')
+          .update({ next_due_date: null })
+          .eq('animal_id', animalId)
+          .eq('organization_id', organizationId)
+          .eq('status', 'tomada'),
+      ),
+      withTimeout<any>(
+        supabase
+          .from('animal_deworming')
+          .update({ next_due_date: null })
+          .eq('animal_id', animalId)
+          .eq('organization_id', organizationId),
+      ),
+      withTimeout<any>(
+        supabase
+          .from('animal_vet_appointments')
+          .delete()
+          .eq('animal_id', animalId)
+          .eq('organization_id', organizationId)
+          .is('result', null),
+      ),
+      withTimeout<any>(
+        supabase
+          .from('animal_vet_appointments')
+          .update({ next_appointment_date: null })
+          .eq('animal_id', animalId)
+          .eq('organization_id', organizationId),
+      ),
+    ]);
+
+    if (
+      pendingVaccinesResult.error ||
+      takenVaccinesResult.error ||
+      dewormingResult.error ||
+      pendingAppointmentsResult.error ||
+      completedAppointmentsResult.error
+    ) {
+      throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
+    }
+  }
+
   async getAll(): Promise<AnimalCareRecord[]> {
     const organizationId = this.authService.getCurrentOrganizationId();
 

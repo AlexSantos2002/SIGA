@@ -93,16 +93,20 @@ export class Dashboard implements OnInit {
     return this.adopters.filter((adopter) => adopter.isFlagged);
   }
 
+  get activeCareRecords(): AnimalCareRecord[] {
+    return this.careRecords.filter((record) => record.animal.status !== 'adotado');
+  }
+
   get overdueCareRecords(): AnimalCareRecord[] {
-    return this.careRecords.filter((record) => this.getTimelineState(record) === 'overdue');
+    return this.activeCareRecords.filter((record) => this.getTimelineState(record) === 'overdue');
   }
 
   get dueSoonCareRecords(): AnimalCareRecord[] {
-    return this.careRecords.filter((record) => this.getTimelineState(record) === 'due_soon');
+    return this.activeCareRecords.filter((record) => this.getTimelineState(record) === 'due_soon');
   }
 
   get urgentCareRecords(): AnimalCareRecord[] {
-    return this.careRecords
+    return this.activeCareRecords
       .filter((record) => {
         const state = this.getTimelineState(record);
 
