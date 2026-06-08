@@ -3,34 +3,24 @@ import { supabase } from '../../../supabase/supabase';
 import { DBError } from '../error/app-error';
 import { ERROR_CODES } from '../error/error-codes';
 
-
 /**
- * Serviço responsável pelo CRUD de imagens
- * de animais
+ * Gere as imagens dos animais no Supabase Storage.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
-
   /**
-   * Faz o upload de uma imagem para o Supabase Storage
+   * Envia uma imagem para o Supabase Storage.
    * @param animalId id do animal
    * @param file imagem para ser guardada
    */
-  private async updateImageToStorage(
-    animalId: string,
-    file: File
-  ): Promise<string> {
-
+  private async updateImageToStorage(animalId: string, file: File): Promise<string> {
     const extension = file.name.split('.').pop();
 
-    const filePath =
-      `${animalId}/${crypto.randomUUID()}.${extension}`;
+    const filePath = `${animalId}/${crypto.randomUUID()}.${extension}`;
 
-    const { error } = await supabase.storage
-      .from('animals')
-      .upload(filePath, file);
+    const { error } = await supabase.storage.from('animals').upload(filePath, file);
 
     if (error) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
@@ -40,37 +30,27 @@ export class ImageService {
   }
 
   /**
-   * Remove uma imagem do Supabase Storage
+   * Remove uma imagem do Supabase Storage.
    * @param imagePath path da imagem armazenada
    */
-  private async deleteImageFromStorage(
-    imagePath: string
-  ): Promise<void> {
-
-    const { error } = await supabase.storage
-      .from('animals')
-      .remove([imagePath]);
+  private async deleteImageFromStorage(imagePath: string): Promise<void> {
+    const { error } = await supabase.storage.from('animals').remove([imagePath]);
 
     if (error) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
   }
 
-
   /**
-   * Atualiza a tabela "animals" com a imagem armazenada no Supabase Storage
+   * Atualiza a tabela "animals" com a imagem armazenada no Supabase Storage.
    * @param animalId id do animal a ser atualizado
    * @param imagePath path da imagem
    */
-  private async updateAnimalTableImage(
-    animalId: string,
-    imagePath: string
-  ): Promise<void> {
-
+  private async updateAnimalTableImage(animalId: string, imagePath: string): Promise<void> {
     const { error } = await supabase
       .from('animals')
       .update({
-        image_path: imagePath
+        image_path: imagePath,
       })
       .eq('id', animalId);
 
@@ -80,17 +60,14 @@ export class ImageService {
   }
 
   /**
-   * Remove a referência da imagem da tabela animals
+   * Remove a referencia da imagem da tabela animals.
    * @param animalId id do animal
    */
-  private async deleteAnimalTableImage(
-    animalId: string
-  ): Promise<void> {
-
+  private async deleteAnimalTableImage(animalId: string): Promise<void> {
     const { error } = await supabase
       .from('animals')
       .update({
-        image_path: null
+        image_path: null,
       })
       .eq('id', animalId);
 
@@ -100,9 +77,7 @@ export class ImageService {
   }
 
   /**
-   * Faz o upload de uma nova imagem para um animal,
-   * realizando o upload no supabase storage e atualizando
-   * a table animals
+   * Associa uma nova imagem a um animal.
    * @param animalId id so animal
    * @param file imagem para ser armazenada
    */
@@ -118,66 +93,66 @@ export class ImageService {
   }
 
   /**
-   * Obtem a URL da imagem de um animal.
-   * Retorna null caso o animal não possua imagem
+   * Obtem a URL publica da imagem de um animal.
+   * Retorna null caso o animal nao possua imagem.
    * @param imagePath imagePath: path para a imagem
    */
-  getAnimalImage(imagePath: string): string | null {
+  getAnimalImage(imagePath: string | null | undefined): string | null {
     if (!imagePath) {
       return null;
     }
 
-    const { data } = supabase.storage
-      .from('animals')
-      .getPublicUrl(imagePath)
+    const { data } = supabase.storage.from('animals').getPublicUrl(imagePath);
 
     return data.publicUrl;
   }
 
-
   /**
-   * Realiza a substituição de uma imagem
+   * Substitui a imagem de um animal.
    * @param animalId id do animal
    * @param oldImagePath path da imagem anterior
    * @param file nova imagem para substituição
    */
-  async replaceImage(
-    animalId: string,
-    oldImagePath: string,
-    file: File
-  ): Promise<void> {
+  async replaceImage(animalId: string, oldImagePath: string, file: File): Promise<void> {
+    let newImagePath: string | null = null;
 
-    let newImagePath: string;
+    try {
+      newImagePath = await this.updateImageToStorage(animalId, file);
+
+      await this.updateAnimalTableImage(animalId, newImagePath);
+    } catch (err) {
+      if (newImagePath) {
+        try {
+          await this.deleteImageFromStorage(newImagePath);
+        } catch (cleanupError) {
+          console.warn(
+            'Nao foi possivel remover a nova imagem apos falha de substituicao.',
+            cleanupError,
+          );
+        }
+      }
+
+      throw new DBError(ERROR_CODES.IMAGE_UPLOAD_FAILED);
+    }
 
     try {
       await this.deleteImageFromStorage(oldImagePath);
-
-      newImagePath = await this.updateImageToStorage(
-        animalId,
-        file
-      );
-
-      await this.updateAnimalTableImage(
-        animalId,
-        newImagePath
-      );
-    } catch (err) {
-      throw new DBError(ERROR_CODES.IMAGE_UPLOAD_FAILED);
+    } catch (cleanupError) {
+      console.warn('Nao foi possivel remover a imagem antiga apos substituicao.', cleanupError);
     }
   }
 
   /**
-   * Remove a imagem de um animal
+   * Remove a imagem de um animal.
    * @param animalId id do animal
    * @param imagePath path da imagem armazenada
    */
-  async deleteImage(
-    animalId: string,
-    imagePath: string
-  ): Promise<void> {
-
+  async deleteImage(animalId: string, imagePath: string | null | undefined): Promise<void> {
     try {
-      await this.deleteImageFromStorage(imagePath);
+      if (imagePath) {
+        await this.deleteImageFromStorage(imagePath);
+      }
+
       await this.deleteAnimalTableImage(animalId);
     } catch (err) {
       throw new DBError(ERROR_CODES.IMAGE_DELETE_FAILED);

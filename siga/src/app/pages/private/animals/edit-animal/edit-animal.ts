@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
@@ -38,6 +38,8 @@ import { ImageService } from '../../../../services/image.service';
   styleUrl: './edit-animal.css',
 })
 export class EditAnimal implements OnInit {
+  @ViewChild('imageInput') imageInput?: ElementRef<HTMLInputElement>;
+
   animal: Animal | null = null;
   animalId = '';
   acceptedAdoption: Adoption | null = null;
@@ -55,6 +57,7 @@ export class EditAnimal implements OnInit {
 
   isLoading = true;
   isSubmitting = false;
+  isImageSubmitting = false;
   errorMessage = '';
 
   activeModal: EditAnimalModal = null;
@@ -173,6 +176,82 @@ export class EditAnimal implements OnInit {
     this.activeModal = null;
   }
 
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    this.errorMessage = '';
+    this.selectedImageFile = input.files?.[0] ?? null;
+  }
+
+  openImagePicker(): void {
+    if (this.isImageSubmitting) {
+      return;
+    }
+
+    this.imageInput?.nativeElement.click();
+  }
+
+  clearSelectedImage(): void {
+    this.selectedImageFile = null;
+
+    if (this.imageInput) {
+      this.imageInput.nativeElement.value = '';
+    }
+  }
+
+  async saveSelectedImage(): Promise<void> {
+    if (!this.animal || !this.selectedImageFile) {
+      return;
+    }
+
+    try {
+      this.isImageSubmitting = true;
+      this.errorMessage = '';
+      this.cdr.detectChanges();
+
+      if (this.animal.imagePath) {
+        await this.imageService.replaceImage(
+          this.animal.id,
+          this.animal.imagePath,
+          this.selectedImageFile,
+        );
+      } else {
+        await this.imageService.uploadImage(this.animal.id, this.selectedImageFile);
+      }
+
+      await this.reloadAnimal();
+      this.clearSelectedImage();
+    } catch (error: any) {
+      console.error('Erro ao guardar imagem do animal:', error);
+      this.errorMessage = error?.message || error?.details || 'Nao foi possivel guardar a imagem.';
+    } finally {
+      this.isImageSubmitting = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  async removeImage(): Promise<void> {
+    if (!this.animal?.imagePath) {
+      return;
+    }
+
+    try {
+      this.isImageSubmitting = true;
+      this.errorMessage = '';
+      this.cdr.detectChanges();
+
+      await this.imageService.deleteImage(this.animal.id, this.animal.imagePath);
+      await this.reloadAnimal();
+      this.clearSelectedImage();
+    } catch (error: any) {
+      console.error('Erro ao remover imagem do animal:', error);
+      this.errorMessage = error?.message || error?.details || 'Nao foi possivel remover a imagem.';
+    } finally {
+      this.isImageSubmitting = false;
+      this.cdr.detectChanges();
+    }
+  }
+
   async submit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -210,6 +289,7 @@ export class EditAnimal implements OnInit {
 
       this.animal = updatedAnimal;
       this.acceptedAdoption = updatedAnimal.status === 'adotado' ? updatedAcceptedAdoption : null;
+      this.animalImage = this.imageService.getAnimalImage(updatedAnimal.imagePath);
       this.patchAnimalForm(updatedAnimal);
       this.activeModal = null;
     } catch (error: any) {
@@ -406,5 +486,13 @@ export class EditAnimal implements OnInit {
 
   private getBirthDate(): string {
     return this.form.value.birthDate;
+  }
+
+  private async reloadAnimal(): Promise<void> {
+    const animal = await this.animalService.getAnimalFromCurrentOrganization(this.animalId);
+
+    this.animal = animal;
+    this.animalImage = this.imageService.getAnimalImage(animal.imagePath);
+    this.patchAnimalForm(animal);
   }
 }

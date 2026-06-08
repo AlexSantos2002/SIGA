@@ -9,6 +9,7 @@ import {
 } from '../../../constants/form-options';
 import { Animal } from '../../../models/animal/animal.model';
 import { AnimalService } from '../../../services/animal/animal.service';
+import { ImageService } from '../../../services/image.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -51,6 +52,7 @@ export class Animals implements OnInit {
 
   constructor(
     private animalService: AnimalService,
+    private imageService: ImageService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -128,6 +130,10 @@ export class Animals implements OnInit {
 
   getStatusLabel(status: string | null): string {
     return getMappedLabel(ANIMAL_STATUS_LABELS, status);
+  }
+
+  getAnimalImageUrl(animal: Animal): string | null {
+    return this.imageService.getAnimalImage(animal.imagePath);
   }
 
   private async loadAnimals(): Promise<void> {

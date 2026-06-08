@@ -40,6 +40,29 @@
   min-width: 960px;
 }
 
+.adoptions-page .animal-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.adoptions-page .animal-thumbnail {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #f8fafc;
+}
+
+.adoptions-page .animal-cell-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .adoptions-page .sort-header {
   border: 0;
   background: transparent;

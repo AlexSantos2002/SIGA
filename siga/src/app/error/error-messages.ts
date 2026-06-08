@@ -32,9 +32,8 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   // ADOTANTES
   ADOPTER_FLAGGED: 'Este adotante esta sinalizado e nao pode fazer novas adocoes',
   ADOPTERS_EMAIL_SCOPE_OUTDATED:
-    'A tabela de adotantes ainda limita emails globalmente. Executa o script supabase/adopters-email-per-organization.sql no SQL Editor da Supabase.',
-  ADOPTERS_SCHEMA_OUTDATED:
-    'A tabela de adotantes ainda nao tem os campos novos. Executa o script supabase/adopters-extra-fields.sql no SQL Editor da Supabase.',
+    'O problema deve-se a uma regra antiga que ainda limita emails de adotantes globalmente.',
+  ADOPTERS_SCHEMA_OUTDATED: 'O problema deve-se a campos em falta na tabela de adotantes.',
   UNABLE_TO_GET_ADOPTER: 'Não foi possível buscar o adotante',
   UNABLE_TO_GET_ADOPTERS: 'Não foi possível buscar os adotantes',
 

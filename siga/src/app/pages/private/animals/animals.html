@@ -116,7 +116,18 @@
 
       <tbody>
         <tr *ngFor="let animal of sortedAnimals">
-          <td>{{ animal.name }}</td>
+          <td>
+            <div class="animal-name-cell">
+              <img
+                *ngIf="getAnimalImageUrl(animal) as imageUrl"
+                class="animal-thumbnail"
+                [src]="imageUrl"
+                [alt]="'Imagem de ' + animal.name"
+              />
+
+              <span>{{ animal.name }}</span>
+            </div>
+          </td>
 
           <td>{{ animal.species?.name || '—' }}</td>
 

@@ -5,9 +5,7 @@
       <p>Regista um novo animal associado à tua organização.</p>
     </div>
 
-    <a routerLink="/app/animals" class="back-button">
-      Voltar à lista
-    </a>
+    <a routerLink="/app/animals" class="back-button"> Voltar à lista </a>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="animal-form">
@@ -17,12 +15,7 @@
       <div class="form-grid">
         <div class="form-field">
           <label for="name">Nome do animal</label>
-          <input
-            id="name"
-            type="text"
-            formControlName="name"
-            placeholder="Ex: Rex"
-          />
+          <input id="name" type="text" formControlName="name" placeholder="Ex: Rex" />
 
           <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
             O nome é obrigatório.
@@ -75,9 +68,7 @@
           <label for="birthDate">Data de nascimento</label>
           <app-date-picker inputId="birthDate" formControlName="birthDate"></app-date-picker>
 
-          <small
-            *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid"
-          >
+          <small *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid">
             A data de nascimento é obrigatória.
           </small>
         </div>
@@ -102,28 +93,25 @@
     </div>
 
     <div class="form-actions">
-      <a routerLink="/app/animals" class="cancel-button">
-        Cancelar
-      </a>
+      <a routerLink="/app/animals" class="cancel-button"> Cancelar </a>
 
-      <label for="image-upload" class="upload-button">
-        {{ selectedFile?.name || 'Adicionar imagem' }}
-      </label>
+      <button type="button" [disabled]="isSubmitting" (click)="openImagePicker()">
+        {{ selectedFile?.name || 'Adicionar foto' }}
+      </button>
 
-        <input
-          id="image-upload"
-          class="image-button"
-          type="file"
-          hidden
-          accept="image/jpeg,image/png,image/webp"
-          (change)="onFileSelected($event)"
-        >
+      <input
+        #imageInput
+        id="image-upload"
+        class="image-button"
+        type="file"
+        hidden
+        accept="image/jpeg,image/png,image/webp"
+        (change)="onFileSelected($event)"
+      />
 
       <button type="submit" [disabled]="isSubmitting">
         {{ isSubmitting ? 'A guardar...' : 'Guardar animal' }}
       </button>
-
-
     </div>
   </form>
 </section>

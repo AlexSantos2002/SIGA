@@ -14,9 +14,76 @@
     {{ errorMessage }}
   </div>
 
-  <img src="{{animalImage}}" class="mb-4 rounded h-[300px]">
-
   <ng-container *ngIf="!isLoading && animal">
+    <section class="animal-image-section">
+      <div class="animal-image-preview" [class.empty]="!animalImage">
+        <img
+          *ngIf="animalImage; else noAnimalImage"
+          [src]="animalImage"
+          [alt]="'Imagem de ' + animal.name"
+        />
+
+        <ng-template #noAnimalImage>
+          <span>Sem imagem</span>
+        </ng-template>
+      </div>
+
+      <div class="animal-image-actions">
+        <button
+          type="button"
+          [class.primary-button]="!animal.imagePath"
+          [class.secondary-button]="animal.imagePath"
+          [disabled]="isImageSubmitting"
+          (click)="openImagePicker()"
+        >
+          {{ animal.imagePath ? 'Alterar foto' : 'Adicionar foto' }}
+        </button>
+
+        <input
+          #imageInput
+          id="animal-image-upload"
+          type="file"
+          hidden
+          accept="image/jpeg,image/png,image/webp"
+          (change)="onImageSelected($event)"
+        />
+
+        <span *ngIf="selectedImageFile" class="selected-image-name">
+          {{ selectedImageFile.name }}
+        </span>
+
+        <button
+          *ngIf="selectedImageFile"
+          type="button"
+          class="primary-button"
+          [disabled]="isImageSubmitting"
+          (click)="saveSelectedImage()"
+        >
+          {{ isImageSubmitting ? 'A guardar...' : 'Guardar foto' }}
+        </button>
+
+        <button
+          *ngIf="selectedImageFile"
+          type="button"
+          class="secondary-button"
+          [disabled]="isImageSubmitting"
+          (click)="clearSelectedImage()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          *ngIf="animal.imagePath"
+          type="button"
+          class="remove-record-button"
+          [disabled]="isImageSubmitting"
+          (click)="removeImage()"
+        >
+          {{ isImageSubmitting ? 'A remover...' : 'Remover foto' }}
+        </button>
+      </div>
+    </section>
+
     <app-animal-summary-cards
       [animal]="animal"
       [acceptedAdoption]="acceptedAdoption"

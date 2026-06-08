@@ -27,6 +27,7 @@ export class AdoptionService {
       gender,
       status,
       available,
+      image_path,
       species:species_id (
         id,
         name
@@ -391,10 +392,23 @@ export class AdoptionService {
     return {
       id: response.id,
       adopter: this.toAdopter(response.adopter),
-      animal: response.animal,
+      animal: this.toAdoptionAnimal(response.animal),
       status: response.status,
       applicationDate: response.application_date,
       decisionDate: response.decision_date,
+    };
+  }
+
+  private toAdoptionAnimal(response: any): Adoption['animal'] {
+    return {
+      id: response.id,
+      name: response.name,
+      gender: response.gender,
+      status: response.status,
+      available: response.available,
+      imagePath: response.image_path ?? null,
+      species: response.species,
+      breed: response.breed,
     };
   }
 

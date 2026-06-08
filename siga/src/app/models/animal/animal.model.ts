@@ -30,7 +30,7 @@ export interface Animal {
   microchipNumber: string | null;
   microchipDate: string | null;
 
-  imagePath: string;
+  imagePath: string | null;
 
   createdAt: string;
 }

@@ -13,6 +13,7 @@ export interface Adoption {
     gender: string | null;
     status: string | null;
     available: boolean;
+    imagePath: string | null;
     species: AdoptionAnimalRelation | null;
     breed: AdoptionAnimalRelation | null;
   };

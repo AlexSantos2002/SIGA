@@ -146,6 +146,23 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
+.animal-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.animal-thumbnail {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #f8fafc;
+}
+
 /* Disponibilidade */
 
 .availability-badge {

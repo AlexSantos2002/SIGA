@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
-import {
-  ANIMAL_GENDERS,
-  ANIMAL_STATUSES,
-} from '../../../../constants/form-options';
+import { ANIMAL_GENDERS, ANIMAL_STATUSES } from '../../../../constants/form-options';
 import { DatePicker } from '../../../../components/date-picker/date-picker';
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { withTimeout } from '../../../../utils/utils';
@@ -21,6 +18,8 @@ import { DBError } from '../../../../error/app-error';
   styleUrl: './add-animal.css',
 })
 export class AddAnimal {
+  @ViewChild('imageInput') imageInput?: ElementRef<HTMLInputElement>;
+
   form: FormGroup;
 
   selectedFile: File | null = null;
@@ -59,15 +58,21 @@ export class AddAnimal {
   }
 
   onFileSelected(event: Event): void {
-
     const input = event.target as HTMLInputElement;
-
 
     if (!input.files?.length) {
       return;
     }
 
     this.selectedFile = input.files[0];
+  }
+
+  openImagePicker(): void {
+    if (this.isSubmitting) {
+      return;
+    }
+
+    this.imageInput?.nativeElement.click();
   }
 
   /**
@@ -96,14 +101,13 @@ export class AddAnimal {
         }),
       );
 
-      // Faz o upload da imagem
+      // A imagem selecionada fica associada ao animal criado.
       if (this.selectedFile) {
         await this.imageService.uploadImage(animal.id, this.selectedFile);
       }
 
       await this.router.navigate(['/app/animals']);
     } catch (error: any) {
-
       console.error('Erro ao adicionar animal:', error);
 
       this.errorMessage =

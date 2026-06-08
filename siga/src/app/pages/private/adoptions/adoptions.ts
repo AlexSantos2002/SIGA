@@ -11,6 +11,7 @@ import { Animal } from '../../../models/animal/animal.model';
 import { AdoptionService } from '../../../services/adoption/adoption.service';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalService } from '../../../services/animal/animal.service';
+import { ImageService } from '../../../services/image.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -59,6 +60,7 @@ export class Adoptions implements OnInit, OnDestroy {
     private adoptionService: AdoptionService,
     private adoptersService: AdoptersService,
     private animalService: AnimalService,
+    private imageService: ImageService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = createAdoptionProcessForm(this.fb);
@@ -219,6 +221,10 @@ export class Adoptions implements OnInit, OnDestroy {
     const breed = adoption.animal.breed?.name;
 
     return [species, breed].filter(Boolean).join(' / ') || '-';
+  }
+
+  getAnimalImageUrl(adoption: Adoption): string | null {
+    return this.imageService.getAnimalImage(adoption.animal.imagePath);
   }
 
   getGenderLabel(gender: string | null | undefined): string {

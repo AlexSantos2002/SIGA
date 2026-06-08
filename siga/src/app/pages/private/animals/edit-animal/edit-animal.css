@@ -1,3 +1,82 @@
 :host {
   display: block;
 }
+
+.animal-image-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #cfd8dc;
+  padding: 12px;
+}
+
+.animal-image-preview {
+  width: 180px;
+  height: 140px;
+  flex: 0 0 180px;
+  overflow: hidden;
+  border: 1px solid #cfd8dc;
+  background: #fbfbfb;
+}
+
+.animal-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.animal-image-preview.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.animal-image-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.selected-image-name {
+  color: #475569;
+  font-size: 14px;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.animal-image-actions .remove-record-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .animal-image-section {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .animal-image-preview {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    flex-basis: auto;
+  }
+
+  .animal-image-actions,
+  .animal-image-actions button {
+    width: 100%;
+  }
+
+  .selected-image-name {
+    max-width: 100%;
+  }
+}

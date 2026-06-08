@@ -131,13 +131,27 @@
           <tbody>
             <tr *ngFor="let adoption of pendingAdoptions">
               <td>
-                <a class="primary-link" [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
-                  {{ adoption.animal.name }}
-                </a>
-                <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
-                <span class="tertiary-line"
-                  >Género: {{ getGenderLabel(adoption.animal.gender) }}</span
-                >
+                <div class="animal-cell">
+                  <img
+                    *ngIf="getAnimalImageUrl(adoption) as imageUrl"
+                    class="animal-thumbnail"
+                    [src]="imageUrl"
+                    [alt]="'Imagem de ' + adoption.animal.name"
+                  />
+
+                  <div class="animal-cell-content">
+                    <a
+                      class="primary-link"
+                      [routerLink]="['/app/animals', adoption.animal.id, 'edit']"
+                    >
+                      {{ adoption.animal.name }}
+                    </a>
+                    <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
+                    <span class="tertiary-line"
+                      >Género: {{ getGenderLabel(adoption.animal.gender) }}</span
+                    >
+                  </div>
+                </div>
               </td>
 
               <td>
@@ -265,10 +279,24 @@
           <tbody>
             <tr *ngFor="let adoption of sortedCompletedAdoptions">
               <td>
-                <a class="primary-link" [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
-                  {{ adoption.animal.name }}
-                </a>
-                <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
+                <div class="animal-cell">
+                  <img
+                    *ngIf="getAnimalImageUrl(adoption) as imageUrl"
+                    class="animal-thumbnail"
+                    [src]="imageUrl"
+                    [alt]="'Imagem de ' + adoption.animal.name"
+                  />
+
+                  <div class="animal-cell-content">
+                    <a
+                      class="primary-link"
+                      [routerLink]="['/app/animals', adoption.animal.id, 'edit']"
+                    >
+                      {{ adoption.animal.name }}
+                    </a>
+                    <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
+                  </div>
+                </div>
               </td>
 
               <td>
