@@ -90,6 +90,11 @@ export const routes: Routes = [
         path: 'care',
         loadComponent: () => import('./pages/private/care/care').then((m) => m.Care),
       },
+      {
+        path: 'statistics',
+        loadComponent: () =>
+          import('./pages/private/statistics/statistics').then((m) => m.Statistics),
+      },
     ],
   },
   {

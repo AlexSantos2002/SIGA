@@ -1,0 +1,259 @@
+<section class="statistics-page">
+  <div class="page-header">
+    <div>
+      <h1>Estatísticas</h1>
+      <p>Resumo visual dos animais, adoções, adotantes e cuidados da organização.</p>
+    </div>
+
+    <button
+      type="button"
+      class="export-button"
+      [disabled]="isLoading || isExporting || !!errorMessage"
+      (click)="exportStatisticsToExcel()"
+    >
+      {{ isExporting ? 'A exportar...' : 'Exportar Excel' }}
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">A carregar estatísticas...</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <div class="summary-grid">
+      <article *ngFor="let metric of metrics" class="summary-card">
+        <span>{{ metric.label }}</span>
+        <strong>{{ metric.value }}</strong>
+        <small>{{ metric.detail }}</small>
+      </article>
+    </div>
+
+    <div class="charts-grid">
+      <section class="chart-panel wide">
+        <div class="section-header">
+          <h2>Animais por estado</h2>
+        </div>
+
+        <div *ngIf="animalStatusBars.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="animalStatusBars.length > 0" class="chart-body chart-body-horizontal">
+          <canvas #statisticsChart data-chart-id="animal-status"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Disponibilidade dos animais</h2>
+        </div>
+
+        <div *ngIf="animalAvailabilityPie.length === 0" class="empty-state">
+          Sem dados registados.
+        </div>
+
+        <div *ngIf="animalAvailabilityPie.length > 0" class="chart-body pie-layout">
+          <div class="pie-canvas">
+            <canvas #statisticsChart data-chart-id="animal-availability"></canvas>
+          </div>
+
+          <div class="legend-list">
+            <div *ngFor="let segment of animalAvailabilityPie" class="legend-item">
+              <span [style.background]="segment.color"></span>
+              <strong>{{ segment.label }}</strong>
+              <small>{{ segment.value }} · {{ segment.percent | number: '1.0-0' }}%</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-panel wide">
+        <div class="section-header">
+          <h2>Pedidos de adoção por mês</h2>
+        </div>
+
+        <div class="chart-body chart-body-monthly">
+          <canvas #statisticsChart data-chart-id="adoption-monthly"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel wide">
+        <div class="section-header">
+          <h2>Adoções aceites por mês</h2>
+        </div>
+
+        <div class="chart-body chart-body-monthly">
+          <canvas #statisticsChart data-chart-id="accepted-adoption-monthly"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Estado das adoções</h2>
+        </div>
+
+        <div *ngIf="adoptionStatusPie.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="adoptionStatusPie.length > 0" class="chart-body pie-layout">
+          <div class="pie-canvas">
+            <canvas #statisticsChart data-chart-id="adoption-status"></canvas>
+          </div>
+
+          <div class="legend-list">
+            <div *ngFor="let segment of adoptionStatusPie" class="legend-item">
+              <span [style.background]="segment.color"></span>
+              <strong>{{ segment.label }}</strong>
+              <small>{{ segment.value }} · {{ segment.percent | number: '1.0-0' }}%</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Espécies mais adotadas</h2>
+        </div>
+
+        <div *ngIf="adoptedSpeciesBars.length === 0" class="empty-state">
+          Sem adoções aceites registadas.
+        </div>
+
+        <div *ngIf="adoptedSpeciesBars.length > 0" class="chart-body chart-body-compact">
+          <canvas #statisticsChart data-chart-id="adopted-species"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Raças mais adotadas</h2>
+        </div>
+
+        <div *ngIf="adoptedBreedBars.length === 0" class="empty-state">
+          Sem adoções aceites registadas.
+        </div>
+
+        <div *ngIf="adoptedBreedBars.length > 0" class="chart-body chart-body-compact">
+          <canvas #statisticsChart data-chart-id="adopted-breeds"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Animais por espécie</h2>
+        </div>
+
+        <div *ngIf="speciesBars.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="speciesBars.length > 0" class="chart-body chart-body-compact">
+          <canvas #statisticsChart data-chart-id="species"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Género dos animais</h2>
+        </div>
+
+        <div *ngIf="animalGenderPie.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="animalGenderPie.length > 0" class="chart-body pie-layout">
+          <div class="pie-canvas">
+            <canvas #statisticsChart data-chart-id="animal-gender"></canvas>
+          </div>
+
+          <div class="legend-list">
+            <div *ngFor="let segment of animalGenderPie" class="legend-item">
+              <span [style.background]="segment.color"></span>
+              <strong>{{ segment.label }}</strong>
+              <small>{{ segment.value }} · {{ segment.percent | number: '1.0-0' }}%</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Microchip</h2>
+        </div>
+
+        <div *ngIf="microchipPie.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="microchipPie.length > 0" class="chart-body pie-layout">
+          <div class="pie-canvas">
+            <canvas #statisticsChart data-chart-id="microchip"></canvas>
+          </div>
+
+          <div class="legend-list">
+            <div *ngFor="let segment of microchipPie" class="legend-item">
+              <span [style.background]="segment.color"></span>
+              <strong>{{ segment.label }}</strong>
+              <small>{{ segment.value }} · {{ segment.percent | number: '1.0-0' }}%</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Cuidados registados</h2>
+        </div>
+
+        <div *ngIf="careTypeBars.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="careTypeBars.length > 0" class="chart-body chart-body-compact">
+          <canvas #statisticsChart data-chart-id="care-types"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Estado dos cuidados</h2>
+        </div>
+
+        <div *ngIf="careStatusPie.length === 0" class="empty-state">Sem dados registados.</div>
+
+        <div *ngIf="careStatusPie.length > 0" class="chart-body pie-layout">
+          <div class="pie-canvas">
+            <canvas #statisticsChart data-chart-id="care-status"></canvas>
+          </div>
+
+          <div class="legend-list">
+            <div *ngFor="let segment of careStatusPie" class="legend-item">
+              <span [style.background]="segment.color"></span>
+              <strong>{{ segment.label }}</strong>
+              <small>{{ segment.value }} · {{ segment.percent | number: '1.0-0' }}%</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Tipo de habitação dos adotantes</h2>
+        </div>
+
+        <div *ngIf="adopterHousingBars.length === 0" class="empty-state">
+          Sem adotantes registados.
+        </div>
+
+        <div *ngIf="adopterHousingBars.length > 0" class="chart-body chart-body-compact">
+          <canvas #statisticsChart data-chart-id="adopter-housing"></canvas>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="section-header">
+          <h2>Espécies preferidas pelos adotantes</h2>
+        </div>
+
+        <div *ngIf="adopterPreferredSpeciesBars.length === 0" class="empty-state">
+          Sem adotantes registados.
+        </div>
+
+        <div *ngIf="adopterPreferredSpeciesBars.length > 0" class="chart-body chart-body-compact">
+          <canvas #statisticsChart data-chart-id="adopter-preferred-species"></canvas>
+        </div>
+      </section>
+    </div>
+  </ng-container>
+</section>
