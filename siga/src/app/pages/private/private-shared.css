@@ -127,6 +127,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+  min-width: 0;
   padding: 16px;
 }
 
@@ -139,6 +140,7 @@
 .adoptions-page .form-field {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .care-page .form-field label,
@@ -157,6 +159,9 @@
 .adoptions-page .form-field input,
 .adoptions-page .form-field select,
 .adoptions-page .form-field textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
   border: 1px solid #9ca3af;
   border-radius: 2px;
   padding: 7px 8px;
