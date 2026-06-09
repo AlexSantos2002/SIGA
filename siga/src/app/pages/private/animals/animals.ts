@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import {
@@ -37,6 +37,7 @@ type AnimalSortField =
   imports: [CommonModule, RouterModule],
   templateUrl: './animals.html',
   styleUrl: './animals.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Animals implements OnInit {
   animals: Animal[] = [];
@@ -134,6 +135,10 @@ export class Animals implements OnInit {
 
   getAnimalImageUrl(animal: Animal): string | null {
     return this.imageService.getAnimalImage(animal.imagePath);
+  }
+
+  trackByAnimalId(_index: number, animal: Animal): string {
+    return animal.id;
   }
 
   private async loadAnimals(): Promise<void> {

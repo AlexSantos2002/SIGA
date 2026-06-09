@@ -13,7 +13,7 @@
   </div>
 
   <div *ngIf="records.length > 0" class="record-card-list">
-    <article *ngFor="let record of records" class="record-card">
+    <article *ngFor="let record of records; trackBy: trackByDewormingId" class="record-card">
       <div>
         <h4>{{ getDewormingTypeLabel(record.type) }}</h4>
 

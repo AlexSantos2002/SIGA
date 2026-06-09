@@ -52,7 +52,7 @@
 
       <div *ngIf="hasImportantNotices" class="notice-list">
         <a
-          *ngFor="let notice of importantNotices"
+          *ngFor="let notice of importantNotices; trackBy: trackByNotice"
           class="notice-item"
           [class.danger]="notice.severity === 'danger'"
           [class.warning]="notice.severity === 'warning'"
@@ -82,7 +82,7 @@
 
         <div *ngIf="urgentCareRecords.length > 0" class="record-list">
           <a
-            *ngFor="let record of urgentCareRecords"
+            *ngFor="let record of urgentCareRecords; trackBy: trackByCareRecord"
             class="record-row"
             [routerLink]="['/app/animals', record.animalId, 'edit']"
           >
@@ -123,7 +123,7 @@
 
         <div *ngIf="recentPendingAdoptions.length > 0" class="record-list">
           <a
-            *ngFor="let adoption of recentPendingAdoptions"
+            *ngFor="let adoption of recentPendingAdoptions; trackBy: trackByAdoptionId"
             class="record-row"
             [routerLink]="['/app/animals', adoption.animal.id, 'edit']"
           >
@@ -154,7 +154,7 @@
 
       <div *ngIf="recentAnimals.length > 0" class="record-list">
         <a
-          *ngFor="let animal of recentAnimals"
+          *ngFor="let animal of recentAnimals; trackBy: trackByAnimalId"
           class="record-row"
           [routerLink]="['/app/animals', animal.id, 'edit']"
         >

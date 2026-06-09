@@ -13,7 +13,10 @@
   </div>
 
   <div *ngIf="appointments.length > 0" class="record-card-list">
-    <article *ngFor="let appointment of appointments" class="record-card">
+    <article
+      *ngFor="let appointment of appointments; trackBy: trackByAppointmentId"
+      class="record-card"
+    >
       <div>
         <h4>{{ appointment.appointmentDate | date: 'dd/MM/yyyy' }}</h4>
 

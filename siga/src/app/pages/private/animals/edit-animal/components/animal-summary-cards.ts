@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import {
   ANIMAL_GENDER_LABELS,
@@ -16,6 +16,7 @@ import { EditAnimalModal } from '../edit-animal.types';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './animal-summary-cards.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimalSummaryCards {
   @Input() animal!: Animal;
@@ -42,8 +43,6 @@ export class AnimalSummaryCards {
       return '-';
     }
 
-    return adopter.email
-      ? `${adopter.name} - ${adopter.email}`
-      : adopter.name;
+    return adopter.email ? `${adopter.name} - ${adopter.email}` : adopter.name;
   }
 }

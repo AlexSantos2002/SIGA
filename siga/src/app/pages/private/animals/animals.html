@@ -115,7 +115,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let animal of sortedAnimals">
+        <tr *ngFor="let animal of sortedAnimals; trackBy: trackByAnimalId">
           <td>
             <div class="animal-name-cell">
               <img

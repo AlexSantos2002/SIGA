@@ -25,7 +25,7 @@
           <div class="form-field">
             <label for="gender">Género</label>
             <select id="gender" formControlName="gender">
-              <option value="" disabled>Seleciona o género</option>
+              <option value="" disabled>Selecionar género</option>
               <option *ngFor="let gender of genders" [value]="gender.value">
                 {{ gender.label }}
               </option>
@@ -110,6 +110,13 @@
               inputId="sterilizationDate"
               formControlName="sterilizationDate"
             ></app-date-picker>
+            <small
+              *ngIf="
+                form.get('sterilizationDate')?.touched && form.get('sterilizationDate')?.invalid
+              "
+            >
+              Preencher a data quando a esterilizacao estiver realizada.
+            </small>
           </div>
 
           <div class="checkbox-field full-width">
@@ -122,6 +129,11 @@
           <div class="form-field">
             <label for="microchipNumber">Número do microchip</label>
             <input id="microchipNumber" type="text" formControlName="microchipNumber" />
+            <small
+              *ngIf="form.get('microchipNumber')?.touched && form.get('microchipNumber')?.invalid"
+            >
+              Preencher o numero do microchip.
+            </small>
           </div>
 
           <div class="form-field">
@@ -130,6 +142,9 @@
               inputId="microchipDate"
               formControlName="microchipDate"
             ></app-date-picker>
+            <small *ngIf="form.get('microchipDate')?.touched && form.get('microchipDate')?.invalid">
+              Preencher a data de colocacao do microchip.
+            </small>
           </div>
         </div>
 
@@ -151,6 +166,9 @@
           <div class="form-field">
             <label>Nome da vacina</label>
             <input type="text" formControlName="name" />
+            <small *ngIf="vaccineForm.get('name')?.touched && vaccineForm.get('name')?.invalid">
+              Preencher o nome da vacina.
+            </small>
           </div>
 
           <div class="form-field">
@@ -165,11 +183,24 @@
           <div class="form-field">
             <label>Data tomada</label>
             <app-date-picker formControlName="dateTaken"></app-date-picker>
+            <small
+              *ngIf="vaccineForm.get('dateTaken')?.touched && vaccineForm.get('dateTaken')?.invalid"
+            >
+              Preencher a data em que a vacina foi tomada.
+            </small>
           </div>
 
           <div class="form-field">
             <label>Data prevista</label>
             <app-date-picker formControlName="scheduledDate"></app-date-picker>
+            <small
+              *ngIf="
+                vaccineForm.get('scheduledDate')?.touched &&
+                vaccineForm.get('scheduledDate')?.invalid
+              "
+            >
+              Preencher a data prevista para a vacina pendente.
+            </small>
           </div>
 
           <div class="form-field">
@@ -214,6 +245,13 @@
           <div class="form-field">
             <label>Data realizada</label>
             <app-date-picker formControlName="dateDone"></app-date-picker>
+            <small
+              *ngIf="
+                dewormingForm.get('dateDone')?.touched && dewormingForm.get('dateDone')?.invalid
+              "
+            >
+              Preencher a data da desparasitacao.
+            </small>
           </div>
 
           <div class="form-field">
@@ -254,11 +292,26 @@
           <div class="form-field">
             <label>Data da consulta</label>
             <app-date-picker formControlName="appointmentDate"></app-date-picker>
+            <small
+              *ngIf="
+                appointmentForm.get('appointmentDate')?.touched &&
+                appointmentForm.get('appointmentDate')?.invalid
+              "
+            >
+              Preencher a data da consulta.
+            </small>
           </div>
 
           <div class="form-field">
             <label>Motivo</label>
             <input type="text" formControlName="reason" />
+            <small
+              *ngIf="
+                appointmentForm.get('reason')?.touched && appointmentForm.get('reason')?.invalid
+              "
+            >
+              Preencher o motivo da consulta.
+            </small>
           </div>
 
           <div class="form-field">

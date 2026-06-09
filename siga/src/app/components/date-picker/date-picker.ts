@@ -40,6 +40,7 @@ export class DatePicker implements ControlValueAccessor {
   isDisabled = false;
   value: string | null = null;
   viewDate = new Date();
+  panelStyle: Record<string, string> = {};
 
   readonly panelId = `date-picker-panel-${DatePicker.nextId++}`;
   readonly weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
@@ -60,6 +61,10 @@ export class DatePicker implements ControlValueAccessor {
 
   private onChange: (value: string | null) => void = () => {};
   private onTouched: () => void = () => {};
+  private readonly panelMaxWidth = 320;
+  private readonly panelMinWidth = 260;
+  private readonly panelEstimatedHeight = 342;
+  private readonly viewportPadding = 8;
 
   constructor(private host: ElementRef<HTMLElement>) {}
 
@@ -88,8 +93,16 @@ export class DatePicker implements ControlValueAccessor {
   get years(): number[] {
     const firstYear = Math.min(this.startYear, this.endYear, this.viewYear);
     const lastYear = Math.max(this.startYear, this.endYear, this.viewYear);
+    const previousYears = Array.from(
+      { length: this.viewYear - firstYear },
+      (_, index) => this.viewYear - index - 1,
+    );
+    const nextYears = Array.from(
+      { length: lastYear - this.viewYear },
+      (_, index) => this.viewYear + index + 1,
+    );
 
-    return Array.from({ length: lastYear - firstYear + 1 }, (_, index) => firstYear + index);
+    return [this.viewYear, ...previousYears, ...nextYears];
   }
 
   get calendarDays(): CalendarDay[] {
@@ -150,8 +163,8 @@ export class DatePicker implements ControlValueAccessor {
       return;
     }
 
-    const selectedDate = this.parseDateValue(this.value);
-    this.viewDate = selectedDate ?? this.viewDate ?? new Date();
+    this.viewDate = new Date();
+    this.panelStyle = this.getPanelStyle();
     this.isOpen = true;
   }
 
@@ -174,18 +187,22 @@ export class DatePicker implements ControlValueAccessor {
 
   previousMonth(): void {
     this.viewDate = new Date(this.viewYear, this.viewMonth - 1, 1);
+    this.updatePanelPosition();
   }
 
   nextMonth(): void {
     this.viewDate = new Date(this.viewYear, this.viewMonth + 1, 1);
+    this.updatePanelPosition();
   }
 
   changeMonth(month: string): void {
     this.viewDate = new Date(this.viewYear, Number(month), 1);
+    this.updatePanelPosition();
   }
 
   changeYear(year: string): void {
     this.viewDate = new Date(Number(year), this.viewMonth, 1);
+    this.updatePanelPosition();
   }
 
   selectDate(day: CalendarDay): void {
@@ -266,6 +283,16 @@ export class DatePicker implements ControlValueAccessor {
     this.closeCalendar();
   }
 
+  @HostListener('window:resize')
+  handleWindowResize(): void {
+    this.updatePanelPosition();
+  }
+
+  @HostListener('window:scroll')
+  handleWindowScroll(): void {
+    this.updatePanelPosition();
+  }
+
   private normalizeDateValue(value: string | null | undefined): string | null {
     if (!value) {
       return null;
@@ -316,5 +343,46 @@ export class DatePicker implements ControlValueAccessor {
     const max = this.normalizeDateValue(this.max);
 
     return !!((min && dateValue < min) || (max && dateValue > max));
+  }
+
+  private updatePanelPosition(): void {
+    if (!this.isOpen) {
+      return;
+    }
+
+    this.panelStyle = this.getPanelStyle();
+  }
+
+  private getPanelStyle(): Record<string, string> {
+    const rect = this.host.nativeElement.getBoundingClientRect();
+    const viewportWidth = window.innerWidth || this.panelMaxWidth;
+    const viewportHeight = window.innerHeight || this.panelEstimatedHeight;
+    const gap = 6;
+    const panelWidth = Math.min(
+      Math.max(rect.width || this.panelMinWidth, this.panelMinWidth),
+      this.panelMaxWidth,
+      viewportWidth - this.viewportPadding * 2,
+    );
+    const panelHeight = Math.min(
+      this.panelEstimatedHeight,
+      Math.max(this.panelMinWidth, viewportHeight - this.viewportPadding * 2),
+    );
+    const spaceBelow = viewportHeight - rect.bottom - gap - this.viewportPadding;
+    const spaceAbove = rect.top - gap - this.viewportPadding;
+    const shouldOpenAbove = spaceBelow < panelHeight && spaceAbove > spaceBelow;
+    const top = shouldOpenAbove
+      ? Math.max(this.viewportPadding, rect.top - panelHeight - gap)
+      : Math.min(rect.bottom + gap, viewportHeight - this.viewportPadding - panelHeight);
+    const left = Math.min(
+      Math.max(this.viewportPadding, rect.left),
+      viewportWidth - this.viewportPadding - panelWidth,
+    );
+
+    return {
+      left: `${left}px`,
+      maxHeight: `${panelHeight}px`,
+      top: `${top}px`,
+      width: `${panelWidth}px`,
+    };
   }
 }

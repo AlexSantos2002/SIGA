@@ -53,14 +53,21 @@
             <label for="animalId">Animal</label>
             <select id="animalId" formControlName="animalId">
               <option value="" disabled>
-                {{ animals.length ? 'Seleciona o animal' : 'Nenhum animal registado' }}
+                {{
+                  animalsAvailableForCare.length
+                    ? 'Selecionar animal'
+                    : 'Nenhum animal ativo para cuidados'
+                }}
               </option>
-              <option *ngFor="let animal of animals" [value]="animal.id">
+              <option
+                *ngFor="let animal of animalsAvailableForCare; trackBy: trackByAnimalId"
+                [value]="animal.id"
+              >
                 {{ getAnimalOptionLabel(animal) }}
               </option>
             </select>
             <small *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid">
-              Seleciona o animal associado ao cuidado.
+              Selecionar o animal associado ao cuidado.
             </small>
           </div>
 
@@ -69,7 +76,7 @@
               <label for="name">Nome da vacina</label>
               <input id="name" type="text" formControlName="name" />
               <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
-                Indica o nome da vacina.
+                Preencher o nome da vacina.
               </small>
             </div>
 
@@ -85,16 +92,30 @@
             <div class="form-field">
               <label for="dateTaken">Data tomada</label>
               <app-date-picker inputId="dateTaken" formControlName="dateTaken"></app-date-picker>
+              <small *ngIf="form.get('dateTaken')?.touched && form.get('dateTaken')?.invalid">
+                Preencher a data em que a vacina foi tomada.
+              </small>
             </div>
 
             <div class="form-field">
               <label for="scheduledDate">Data prevista</label>
-              <app-date-picker inputId="scheduledDate" formControlName="scheduledDate"></app-date-picker>
+              <app-date-picker
+                inputId="scheduledDate"
+                formControlName="scheduledDate"
+              ></app-date-picker>
+              <small
+                *ngIf="form.get('scheduledDate')?.touched && form.get('scheduledDate')?.invalid"
+              >
+                Preencher a data prevista para a vacina pendente.
+              </small>
             </div>
 
             <div class="form-field">
               <label for="nextDueDate">Próxima dose</label>
-              <app-date-picker inputId="nextDueDate" formControlName="nextDueDate"></app-date-picker>
+              <app-date-picker
+                inputId="nextDueDate"
+                formControlName="nextDueDate"
+              ></app-date-picker>
             </div>
           </ng-container>
 
@@ -112,7 +133,7 @@
               <label for="dateDone">Data realizada</label>
               <app-date-picker inputId="dateDone" formControlName="dateDone"></app-date-picker>
               <small *ngIf="form.get('dateDone')?.touched && form.get('dateDone')?.invalid">
-                Indica a data da desparasitação.
+                Preencher a data da desparasitação.
               </small>
             </div>
 
@@ -140,7 +161,7 @@
               <small
                 *ngIf="form.get('appointmentDate')?.touched && form.get('appointmentDate')?.invalid"
               >
-                Indica a data da consulta ou tratamento.
+                Preencher a data da consulta ou tratamento.
               </small>
             </div>
 
@@ -148,7 +169,7 @@
               <label for="reason">Motivo / tratamento</label>
               <input id="reason" type="text" formControlName="reason" />
               <small *ngIf="form.get('reason')?.touched && form.get('reason')?.invalid">
-                Indica o motivo ou tratamento.
+                Preencher o motivo ou tratamento.
               </small>
             </div>
 
@@ -198,7 +219,7 @@
       <div class="filters-grid">
         <div class="form-field">
           <label for="filterType">Tipo</label>
-          <select id="filterType" [(ngModel)]="filterType">
+          <select id="filterType" [(ngModel)]="filterType" (ngModelChange)="onCareFiltersChange()">
             <option value="all">Todos</option>
             <option *ngFor="let type of careTypes" [value]="type.value">
               {{ type.label }}
@@ -208,9 +229,13 @@
 
         <div class="form-field">
           <label for="filterAnimal">Animal</label>
-          <select id="filterAnimal" [(ngModel)]="filterAnimalId">
+          <select
+            id="filterAnimal"
+            [(ngModel)]="filterAnimalId"
+            (ngModelChange)="onCareFiltersChange()"
+          >
             <option value="all">Todos</option>
-            <option *ngFor="let animal of animals" [value]="animal.id">
+            <option *ngFor="let animal of animals; trackBy: trackByAnimalId" [value]="animal.id">
               {{ getAnimalOptionLabel(animal) }}
             </option>
           </select>
@@ -218,7 +243,11 @@
 
         <div class="form-field">
           <label for="filterState">Aviso</label>
-          <select id="filterState" [(ngModel)]="filterState">
+          <select
+            id="filterState"
+            [(ngModel)]="filterState"
+            (ngModelChange)="onCareFiltersChange()"
+          >
             <option value="all">Todos</option>
             <option *ngFor="let state of timelineStates" [value]="state.value">
               {{ state.label }}
@@ -250,7 +279,7 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let record of filteredCareRecords">
+            <tr *ngFor="let record of paginatedCareRecords; trackBy: trackByRecordKey">
               <td>
                 <a class="primary-link" [routerLink]="['/app/animals', record.animalId, 'edit']">
                   {{ record.animal.name }}
@@ -327,6 +356,20 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div *ngIf="filteredCareRecords.length > pageSize" class="pagination-bar">
+        <span> {{ pageStart }}-{{ pageEnd }} de {{ filteredCareRecords.length }} </span>
+
+        <div class="pagination-actions">
+          <button type="button" [disabled]="!hasPreviousPage" (click)="previousPage()">
+            Anterior
+          </button>
+
+          <span>Pagina {{ currentPage }} de {{ totalPages }}</span>
+
+          <button type="button" [disabled]="!hasNextPage" (click)="nextPage()">Seguinte</button>
+        </div>
       </div>
     </section>
   </ng-container>

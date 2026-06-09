@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -46,6 +52,7 @@ import {
   imports: [CommonModule, DatePicker, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './care.html',
   styleUrl: './care.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Care implements OnInit, OnDestroy {
   animals: Animal[] = [];
@@ -56,6 +63,7 @@ export class Care implements OnInit, OnDestroy {
   filterType: CareFilterType = 'all';
   filterAnimalId = 'all';
   filterState: CareFilterState = 'all';
+  currentPage = 1;
 
   isLoading = true;
   isSubmitting = false;
@@ -82,8 +90,10 @@ export class Care implements OnInit, OnDestroy {
   readonly getTimelineDescription = getTimelineDescription;
   readonly getRecordKey = getCareRecordKey;
   readonly getAlertDate = getAlertDate;
+  readonly pageSize = 10;
 
   private careTypeSubscription: Subscription | null = null;
+  private vaccineStatusSubscription: Subscription | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -100,6 +110,10 @@ export class Care implements OnInit, OnDestroy {
       this.form.get('careType')?.valueChanges.subscribe((type) => {
         updateCareTypeValidators(this.form, type);
       }) ?? null;
+    this.vaccineStatusSubscription =
+      this.form.get('vaccineStatus')?.valueChanges.subscribe(() => {
+        updateCareTypeValidators(this.form, this.careType);
+      }) ?? null;
 
     updateCareTypeValidators(this.form, this.careType);
   }
@@ -110,6 +124,7 @@ export class Care implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.careTypeSubscription?.unsubscribe();
+    this.vaccineStatusSubscription?.unsubscribe();
   }
 
   get careType(): AnimalCareType {
@@ -126,6 +141,42 @@ export class Care implements OnInit, OnDestroy {
         }),
       )
       .sort(compareCareRecords);
+  }
+
+  get animalsAvailableForCare(): Animal[] {
+    return this.animals.filter((animal) => this.canRegisterCareForAnimal(animal));
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.filteredCareRecords.length / this.pageSize));
+  }
+
+  get paginatedCareRecords(): AnimalCareRecord[] {
+    this.ensureCurrentPage();
+
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+
+    return this.filteredCareRecords.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get pageStart(): number {
+    if (this.filteredCareRecords.length === 0) {
+      return 0;
+    }
+
+    return (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  get pageEnd(): number {
+    return Math.min(this.currentPage * this.pageSize, this.filteredCareRecords.length);
+  }
+
+  get hasPreviousPage(): boolean {
+    return this.currentPage > 1;
+  }
+
+  get hasNextPage(): boolean {
+    return this.currentPage < this.totalPages;
   }
 
   get overdueCount(): number {
@@ -247,6 +298,34 @@ export class Care implements OnInit, OnDestroy {
     return [record.animal.speciesName, record.animal.breedName].filter(Boolean).join(' / ') || '-';
   }
 
+  onCareFiltersChange(): void {
+    this.currentPage = 1;
+  }
+
+  previousPage(): void {
+    if (!this.hasPreviousPage) {
+      return;
+    }
+
+    this.currentPage -= 1;
+  }
+
+  nextPage(): void {
+    if (!this.hasNextPage) {
+      return;
+    }
+
+    this.currentPage += 1;
+  }
+
+  trackByAnimalId(_index: number, animal: Animal): string {
+    return animal.id;
+  }
+
+  trackByRecordKey(_index: number, record: AnimalCareRecord): string {
+    return this.getRecordKey(record);
+  }
+
   private async loadPageData(): Promise<void> {
     try {
       this.isLoading = true;
@@ -273,6 +352,11 @@ export class Care implements OnInit, OnDestroy {
   private async createCareRecord(): Promise<void> {
     const animalId = this.form.value.animalId;
     const notes = toNullableString(this.form.value.notes);
+    const animal = this.animals.find((registeredAnimal) => registeredAnimal.id === animalId);
+
+    if (!animal || !this.canRegisterCareForAnimal(animal)) {
+      throw new Error('Selecionar um animal ativo para registar o cuidado.');
+    }
 
     if (this.careType === 'vaccine') {
       await this.vaccineService.create({
@@ -309,5 +393,19 @@ export class Care implements OnInit, OnDestroy {
       nextAppointmentDate: toNullableString(this.form.value.nextAppointmentDate),
       notes,
     });
+  }
+
+  private canRegisterCareForAnimal(animal: Animal): boolean {
+    return animal.status !== 'adotado';
+  }
+
+  private ensureCurrentPage(): void {
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    }
+
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
   }
 }

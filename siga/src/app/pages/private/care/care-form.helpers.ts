@@ -58,6 +58,12 @@ export function updateCareTypeValidators(form: FormGroup, typeValue: unknown): v
   if (type === 'vaccine') {
     form.get('name')?.setValidators([Validators.required, Validators.maxLength(120)]);
     form.get('vaccineStatus')?.setValidators([Validators.required]);
+
+    if (form.get('vaccineStatus')?.value === 'tomada') {
+      form.get('dateTaken')?.setValidators([Validators.required]);
+    } else {
+      form.get('scheduledDate')?.setValidators([Validators.required]);
+    }
   }
 
   if (type === 'deworming') {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ANIMAL_STATUS_LABELS, getMappedLabel } from '../../../constants/form-options';
@@ -38,6 +38,7 @@ interface DashboardNotice {
   imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard implements OnInit {
   animals: Animal[] = [];
@@ -243,6 +244,22 @@ export class Dashboard implements OnInit {
 
   getTimelineDescription(record: AnimalCareRecord): string {
     return getTimelineDescription(record);
+  }
+
+  trackByNotice(_index: number, notice: DashboardNotice): string {
+    return `${notice.route}-${notice.title}`;
+  }
+
+  trackByCareRecord(_index: number, record: AnimalCareRecord): string {
+    return `${record.type}-${record.id}`;
+  }
+
+  trackByAdoptionId(_index: number, adoption: Adoption): string {
+    return adoption.id;
+  }
+
+  trackByAnimalId(_index: number, animal: Animal): string {
+    return animal.id;
   }
 
   private async loadDashboardData(): Promise<void> {

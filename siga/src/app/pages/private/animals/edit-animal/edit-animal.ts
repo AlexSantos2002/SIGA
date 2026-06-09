@@ -1,7 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { Adoption } from '../../../../models/adoption/adoption.model';
 import { Animal } from '../../../../models/animal/animal.model';
@@ -36,8 +45,9 @@ import { ImageService } from '../../../../services/image.service';
   ],
   templateUrl: './edit-animal.html',
   styleUrl: './edit-animal.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditAnimal implements OnInit {
+export class EditAnimal implements OnInit, OnDestroy {
   @ViewChild('imageInput') imageInput?: ElementRef<HTMLInputElement>;
 
   animal: Animal | null = null;
@@ -61,6 +71,8 @@ export class EditAnimal implements OnInit {
   errorMessage = '';
 
   activeModal: EditAnimalModal = null;
+
+  private readonly formSubscriptions = new Subscription();
 
   constructor(
     private fb: FormBuilder,
@@ -115,6 +127,10 @@ export class EditAnimal implements OnInit {
       nextAppointmentDate: [null],
       notes: [''],
     });
+
+    this.setupFormSubscriptions();
+    this.updateHealthValidators(false);
+    this.updateVaccineValidators();
   }
 
   async ngOnInit(): Promise<void> {
@@ -129,6 +145,10 @@ export class EditAnimal implements OnInit {
     await this.loadPageData();
   }
 
+  ngOnDestroy(): void {
+    this.formSubscriptions.unsubscribe();
+  }
+
   openModal(modal: EditAnimalModal): void {
     this.errorMessage = '';
 
@@ -141,6 +161,7 @@ export class EditAnimal implements OnInit {
         nextDueDate: null,
         notes: '',
       });
+      this.updateVaccineValidators();
     }
 
     if (modal === 'deworming') {
@@ -163,6 +184,10 @@ export class EditAnimal implements OnInit {
         nextAppointmentDate: null,
         notes: '',
       });
+    }
+
+    if (modal === 'health') {
+      this.updateHealthValidators(false);
     }
 
     this.activeModal = modal;
@@ -253,13 +278,16 @@ export class EditAnimal implements OnInit {
   }
 
   async submit(): Promise<void> {
+    this.updateHealthValidators(false);
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const hasMicrochip = !!this.form.value.hasMicrochip;
-    const selectedStatus = this.form.value.status;
+    const formValue = this.form.getRawValue();
+    const hasMicrochip = !!formValue.hasMicrochip;
+    const selectedStatus = formValue.status;
 
     try {
       this.isSubmitting = true;
@@ -267,19 +295,19 @@ export class EditAnimal implements OnInit {
       this.cdr.detectChanges();
 
       await this.animalService.updateAnimal(this.animalId, {
-        name: this.form.value.name,
-        speciesName: this.form.value.speciesName,
-        breedName: this.form.value.breedName,
-        gender: this.form.value.gender,
+        name: formValue.name,
+        speciesName: formValue.speciesName,
+        breedName: formValue.breedName,
+        gender: formValue.gender,
         birthDate: this.getBirthDate(),
         status: selectedStatus,
-        generalNotes: this.form.value.generalNotes || null,
-        medicalNotes: this.form.value.medicalNotes || null,
-        sterilizationStatus: this.form.value.sterilizationStatus || null,
-        sterilizationDate: this.form.value.sterilizationDate || null,
+        generalNotes: formValue.generalNotes || null,
+        medicalNotes: formValue.medicalNotes || null,
+        sterilizationStatus: formValue.sterilizationStatus || null,
+        sterilizationDate: formValue.sterilizationDate || null,
         hasMicrochip,
-        microchipNumber: hasMicrochip ? this.form.value.microchipNumber || null : null,
-        microchipDate: hasMicrochip ? this.form.value.microchipDate || null : null,
+        microchipNumber: hasMicrochip ? formValue.microchipNumber || null : null,
+        microchipDate: hasMicrochip ? formValue.microchipDate || null : null,
       });
 
       const [updatedAnimal, updatedAcceptedAdoption] = await Promise.all([
@@ -303,6 +331,8 @@ export class EditAnimal implements OnInit {
   }
 
   async addVaccine(): Promise<void> {
+    this.updateVaccineValidators();
+
     if (this.vaccineForm.invalid) {
       this.vaccineForm.markAllAsTouched();
       return;
@@ -467,25 +497,29 @@ export class EditAnimal implements OnInit {
   }
 
   private patchAnimalForm(animal: Animal): void {
-    this.form.patchValue({
-      name: animal.name,
-      speciesName: animal.species?.name || '',
-      breedName: animal.breed?.name || '',
-      gender: animal.gender || '',
-      birthDate: animal.birthDate || null,
-      status: animal.status || 'por_adotar',
-      generalNotes: animal.generalNotes || '',
-      medicalNotes: animal.medicalNotes || '',
-      sterilizationStatus: animal.sterilizationStatus || '',
-      sterilizationDate: animal.sterilizationDate || null,
-      hasMicrochip: animal.hasMicrochip || false,
-      microchipNumber: animal.microchipNumber || '',
-      microchipDate: animal.microchipDate || null,
-    });
+    this.form.patchValue(
+      {
+        name: animal.name,
+        speciesName: animal.species?.name || '',
+        breedName: animal.breed?.name || '',
+        gender: animal.gender || '',
+        birthDate: animal.birthDate || null,
+        status: animal.status || 'por_adotar',
+        generalNotes: animal.generalNotes || '',
+        medicalNotes: animal.medicalNotes || '',
+        sterilizationStatus: animal.sterilizationStatus || '',
+        sterilizationDate: animal.sterilizationDate || null,
+        hasMicrochip: animal.hasMicrochip || false,
+        microchipNumber: animal.microchipNumber || '',
+        microchipDate: animal.microchipDate || null,
+      },
+      { emitEvent: false },
+    );
+    this.updateHealthValidators(false);
   }
 
   private getBirthDate(): string {
-    return this.form.value.birthDate;
+    return this.form.getRawValue().birthDate;
   }
 
   private async reloadAnimal(): Promise<void> {
@@ -494,5 +528,82 @@ export class EditAnimal implements OnInit {
     this.animal = animal;
     this.animalImage = this.imageService.getAnimalImage(animal.imagePath);
     this.patchAnimalForm(animal);
+  }
+
+  private setupFormSubscriptions(): void {
+    const hasMicrochipChanges = this.form
+      .get('hasMicrochip')
+      ?.valueChanges.subscribe(() => this.updateHealthValidators(true));
+    const sterilizationStatusChanges = this.form
+      .get('sterilizationStatus')
+      ?.valueChanges.subscribe(() => this.updateHealthValidators(false));
+    const vaccineStatusChanges = this.vaccineForm
+      .get('status')
+      ?.valueChanges.subscribe(() => this.updateVaccineValidators());
+
+    if (hasMicrochipChanges) {
+      this.formSubscriptions.add(hasMicrochipChanges);
+    }
+
+    if (sterilizationStatusChanges) {
+      this.formSubscriptions.add(sterilizationStatusChanges);
+    }
+
+    if (vaccineStatusChanges) {
+      this.formSubscriptions.add(vaccineStatusChanges);
+    }
+  }
+
+  private updateHealthValidators(clearMicrochipWhenDisabled: boolean): void {
+    const hasMicrochip = !!this.form.get('hasMicrochip')?.value;
+    const microchipNumber = this.form.get('microchipNumber');
+    const microchipDate = this.form.get('microchipDate');
+    const sterilizationDate = this.form.get('sterilizationDate');
+    const sterilizationStatus = this.form.get('sterilizationStatus')?.value;
+
+    if (hasMicrochip) {
+      microchipNumber?.enable({ emitEvent: false });
+      microchipDate?.enable({ emitEvent: false });
+      microchipNumber?.setValidators([Validators.required, Validators.maxLength(60)]);
+      microchipDate?.setValidators([Validators.required]);
+    } else {
+      if (clearMicrochipWhenDisabled) {
+        microchipNumber?.reset('', { emitEvent: false });
+        microchipDate?.reset(null, { emitEvent: false });
+      }
+
+      microchipNumber?.clearValidators();
+      microchipDate?.clearValidators();
+      microchipNumber?.disable({ emitEvent: false });
+      microchipDate?.disable({ emitEvent: false });
+    }
+
+    if (sterilizationStatus === 'realizada') {
+      sterilizationDate?.setValidators([Validators.required]);
+    } else {
+      sterilizationDate?.clearValidators();
+    }
+
+    microchipNumber?.updateValueAndValidity({ emitEvent: false });
+    microchipDate?.updateValueAndValidity({ emitEvent: false });
+    sterilizationDate?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  private updateVaccineValidators(): void {
+    const dateTaken = this.vaccineForm.get('dateTaken');
+    const scheduledDate = this.vaccineForm.get('scheduledDate');
+    const status = this.vaccineForm.get('status')?.value;
+
+    dateTaken?.clearValidators();
+    scheduledDate?.clearValidators();
+
+    if (status === 'tomada') {
+      dateTaken?.setValidators([Validators.required]);
+    } else {
+      scheduledDate?.setValidators([Validators.required]);
+    }
+
+    dateTaken?.updateValueAndValidity({ emitEvent: false });
+    scheduledDate?.updateValueAndValidity({ emitEvent: false });
   }
 }

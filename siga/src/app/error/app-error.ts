@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES } from './error-messages';
-import { ERROR_CODES, ErrorCode } from './error-codes';
+import { ErrorCode } from './error-codes';
 
 /**
  * Representa um erro na aplicação

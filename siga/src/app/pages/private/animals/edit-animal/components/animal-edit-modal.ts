@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { DatePicker } from '../../../../../components/date-picker/date-picker';
@@ -18,6 +18,7 @@ import { EditAnimalModal } from '../edit-animal.types';
   standalone: true,
   imports: [CommonModule, DatePicker, ReactiveFormsModule],
   templateUrl: './animal-edit-modal.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimalEditModal {
   @Input() activeModal!: EditAnimalModal;

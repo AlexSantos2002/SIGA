@@ -87,7 +87,7 @@ export class ImageService {
     try {
       imagePath = await this.updateImageToStorage(animalId, file);
       await this.updateAnimalTableImage(animalId, imagePath);
-    } catch (err) {
+    } catch {
       throw new DBError(ERROR_CODES.IMAGE_UPLOAD_FAILED);
     }
   }
@@ -120,7 +120,7 @@ export class ImageService {
       newImagePath = await this.updateImageToStorage(animalId, file);
 
       await this.updateAnimalTableImage(animalId, newImagePath);
-    } catch (err) {
+    } catch {
       if (newImagePath) {
         try {
           await this.deleteImageFromStorage(newImagePath);
@@ -154,7 +154,7 @@ export class ImageService {
       }
 
       await this.deleteAnimalTableImage(animalId);
-    } catch (err) {
+    } catch {
       throw new DBError(ERROR_CODES.IMAGE_DELETE_FAILED);
     }
   }

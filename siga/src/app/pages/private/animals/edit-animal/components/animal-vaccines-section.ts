@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { VACCINE_STATUSES, getOptionLabel } from '../../../../../constants/form-options';
 import { AnimalVaccine } from '../../../../../models/vaccines/animal-vaccines.model';
@@ -9,6 +9,7 @@ import { AnimalVaccine } from '../../../../../models/vaccines/animal-vaccines.mo
   standalone: true,
   imports: [CommonModule],
   templateUrl: './animal-vaccines-section.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimalVaccinesSection {
   @Input() vaccines: AnimalVaccine[] = [];
@@ -18,5 +19,9 @@ export class AnimalVaccinesSection {
 
   getVaccineStatusLabel(status: string): string {
     return getOptionLabel(VACCINE_STATUSES, status);
+  }
+
+  trackByVaccineId(_index: number, vaccine: AnimalVaccine): string {
+    return vaccine.id;
   }
 }
