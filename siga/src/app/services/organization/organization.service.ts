@@ -31,6 +31,7 @@ const REGISTRATION_METADATA = {
   organizationAddress: 'siga_organization_address',
   adminName: 'siga_admin_name',
   organizationId: 'siga_organization_id',
+  emailLocale: 'siga_email_locale',
 } as const;
 
 @Injectable({
@@ -167,6 +168,7 @@ export class OrganizationService {
       [REGISTRATION_METADATA.organizationPhone]: request.phone.trim(),
       [REGISTRATION_METADATA.organizationAddress]: request.address.trim(),
       [REGISTRATION_METADATA.adminName]: request.adminName.trim(),
+      [REGISTRATION_METADATA.emailLocale]: this.getCurrentEmailLocale(),
     };
 
     if (organizationId) {
@@ -268,11 +270,17 @@ export class OrganizationService {
   }
 
   private getEmailRedirectUrl(): string {
-    return `${globalThis.location?.origin ?? ''}/login`;
+    const localizedPrefix = this.getCurrentEmailLocale() === 'en' ? '/en' : '';
+    return `${globalThis.location?.origin ?? ''}${localizedPrefix}/email-confirmed`;
   }
 
   private normalizeEmail(email: string): string {
     return email.trim().toLowerCase();
+  }
+
+  private getCurrentEmailLocale(): 'pt' | 'en' {
+    const pathname = globalThis.location?.pathname ?? '';
+    return pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'pt';
   }
 
   private isEmailAlreadyRegisteredError(error: AuthApiError): boolean {

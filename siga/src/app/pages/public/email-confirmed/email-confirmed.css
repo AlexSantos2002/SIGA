@@ -1,0 +1,138 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.email-confirmed-page {
+  min-height: calc(100vh - 160px);
+  position: relative;
+  background: linear-gradient(180deg, #eef3f6 0%, #f7f9fb 100%);
+  padding: 120px 24px 80px;
+}
+
+.confirmation-hero {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: #4b88a2;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.confirmation-hero h1 {
+  margin: 0 0 18px;
+  color: #1f2a37;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.confirmation-hero p:last-child {
+  max-width: 620px;
+  margin: 0;
+  color: #5d6b78;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(31, 42, 55, 0.42);
+}
+
+.confirmation-modal {
+  position: relative;
+  width: min(100%, 460px);
+  background: #ffffff;
+  border: 1px solid rgba(75, 136, 162, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 22px 70px rgba(31, 42, 55, 0.22);
+  padding: 36px 34px 32px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.close-button:hover {
+  background: #eef3f6;
+  color: #1f2a37;
+}
+
+.success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #e8f5ef;
+  color: #16805a;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.confirmation-modal h2 {
+  margin: 0 0 14px;
+  color: #1f2a37;
+  font-size: 1.55rem;
+  line-height: 1.25;
+}
+
+.confirmation-modal p {
+  margin: 0 0 26px;
+  color: #5d6b78;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.primary-button {
+  border: none;
+  border-radius: 6px;
+  background: #4b88a2;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 13px 24px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #3e7891;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .email-confirmed-page {
+    padding: 100px 18px 60px;
+  }
+
+  .confirmation-modal {
+    padding: 32px 24px 28px;
+  }
+}

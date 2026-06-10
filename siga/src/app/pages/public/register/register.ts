@@ -97,8 +97,9 @@ export class Register {
       this.form.reset();
 
       if (result.requiresEmailConfirmation) {
-        this.successMessage =
-          'Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessao.';
+        this.successMessage = this.isEnglishLocale()
+          ? 'Account created. Check your email and click the link sent to confirm your account before signing in.'
+          : 'Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessao.';
         return;
       }
 
@@ -129,4 +130,9 @@ export class Register {
 
     return password === confirm ? null : { passwordMismatch: true };
   };
+
+  private isEnglishLocale(): boolean {
+    const pathname = globalThis.location?.pathname ?? '';
+    return pathname === '/en' || pathname.startsWith('/en/');
+  }
 }
