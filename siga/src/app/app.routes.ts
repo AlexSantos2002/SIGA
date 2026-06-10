@@ -5,11 +5,6 @@ import { guestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
   {
-    path: 'email-confirmed',
-    loadComponent: () =>
-      import('./pages/public/email-confirmed/email-confirmed').then((m) => m.EmailConfirmed),
-  },
-  {
     path: '',
     loadComponent: () => import('./pages/public/public-layout').then((m) => m.PublicLayout),
     canActivate: [guestGuard],
