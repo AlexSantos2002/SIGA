@@ -146,6 +146,20 @@
   text-decoration: underline;
 }
 
+.feedback-message {
+  margin: -12px 0 18px;
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.error-message {
+  color: #c2410c;
+}
+
+.success-message {
+  color: #166534;
+}
+
 /* Ações de botoes e links */
 
 .acoes-formulario {
@@ -171,6 +185,12 @@
 .botao-submeter:hover {
   background: #3e7891;
   transform: translateY(-1px);
+}
+
+.botao-submeter:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
 }
 
 /* Link secundário */

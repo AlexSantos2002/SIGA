@@ -81,7 +81,10 @@ export class Register {
    * @returns {Promise<void>} Promessa resolvida após tentativa de registo
    */
   async register(): Promise<void> {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     this.isLoading = true;
     this.errorMessage = null;
@@ -90,14 +93,24 @@ export class Register {
     const request: RegisterOrganizationRequest = this.form.value;
 
     try {
-      await this.organizationService.registerOrganization(request);
-      await this.router.navigate(['/login']);
+      const result = await this.organizationService.registerOrganization(request);
       this.form.reset();
+
+      if (result.requiresEmailConfirmation) {
+        this.successMessage =
+          'Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessao.';
+        return;
+      }
+
+      await this.router.navigate(['/login']);
     } catch (err) {
       if (err instanceof AppError) {
         this.errorMessage = err.message;
+      } else {
+        this.errorMessage = 'Nao foi possivel realizar a operacao.';
       }
-
+    } finally {
+      this.isLoading = false;
       this.cdr.detectChanges();
     }
   }

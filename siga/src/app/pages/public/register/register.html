@@ -181,8 +181,12 @@
         </div>
       </div>
 
-      <p *ngIf="errorMessage" class="text-red-500">
+      <p *ngIf="errorMessage" class="feedback-message error-message">
         {{ errorMessage }}
+      </p>
+
+      <p *ngIf="successMessage" class="feedback-message success-message">
+        {{ successMessage }}
       </p>
 
       <!-- Confirmação de dados -->
@@ -201,8 +205,8 @@
 
       <!-- Ações do formulário -->
       <div class="acoes-formulario">
-        <button type="submit" [disabled]="form.invalid" class="botao-submeter" i18n>
-          Criar conta
+        <button type="submit" [disabled]="form.invalid || isLoading" class="botao-submeter">
+          {{ isLoading ? 'A criar...' : 'Criar conta' }}
         </button>
 
         <a routerLink="/login" class="link-login" i18n>

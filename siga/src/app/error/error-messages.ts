@@ -39,6 +39,7 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
 
   // REGISTO
   EMAIL_ALREADY_EXISTS: 'O email do usuário já está registado',
+  EMAIL_NOT_CONFIRMED: 'Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessao.',
   ORGANIZATION_ALREADY_EXISTS: 'O email da organização já está registado',
 
   // AUTENTICAÇÃO

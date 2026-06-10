@@ -3,7 +3,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
-import { AuthenticationError } from '../../../error/app-error';
+import { AppError } from '../../../error/app-error';
 
 @Component({
   selector: 'app-login',
@@ -63,8 +63,10 @@ export class Login {
       }
 
     } catch (err) {
-      if (err instanceof AuthenticationError) {
+      if (err instanceof AppError) {
         this.errorMessage = err.message;
+      } else {
+        this.errorMessage = 'Nao foi possivel iniciar sessao.';
       }
       this.cdr.detectChanges();
     }
