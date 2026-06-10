@@ -34,8 +34,6 @@ const REGISTRATION_METADATA = {
   emailLocale: 'siga_email_locale',
 } as const;
 
-const EMAIL_CONFIRMATION_REDIRECT_URL = 'https://www.sigaanimal.com/email-confirmed';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -272,7 +270,8 @@ export class OrganizationService {
   }
 
   private getEmailRedirectUrl(): string {
-    return EMAIL_CONFIRMATION_REDIRECT_URL;
+    const localizedPrefix = this.getCurrentEmailLocale() === 'en' ? '/en' : '';
+    return `${globalThis.location?.origin ?? ''}${localizedPrefix}/email-confirmed`;
   }
 
   private normalizeEmail(email: string): string {
