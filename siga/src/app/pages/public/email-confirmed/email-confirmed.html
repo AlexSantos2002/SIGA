@@ -2,24 +2,46 @@
 
 <main class="email-confirmed-page">
   <section class="confirmation-hero" aria-hidden="true">
-    <p class="eyebrow">Conta verificada</p>
-    <h1>Bem-vindo ao SIGA</h1>
-    <p>A confirmação do email foi concluída com sucesso.</p>
+    <p class="eyebrow">{{ text.eyebrow }}</p>
+    <h1>{{ text.heroTitle }}</h1>
+    <p>{{ text.heroDescription }}</p>
   </section>
 
   <div class="modal-backdrop">
     <section class="confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="confirmationTitle">
-      <button type="button" class="close-button" aria-label="Fechar mensagem" (click)="close()">&times;</button>
+      <button type="button" class="close-button" [attr.aria-label]="text.closeLabel" (click)="close()">
+        &times;
+      </button>
 
-      <div class="success-icon" aria-hidden="true">&#10003;</div>
+      <ng-container [ngSwitch]="confirmationState">
+        <ng-container *ngSwitchCase="'verifying'">
+          <div class="status-icon verifying-icon" aria-hidden="true"></div>
 
-      <h2 id="confirmationTitle">Conta verificada com sucesso</h2>
+          <h2 id="confirmationTitle">{{ text.verifyingTitle }}</h2>
 
-      <p>
-        O seu email foi confirmado. Já pode iniciar sessão e começar a utilizar a plataforma.
-      </p>
+          <p>{{ text.verifyingDescription }}</p>
+        </ng-container>
 
-      <button type="button" class="primary-button" (click)="close()">Continuar</button>
+        <ng-container *ngSwitchCase="'error'">
+          <div class="status-icon error-icon" aria-hidden="true">!</div>
+
+          <h2 id="confirmationTitle">{{ text.errorTitle }}</h2>
+
+          <p>{{ text.errorDescription }}</p>
+
+          <button type="button" class="primary-button" (click)="goToLogin()">{{ text.loginLabel }}</button>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <div class="status-icon success-icon" aria-hidden="true">&#10003;</div>
+
+          <h2 id="confirmationTitle">{{ text.successTitle }}</h2>
+
+          <p>{{ text.successDescription }}</p>
+
+          <button type="button" class="primary-button" (click)="close()">{{ text.continueLabel }}</button>
+        </ng-container>
+      </ng-container>
     </section>
   </div>
 </main>
