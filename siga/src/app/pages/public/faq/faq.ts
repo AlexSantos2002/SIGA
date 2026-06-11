@@ -15,6 +15,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Faq implements OnInit {
 
+  // TODO: Refatorar para usar i18n
+
   /**
    * @description
    * Lista de perguntas frequentes apresentadas na página
@@ -25,7 +27,7 @@ export class Faq implements OnInit {
    * @description
    * Método executado quando o componente é inicializado.
    * Define automaticamente o idioma das FAQs com base no URL, se o path tiver /en fica em ingles caso contrario em portugues
-   * 
+   *
    * @returns {void} Não retorna valor
    */
   ngOnInit(): void {
@@ -104,7 +106,7 @@ export class Faq implements OnInit {
    * @description
    * Altera o estado de uma pergunta da FAQ
    * Permite abrir/fechar
-   * 
+   *
    * @param index Índice da pergunta na lista
    * @returns {void} Não retorna valor
    */

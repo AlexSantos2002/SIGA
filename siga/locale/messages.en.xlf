@@ -882,6 +882,121 @@
           <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
+
+<!--    Página de login    -->
+
+<trans-unit id="login.title" datatype="html">
+  <source> Entrar na plataforma </source>
+  <target> Sign in to the platform </target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">11,14</context>
+  </context-group>
+  <note priority="1" from="description">Login page title</note>
+</trans-unit>
+
+<trans-unit id="login.description" datatype="html">
+  <source> Introduza os seus dados de acesso para entrar no SIGA! </source>
+  <target> Enter your login credentials to access SIGA! </target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">18,23</context>
+  </context-group>
+  <note priority="1" from="description">Login description</note>
+</trans-unit>
+
+<trans-unit id="login.email.label" datatype="html">
+  <source> Email </source>
+  <target>Email</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">29,32</context>
+  </context-group>
+  <note priority="1" from="description">Email label</note>
+</trans-unit>
+
+<trans-unit id="login.email.placeholder" datatype="html">
+  <source>email@exemplo.pt</source>
+  <target>email@example.com</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">35,36</context>
+  </context-group>
+  <note priority="1" from="description">Email placeholder</note>
+</trans-unit>
+
+<trans-unit id="login.email.error" datatype="html">
+  <source> Introduza um email válido. </source>
+  <target>Please enter a valid email address.</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">45,50</context>
+  </context-group>
+  <note priority="1" from="description">Email validation error</note>
+</trans-unit>
+
+<trans-unit id="login.password.label" datatype="html">
+  <source> Palavra-passe </source>
+  <target>Password</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">54,58</context>
+  </context-group>
+  <note priority="1" from="description">Password label</note>
+</trans-unit>
+
+<trans-unit id="login.password.placeholder" datatype="html">
+  <source>Introduza a palavra-passe</source>
+  <target>Enter your password</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">60,61</context>
+  </context-group>
+  <note priority="1" from="description">Password placeholder</note>
+</trans-unit>
+
+<trans-unit id="login.password.error" datatype="html">
+  <source> Introduza a palavra-passe. </source>
+  <target>Please enter your password.</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">70,75</context>
+  </context-group>
+  <note priority="1" from="description">Password validation error</note>
+</trans-unit>
+
+<trans-unit id="login.recoverPassword" datatype="html">
+  <source> Esqueci-me da palavra-passe </source>
+  <target>I forgot my password</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">86,91</context>
+  </context-group>
+  <note priority="1" from="description">Recover password link</note>
+</trans-unit>
+
+<trans-unit id="login.submit" datatype="html">
+  <source> Entrar </source>
+  <target>Sign in</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">97,100</context>
+  </context-group>
+  <note priority="1" from="description">Login button</note>
+</trans-unit>
+
+<trans-unit id="login.register" datatype="html">
+  <source> Criar conta </source>
+  <target>Create account</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+    <context context-type="linenumber">103,107</context>
+  </context-group>
+  <note priority="1" from="description">Register link</note>
+</trans-unit>
+
+<!--    Fim da página de login    -->
+
     </body>
   </file>
 </xliff>

@@ -1,72 +1,111 @@
-<!-- Página de login da plataforma SIGA -->
-
 <section class="pagina-login">
   <div class="container-login">
 
     <div class="cabecalho-login">
-      <p class="etiqueta-login">LOGIN</p>
 
-      <h1>Entrar na plataforma</h1>
+      <p class="etiqueta-login">
+        LOGIN
+      </p>
+
+      <h1 i18n="Login page title@@login.title">
+        Entrar na plataforma
+      </h1>
 
       <div class="linha-login"></div>
 
-      <p class="descricao-login">
+      <p class="descricao-login"
+         i18n="Login description@@login.description">
         Introduza os seus dados de acesso para entrar no SIGA!
       </p>
+
     </div>
 
     <form [formGroup]="form" (ngSubmit)="login()" class="formulario-login">
 
+      <!-- EMAIL -->
       <div class="grupo-campo">
-        <label for="email">Email</label>
+
+        <label for="email" i18n="Email label@@login.email.label">
+          Email
+        </label>
+
         <input
           id="email"
           type="email"
           placeholder="email@exemplo.pt"
+          i18n-placeholder="Email placeholder@@login.email.placeholder"
           formControlName="email"
           (click)="resetErrorMessage()"
         />
 
-        <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-red-500">
+        <small
+          *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+          class="text-red-500"
+          i18n="Email validation error@@login.email.error">
           Introduza um email válido.
         </small>
+
       </div>
 
+      <!-- PASSWORD -->
       <div class="grupo-campo">
-        <label for="password">Palavra-passe</label>
+
+        <label for="password" i18n="Password label@@login.password.label">
+          Palavra-passe
+        </label>
+
         <input
           id="password"
           type="password"
           placeholder="Introduza a palavra-passe"
+          i18n-placeholder="Password placeholder@@login.password.placeholder"
           formControlName="password"
           (click)="resetErrorMessage()"
         />
 
-        <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-red-500">
+        <small
+          *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+          class="text-red-500"
+          i18n="Password validation error@@login.password.error">
           Introduza a palavra-passe.
         </small>
+
       </div>
 
+      <!-- ERROR MESSAGE (runtime - NOT i18n) -->
       <p *ngIf="errorMessage" class="text-red-500 mb-4">
         {{ errorMessage }}
       </p>
 
+      <!-- LINKS -->
       <div class="linha-opcoes">
-        <a routerLink="/recover-password" class="link-secundario">
+
+        <a routerLink="/recover-password"
+           class="link-secundario"
+           i18n="Recover password link@@login.recoverPassword">
           Esqueci-me da palavra-passe
         </a>
+
       </div>
 
+      <!-- ACTIONS -->
       <div class="acoes-login">
-        <button type="submit" class="botao-entrar">
+
+        <button type="submit"
+                class="botao-entrar"
+                i18n="Login button@@login.submit">
           Entrar
         </button>
 
-        <a routerLink="/register" class="link-registo">
+        <a routerLink="/register"
+           class="link-registo"
+           i18n="Register link@@login.register">
           Criar conta
         </a>
+
       </div>
 
     </form>
+
   </div>
 </section>

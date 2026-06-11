@@ -370,7 +370,6 @@ export class AdoptionService {
     }
   }
 
-  // TODO: Permitir mudança de aceita para rejeitada por exemplo?
   /**
    * Valida se a transição de estado é permitida.
    */
