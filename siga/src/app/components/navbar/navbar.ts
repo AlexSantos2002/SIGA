@@ -1,8 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  RouterModule
+} from '@angular/router';
 
 import { LanguageSwitcher } from '../language-switcher/language-switcher';
+import { LoadingService } from '../../services/services/loading.service';
 
 /**
  * @description
@@ -15,4 +23,21 @@ import { LanguageSwitcher } from '../language-switcher/language-switcher';
   styleUrl: './navbar.css',
   imports: [RouterModule, CommonModule, LanguageSwitcher],
 })
-export class Navbar {}
+export class Navbar implements OnInit {
+
+  constructor(private router: Router, public loading: LoadingService) {}
+
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.loading.start();
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.loading.stop();
+      }
+    });
+  }
+}

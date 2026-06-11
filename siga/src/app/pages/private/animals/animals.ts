@@ -9,7 +9,7 @@ import {
 } from '../../../constants/form-options';
 import { Animal } from '../../../models/animal/animal.model';
 import { AnimalService } from '../../../services/animal/animal.service';
-import { ImageService } from '../../../services/image.service';
+import { ImageService } from '../../../services/image/image.service';
 import {
   createSortState,
   getInitialSortDirection,

@@ -883,119 +883,284 @@
         </context-group>
       </trans-unit>
 
-<!--    Página de login    -->
+      <!--    Página de login    -->
 
-<trans-unit id="login.title" datatype="html">
-  <source> Entrar na plataforma </source>
-  <target> Sign in to the platform </target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">11,14</context>
-  </context-group>
-  <note priority="1" from="description">Login page title</note>
-</trans-unit>
+      <trans-unit id="login.title" datatype="html">
+        <source> Entrar na plataforma </source>
+        <target> Sign in to the platform </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+        <note priority="1" from="description">Login page title</note>
+      </trans-unit>
 
-<trans-unit id="login.description" datatype="html">
-  <source> Introduza os seus dados de acesso para entrar no SIGA! </source>
-  <target> Enter your login credentials to access SIGA! </target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">18,23</context>
-  </context-group>
-  <note priority="1" from="description">Login description</note>
-</trans-unit>
+      <trans-unit id="login.description" datatype="html">
+        <source> Introduza os seus dados de acesso para entrar no SIGA! </source>
+        <target> Enter your login credentials to access SIGA! </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">18,23</context>
+        </context-group>
+        <note priority="1" from="description">Login description</note>
+      </trans-unit>
 
-<trans-unit id="login.email.label" datatype="html">
-  <source> Email </source>
-  <target>Email</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">29,32</context>
-  </context-group>
-  <note priority="1" from="description">Email label</note>
-</trans-unit>
+      <trans-unit id="login.email.label" datatype="html">
+        <source> Email </source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">29,32</context>
+        </context-group>
+        <note priority="1" from="description">Email label</note>
+      </trans-unit>
 
-<trans-unit id="login.email.placeholder" datatype="html">
-  <source>email@exemplo.pt</source>
-  <target>email@example.com</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">35,36</context>
-  </context-group>
-  <note priority="1" from="description">Email placeholder</note>
-</trans-unit>
+      <trans-unit id="login.email.placeholder" datatype="html">
+        <source>email@exemplo.pt</source>
+        <target>email@example.com</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+        <note priority="1" from="description">Email placeholder</note>
+      </trans-unit>
 
-<trans-unit id="login.email.error" datatype="html">
-  <source> Introduza um email válido. </source>
-  <target>Please enter a valid email address.</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">45,50</context>
-  </context-group>
-  <note priority="1" from="description">Email validation error</note>
-</trans-unit>
+      <trans-unit id="login.email.error" datatype="html">
+        <source> Introduza um email válido. </source>
+        <target>Please enter a valid email address.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">45,50</context>
+        </context-group>
+        <note priority="1" from="description">Email validation error</note>
+      </trans-unit>
 
-<trans-unit id="login.password.label" datatype="html">
-  <source> Palavra-passe </source>
-  <target>Password</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">54,58</context>
-  </context-group>
-  <note priority="1" from="description">Password label</note>
-</trans-unit>
+      <trans-unit id="login.password.label" datatype="html">
+        <source> Palavra-passe </source>
+        <target>Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">54,58</context>
+        </context-group>
+        <note priority="1" from="description">Password label</note>
+      </trans-unit>
 
-<trans-unit id="login.password.placeholder" datatype="html">
-  <source>Introduza a palavra-passe</source>
-  <target>Enter your password</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">60,61</context>
-  </context-group>
-  <note priority="1" from="description">Password placeholder</note>
-</trans-unit>
+      <trans-unit id="login.password.placeholder" datatype="html">
+        <source>Introduza a palavra-passe</source>
+        <target>Enter your password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+        <note priority="1" from="description">Password placeholder</note>
+      </trans-unit>
 
-<trans-unit id="login.password.error" datatype="html">
-  <source> Introduza a palavra-passe. </source>
-  <target>Please enter your password.</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">70,75</context>
-  </context-group>
-  <note priority="1" from="description">Password validation error</note>
-</trans-unit>
+      <trans-unit id="login.password.error" datatype="html">
+        <source> Introduza a palavra-passe. </source>
+        <target>Please enter your password.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">70,75</context>
+        </context-group>
+        <note priority="1" from="description">Password validation error</note>
+      </trans-unit>
 
-<trans-unit id="login.recoverPassword" datatype="html">
-  <source> Esqueci-me da palavra-passe </source>
-  <target>I forgot my password</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">86,91</context>
-  </context-group>
-  <note priority="1" from="description">Recover password link</note>
-</trans-unit>
+      <trans-unit id="login.recoverPassword" datatype="html">
+        <source> Esqueci-me da palavra-passe </source>
+        <target>I forgot my password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">86,91</context>
+        </context-group>
+        <note priority="1" from="description">Recover password link</note>
+      </trans-unit>
 
-<trans-unit id="login.submit" datatype="html">
-  <source> Entrar </source>
-  <target>Sign in</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">97,100</context>
-  </context-group>
-  <note priority="1" from="description">Login button</note>
-</trans-unit>
+      <trans-unit id="login.submit" datatype="html">
+        <source> Entrar </source>
+        <target>Sign in</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">97,100</context>
+        </context-group>
+        <note priority="1" from="description">Login button</note>
+      </trans-unit>
 
-<trans-unit id="login.register" datatype="html">
-  <source> Criar conta </source>
-  <target>Create account</target>
-  <context-group purpose="location">
-    <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
-    <context context-type="linenumber">103,107</context>
-  </context-group>
-  <note priority="1" from="description">Register link</note>
-</trans-unit>
+      <trans-unit id="login.register" datatype="html">
+        <source> Criar conta </source>
+        <target>Create account</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/login/login.html</context>
+          <context context-type="linenumber">103,107</context>
+        </context-group>
+        <note priority="1" from="description">Register link</note>
+      </trans-unit>
 
-<!--    Fim da página de login    -->
+      <!--    Fim da página de login    -->
+
+      <!--    Dashboard    -->
+
+
+      <trans-unit id="dashboard.header.title">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.header.welcome">
+        <source>Olá, <x id="INTERPOLATION"/>. Aqui está o resumo da organização para hoje.</source>
+        <target>Hello, <x id="INTERPOLATION"/>. Here is your organization's summary for today.</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.loading">
+        <source>A carregar dashboard...</source>
+        <target>Loading dashboard...</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.animals.title">
+        <source>Animais registados</source>
+        <target>Registered animals</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.animals.available">
+        <source><x id="INTERPOLATION"/> disponíveis</source>
+        <target><x id="INTERPOLATION"/> available</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.incare.title">
+        <source>Em acompanhamento</source>
+        <target>Under care</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.incare.description">
+        <source>Tratamento ou acolhimento</source>
+        <target>Treatment or foster care</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.adoptions.title">
+        <source>Processos em aberto</source>
+        <target>Open processes</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.adoptions.completed">
+        <source><x id="INTERPOLATION"/> adoções concluídas</source>
+        <target><x id="INTERPOLATION"/> completed adoptions</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.alerts.title">
+        <source>Avisos de cuidados</source>
+        <target>Care alerts</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.summary.alerts.overdue">
+        <source><x id="INTERPOLATION"/> em atraso</source>
+        <target><x id="INTERPOLATION"/> overdue</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.notices.title">
+        <source>Avisos importantes</source>
+        <target>Important notices</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.notices.empty">
+        <source>Não existem avisos importantes neste momento.</source>
+        <target>There are no important notices at the moment.</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.care.title">
+        <source>Próximos cuidados</source>
+        <target>Upcoming care</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.care.view">
+        <source>Ver cuidados</source>
+        <target>View care</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.care.empty">
+        <source>Não existem cuidados em atraso ou próximos.</source>
+        <target>There are no overdue or upcoming care records.</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.adoptions.title">
+        <source>Adoções pendentes</source>
+        <target>Pending adoptions</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.adoptions.view">
+        <source>Ver processos</source>
+        <target>View processes</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.adoptions.empty">
+        <source>Não existem processos de adoção em aberto.</source>
+        <target>There are no open adoption processes.</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.adoptions.adopter">
+        <source>Adotante:</source>
+        <target>Adopter:</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.adoptions.status">
+        <source>Em aberto</source>
+        <target>Open</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.adoptions.applicationDate">
+        <source>Pedido em <x id="INTERPOLATION"/></source>
+        <target>Requested on <x id="INTERPOLATION"/></target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.animals.title">
+        <source>Animais recentes</source>
+        <target>Recent animals</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.animals.view">
+        <source>Ver animais</source>
+        <target>View animals</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.animals.empty">
+        <source>Ainda não existem animais registados nesta organização.</source>
+        <target>There are no animals registered in this organization yet.</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.animals.registeredDate">
+        <source>Registado em <x id="INTERPOLATION"/></source>
+        <target>Registered on <x id="INTERPOLATION"/></target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.quickActions.label">
+        <source>Ações rápidas</source>
+        <target>Quick actions</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.quickActions.ariaLabel">
+        <source>Ações rápidas</source>
+        <target>Quick actions</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.quickActions.addAnimal">
+        <source>Adicionar animal</source>
+        <target>Add animal</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.quickActions.addAdopter">
+        <source>Registar adotante</source>
+        <target>Register adopter</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.quickActions.startAdoption">
+        <source>Iniciar adoção</source>
+        <target>Start adoption</target>
+      </trans-unit>
+
+      <trans-unit id="dashboard.quickActions.registerCare">
+        <source>Registar cuidado</source>
+        <target>Register care</target>
+      </trans-unit>
+
+      <!--   Fim do dashboard     -->
 
     </body>
   </file>

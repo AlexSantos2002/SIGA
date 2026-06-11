@@ -28,7 +28,7 @@ import { AnimalSummaryCards } from './components/animal-summary-cards';
 import { AnimalVaccinesSection } from './components/animal-vaccines-section';
 import { AnimalVetAppointmentsSection } from './components/animal-vet-appointments-section';
 import { EditAnimalModal } from './edit-animal.types';
-import { ImageService } from '../../../../services/image.service';
+import { ImageService } from '../../../../services/image/image.service';
 
 @Component({
   selector: 'app-edit-animal',

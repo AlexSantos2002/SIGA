@@ -1,14 +1,25 @@
 <section class="dashboard-page">
   <div class="page-header">
     <div>
-      <h1>Dashboard</h1>
-      <p>Olá, {{ userName }}. Aqui está o resumo da organização para hoje.</p>
+      <h1 i18n="Dashboard title@@dashboard.header.title">
+        Dashboard
+      </h1>
+
+      <p i18n="Dashboard welcome@@dashboard.header.welcome">
+        Olá, {{ userName }}. Aqui está o resumo da organização para hoje.
+      </p>
     </div>
 
     <span class="today-label">{{ today | date: 'dd/MM/yyyy' }}</span>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar dashboard...</div>
+  <div
+    *ngIf="isLoading"
+    class="loading"
+    i18n="Dashboard loading@@dashboard.loading"
+  >
+    A carregar dashboard...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
@@ -17,36 +28,70 @@
   <ng-container *ngIf="!isLoading && !errorMessage">
     <div class="summary-grid">
       <article class="summary-card">
-        <span>Animais registados</span>
+        <span i18n="Registered animals@@dashboard.summary.animals.title">
+          Animais registados
+        </span>
+
         <strong>{{ totalAnimals }}</strong>
-        <small>{{ availableAnimalsCount }} disponíveis</small>
+
+        <small i18n="Available animals@@dashboard.summary.animals.available">
+          {{ availableAnimalsCount }} disponíveis
+        </small>
       </article>
 
       <article class="summary-card">
-        <span>Em acompanhamento</span>
+        <span i18n="Animals in care@@dashboard.summary.incare.title">
+          Em acompanhamento
+        </span>
+
         <strong>{{ inCareAnimalsCount }}</strong>
-        <small>Tratamento ou acolhimento</small>
+
+        <small i18n="Care description@@dashboard.summary.incare.description">
+          Tratamento ou acolhimento
+        </small>
       </article>
 
       <article class="summary-card">
-        <span>Processos em aberto</span>
+        <span i18n="Open adoptions@@dashboard.summary.adoptions.title">
+          Processos em aberto
+        </span>
+
         <strong>{{ pendingAdoptions.length }}</strong>
-        <small>{{ completedAdoptionsCount }} adoções concluídas</small>
+
+        <small
+          i18n="Completed adoptions@@dashboard.summary.adoptions.completed"
+        >
+          {{ completedAdoptionsCount }} adoções concluídas
+        </small>
       </article>
 
       <article class="summary-card warning">
-        <span>Avisos de cuidados</span>
-        <strong>{{ overdueCareRecords.length + dueSoonCareRecords.length }}</strong>
-        <small>{{ overdueCareRecords.length }} em atraso</small>
+        <span i18n="Care alerts@@dashboard.summary.alerts.title">
+          Avisos de cuidados
+        </span>
+
+        <strong>
+          {{ overdueCareRecords.length + dueSoonCareRecords.length }}
+        </strong>
+
+        <small i18n="Overdue alerts@@dashboard.summary.alerts.overdue">
+          {{ overdueCareRecords.length }} em atraso
+        </small>
       </article>
     </div>
 
     <section class="notices-section">
       <div class="section-header">
-        <h2>Avisos importantes</h2>
+        <h2 i18n="Important notices@@dashboard.notices.title">
+          Avisos importantes
+        </h2>
       </div>
 
-      <div *ngIf="!hasImportantNotices" class="empty-state">
+      <div
+        *ngIf="!hasImportantNotices"
+        class="empty-state"
+        i18n="No important notices@@dashboard.notices.empty"
+      >
         Não existem avisos importantes neste momento.
       </div>
 
@@ -59,7 +104,9 @@
           [class.info]="notice.severity === 'info'"
           [routerLink]="notice.route"
         >
-          <span class="notice-count">{{ notice.count || 'Ver' }}</span>
+          <span class="notice-count">
+            {{ notice.count || 'Ver' }}
+          </span>
 
           <span>
             <strong>{{ notice.title }}</strong>
@@ -72,11 +119,23 @@
     <div class="dashboard-grid">
       <section class="dashboard-panel">
         <div class="section-header">
-          <h2>Próximos cuidados</h2>
-          <a routerLink="/app/care">Ver cuidados</a>
+          <h2 i18n="Upcoming care@@dashboard.care.title">
+            Próximos cuidados
+          </h2>
+
+          <a
+            routerLink="/app/care"
+            i18n="View care@@dashboard.care.view"
+          >
+            Ver cuidados
+          </a>
         </div>
 
-        <div *ngIf="urgentCareRecords.length === 0" class="empty-state">
+        <div
+          *ngIf="urgentCareRecords.length === 0"
+          class="empty-state"
+          i18n="No urgent care@@dashboard.care.empty"
+        >
           Não existem cuidados em atraso ou próximos.
         </div>
 
@@ -88,8 +147,14 @@
           >
             <span>
               <strong>{{ record.animal.name }}</strong>
-              <small>{{ getCareTypeLabel(record.type) }} · {{ record.title }}</small>
-              <small>{{ getCareRecordDescription(record) }}</small>
+
+              <small>
+                {{ getCareTypeLabel(record.type) }} · {{ record.title }}
+              </small>
+
+              <small>
+                {{ getCareRecordDescription(record) }}
+              </small>
             </span>
 
             <span class="record-meta">
@@ -100,10 +165,16 @@
               >
                 {{ getTimelineLabel(record) }}
               </span>
-              <small>{{ getTimelineDescription(record) }}</small>
+
+              <small>
+                {{ getTimelineDescription(record) }}
+              </small>
+
               <small>
                 {{
-                  getCareRecordDate(record) ? (getCareRecordDate(record) | date: 'dd/MM/yyyy') : '-'
+                  getCareRecordDate(record)
+                    ? (getCareRecordDate(record) | date: 'dd/MM/yyyy')
+                    : '-'
                 }}
               </small>
             </span>
@@ -113,11 +184,23 @@
 
       <section class="dashboard-panel">
         <div class="section-header">
-          <h2>Adoções pendentes</h2>
-          <a routerLink="/app/adoptions">Ver processos</a>
+          <h2 i18n="Pending adoptions@@dashboard.adoptions.title">
+            Adoções pendentes
+          </h2>
+
+          <a
+            routerLink="/app/adoptions"
+            i18n="View adoptions@@dashboard.adoptions.view"
+          >
+            Ver processos
+          </a>
         </div>
 
-        <div *ngIf="recentPendingAdoptions.length === 0" class="empty-state">
+        <div
+          *ngIf="recentPendingAdoptions.length === 0"
+          class="empty-state"
+          i18n="No pending adoptions@@dashboard.adoptions.empty"
+        >
           Não existem processos de adoção em aberto.
         </div>
 
@@ -129,13 +212,32 @@
           >
             <span>
               <strong>{{ adoption.animal.name }}</strong>
-              <small>{{ getAdoptionAnimalDescription(adoption) }}</small>
-              <small>Adotante: {{ getAdoptionAdopterName(adoption) }}</small>
+
+              <small>
+                {{ getAdoptionAnimalDescription(adoption) }}
+              </small>
+
+              <small i18n="Adopter label@@dashboard.adoptions.adopter">
+                Adotante:
+              </small>
+              <small>
+                {{ getAdoptionAdopterName(adoption) }}
+              </small>
             </span>
 
             <span class="record-meta">
-              <span class="status-badge">Em aberto</span>
-              <small>Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}</small>
+              <span
+                class="status-badge"
+                i18n="Open status@@dashboard.adoptions.status"
+              >
+                Em aberto
+              </span>
+
+              <small
+                i18n="Application date@@dashboard.adoptions.applicationDate"
+              >
+                Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}
+              </small>
             </span>
           </a>
         </div>
@@ -144,11 +246,23 @@
 
     <section class="dashboard-panel">
       <div class="section-header">
-        <h2>Animais recentes</h2>
-        <a routerLink="/app/animals">Ver animais</a>
+        <h2 i18n="Recent animals@@dashboard.animals.title">
+          Animais recentes
+        </h2>
+
+        <a
+          routerLink="/app/animals"
+          i18n="View animals@@dashboard.animals.view"
+        >
+          Ver animais
+        </a>
       </div>
 
-      <div *ngIf="recentAnimals.length === 0" class="empty-state">
+      <div
+        *ngIf="recentAnimals.length === 0"
+        class="empty-state"
+        i18n="No recent animals@@dashboard.animals.empty"
+      >
         Ainda não existem animais registados nesta organização.
       </div>
 
@@ -160,8 +274,14 @@
         >
           <span>
             <strong>{{ animal.name }}</strong>
-            <small>{{ getAnimalDescription(animal) }}</small>
-            <small>{{ getAnimalStatusLabel(animal.status) }}</small>
+
+            <small>
+              {{ getAnimalDescription(animal) }}
+            </small>
+
+            <small>
+              {{ getAnimalStatusLabel(animal.status) }}
+            </small>
           </span>
 
           <span class="record-meta">
@@ -172,17 +292,49 @@
             >
               {{ animal.available ? 'Disponível' : 'Indisponível' }}
             </span>
-            <small>Registado em {{ animal.createdAt | date: 'dd/MM/yyyy' }}</small>
+
+            <small
+              i18n="Registered date@@dashboard.animals.registeredDate"
+            >
+              Registado em {{ animal.createdAt | date: 'dd/MM/yyyy' }}
+            </small>
           </span>
         </a>
       </div>
     </section>
 
-    <nav class="quick-actions" aria-label="Ações rápidas">
-      <a routerLink="/app/animals/new">Adicionar animal</a>
-      <a routerLink="/app/adopters/new">Registar adotante</a>
-      <a routerLink="/app/adoptions">Iniciar adoção</a>
-      <a routerLink="/app/care">Registar cuidado</a>
+    <nav
+      class="quick-actions"
+      aria-label="Ações rápidas"
+      i18n-aria-label="Quick actions@@dashboard.quickActions.ariaLabel"
+    >
+      <a
+        routerLink="/app/animals/new"
+        i18n="Add animal@@dashboard.quickActions.addAnimal"
+      >
+        Adicionar animal
+      </a>
+
+      <a
+        routerLink="/app/adopters/new"
+        i18n="Register adopter@@dashboard.quickActions.addAdopter"
+      >
+        Registar adotante
+      </a>
+
+      <a
+        routerLink="/app/adoptions"
+        i18n="Start adoption@@dashboard.quickActions.startAdoption"
+      >
+        Iniciar adoção
+      </a>
+
+      <a
+        routerLink="/app/care"
+        i18n="Register care@@dashboard.quickActions.registerCare"
+      >
+        Registar cuidado
+      </a>
     </nav>
   </ng-container>
 </section>

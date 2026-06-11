@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AppError } from '../../../error/app-error';
+import { LoadingService } from '../../../services/services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private loading: LoadingService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {
@@ -54,7 +56,7 @@ export class Login {
     }
 
     try {
-      this.errorMessage = '';
+      this.loading.start();
 
       const user = await this.authService.login(this.form.value);
 
@@ -69,6 +71,8 @@ export class Login {
         this.errorMessage = 'Nao foi possivel iniciar sessao.';
       }
       this.cdr.detectChanges();
+    } finally {
+    this.loading.stop();
     }
   }
 

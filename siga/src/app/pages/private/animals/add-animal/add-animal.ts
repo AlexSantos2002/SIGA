@@ -7,7 +7,7 @@ import { ANIMAL_GENDERS, ANIMAL_STATUSES } from '../../../../constants/form-opti
 import { DatePicker } from '../../../../components/date-picker/date-picker';
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { withTimeout } from '../../../../utils/utils';
-import { ImageService } from '../../../../services/image.service';
+import { ImageService } from '../../../../services/image/image.service';
 
 @Component({
   selector: 'app-add-animal',

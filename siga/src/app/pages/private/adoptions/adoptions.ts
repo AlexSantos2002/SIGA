@@ -11,7 +11,7 @@ import { Animal } from '../../../models/animal/animal.model';
 import { AdoptionService } from '../../../services/adoption/adoption.service';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalService } from '../../../services/animal/animal.service';
-import { ImageService } from '../../../services/image.service';
+import { ImageService } from '../../../services/image/image.service';
 import {
   createSortState,
   getInitialSortDirection,

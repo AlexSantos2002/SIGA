@@ -42,7 +42,7 @@
   color: #fff9fb;
 }
 
-/* Animaçãp ao passar o rato no ícone */
+/* Animação ao passar o rato no ícone */
 .logo:hover .logo-imagem {
   transform: rotate(5deg) scale(1.05);
 }
@@ -107,6 +107,40 @@
 .botao-topo:hover {
   background: #5b9bb7;
   transform: translateY(-2px);
+}
+
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -60%;
+    height: 100%;
+    width: 60%;
+    background: #5b9bb7;
+  animation: shimmer 1.4s infinite ease-in-out;
+  }
+
+  &.active {
+    opacity: 1;
+
+    &::after {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0%   { left: -60%; }
+  100% { left: 110%; }
 }
 
 /* Responsividade */

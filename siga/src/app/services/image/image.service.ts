@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { supabase } from '../../../supabase/supabase';
-import { DBError } from '../error/app-error';
-import { ERROR_CODES } from '../error/error-codes';
+import { supabase } from '../../../../supabase/supabase';
+import { DBError } from '../../error/app-error';
+import { ERROR_CODES } from '../../error/error-codes';
 
 /**
  * Gere as imagens dos animais no Supabase Storage.

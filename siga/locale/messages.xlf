@@ -17,7 +17,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1826668441638703043" datatype="html">
@@ -35,7 +35,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
-          <context context-type="linenumber">11,12</context>
+          <context context-type="linenumber">12,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5489968893403305908" datatype="html">
@@ -46,7 +46,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
-          <context context-type="linenumber">13,14</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7761920529535961293" datatype="html">
@@ -102,7 +102,7 @@
         <source>FAQ</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/public/faq/faq.html</context>
@@ -113,15 +113,263 @@
         <source>Contactos</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
-          <context context-type="linenumber">14,15</context>
+          <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="600376029726528115" datatype="html">
         <source>Entrar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="dashboard.header.title" datatype="html">
+        <source> Dashboard </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+        <note priority="1" from="description">Dashboard title</note>
+      </trans-unit>
+      <trans-unit id="dashboard.header.welcome" datatype="html">
+        <source> Olá, <x id="INTERPOLATION" equiv-text="{{ userName }}"/>. Aqui está o resumo da organização para hoje. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">9,11</context>
+        </context-group>
+        <note priority="1" from="description">Dashboard welcome</note>
+      </trans-unit>
+      <trans-unit id="dashboard.loading" datatype="html">
+        <source> A carregar dashboard... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">21,24</context>
+        </context-group>
+        <note priority="1" from="description">Dashboard loading</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.animals.title" datatype="html">
+        <source> Animais registados </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">32,35</context>
+        </context-group>
+        <note priority="1" from="description">Registered animals</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.animals.available" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ availableAnimalsCount }}"/> disponíveis </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+        <note priority="1" from="description">Available animals</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.incare.title" datatype="html">
+        <source> Em acompanhamento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">44,47</context>
+        </context-group>
+        <note priority="1" from="description">Animals in care</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.incare.description" datatype="html">
+        <source> Tratamento ou acolhimento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">50,54</context>
+        </context-group>
+        <note priority="1" from="description">Care description</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.adoptions.title" datatype="html">
+        <source> Processos em aberto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">56,59</context>
+        </context-group>
+        <note priority="1" from="description">Open adoptions</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.adoptions.completed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ completedAdoptionsCount }}"/> adoções concluídas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+        <note priority="1" from="description">Completed adoptions</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.alerts.title" datatype="html">
+        <source> Avisos de cuidados </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">70,74</context>
+        </context-group>
+        <note priority="1" from="description">Care alerts</note>
+      </trans-unit>
+      <trans-unit id="dashboard.summary.alerts.overdue" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ overdueCareRecords.length }}"/> em atraso </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">78,79</context>
+        </context-group>
+        <note priority="1" from="description">Overdue alerts</note>
+      </trans-unit>
+      <trans-unit id="dashboard.notices.title" datatype="html">
+        <source> Avisos importantes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">86,91</context>
+        </context-group>
+        <note priority="1" from="description">Important notices</note>
+      </trans-unit>
+      <trans-unit id="dashboard.notices.empty" datatype="html">
+        <source> Não existem avisos importantes neste momento. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+        <note priority="1" from="description">No important notices</note>
+      </trans-unit>
+      <trans-unit id="dashboard.care.title" datatype="html">
+        <source> Próximos cuidados </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">123,127</context>
+        </context-group>
+        <note priority="1" from="description">Upcoming care</note>
+      </trans-unit>
+      <trans-unit id="dashboard.care.view" datatype="html">
+        <source> Ver cuidados </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">130,132</context>
+        </context-group>
+        <note priority="1" from="description">View care</note>
+      </trans-unit>
+      <trans-unit id="dashboard.care.empty" datatype="html">
+        <source> Não existem cuidados em atraso ou próximos. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">139,142</context>
+        </context-group>
+        <note priority="1" from="description">No urgent care</note>
+      </trans-unit>
+      <trans-unit id="dashboard.adoptions.title" datatype="html">
+        <source> Adoções pendentes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">188,192</context>
+        </context-group>
+        <note priority="1" from="description">Pending adoptions</note>
+      </trans-unit>
+      <trans-unit id="dashboard.adoptions.view" datatype="html">
+        <source> Ver processos </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">195,199</context>
+        </context-group>
+        <note priority="1" from="description">View adoptions</note>
+      </trans-unit>
+      <trans-unit id="dashboard.adoptions.empty" datatype="html">
+        <source> Não existem processos de adoção em aberto. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">204,207</context>
+        </context-group>
+        <note priority="1" from="description">No pending adoptions</note>
+      </trans-unit>
+      <trans-unit id="dashboard.adoptions.adopter" datatype="html">
+        <source> Adotante: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">221,223</context>
+        </context-group>
+        <note priority="1" from="description">Adopter label</note>
+      </trans-unit>
+      <trans-unit id="dashboard.adoptions.status" datatype="html">
+        <source> Em aberto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">233,236</context>
+        </context-group>
+        <note priority="1" from="description">Open status</note>
+      </trans-unit>
+      <trans-unit id="dashboard.adoptions.applicationDate" datatype="html">
+        <source> Pedido em <x id="INTERPOLATION" equiv-text="{{ adoption.applicationDate | date: &apos;dd/MM/yyyy&apos; }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">239,240</context>
+        </context-group>
+        <note priority="1" from="description">Application date</note>
+      </trans-unit>
+      <trans-unit id="dashboard.animals.title" datatype="html">
+        <source> Animais recentes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">250,254</context>
+        </context-group>
+        <note priority="1" from="description">Recent animals</note>
+      </trans-unit>
+      <trans-unit id="dashboard.animals.view" datatype="html">
+        <source> Ver animais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">257,261</context>
+        </context-group>
+        <note priority="1" from="description">View animals</note>
+      </trans-unit>
+      <trans-unit id="dashboard.animals.empty" datatype="html">
+        <source> Ainda não existem animais registados nesta organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">266,269</context>
+        </context-group>
+        <note priority="1" from="description">No recent animals</note>
+      </trans-unit>
+      <trans-unit id="dashboard.animals.registeredDate" datatype="html">
+        <source> Registado em <x id="INTERPOLATION" equiv-text="{{ animal.createdAt | date: &apos;dd/MM/yyyy&apos; }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">299,300</context>
+        </context-group>
+        <note priority="1" from="description">Registered date</note>
+      </trans-unit>
+      <trans-unit id="dashboard.quickActions.ariaLabel" datatype="html">
+        <source>Ações rápidas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">308,309</context>
+        </context-group>
+        <note priority="1" from="description">Quick actions</note>
+      </trans-unit>
+      <trans-unit id="dashboard.quickActions.addAnimal" datatype="html">
+        <source> Adicionar animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">315,319</context>
+        </context-group>
+        <note priority="1" from="description">Add animal</note>
+      </trans-unit>
+      <trans-unit id="dashboard.quickActions.addAdopter" datatype="html">
+        <source> Registar adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">322,326</context>
+        </context-group>
+        <note priority="1" from="description">Register adopter</note>
+      </trans-unit>
+      <trans-unit id="dashboard.quickActions.startAdoption" datatype="html">
+        <source> Iniciar adoção </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">329,333</context>
+        </context-group>
+        <note priority="1" from="description">Start adoption</note>
+      </trans-unit>
+      <trans-unit id="dashboard.quickActions.registerCare" datatype="html">
+        <source> Registar cuidado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/dashboard/dashboard.html</context>
+          <context context-type="linenumber">336,340</context>
+        </context-group>
+        <note priority="1" from="description">Register care</note>
       </trans-unit>
       <trans-unit id="8513029167698384448" datatype="html">
         <source>Sobre o SIGA</source>
@@ -604,9 +852,6 @@
           <context context-type="linenumber">142,143</context>
         </context-group>
       </trans-unit>
-
-      <!--   Página de login     -->
-
       <trans-unit id="login.title" datatype="html">
         <source> Entrar na plataforma </source>
         <context-group purpose="location">
@@ -695,9 +940,6 @@
         </context-group>
         <note priority="1" from="description">Register link</note>
       </trans-unit>
-
-      <!--   Fim da página de login     -->
-
       <trans-unit id="4723729699972393049" datatype="html">
         <source>REGISTO</source>
         <context-group purpose="location">
