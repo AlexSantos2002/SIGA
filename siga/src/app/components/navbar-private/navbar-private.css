@@ -168,6 +168,41 @@
   color: #b42318;
 }
 
+/* Animação de carregamento */
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -60%;
+    height: 100%;
+    width: 60%;
+    background: #5b9bb7;
+    animation: shimmer 1.4s infinite ease-in-out;
+  }
+
+  &.active {
+    opacity: 1;
+
+    &::after {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0%   { left: -60%; }
+  100% { left: 110%; }
+}
+
 /* Responsividade */
 
 @media (max-width: 900px) {

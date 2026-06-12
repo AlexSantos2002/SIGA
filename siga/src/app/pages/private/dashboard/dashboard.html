@@ -290,7 +290,13 @@
               [class.available]="animal.available"
               [class.unavailable]="!animal.available"
             >
-              {{ animal.available ? 'Disponível' : 'Indisponível' }}
+              <ng-container *ngIf="animal.available; else unavailableTpl" i18n="animals@@dashboard.animals.available">
+                 <span >Disponível</span>
+              </ng-container>
+
+              <ng-template #unavailableTpl i18n="animals@@dashboard.animals.unavailable">
+                Indisponível
+              </ng-template>
             </span>
 
             <small

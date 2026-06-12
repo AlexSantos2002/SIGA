@@ -1,11 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  RouterModule
+} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { LanguageSwitcher } from '../language-switcher/language-switcher';
 import { User } from '../../models/user/user.model';
+import { LoadingService } from '../../services/services/loading.service';
 
 @Component({
   selector: 'app-navbar-private',
@@ -30,10 +38,12 @@ export class NavbarPrivate implements OnInit, OnDestroy {
    * e ao router da aplicação.
    *
    * @param authService Serviço responsável pela autenticação do utilizador.
+   * @param loading Serviço responsável por emitir sinais de carregamento para animação da navbar
    * @param router Serviço utilizado para navegar entre páginas.
    */
   constructor(
     private authService: AuthService,
+    public loading: LoadingService,
     private router: Router,
   ) {}
 
@@ -53,6 +63,19 @@ export class NavbarPrivate implements OnInit, OnDestroy {
     this.userSubscription = this.authService.currentUser$.subscribe((user) => {
       if (user) {
         this.setUserData(user);
+      }
+    });
+
+    // Responsável por realizar animação de carregamento
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.loading.start();
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.loading.stop();
       }
     });
   }

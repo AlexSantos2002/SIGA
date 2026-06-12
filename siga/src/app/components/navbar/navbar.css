@@ -109,6 +109,7 @@
   transform: translateY(-2px);
 }
 
+/* Animação de carregamento */
 .loading-bar {
   position: absolute;
   bottom: 0;
