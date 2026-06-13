@@ -28,7 +28,12 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(37, 38, 39, 0.78) 0%, rgba(37, 38, 39, 0.52) 45%, rgba(37, 38, 39, 0.32) 100%),
+    linear-gradient(
+      90deg,
+      rgba(37, 38, 39, 0.78) 0%,
+      rgba(37, 38, 39, 0.52) 45%,
+      rgba(37, 38, 39, 0.32) 100%
+    ),
     linear-gradient(180deg, rgba(75, 136, 162, 0.18), rgba(75, 136, 162, 0.08));
 }
 
@@ -50,6 +55,9 @@
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #d4ebf4;
+  opacity: 0;
+  animation: aparecer-esquerda 0.9s ease forwards;
+  animation-delay: 0.08s;
 }
 
 /* Título principal */
@@ -61,6 +69,9 @@
   font-weight: 700;
   letter-spacing: -1.4px;
   color: #fff9fb;
+  opacity: 0;
+  animation: aparecer-esquerda 0.9s ease forwards;
+  animation-delay: 0.18s;
 }
 
 /* Texto introdutório */
@@ -70,6 +81,9 @@
   font-size: 18px;
   line-height: 1.8;
   color: rgba(255, 249, 251, 0.92);
+  opacity: 0;
+  animation: aparecer-esquerda 0.9s ease forwards;
+  animation-delay: 0.32s;
 }
 
 /* Secções informativas */
@@ -84,11 +98,7 @@
 
 /* Fundo azul suave */
 .secao-azul-suave {
-  background: linear-gradient(
-    180deg,
-    rgba(75, 136, 162, 0.08),
-    rgba(255, 255, 255, 0.3)
-  );
+  background: linear-gradient(180deg, rgba(75, 136, 162, 0.08), rgba(255, 255, 255, 0.3));
 }
 
 /* Pequeno título */
@@ -147,7 +157,11 @@
   display: inline-block;
   text-decoration: none;
   font-weight: 600;
-  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .botao-primario {
@@ -161,6 +175,18 @@
   background: #5d9bb5;
   transform: translateY(-3px);
   box-shadow: 0 14px 28px rgba(75, 136, 162, 0.25);
+}
+
+@keyframes aparecer-esquerda {
+  from {
+    opacity: 0;
+    transform: translateX(-55px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Responsividade */
