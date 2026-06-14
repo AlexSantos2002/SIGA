@@ -81,7 +81,7 @@
             type="button"
             class="secondary-button"
             (click)="close.emit()"
-            i18n="Cancel button@@animals.modal.cancel"
+            i18n="Cancel button@@common.cancel"
           >
             Cancelar
           </button>
@@ -102,9 +102,7 @@
         </div>
       </form>
 
-<!-- FROM HERE      -->
-
-      <!-- ================= NOTES ================= -->
+      <!-- ================= NOTAS ================= -->
       <form *ngSwitchCase="'notes'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
         <div class="modal-header">
           <h3 i18n="Notes modal title@@animals.modal.notes.title">
@@ -137,7 +135,7 @@
             type="button"
             class="secondary-button"
             (click)="close.emit()"
-            i18n="Cancel button@@animals.modal.cancel"
+            i18n="Cancel button@@common.cancel"
           >
             Cancelar
           </button>
@@ -154,7 +152,7 @@
         </div>
       </form>
 
-      <!-- ================= HEALTH ================= -->
+      <!-- ================= SAÚDE ================= -->
       <form *ngSwitchCase="'health'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
         <div class="modal-header">
           <h3 i18n="Health modal title@@animals.modal.health.title">
@@ -244,7 +242,7 @@
             type="button"
             class="secondary-button"
             (click)="close.emit()"
-            i18n="Cancel button@@animals.modal.cancel"
+            i18n="Cancel button@@common.cancel"
           >
             Cancelar
           </button>
@@ -261,24 +259,35 @@
         </div>
       </form>
 
-<!--   TILL HERE   -->
-
+      <!-- ================= VACINAS ================= -->
       <form *ngSwitchCase="'vaccine'" [formGroup]="vaccineForm" (ngSubmit)="submitVaccine.emit()">
         <div class="modal-header">
-          <h3>Adicionar vacina</h3>
+          <h3 i18n="Vaccine modal title@@animals.modal.vaccine.title">
+            Add vaccine
+          </h3>
         </div>
 
         <div class="modal-grid">
           <div class="form-field">
-            <label>Nome da vacina</label>
+            <label i18n="Vaccine name label@@animals.modal.vaccine.name">
+              Vaccine name
+            </label>
+
             <input type="text" formControlName="name" />
-            <small *ngIf="vaccineForm.get('name')?.touched && vaccineForm.get('name')?.invalid">
-              Preencher o nome da vacina.
+
+            <small
+              *ngIf="vaccineForm.get('name')?.touched && vaccineForm.get('name')?.invalid"
+              i18n="Vaccine name error@@animals.modal.vaccine.name.error"
+            >
+              Please provide the vaccine name.
             </small>
           </div>
 
           <div class="form-field">
-            <label>Estado</label>
+            <label i18n="Vaccine status label@@animals.modal.vaccine.status">
+              Status
+            </label>
+
             <select formControlName="status">
               <option *ngFor="let status of vaccineStatuses" [value]="status.value">
                 {{ status.label }}
@@ -287,60 +296,81 @@
           </div>
 
           <div class="form-field">
-            <label>Data tomada</label>
+            <label i18n="Vaccine taken date label@@animals.modal.vaccine.dateTaken">
+              Date taken
+            </label>
+
             <app-date-picker formControlName="dateTaken"></app-date-picker>
+
             <small
               *ngIf="vaccineForm.get('dateTaken')?.touched && vaccineForm.get('dateTaken')?.invalid"
+              i18n="Vaccine taken date error@@animals.modal.vaccine.dateTaken.error"
             >
-              Preencher a data em que a vacina foi tomada.
+              Please provide the date when the vaccine was taken.
             </small>
           </div>
 
           <div class="form-field">
-            <label>Data prevista</label>
+            <label i18n="Vaccine scheduled date label@@animals.modal.vaccine.scheduledDate">
+              Scheduled date
+            </label>
+
             <app-date-picker formControlName="scheduledDate"></app-date-picker>
+
             <small
-              *ngIf="
-                vaccineForm.get('scheduledDate')?.touched &&
-                vaccineForm.get('scheduledDate')?.invalid
-              "
+              *ngIf="vaccineForm.get('scheduledDate')?.touched && vaccineForm.get('scheduledDate')?.invalid"
+              i18n="Vaccine scheduled date error@@animals.modal.vaccine.scheduledDate.error"
             >
-              Preencher a data prevista para a vacina pendente.
+              Please provide the scheduled date for the pending vaccine.
             </small>
           </div>
 
           <div class="form-field">
-            <label>Próxima dose</label>
+            <label i18n="Vaccine next dose label@@animals.modal.vaccine.nextDueDate">
+              Next dose
+            </label>
+
             <app-date-picker formControlName="nextDueDate"></app-date-picker>
           </div>
 
           <div class="form-field full-width">
-            <label>Observações</label>
+            <label i18n="Vaccine notes label@@animals.modal.vaccine.notes">
+              Notes
+            </label>
+
             <textarea rows="3" formControlName="notes"></textarea>
           </div>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+          <button type="button" class="secondary-button" (click)="close.emit()" i18n="Cancel button@@common.cancel">
+            Cancel
+          </button>
 
           <button type="submit" class="primary-button" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+            {{ isSubmitting ? 'Adding...' : 'Add' }}
           </button>
         </div>
       </form>
 
+      <!-- ================= DEWORMING ================= -->
       <form
         *ngSwitchCase="'deworming'"
         [formGroup]="dewormingForm"
         (ngSubmit)="submitDeworming.emit()"
       >
         <div class="modal-header">
-          <h3>Adicionar desparasitação</h3>
+          <h3 i18n="Deworming modal title@@animals.modal.deworming.title">
+            Add deworming
+          </h3>
         </div>
 
         <div class="modal-grid">
           <div class="form-field">
-            <label>Tipo</label>
+            <label i18n="Deworming type label@@animals.modal.deworming.type">
+              Type
+            </label>
+
             <select formControlName="type">
               <option *ngFor="let type of dewormingTypes" [value]="type.value">
                 {{ type.label }}
@@ -349,108 +379,147 @@
           </div>
 
           <div class="form-field">
-            <label>Data realizada</label>
+            <label i18n="Deworming done date label@@animals.modal.deworming.dateDone">
+              Date done
+            </label>
+
             <app-date-picker formControlName="dateDone"></app-date-picker>
+
             <small
-              *ngIf="
-                dewormingForm.get('dateDone')?.touched && dewormingForm.get('dateDone')?.invalid
-              "
+              *ngIf="dewormingForm.get('dateDone')?.touched && dewormingForm.get('dateDone')?.invalid"
+              i18n="Deworming date error@@animals.modal.deworming.dateDone.error"
             >
-              Preencher a data da desparasitacao.
+              Please provide the deworming date.
             </small>
           </div>
 
           <div class="form-field">
-            <label>Próxima data</label>
+            <label i18n="Deworming next due date label@@animals.modal.deworming.nextDueDate">
+              Next date
+            </label>
+
             <app-date-picker formControlName="nextDueDate"></app-date-picker>
           </div>
 
           <div class="form-field">
-            <label>Produto usado</label>
+            <label i18n="Deworming product label@@animals.modal.deworming.product">
+              Product used
+            </label>
+
             <input type="text" formControlName="productName" />
           </div>
 
           <div class="form-field full-width">
-            <label>Observações</label>
+            <label i18n="Deworming notes label@@animals.modal.deworming.notes">
+              Notes
+            </label>
+
             <textarea rows="3" formControlName="notes"></textarea>
           </div>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+          <button type="button" class="secondary-button" (click)="close.emit()" i18n="Cancel button@@common.cancel">
+            Cancel
+          </button>
 
           <button type="submit" class="primary-button" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+            {{ isSubmitting ? 'Adding...' : 'Add' }}
           </button>
         </div>
       </form>
 
+      <!-- ================= CONSULTAS ================= -->
       <form
         *ngSwitchCase="'appointment'"
         [formGroup]="appointmentForm"
         (ngSubmit)="submitAppointment.emit()"
       >
         <div class="modal-header">
-          <h3>Adicionar consulta veterinária</h3>
+          <h3 i18n="Appointment modal title@@animals.modal.appointment.title">
+            Add veterinary appointment
+          </h3>
         </div>
 
         <div class="modal-grid">
           <div class="form-field">
-            <label>Data da consulta</label>
+            <label i18n="Appointment date label@@animals.modal.appointment.date">
+              Appointment date
+            </label>
+
             <app-date-picker formControlName="appointmentDate"></app-date-picker>
+
             <small
-              *ngIf="
-                appointmentForm.get('appointmentDate')?.touched &&
-                appointmentForm.get('appointmentDate')?.invalid
-              "
+              *ngIf="appointmentForm.get('appointmentDate')?.touched && appointmentForm.get('appointmentDate')?.invalid"
+              i18n="Appointment date error@@animals.modal.appointment.date.error"
             >
-              Preencher a data da consulta.
+              Please provide the appointment date.
             </small>
           </div>
 
           <div class="form-field">
-            <label>Motivo</label>
+            <label i18n="Appointment reason label@@animals.modal.appointment.reason">
+              Reason
+            </label>
+
             <input type="text" formControlName="reason" />
+
             <small
-              *ngIf="
-                appointmentForm.get('reason')?.touched && appointmentForm.get('reason')?.invalid
-              "
+              *ngIf="appointmentForm.get('reason')?.touched && appointmentForm.get('reason')?.invalid"
+              i18n="Appointment reason error@@animals.modal.appointment.reason.error"
             >
-              Preencher o motivo da consulta.
+              Please provide the reason for the appointment.
             </small>
           </div>
 
           <div class="form-field">
-            <label>Clínica</label>
+            <label i18n="Clinic label@@animals.modal.appointment.clinic">
+              Clinic
+            </label>
+
             <input type="text" formControlName="clinicName" />
           </div>
 
           <div class="form-field">
-            <label>Veterinário</label>
+            <label i18n="Veterinarian label@@animals.modal.appointment.veterinarian">
+              Veterinarian
+            </label>
+
             <input type="text" formControlName="veterinarianName" />
           </div>
 
           <div class="form-field">
-            <label>Resultado</label>
+            <label i18n="Result label@@animals.modal.appointment.result">
+              Result
+            </label>
+
             <input type="text" formControlName="result" />
           </div>
 
           <div class="form-field">
-            <label>Próxima consulta</label>
+            <label i18n="Next appointment label@@animals.modal.appointment.next">
+              Next appointment
+            </label>
+
             <app-date-picker formControlName="nextAppointmentDate"></app-date-picker>
           </div>
 
           <div class="form-field full-width">
-            <label>Observações</label>
+            <label i18n="Appointment notes label@@animals.modal.appointment.notes">
+              Notes
+            </label>
+
             <textarea rows="3" formControlName="notes"></textarea>
           </div>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+          <button type="button" class="secondary-button" (click)="close.emit()" i18n="Cancel button@@common.cancel">
+            Cancel
+          </button>
 
           <button type="submit" class="primary-button" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'A adicionar...' : 'Adicionar' }}
+            {{ isSubmitting ? 'Adding...' : 'Add' }}
           </button>
         </div>
       </form>

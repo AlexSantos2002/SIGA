@@ -1696,11 +1696,6 @@
         <source>Medical notes</source>
         <target>Medical notes</target>
       </trans-unit>
-
-      <trans-unit id="animals.modal.cancel" datatype="html">
-        <source>Cancel</source>
-        <target>Cancel</target>
-      </trans-unit>
       <!--    Fim das notas    -->
 
       <!--    Saúde    -->
@@ -1750,7 +1745,100 @@
       </trans-unit>
       <!--    Fim da saúde    -->
 
-      <!--   Modal de edição de animal     -->
+      <!--   Vacinas     -->
+
+      <trans-unit id="animals.modal.vaccine.title" datatype="html">
+        <source> Add vaccine </source>
+        <target> Add vaccine </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.name" datatype="html">
+        <source> Vaccine name </source>
+        <target> Vaccine name </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.name.error" datatype="html">
+        <source> Please provide the vaccine name. </source>
+        <target> Please provide the vaccine name. </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.status" datatype="html">
+        <source> Status </source>
+        <target> Status </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.dateTaken" datatype="html">
+        <source> Date taken </source>
+        <target> Date taken </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.dateTaken.error" datatype="html">
+        <source> Please provide the date when the vaccine was taken. </source>
+        <target> Please provide the date when the vaccine was taken. </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.scheduledDate" datatype="html">
+        <source> Scheduled date </source>
+        <target> Scheduled date </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.scheduledDate.error" datatype="html">
+        <source> Please provide the scheduled date for the pending vaccine. </source>
+        <target> Please provide the scheduled date for the pending vaccine. </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.nextDueDate" datatype="html">
+        <source> Next dose </source>
+        <target> Next dose </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.vaccine.notes" datatype="html">
+        <source> Notes </source>
+        <target> Notes </target>
+      </trans-unit>
+
+      <!--   Fim das Vacinas     -->
+
+      <!--   Deworming     -->
+
+      <trans-unit id="animals.modal.deworming.title" datatype="html">
+        <source> Add deworming </source>
+        <target> Add deworming </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.deworming.type" datatype="html">
+        <source> Type </source>
+        <target> Type </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.deworming.dateDone" datatype="html">
+        <source> Date done </source>
+        <target> Date done </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.deworming.dateDone.error" datatype="html">
+        <source> Please provide the deworming date. </source>
+        <target> Please provide the deworming date. </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.deworming.nextDueDate" datatype="html">
+        <source> Next date </source>
+        <target> Next date </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.deworming.product" datatype="html">
+        <source> Product used </source>
+        <target> Product used </target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.deworming.notes" datatype="html">
+        <source> Notes </source>
+        <target> Notes </target>
+      </trans-unit>
+
+      <!--   Deworming     -->
+
+      <!--   Fim do modal de edição de animal     -->
 
       <!--   Fim da página de edição de animais     -->
 
