@@ -1251,6 +1251,11 @@
         <target>Loading animal details...</target>
       </trans-unit>
 
+      <trans-unit id="animals.edit.image.alt" datatype="html">
+        <source>Imagem de animal</source>
+        <target>Animal image</target>
+      </trans-unit>
+
       <trans-unit id="animals.edit.noImage">
         <source> Sem imagem </source>
         <target>No image</target>

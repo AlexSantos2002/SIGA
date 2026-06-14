@@ -277,6 +277,12 @@ export class EditAnimal implements OnInit, OnDestroy {
     }
   }
 
+  getAnimalImageAlt(): string {
+    if (!this.animal) return "";
+
+    return `Imagem de ${this.animal.name}`;
+  }
+
   async submit(): Promise<void> {
     this.updateHealthValidators(false);
 

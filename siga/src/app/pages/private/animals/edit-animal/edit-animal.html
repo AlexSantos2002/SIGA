@@ -40,7 +40,8 @@
         <img
           *ngIf="animalImage; else noAnimalImage"
           [src]="animalImage"
-          [alt]="'Imagem de ' + animal.name"
+          i18n-alt="Animal image alt text@@animals.edit.image.alt"
+          alt="Imagem de animal"
         />
 
         <ng-template #noAnimalImage>
