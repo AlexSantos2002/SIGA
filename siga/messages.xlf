@@ -499,6 +499,86 @@
         </context-group>
         <note priority="1" from="description">Microchip date label</note>
       </trans-unit>
+      <trans-unit id="animals.vaccines.title" datatype="html">
+        <source> Vacinas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">6,9</context>
+        </context-group>
+        <note priority="1" from="description">Vaccines section title</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.description" datatype="html">
+        <source> Vacinas tomadas ou ainda pendentes. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">10,15</context>
+        </context-group>
+        <note priority="1" from="description">Vaccines description</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.actions.add" datatype="html">
+        <source> Adicionar vacina </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">19,24</context>
+        </context-group>
+        <note priority="1" from="description">Add vaccine button</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.empty" datatype="html">
+        <source> Ainda não existem vacinas registadas. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">29,33</context>
+        </context-group>
+        <note priority="1" from="description">Empty vaccines state</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.status.label" datatype="html">
+        <source> Estado: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">46,49</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine status label</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.dateTaken" datatype="html">
+        <source> Tomada em: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">54,57</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine taken date label</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.scheduledDate" datatype="html">
+        <source> Prevista para: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">62,65</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine scheduled date label</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.nextDueDate" datatype="html">
+        <source> Próxima dose: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">70,73</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine next dose label</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.notes" datatype="html">
+        <source> Observações: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">78,81</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine notes label</note>
+      </trans-unit>
+      <trans-unit id="animals.vaccines.actions.remove" datatype="html">
+        <source> Remover </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-vaccines-section.html</context>
+          <context context-type="linenumber">92,99</context>
+        </context-group>
+        <note priority="1" from="description">Remove vaccine button</note>
+      </trans-unit>
       <trans-unit id="animals.edit.title" datatype="html">
         <source> Ficha do animal </source>
         <context-group purpose="location">

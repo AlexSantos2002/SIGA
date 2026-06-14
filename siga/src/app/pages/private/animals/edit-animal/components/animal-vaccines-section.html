@@ -1,43 +1,99 @@
 <section class="records-section">
+
   <div class="records-header">
     <div>
-      <h3>Vacinas</h3>
-      <p>Vacinas tomadas ou ainda pendentes.</p>
+      <h3 i18n="Vaccines section title@@animals.vaccines.title">
+        Vacinas
+      </h3>
+
+      <p i18n="Vaccines description@@animals.vaccines.description">
+        Vacinas tomadas ou ainda pendentes.
+      </p>
     </div>
 
-    <button type="button" (click)="addVaccine.emit()">Adicionar vacina</button>
+    <button
+      type="button"
+      (click)="addVaccine.emit()"
+      i18n="Add vaccine button@@animals.vaccines.actions.add"
+    >
+      Adicionar vacina
+    </button>
   </div>
 
-  <div *ngIf="vaccines.length === 0" class="empty-card">Ainda não existem vacinas registadas.</div>
+  <!-- EMPTY STATE -->
+  <div
+    *ngIf="vaccines.length === 0"
+    class="empty-card"
+    i18n="Empty vaccines state@@animals.vaccines.empty"
+  >
+    Ainda não existem vacinas registadas.
+  </div>
 
+  <!-- LIST -->
   <div *ngIf="vaccines.length > 0" class="record-card-list">
-    <article *ngFor="let vaccine of vaccines; trackBy: trackByVaccineId" class="record-card">
+
+    <article
+      *ngFor="let vaccine of vaccines; trackBy: trackByVaccineId"
+      class="record-card"
+    >
+
       <div>
+
         <h4>{{ vaccine.name }}</h4>
 
         <p>
-          Estado:
+          <span i18n="Vaccine status label@@animals.vaccines.status.label">
+            Estado:
+          </span>
+
           <strong>{{ getVaccineStatusLabel(vaccine.status) }}</strong>
         </p>
 
-        <p>Tomada em: {{ vaccine.dateTaken ? (vaccine.dateTaken | date: 'dd/MM/yyyy') : '-' }}</p>
+        <p>
+          <span i18n="Vaccine taken date label@@animals.vaccines.dateTaken">
+            Tomada em:
+          </span>
+
+          {{ vaccine.dateTaken ? (vaccine.dateTaken | date: 'dd/MM/yyyy') : '-' }}
+        </p>
 
         <p>
-          Prevista para:
+          <span i18n="Vaccine scheduled date label@@animals.vaccines.scheduledDate">
+            Prevista para:
+          </span>
+
           {{ vaccine.scheduledDate ? (vaccine.scheduledDate | date: 'dd/MM/yyyy') : '-' }}
         </p>
 
         <p>
-          Próxima dose:
+          <span i18n="Vaccine next dose label@@animals.vaccines.nextDueDate">
+            Próxima dose:
+          </span>
+
           {{ vaccine.nextDueDate ? (vaccine.nextDueDate | date: 'dd/MM/yyyy') : '-' }}
         </p>
 
-        <p *ngIf="vaccine.notes">Observações: {{ vaccine.notes }}</p>
+        <p *ngIf="vaccine.notes">
+          <span i18n="Vaccine notes label@@animals.vaccines.notes">
+            Observações:
+          </span>
+
+          {{ vaccine.notes }}
+        </p>
+
       </div>
 
-      <button type="button" class="remove-record-button" (click)="removeVaccine.emit(vaccine.id)">
+      <button
+        type="button"
+        class="remove-record-button"
+        (click)="removeVaccine.emit(vaccine.id)"
+        i18n="Remove vaccine button@@animals.vaccines.actions.remove"
+      >
         Remover
       </button>
+
     </article>
+
   </div>
+
 </section>

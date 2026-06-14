@@ -1424,6 +1424,70 @@
 
       <!--   Fim dos summary Cards     -->
 
+      <!--   Componente de vacinas     -->
+
+      <trans-unit id="animals.vaccines.title">
+        <source> Vacinas </source>
+        <target>Vaccines</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.description">
+        <source> Vacinas tomadas ou ainda pendentes. </source>
+        <target>Vaccines already taken or still pending.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.actions.add">
+        <source> Adicionar vacina </source>
+        <target>Add vaccine</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.empty">
+        <source> Ainda não existem vacinas registadas. </source>
+        <target>No vaccines registered yet.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.status.label">
+        <source> Estado: </source>
+        <target>Status:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.dateTaken">
+        <source> Tomada em: </source>
+        <target>Taken on:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.scheduledDate">
+        <source> Prevista para: </source>
+        <target>Scheduled for:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.nextDueDate">
+        <source> Próxima dose: </source>
+        <target>Next dose:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.notes">
+        <source> Observações: </source>
+        <target>Notes:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.vaccines.actions.remove">
+        <source> Remover </source>
+        <target>Remove</target>
+      </trans-unit>
+
+      <!--   Fim do componente de vacinas     -->
+
+
+      <!--   Componente de desparasitação     -->
+
+
+
+      <!--   Fim do componente de desparasitação     -->
+
+
+
+
       <!--   Fim da página de edição de animais     -->
 
     </body>
