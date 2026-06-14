@@ -1,32 +1,77 @@
 <section class="records-section">
   <div class="records-header">
     <div>
-      <h3>Desparasitação</h3>
-      <p>Registos de desparasitação interna ou externa.</p>
+      <h3 i18n="Deworming section title@@animals.deworming.title">
+        Desparasitação
+      </h3>
+
+      <p i18n="Deworming section description@@animals.deworming.description">
+        Registos de desparasitação interna ou externa.
+      </p>
     </div>
 
-    <button type="button" (click)="addDeworming.emit()">Adicionar desparasitação</button>
+    <button
+      type="button"
+      (click)="addDeworming.emit()"
+      i18n="Add deworming button@@animals.deworming.actions.add"
+    >
+      Adicionar desparasitação
+    </button>
   </div>
 
-  <div *ngIf="records.length === 0" class="empty-card">
+  <div
+    *ngIf="records.length === 0"
+    class="empty-card"
+    i18n="Empty deworming state@@animals.deworming.empty"
+  >
     Ainda não existem desparasitações registadas.
   </div>
 
   <div *ngIf="records.length > 0" class="record-card-list">
-    <article *ngFor="let record of records; trackBy: trackByDewormingId" class="record-card">
+    <article
+      *ngFor="let record of records; trackBy: trackByDewormingId"
+      class="record-card"
+    >
       <div>
-        <h4>{{ getDewormingTypeLabel(record.type) }}</h4>
+        <h4>
+          {{ getDewormingTypeLabel(record.type) }}
+        </h4>
 
-        <p>Realizada em: {{ record.dateDone | date: 'dd/MM/yyyy' }}</p>
+        <p>
+          <span i18n="Deworming done date label@@animals.deworming.dateDone">
+            Realizada em:
+          </span>
+          {{ record.dateDone | date: 'dd/MM/yyyy' }}
+        </p>
 
-        <p>Próxima: {{ record.nextDueDate ? (record.nextDueDate | date: 'dd/MM/yyyy') : '-' }}</p>
+        <p>
+          <span i18n="Deworming next due label@@animals.deworming.nextDueDate">
+            Próxima:
+          </span>
+          {{ record.nextDueDate ? (record.nextDueDate | date: 'dd/MM/yyyy') : '-' }}
+        </p>
 
-        <p>Produto: {{ record.productName || '-' }}</p>
+        <p>
+          <span i18n="Deworming product label@@animals.deworming.product">
+            Produto:
+          </span>
+          {{ record.productName || '-' }}
+        </p>
 
-        <p *ngIf="record.notes">Observações: {{ record.notes }}</p>
+        <p *ngIf="record.notes">
+          <span i18n="Deworming notes label@@animals.deworming.notes">
+            Observações:
+          </span>
+          {{ record.notes }}
+        </p>
       </div>
 
-      <button type="button" class="remove-record-button" (click)="removeDeworming.emit(record.id)">
+      <button
+        type="button"
+        class="remove-record-button"
+        (click)="removeDeworming.emit(record.id)"
+        i18n="Remove deworming button@@animals.deworming.actions.remove"
+      >
         Remover
       </button>
     </article>

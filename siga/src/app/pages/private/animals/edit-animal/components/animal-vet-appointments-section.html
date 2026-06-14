@@ -1,14 +1,29 @@
 <section class="records-section">
   <div class="records-header">
     <div>
-      <h3>Consultas veterinárias</h3>
-      <p>Histórico de consultas e acompanhamento veterinário.</p>
+      <h3 i18n="Vet appointments title@@animals.appointments.title">
+        Consultas veterinárias
+      </h3>
+
+      <p i18n="Vet appointments description@@animals.appointments.description">
+        Histórico de consultas e acompanhamento veterinário.
+      </p>
     </div>
 
-    <button type="button" (click)="addAppointment.emit()">Adicionar consulta</button>
+    <button
+      type="button"
+      (click)="addAppointment.emit()"
+      i18n="Add appointment button@@animals.appointments.actions.add"
+    >
+      Adicionar consulta
+    </button>
   </div>
 
-  <div *ngIf="appointments.length === 0" class="empty-card">
+  <div
+    *ngIf="appointments.length === 0"
+    class="empty-card"
+    i18n="Empty appointments state@@animals.appointments.empty"
+  >
     Ainda não existem consultas registadas.
   </div>
 
@@ -18,15 +33,42 @@
       class="record-card"
     >
       <div>
-        <h4>{{ appointment.appointmentDate | date: 'dd/MM/yyyy' }}</h4>
-
-        <p>Motivo: {{ appointment.reason }}</p>
-        <p>Clínica: {{ appointment.clinicName || '-' }}</p>
-        <p>Veterinário: {{ appointment.veterinarianName || '-' }}</p>
-        <p>Resultado: {{ appointment.result || '-' }}</p>
+        <h4>
+          {{ appointment.appointmentDate | date: 'dd/MM/yyyy' }}
+        </h4>
 
         <p>
-          Próxima consulta:
+          <span i18n="Appointment reason label@@animals.appointments.reason">
+            Motivo:
+          </span>
+          {{ appointment.reason }}
+        </p>
+
+        <p>
+          <span i18n="Clinic label@@animals.appointments.clinic">
+            Clínica:
+          </span>
+          {{ appointment.clinicName || '-' }}
+        </p>
+
+        <p>
+          <span i18n="Veterinarian label@@animals.appointments.veterinarian">
+            Veterinário:
+          </span>
+          {{ appointment.veterinarianName || '-' }}
+        </p>
+
+        <p>
+          <span i18n="Appointment result label@@animals.appointments.result">
+            Resultado:
+          </span>
+          {{ appointment.result || '-' }}
+        </p>
+
+        <p>
+          <span i18n="Next appointment label@@animals.appointments.next">
+            Próxima consulta:
+          </span>
           {{
             appointment.nextAppointmentDate
               ? (appointment.nextAppointmentDate | date: 'dd/MM/yyyy')
@@ -34,13 +76,19 @@
           }}
         </p>
 
-        <p *ngIf="appointment.notes">Observações: {{ appointment.notes }}</p>
+        <p *ngIf="appointment.notes">
+          <span i18n="Appointment notes label@@animals.appointments.notes">
+            Observações:
+          </span>
+          {{ appointment.notes }}
+        </p>
       </div>
 
       <button
         type="button"
         class="remove-record-button"
         (click)="removeAppointment.emit(appointment.id)"
+        i18n="Remove appointment button@@animals.appointments.actions.remove"
       >
         Remover
       </button>

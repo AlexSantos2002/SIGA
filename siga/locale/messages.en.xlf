@@ -1481,11 +1481,111 @@
 
       <!--   Componente de desparasitação     -->
 
+      <trans-unit id="animals.deworming.title" datatype="html">
+        <source> Desparasitação </source>
+        <target>Deworming</target>
+      </trans-unit>
 
+      <trans-unit id="animals.deworming.description" datatype="html">
+        <source> Registos de desparasitação interna ou externa. </source>
+        <target>Internal or external deworming records.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.actions.add" datatype="html">
+        <source> Adicionar desparasitação </source>
+        <target>Add deworming</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.empty" datatype="html">
+        <source> Ainda não existem desparasitações registadas. </source>
+        <target>No deworming records registered yet.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.dateDone" datatype="html">
+        <source> Realizada em: </source>
+        <target>Done on:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.nextDueDate" datatype="html">
+        <source> Próxima: </source>
+        <target>Next due:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.product" datatype="html">
+        <source> Produto: </source>
+        <target>Product:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.notes" datatype="html">
+        <source> Observações: </source>
+        <target>Notes:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.deworming.actions.remove" datatype="html">
+        <source> Remover </source>
+        <target>Remove</target>
+      </trans-unit>
 
       <!--   Fim do componente de desparasitação     -->
 
+      <!--   Componente de consultas veterinárias     -->
 
+      <trans-unit id="animals.appointments.title" datatype="html">
+        <source> Consultas veterinárias </source>
+        <target>Veterinary appointments</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.description" datatype="html">
+        <source> Histórico de consultas e acompanhamento veterinário. </source>
+        <target>History of veterinary appointments and follow-up care.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.actions.add" datatype="html">
+        <source> Adicionar consulta </source>
+        <target>Add appointment</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.empty" datatype="html">
+        <source> Ainda não existem consultas registadas. </source>
+        <target>No appointments registered yet.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.reason" datatype="html">
+        <source> Motivo: </source>
+        <target>Reason:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.clinic" datatype="html">
+        <source> Clínica: </source>
+        <target>Clinic:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.veterinarian" datatype="html">
+        <source> Veterinário: </source>
+        <target>Veterinarian:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.result" datatype="html">
+        <source> Resultado: </source>
+        <target>Result:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.next" datatype="html">
+        <source> Próxima consulta: </source>
+        <target>Next appointment:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.notes" datatype="html">
+        <source> Observações: </source>
+        <target>Notes:</target>
+      </trans-unit>
+
+      <trans-unit id="animals.appointments.actions.remove" datatype="html">
+        <source> Remover </source>
+        <target>Remove</target>
+      </trans-unit>
+
+      <!--   Fim do componente de consultas veterinárias     -->
 
 
       <!--   Fim da página de edição de animais     -->
