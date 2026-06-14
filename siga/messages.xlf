@@ -277,6 +277,10 @@
       </trans-unit>
       <trans-unit id="animals.delete.confirm.delete" datatype="html">
         <source> Eliminar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">279,283</context>
+        </context-group>
         <note priority="1" from="description">Delete button</note>
       </trans-unit>
       <trans-unit id="animals.delete.confirm.deleting" datatype="html">
@@ -286,6 +290,102 @@
           <context context-type="linenumber">285,287</context>
         </context-group>
         <note priority="1" from="description">Deleting state</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.title" datatype="html">
+        <source> Ficha do animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+        <note priority="1" from="description">Animal detail page title</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.description" datatype="html">
+        <source> Consulta e gere os dados associados ao animal. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">9,14</context>
+        </context-group>
+        <note priority="1" from="description">Animal detail page description</note>
+      </trans-unit>
+      <trans-unit id="animals.actions.backToList" datatype="html">
+        <source> Voltar à lista </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">18,23</context>
+        </context-group>
+        <note priority="1" from="description">Back to list button</note>
+      </trans-unit>
+      <trans-unit id="animals.state.loadingDetail" datatype="html">
+        <source> A carregar ficha do animal... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">27,30</context>
+        </context-group>
+        <note priority="1" from="description">Loading animal detail</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.noImage" datatype="html">
+        <source> Sem imagem </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">48,51</context>
+        </context-group>
+        <note priority="1" from="description">No animal image placeholder</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.actions.changePhoto" datatype="html">
+        <source> Alterar foto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">65,69</context>
+        </context-group>
+        <note priority="1" from="description">Change photo button</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.actions.addPhoto" datatype="html">
+        <source> Adicionar foto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">72,76</context>
+        </context-group>
+        <note priority="1" from="description">Add photo button</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.actions.savePhoto" datatype="html">
+        <source> Guardar foto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">100,104</context>
+        </context-group>
+        <note priority="1" from="description">Save photo button</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.state.savingPhoto" datatype="html">
+        <source> A guardar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">107,111</context>
+        </context-group>
+        <note priority="1" from="description">Saving photo state</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.actions.cancelPhoto" datatype="html">
+        <source> Cancelar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">119,123</context>
+        </context-group>
+        <note priority="1" from="description">Cancel photo selection</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.actions.removePhoto" datatype="html">
+        <source> Remover foto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">133,137</context>
+        </context-group>
+        <note priority="1" from="description">Remove photo button</note>
+      </trans-unit>
+      <trans-unit id="animals.edit.state.removingPhoto" datatype="html">
+        <source> A remover... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/edit-animal.html</context>
+          <context context-type="linenumber">140,144</context>
+        </context-group>
+        <note priority="1" from="description">Removing photo state</note>
       </trans-unit>
       <trans-unit id="dashboard.header.title" datatype="html">
         <source> Dashboard </source>

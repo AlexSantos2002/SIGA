@@ -1229,6 +1229,70 @@
       </trans-unit>
       <!--   Fim da página de animais     -->
 
+      <!--    Página de edição de animais    -->
+
+      <trans-unit id="animals.edit.title">
+        <source> Ficha do animal </source>
+        <target>Animal details</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.description">
+        <source> Consulta e gere os dados associados ao animal. </source>
+        <target>View and manage the data associated with the animal.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.actions.backToList">
+        <source> Voltar à lista </source>
+        <target>Back to list</target>
+      </trans-unit>
+
+      <trans-unit id="animals.state.loadingDetail">
+        <source> A carregar ficha do animal... </source>
+        <target>Loading animal details...</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.noImage">
+        <source> Sem imagem </source>
+        <target>No image</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.actions.changePhoto">
+        <source> Alterar foto </source>
+        <target>Change photo</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.actions.addPhoto">
+        <source> Adicionar foto </source>
+        <target>Add photo</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.actions.savePhoto">
+        <source>Guardar foto</source>
+        <target>Save photo</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.state.savingPhoto">
+        <source>A guardar...</source>
+        <target>Saving...</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.actions.cancelPhoto">
+        <source> Cancelar </source>
+        <target>Cancel</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.actions.removePhoto">
+        <source>Remover foto</source>
+        <target>Remove photo</target>
+      </trans-unit>
+
+      <trans-unit id="animals.edit.state.removingPhoto">
+        <source>A remover...</source>
+        <target>Removing...</target>
+      </trans-unit>
+
+      <!--   Fim da página de edição de animais     -->
+
     </body>
   </file>
 </xliff>

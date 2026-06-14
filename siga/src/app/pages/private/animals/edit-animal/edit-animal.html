@@ -1,14 +1,31 @@
 <section class="edit-animal-page">
   <div class="page-header">
     <div>
-      <h1>Ficha do animal</h1>
-      <p>Consulta e gere os dados associados ao animal.</p>
+      <h1 i18n="Animal detail page title@@animals.edit.title">
+        Ficha do animal
+      </h1>
+
+      <p i18n="Animal detail page description@@animals.edit.description">
+        Consulta e gere os dados associados ao animal.
+      </p>
     </div>
 
-    <a routerLink="/app/animals" class="back-button">Voltar à lista</a>
+    <a
+      routerLink="/app/animals"
+      class="back-button"
+      i18n="Back to list button@@animals.actions.backToList"
+    >
+      Voltar à lista
+    </a>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar ficha do animal...</div>
+  <div
+    *ngIf="isLoading"
+    class="loading"
+    i18n="Loading animal detail@@animals.state.loadingDetail"
+  >
+    A carregar ficha do animal...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
@@ -16,7 +33,10 @@
 
   <ng-container *ngIf="!isLoading && animal">
     <section class="animal-image-section">
-      <div class="animal-image-preview" [class.empty]="!animalImage">
+      <div
+        class="animal-image-preview"
+        [class.empty]="!animalImage"
+      >
         <img
           *ngIf="animalImage; else noAnimalImage"
           [src]="animalImage"
@@ -24,7 +44,9 @@
         />
 
         <ng-template #noAnimalImage>
-          <span>Sem imagem</span>
+          <span i18n="No animal image placeholder@@animals.edit.noImage">
+            Sem imagem
+          </span>
         </ng-template>
       </div>
 
@@ -36,7 +58,19 @@
           [disabled]="isImageSubmitting"
           (click)="openImagePicker()"
         >
-          {{ animal.imagePath ? 'Alterar foto' : 'Adicionar foto' }}
+          <span
+            *ngIf="animal.imagePath"
+            i18n="Change photo button@@animals.edit.actions.changePhoto"
+          >
+            Alterar foto
+          </span>
+
+          <span
+            *ngIf="!animal.imagePath"
+            i18n="Add photo button@@animals.edit.actions.addPhoto"
+          >
+            Adicionar foto
+          </span>
         </button>
 
         <input
@@ -59,7 +93,19 @@
           [disabled]="isImageSubmitting"
           (click)="saveSelectedImage()"
         >
-          {{ isImageSubmitting ? 'A guardar...' : 'Guardar foto' }}
+          <span
+            *ngIf="!isImageSubmitting"
+            i18n="Save photo button@@animals.edit.actions.savePhoto"
+          >
+            Guardar foto
+          </span>
+
+          <span
+            *ngIf="isImageSubmitting"
+            i18n="Saving photo state@@animals.edit.state.savingPhoto"
+          >
+            A guardar...
+          </span>
         </button>
 
         <button
@@ -68,6 +114,7 @@
           class="secondary-button"
           [disabled]="isImageSubmitting"
           (click)="clearSelectedImage()"
+          i18n="Cancel photo selection@@animals.edit.actions.cancelPhoto"
         >
           Cancelar
         </button>
@@ -79,7 +126,19 @@
           [disabled]="isImageSubmitting"
           (click)="removeImage()"
         >
-          {{ isImageSubmitting ? 'A remover...' : 'Remover foto' }}
+          <span
+            *ngIf="!isImageSubmitting"
+            i18n="Remove photo button@@animals.edit.actions.removePhoto"
+          >
+            Remover foto
+          </span>
+
+          <span
+            *ngIf="isImageSubmitting"
+            i18n="Removing photo state@@animals.edit.state.removingPhoto"
+          >
+            A remover...
+          </span>
         </button>
       </div>
     </section>
