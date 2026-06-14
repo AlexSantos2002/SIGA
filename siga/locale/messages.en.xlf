@@ -5,10 +5,6 @@
       <trans-unit id="7106539915530262914" datatype="html">
         <source> Plataforma de apoio à gestão de animais e processos de adoção por organizações de proteção animal. </source>
         <target> A platform to support animal management and adoption processes for animal welfare organizations. </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="7210930735981511249" datatype="html">
         <source>Começar agora</source>
@@ -941,6 +937,40 @@
       </trans-unit>
 
       <!--    Fim da página de login    -->
+
+      <!--   Side menu     -->
+
+      <trans-unit id="sidebar.dashboard" datatype="html">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+
+      <trans-unit id="sidebar.animals" datatype="html">
+        <source>Animais</source>
+        <target>Animals</target>
+      </trans-unit>
+
+      <trans-unit id="sidebar.adopters" datatype="html">
+        <source>Adotantes</source>
+        <target>Adopters</target>
+      </trans-unit>
+
+      <trans-unit id="sidebar.adoptions" datatype="html">
+        <source>Adoções</source>
+        <target>Adoptions</target>
+      </trans-unit>
+
+      <trans-unit id="sidebar.care" datatype="html">
+        <source>Cuidados</source>
+        <target>Care</target>
+      </trans-unit>
+
+      <trans-unit id="sidebar.statistics" datatype="html">
+        <source>Estatísticas</source>
+        <target>Statistics</target>
+      </trans-unit>
+
+      <!--   Fim do side menu     -->
 
       <!--    Dashboard    -->
 

@@ -1,10 +1,12 @@
 <aside class="menu-lateral">
   <nav class="navegacao-menu">
+
     <a
       routerLink="/app/dashboard"
       routerLinkActive="ativo"
       [routerLinkActiveOptions]="{ exact: true }"
       class="item-menu"
+      i18n="Sidebar dashboard link@@sidebar.dashboard"
     >
       Dashboard
     </a>
@@ -13,6 +15,7 @@
       routerLink="/app/animals"
       routerLinkActive="ativo"
       class="item-menu"
+      i18n="Sidebar animals link@@sidebar.animals"
     >
       Animais
     </a>
@@ -21,6 +24,7 @@
       routerLink="/app/adopters"
       routerLinkActive="ativo"
       class="item-menu"
+      i18n="Sidebar adopters link@@sidebar.adopters"
     >
       Adotantes
     </a>
@@ -29,6 +33,7 @@
       routerLink="/app/adoptions"
       routerLinkActive="ativo"
       class="item-menu"
+      i18n="Sidebar adoptions link@@sidebar.adoptions"
     >
       Adoções
     </a>
@@ -37,6 +42,7 @@
       routerLink="/app/care"
       routerLinkActive="ativo"
       class="item-menu"
+      i18n="Sidebar care link@@sidebar.care"
     >
       Cuidados
     </a>
@@ -45,8 +51,10 @@
       routerLink="/app/statistics"
       routerLinkActive="ativo"
       class="item-menu"
+      i18n="Sidebar statistics link@@sidebar.statistics"
     >
       Estatísticas
     </a>
+
   </nav>
 </aside>

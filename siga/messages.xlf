@@ -123,6 +123,54 @@
           <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="sidebar.dashboard" datatype="html">
+        <source> Dashboard </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/side-menu/side-menu.html</context>
+          <context context-type="linenumber">11,15</context>
+        </context-group>
+        <note priority="1" from="description">Sidebar dashboard link</note>
+      </trans-unit>
+      <trans-unit id="sidebar.animals" datatype="html">
+        <source> Animais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/side-menu/side-menu.html</context>
+          <context context-type="linenumber">20,24</context>
+        </context-group>
+        <note priority="1" from="description">Sidebar animals link</note>
+      </trans-unit>
+      <trans-unit id="sidebar.adopters" datatype="html">
+        <source> Adotantes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/side-menu/side-menu.html</context>
+          <context context-type="linenumber">29,33</context>
+        </context-group>
+        <note priority="1" from="description">Sidebar adopters link</note>
+      </trans-unit>
+      <trans-unit id="sidebar.adoptions" datatype="html">
+        <source> Adoções </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/side-menu/side-menu.html</context>
+          <context context-type="linenumber">38,42</context>
+        </context-group>
+        <note priority="1" from="description">Sidebar adoptions link</note>
+      </trans-unit>
+      <trans-unit id="sidebar.care" datatype="html">
+        <source> Cuidados </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/side-menu/side-menu.html</context>
+          <context context-type="linenumber">47,51</context>
+        </context-group>
+        <note priority="1" from="description">Sidebar care link</note>
+      </trans-unit>
+      <trans-unit id="sidebar.statistics" datatype="html">
+        <source> Estatísticas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/side-menu/side-menu.html</context>
+          <context context-type="linenumber">56,61</context>
+        </context-group>
+        <note priority="1" from="description">Sidebar statistics link</note>
+      </trans-unit>
       <trans-unit id="animals.page.title" datatype="html">
         <source> Animais </source>
         <context-group purpose="location">
