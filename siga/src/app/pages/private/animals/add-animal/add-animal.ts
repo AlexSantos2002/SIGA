@@ -89,6 +89,10 @@ export class AddAnimal {
       this.errorMessage = '';
       this.cdr.detectChanges();
 
+      const selectedFile = this.selectedFile
+        ? await this.imageService.prepareImageForUpload(this.selectedFile)
+        : null;
+
       const animal = await withTimeout(
         this.animalService.createAnimal({
           name: this.form.value.name.trim(),
@@ -101,8 +105,8 @@ export class AddAnimal {
       );
 
       // A imagem selecionada fica associada ao animal criado.
-      if (this.selectedFile) {
-        await this.imageService.uploadImage(animal.id, this.selectedFile);
+      if (selectedFile) {
+        await this.imageService.uploadImage(animal.id, selectedFile);
       }
 
       await this.router.navigate(['/app/animals']);

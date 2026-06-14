@@ -50,6 +50,9 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   // STORAGE
   IMAGE_UPLOAD_FAILED: 'Falha ao armazenar imagem',
   IMAGE_DELETE_FAILED: 'Falha ao deletar imagem',
+  IMAGE_INVALID_TYPE: 'A imagem deve estar em formato JPEG, PNG ou WebP.',
+  IMAGE_TOO_LARGE: 'A imagem deve ter no maximo 10 MB.',
+  IMAGE_PROCESSING_FAILED: 'Nao foi possivel preparar a imagem. Tente outra foto.',
 
   // GENÉRICOS
   DB_ERROR: 'Ocorreu um erro na base de dados.',
