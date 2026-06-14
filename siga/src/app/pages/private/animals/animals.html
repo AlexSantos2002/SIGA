@@ -1,200 +1,269 @@
 <section class="animals-page">
   <div class="page-header">
     <div>
-      <h1>Animais</h1>
-      <p>Consulta e gere os animais registados na tua organização.</p>
+      <h1 i18n="Animals page title@@animals.page.title">
+        Animais
+      </h1>
+
+      <p i18n="Animals page description@@animals.page.description">
+        Consulta e gere os animais registados na tua organização.
+      </p>
     </div>
 
-    <a routerLink="/app/animals/new" class="add-animal-button"> Adicionar animal </a>
+    <a
+      routerLink="/app/animals/new"
+      class="add-animal-button"
+      i18n="Add animal button@@animals.actions.add"
+    >
+      Adicionar animal
+    </a>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar animais...</div>
+  <div
+    *ngIf="isLoading"
+    class="loading"
+    i18n="Loading animals state@@animals.state.loading"
+  >
+    A carregar animais...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <div *ngIf="!isLoading && !errorMessage && animals.length === 0" class="empty-state">
+  <div
+    *ngIf="!isLoading && !errorMessage && animals.length === 0"
+    class="empty-state"
+    i18n="No animals empty state@@animals.empty.noAnimals"
+  >
     Ainda não existem animais registados nesta organização.
   </div>
 
-  <div *ngIf="!isLoading && !errorMessage && animals.length > 0" class="table-wrapper">
+  <div
+    *ngIf="!isLoading && !errorMessage && animals.length > 0"
+    class="table-wrapper"
+  >
     <table>
       <thead>
-        <tr>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'name'"
-              [attr.aria-label]="getSortAriaLabel('Nome', 'name')"
-              (click)="sortBy('name')"
-            >
-              Nome <span>{{ getSortIndicator('name') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'species'"
-              [attr.aria-label]="getSortAriaLabel('Espécie', 'species')"
-              (click)="sortBy('species')"
-            >
-              Espécie <span>{{ getSortIndicator('species') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'breed'"
-              [attr.aria-label]="getSortAriaLabel('Raça', 'breed')"
-              (click)="sortBy('breed')"
-            >
-              Raça <span>{{ getSortIndicator('breed') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'gender'"
-              [attr.aria-label]="getSortAriaLabel('Género', 'gender')"
-              (click)="sortBy('gender')"
-            >
-              Género <span>{{ getSortIndicator('gender') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'birthDate'"
-              [attr.aria-label]="getSortAriaLabel('Data de nascimento', 'birthDate')"
-              (click)="sortBy('birthDate')"
-            >
-              Data de nascimento <span>{{ getSortIndicator('birthDate') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'status'"
-              [attr.aria-label]="getSortAriaLabel('Estado', 'status')"
-              (click)="sortBy('status')"
-            >
-              Estado <span>{{ getSortIndicator('status') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'availability'"
-              [attr.aria-label]="getSortAriaLabel('Disponibilidade', 'availability')"
-              (click)="sortBy('availability')"
-            >
-              Disponibilidade <span>{{ getSortIndicator('availability') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'createdAt'"
-              [attr.aria-label]="getSortAriaLabel('Registado em', 'createdAt')"
-              (click)="sortBy('createdAt')"
-            >
-              Registado em <span>{{ getSortIndicator('createdAt') }}</span>
-            </button>
-          </th>
-          <th class="actions-column"></th>
-        </tr>
+      <tr>
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'name'"
+            [attr.aria-label]="getSortAriaLabel('Nome', 'name')"
+            (click)="sortBy('name')"
+          >
+            <span i18n="Animal name column@@animals.table.name">Nome</span>
+            <span>{{ getSortIndicator('name') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'species'"
+            [attr.aria-label]="getSortAriaLabel('Espécie', 'species')"
+            (click)="sortBy('species')"
+          >
+              <span i18n="Animal species column@@animals.table.species">
+                Espécie
+              </span>
+            <span>{{ getSortIndicator('species') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'breed'"
+            [attr.aria-label]="getSortAriaLabel('Raça', 'breed')"
+            (click)="sortBy('breed')"
+          >
+              <span i18n="Animal breed column@@animals.table.breed">
+                Raça
+              </span>
+            <span>{{ getSortIndicator('breed') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'gender'"
+            [attr.aria-label]="getSortAriaLabel('Género', 'gender')"
+            (click)="sortBy('gender')"
+          >
+              <span i18n="Animal gender column@@animals.table.gender">
+                Género
+              </span>
+            <span>{{ getSortIndicator('gender') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'birthDate'"
+            [attr.aria-label]="getSortAriaLabel('Data de nascimento', 'birthDate')"
+            (click)="sortBy('birthDate')"
+          >
+              <span i18n="Animal birth date column@@animals.table.birthDate">
+                Data de nascimento
+              </span>
+            <span>{{ getSortIndicator('birthDate') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'status'"
+            [attr.aria-label]="getSortAriaLabel('Estado', 'status')"
+            (click)="sortBy('status')"
+          >
+              <span i18n="Animal status column@@animals.table.status">
+                Estado
+              </span>
+            <span>{{ getSortIndicator('status') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'availability'"
+            [attr.aria-label]="getSortAriaLabel('Disponibilidade', 'availability')"
+            (click)="sortBy('availability')"
+          >
+              <span i18n="Animal availability column@@animals.table.availability">
+                Disponibilidade
+              </span>
+            <span>{{ getSortIndicator('availability') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'createdAt'"
+            [attr.aria-label]="getSortAriaLabel('Registado em', 'createdAt')"
+            (click)="sortBy('createdAt')"
+          >
+              <span i18n="Animal created at column@@animals.table.createdAt">
+                Registado em
+              </span>
+            <span>{{ getSortIndicator('createdAt') }}</span>
+          </button>
+        </th>
+
+        <th class="actions-column"></th>
+      </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let animal of sortedAnimals; trackBy: trackByAnimalId">
-          <td>
-            <div class="animal-name-cell">
-              <img
-                *ngIf="getAnimalImageUrl(animal) as imageUrl"
-                class="animal-thumbnail"
-                [src]="imageUrl"
-                [alt]="'Imagem de ' + animal.name"
-              />
+      <tr *ngFor="let animal of sortedAnimals; trackBy: trackByAnimalId">
+        <td>
+          <div class="animal-name-cell">
+            <img
+              *ngIf="getAnimalImageUrl(animal) as imageUrl"
+              class="animal-thumbnail"
+              [src]="imageUrl"
+              [alt]="'Imagem de ' + animal.name"
+            />
 
-              <span>{{ animal.name }}</span>
-            </div>
-          </td>
+            <span>{{ animal.name }}</span>
+          </div>
+        </td>
 
-          <td>{{ animal.species?.name || '—' }}</td>
+        <td>{{ animal.species?.name || '—' }}</td>
 
-          <td>{{ animal.breed?.name || '—' }}</td>
+        <td>{{ animal.breed?.name || '—' }}</td>
 
-          <td>{{ getGenderLabel(animal.gender) }}</td>
+        <td>{{ getGenderLabel(animal.gender) }}</td>
 
-          <td>
-            {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '—' }}
-          </td>
+        <td>
+          {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '—' }}
+        </td>
 
-          <td>
-            {{ getStatusLabel(animal.status) }}
-          </td>
+        <td>{{ getStatusLabel(animal.status) }}</td>
 
-          <td>
+        <td>
             <span
               class="availability-badge"
               [class.available]="animal.available"
               [class.unavailable]="!animal.available"
             >
-              {{ animal.available ? 'Disponível' : 'Indisponível' }}
+              <span
+                *ngIf="animal.available"
+                i18n="Animal available status@@animals.status.available"
+              >
+                Disponível
+              </span>
+
+              <span
+                *ngIf="!animal.available"
+                i18n="Animal unavailable status@@animals.status.unavailable"
+              >
+                Indisponível
+              </span>
             </span>
-          </td>
+        </td>
 
-          <td>{{ animal.createdAt | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ animal.createdAt | date: 'dd/MM/yyyy' }}</td>
 
-          <td class="actions-column">
-            <div class="actions-buttons">
-              <a
-                class="edit-animal-button"
-                title="Editar animal"
-                [routerLink]="['/app/animals', animal.id, 'edit']"
-              >
-                ✎
-              </a>
+        <td class="actions-column">
+          <div class="actions-buttons">
+            <a
+              class="edit-animal-button"
+              [routerLink]="['/app/animals', animal.id, 'edit']"
+              title="Editar animal"
+              i18n-title="Edit animal tooltip@@animals.actions.editTooltip"
+            >
+              ✎
+            </a>
 
-              <button
-                type="button"
-                class="delete-animal-button"
-                title="Eliminar animal"
-                [disabled]="deletingAnimalId === animal.id"
-                (click)="openDeleteModal(animal)"
-              >
-                {{ deletingAnimalId === animal.id ? '...' : '×' }}
-              </button>
-            </div>
-          </td>
-        </tr>
+            <button
+              type="button"
+              class="delete-animal-button"
+              [disabled]="deletingAnimalId === animal.id"
+              (click)="openDeleteModal(animal)"
+              title="Eliminar animal"
+              i18n-title="Delete animal tooltip@@animals.actions.deleteTooltip"
+            >
+              {{ deletingAnimalId === animal.id ? '...' : '×' }}
+            </button>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
 
-  <div *ngIf="isDeleteModalOpen" class="modal-backdrop" (click)="closeDeleteModal()">
+  <div
+    *ngIf="isDeleteModalOpen"
+    class="modal-backdrop"
+    (click)="closeDeleteModal()"
+  >
     <div class="delete-modal" (click)="$event.stopPropagation()">
-      <p>
+      <p i18n="Delete animal confirmation text@@animals.delete.confirmText">
         Tem a certeza que quer eliminar
-        <strong>{{ animalToDelete?.name }}</strong
-        >?
+        <strong>{{ animalToDelete?.name }}</strong>?
       </p>
 
       <div class="modal-actions">
         <button
           type="button"
           class="modal-cancel-button"
-          [disabled]="!!deletingAnimalId"
           (click)="closeDeleteModal()"
+          i18n="Cancel delete button@@animals.delete.cancel"
         >
           Cancelar
         </button>
@@ -202,10 +271,20 @@
         <button
           type="button"
           class="modal-delete-button"
-          [disabled]="!!deletingAnimalId"
           (click)="confirmDeleteAnimal()"
+          [disabled]="!!deletingAnimalId"
         >
-          {{ deletingAnimalId ? 'A eliminar...' : 'Eliminar' }}
+          <span *ngIf="!deletingAnimalId; else deleting">
+           <span i18n="Delete button@@animals.delete.confirm.delete">
+             Eliminar
+            </span>
+          </span>
+
+          <ng-template #deleting>
+            <span i18n="Deleting state@@animals.delete.confirm.deleting">
+              A eliminar...
+            </span>
+          </ng-template>
         </button>
       </div>
     </div>

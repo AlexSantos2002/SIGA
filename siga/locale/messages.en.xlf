@@ -1117,6 +1117,118 @@
 
       <!--   Fim do dashboard     -->
 
+
+      <!--   Página de animais     -->
+      <trans-unit id="animals.page.title">
+        <source> Animais </source>
+        <target>Animals</target>
+      </trans-unit>
+
+      <trans-unit id="animals.page.description">
+        <source> Consulta e gere os animais registados na tua organização. </source>
+        <target>View and manage the animals registered in your organization.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.actions.add">
+        <source> Adicionar animal </source>
+        <target>Add animal</target>
+      </trans-unit>
+
+      <trans-unit id="animals.state.loading">
+        <source> A carregar animais... </source>
+        <target>Loading animals...</target>
+      </trans-unit>
+
+      <trans-unit id="animals.empty.noAnimals">
+        <source> Ainda não existem animais registados nesta organização. </source>
+        <target>No animals have been registered in this organization yet.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.name">
+        <source>Nome</source>
+        <target>Name</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.species">
+        <source> Espécie </source>
+        <target>Species</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.breed">
+        <source> Raça </source>
+        <target>Breed</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.gender">
+        <source> Género </source>
+        <target>Gender</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.birthDate">
+        <source> Data de nascimento </source>
+        <target>Birth date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.status">
+        <source> Estado </source>
+        <target>Status</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.availability">
+        <source> Disponibilidade </source>
+        <target>Availability</target>
+      </trans-unit>
+
+      <trans-unit id="animals.table.createdAt">
+        <source> Registado em </source>
+        <target>Registered on</target>
+      </trans-unit>
+
+      <trans-unit id="animals.status.available">
+        <source> Disponível </source>
+        <target>Available</target>
+      </trans-unit>
+
+      <trans-unit id="animals.status.unavailable">
+        <source> Indisponível </source>
+        <target>Unavailable</target>
+      </trans-unit>
+
+      <trans-unit id="animals.actions.editTooltip">
+        <source>Editar animal</source>
+        <target>Edit animal</target>
+      </trans-unit>
+
+      <trans-unit id="animals.actions.deleteTooltip">
+        <source>Eliminar animal</source>
+        <target>Delete animal</target>
+      </trans-unit>
+
+      <trans-unit id="animals.delete.confirmText">
+        <source>
+          Tem a certeza que quer eliminar <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ animalToDelete?.name }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>?
+        </source>
+        <target>
+          Are you sure you want to delete <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ animalToDelete?.name }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>?
+        </target>
+      </trans-unit>
+
+      <trans-unit id="animals.delete.cancel">
+        <source> Cancelar </source>
+        <target>Cancel</target>
+      </trans-unit>
+
+      <trans-unit id="animals.delete.confirm.delete">
+        <source>Eliminar</source>
+        <target>Delete</target>
+      </trans-unit>
+
+      <trans-unit id="animals.delete.confirm.deleting">
+        <source>A eliminar...</source>
+        <target>Deleting...</target>
+      </trans-unit>
+      <!--   Fim da página de animais     -->
+
     </body>
   </file>
 </xliff>

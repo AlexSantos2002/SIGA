@@ -123,6 +123,170 @@
           <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="animals.page.title" datatype="html">
+        <source> Animais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+        <note priority="1" from="description">Animals page title</note>
+      </trans-unit>
+      <trans-unit id="animals.page.description" datatype="html">
+        <source> Consulta e gere os animais registados na tua organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">9,14</context>
+        </context-group>
+        <note priority="1" from="description">Animals page description</note>
+      </trans-unit>
+      <trans-unit id="animals.actions.add" datatype="html">
+        <source> Adicionar animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">18,23</context>
+        </context-group>
+        <note priority="1" from="description">Add animal button</note>
+      </trans-unit>
+      <trans-unit id="animals.state.loading" datatype="html">
+        <source> A carregar animais... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">27,30</context>
+        </context-group>
+        <note priority="1" from="description">Loading animals state</note>
+      </trans-unit>
+      <trans-unit id="animals.empty.noAnimals" datatype="html">
+        <source> Ainda não existem animais registados nesta organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">39,43</context>
+        </context-group>
+        <note priority="1" from="description">No animals empty state</note>
+      </trans-unit>
+      <trans-unit id="animals.table.name" datatype="html">
+        <source>Nome</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+        <note priority="1" from="description">Animal name column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.species" datatype="html">
+        <source> Espécie </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">71,73</context>
+        </context-group>
+        <note priority="1" from="description">Animal species column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.breed" datatype="html">
+        <source> Raça </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">86,88</context>
+        </context-group>
+        <note priority="1" from="description">Animal breed column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.gender" datatype="html">
+        <source> Género </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">101,103</context>
+        </context-group>
+        <note priority="1" from="description">Animal gender column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.birthDate" datatype="html">
+        <source> Data de nascimento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">116,118</context>
+        </context-group>
+        <note priority="1" from="description">Animal birth date column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.status" datatype="html">
+        <source> Estado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">131,133</context>
+        </context-group>
+        <note priority="1" from="description">Animal status column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.availability" datatype="html">
+        <source> Disponibilidade </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">146,148</context>
+        </context-group>
+        <note priority="1" from="description">Animal availability column</note>
+      </trans-unit>
+      <trans-unit id="animals.table.createdAt" datatype="html">
+        <source> Registado em </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">161,163</context>
+        </context-group>
+        <note priority="1" from="description">Animal created at column</note>
+      </trans-unit>
+      <trans-unit id="animals.status.available" datatype="html">
+        <source> Disponível </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">208,211</context>
+        </context-group>
+        <note priority="1" from="description">Animal available status</note>
+      </trans-unit>
+      <trans-unit id="animals.status.unavailable" datatype="html">
+        <source> Indisponível </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">215,218</context>
+        </context-group>
+        <note priority="1" from="description">Animal unavailable status</note>
+      </trans-unit>
+      <trans-unit id="animals.actions.editTooltip" datatype="html">
+        <source>Editar animal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">227,228</context>
+        </context-group>
+        <note priority="1" from="description">Edit animal tooltip</note>
+      </trans-unit>
+      <trans-unit id="animals.actions.deleteTooltip" datatype="html">
+        <source>Eliminar animal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">238,239</context>
+        </context-group>
+        <note priority="1" from="description">Delete animal tooltip</note>
+      </trans-unit>
+      <trans-unit id="animals.delete.confirmText" datatype="html">
+        <source> Tem a certeza que quer eliminar <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ animalToDelete?.name }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">257,261</context>
+        </context-group>
+        <note priority="1" from="description">Delete animal confirmation text</note>
+      </trans-unit>
+      <trans-unit id="animals.delete.cancel" datatype="html">
+        <source> Cancelar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">268,272</context>
+        </context-group>
+        <note priority="1" from="description">Cancel delete button</note>
+      </trans-unit>
+      <trans-unit id="animals.delete.confirm.delete" datatype="html">
+        <source> Eliminar </source>
+        <note priority="1" from="description">Delete button</note>
+      </trans-unit>
+      <trans-unit id="animals.delete.confirm.deleting" datatype="html">
+        <source> A eliminar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
+          <context context-type="linenumber">285,287</context>
+        </context-group>
+        <note priority="1" from="description">Deleting state</note>
+      </trans-unit>
       <trans-unit id="dashboard.header.title" datatype="html">
         <source> Dashboard </source>
         <context-group purpose="location">
