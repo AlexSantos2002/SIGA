@@ -233,6 +233,10 @@
           <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
           <context context-type="linenumber">208,211</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">72,75</context>
+        </context-group>
         <note priority="1" from="description">Animal available status</note>
       </trans-unit>
       <trans-unit id="animals.status.unavailable" datatype="html">
@@ -240,6 +244,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/animals/animals.html</context>
           <context context-type="linenumber">215,218</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">77,79</context>
         </context-group>
         <note priority="1" from="description">Animal unavailable status</note>
       </trans-unit>
@@ -290,6 +298,206 @@
           <context context-type="linenumber">285,287</context>
         </context-group>
         <note priority="1" from="description">Deleting state</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.title" datatype="html">
+        <source> Informação principal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">7,12</context>
+        </context-group>
+        <note priority="1" from="description">Main info section title</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.edit" datatype="html">
+        <source> Editar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">15,19</context>
+        </context-group>
+        <note priority="1" from="description">Edit main info button</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.name" datatype="html">
+        <source>Nome</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">22,25</context>
+        </context-group>
+        <note priority="1" from="description">Animal name label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.species" datatype="html">
+        <source>Espécie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+        <note priority="1" from="description">Animal species label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.breed" datatype="html">
+        <source>Raça</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <note priority="1" from="description">Animal breed label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.gender" datatype="html">
+        <source>Género</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+        <note priority="1" from="description">Animal gender label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.birthDate" datatype="html">
+        <source> Data de nascimento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">43,46</context>
+        </context-group>
+        <note priority="1" from="description">Animal birth date label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.status" datatype="html">
+        <source>Estado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+        <note priority="1" from="description">Animal status label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.adopter" datatype="html">
+        <source> Adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+        <note priority="1" from="description">Animal adopter label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.main.availability" datatype="html">
+        <source> Disponibilidade </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">64,69</context>
+        </context-group>
+        <note priority="1" from="description">Animal availability label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.notes.title" datatype="html">
+        <source> Notas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">90,94</context>
+        </context-group>
+        <note priority="1" from="description">Notes section title</note>
+      </trans-unit>
+      <trans-unit id="animals.details.notes.edit" datatype="html">
+        <source> Editar notas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">98,102</context>
+        </context-group>
+        <note priority="1" from="description">Edit notes button</note>
+      </trans-unit>
+      <trans-unit id="animals.details.notes.generalTitle" datatype="html">
+        <source> Notas gerais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">105,108</context>
+        </context-group>
+        <note priority="1" from="description">General notes title</note>
+      </trans-unit>
+      <trans-unit id="animals.details.notes.generalEmpty" datatype="html">
+        <source> Ainda não existem notas gerais. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">114,119</context>
+        </context-group>
+        <note priority="1" from="description">Empty general notes</note>
+      </trans-unit>
+      <trans-unit id="animals.details.notes.medicalTitle" datatype="html">
+        <source> Notas médicas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">122,125</context>
+        </context-group>
+        <note priority="1" from="description">Medical notes title</note>
+      </trans-unit>
+      <trans-unit id="animals.details.notes.medicalEmpty" datatype="html">
+        <source> Ainda não existem notas médicas. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">131,135</context>
+        </context-group>
+        <note priority="1" from="description">Empty medical notes</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.title" datatype="html">
+        <source> Saúde </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">141,146</context>
+        </context-group>
+        <note priority="1" from="description">Health section title</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.edit" datatype="html">
+        <source> Editar saúde </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">149,153</context>
+        </context-group>
+        <note priority="1" from="description">Edit health button</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.sterilization" datatype="html">
+        <source> Esterilização / castração </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">157,159</context>
+        </context-group>
+        <note priority="1" from="description">Sterilization status label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.sterilizationDate" datatype="html">
+        <source> Data da esterilização </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">164,168</context>
+        </context-group>
+        <note priority="1" from="description">Sterilization date label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.microchip" datatype="html">
+        <source> Microchip </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">177,181</context>
+        </context-group>
+        <note priority="1" from="description">Microchip label</note>
+      </trans-unit>
+      <trans-unit id="animals.common.yes" datatype="html">
+        <source> Sim </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">182,185</context>
+        </context-group>
+        <note priority="1" from="description">Yes</note>
+      </trans-unit>
+      <trans-unit id="animals.common.no" datatype="html">
+        <source> Não </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">187,188</context>
+        </context-group>
+        <note priority="1" from="description">No</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.microchipNumber" datatype="html">
+        <source> Número do microchip </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">195,197</context>
+        </context-group>
+        <note priority="1" from="description">Microchip number label</note>
+      </trans-unit>
+      <trans-unit id="animals.details.health.microchipDate" datatype="html">
+        <source> Data de colocação </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-summary-cards.html</context>
+          <context context-type="linenumber">202,206</context>
+        </context-group>
+        <note priority="1" from="description">Microchip date label</note>
       </trans-unit>
       <trans-unit id="animals.edit.title" datatype="html">
         <source> Ficha do animal </source>

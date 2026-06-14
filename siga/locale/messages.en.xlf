@@ -1291,6 +1291,139 @@
         <target>Removing...</target>
       </trans-unit>
 
+      <!--   Summary Cards     -->
+
+      <trans-unit id="animals.details.main.title">
+        <source> Informação principal </source>
+        <target>Main information</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.edit">
+        <source> Editar </source>
+        <target>Edit</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.name">
+        <source>Nome</source>
+        <target>Name</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.species">
+        <source>Espécie</source>
+        <target>Species</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.breed">
+        <source>Raça</source>
+        <target>Breed</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.gender">
+        <source>Género</source>
+        <target>Gender</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.birthDate">
+        <source> Data de nascimento </source>
+        <target>Birth date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.status">
+        <source>Estado</source>
+        <target>Status</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.adopter">
+        <source> Adotante </source>
+        <target>Adopter</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.main.availability">
+        <source> Disponibilidade </source>
+        <target>Availability</target>
+      </trans-unit>
+
+      <!-- ================= NOTES ================= -->
+
+      <trans-unit id="animals.details.notes.title">
+        <source> Notas </source>
+        <target>Notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.notes.edit">
+        <source> Editar notas </source>
+        <target>Edit notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.notes.generalTitle">
+        <source> Notas gerais </source>
+        <target>General notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.notes.generalEmpty">
+        <source> Ainda não existem notas gerais. </source>
+        <target>No general notes available.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.notes.medicalTitle">
+        <source> Notas médicas </source>
+        <target>Medical notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.notes.medicalEmpty">
+        <source> Ainda não existem notas médicas. </source>
+        <target>No medical notes available.</target>
+      </trans-unit>
+
+      <!-- ================= HEALTH ================= -->
+
+      <trans-unit id="animals.details.health.title">
+        <source> Saúde </source>
+        <target>Health</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.health.edit">
+        <source> Editar saúde </source>
+        <target>Edit health</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.health.sterilization">
+        <source> Esterilização / castração </source>
+        <target>Sterilization / neutering</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.health.sterilizationDate">
+        <source> Data da esterilização </source>
+        <target>Sterilization date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.health.microchip">
+        <source> Microchip </source>
+        <target>Microchip</target>
+      </trans-unit>
+
+      <trans-unit id="animals.common.yes">
+        <source> Sim </source>
+        <target>Yes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.common.no">
+        <source> Não </source>
+        <target>No</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.health.microchipNumber">
+        <source> Número do microchip </source>
+        <target>Microchip number</target>
+      </trans-unit>
+
+      <trans-unit id="animals.details.health.microchipDate">
+        <source> Data de colocação </source>
+        <target>Microchip date</target>
+      </trans-unit>
+
+      <!--   Fim dos summary Cards     -->
+
       <!--   Fim da página de edição de animais     -->
 
     </body>

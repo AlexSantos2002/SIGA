@@ -1,106 +1,216 @@
 <div class="details-grid">
+
+  <!-- ================= MAIN INFO ================= -->
   <section class="details-card">
     <div class="card-header">
-      <h3>Informação principal</h3>
+      <h3 i18n="Main info section title@@animals.details.main.title">
+        Informação principal
+      </h3>
 
-      <button type="button" (click)="editSection.emit('main')">Editar</button>
+      <button
+        type="button"
+        (click)="editSection.emit('main')"
+        i18n="Edit main info button@@animals.details.main.edit"
+      >
+        Editar
+      </button>
     </div>
 
     <dl class="details-list">
+
       <div>
-        <dt>Nome</dt>
+        <dt i18n="Animal name label@@animals.details.main.name">Nome</dt>
         <dd>{{ animal.name }}</dd>
       </div>
 
       <div>
-        <dt>Espécie</dt>
+        <dt i18n="Animal species label@@animals.details.main.species">Espécie</dt>
         <dd>{{ animal.species?.name || '-' }}</dd>
       </div>
 
       <div>
-        <dt>Raça</dt>
+        <dt i18n="Animal breed label@@animals.details.main.breed">Raça</dt>
         <dd>{{ animal.breed?.name || '-' }}</dd>
       </div>
 
       <div>
-        <dt>Género</dt>
+        <dt i18n="Animal gender label@@animals.details.main.gender">Género</dt>
         <dd>{{ getGenderLabel(animal.gender) }}</dd>
       </div>
 
       <div>
-        <dt>Data de nascimento</dt>
-        <dd>{{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '-' }}</dd>
-      </div>
-
-      <div>
-        <dt>Estado</dt>
-        <dd>{{ getStatusLabel(animal.status) }}</dd>
-      </div>
-
-      <div *ngIf="animal.status === 'adotado'">
-        <dt>Adotante</dt>
-        <dd>{{ getAdopterLabel() }}</dd>
-      </div>
-
-      <div>
-        <dt>Disponibilidade</dt>
-        <dd>{{ animal.available ? 'Disponível' : 'Indisponível' }}</dd>
-      </div>
-    </dl>
-  </section>
-
-  <section class="details-card">
-    <div class="card-header">
-      <h3>Notas</h3>
-
-      <button type="button" (click)="editSection.emit('notes')">Editar notas</button>
-    </div>
-
-    <div class="note-box">
-      <h4>Notas gerais</h4>
-      <p>{{ animal.generalNotes || 'Ainda não existem notas gerais.' }}</p>
-    </div>
-
-    <div class="note-box">
-      <h4>Notas médicas</h4>
-      <p>{{ animal.medicalNotes || 'Ainda não existem notas médicas.' }}</p>
-    </div>
-  </section>
-
-  <section class="details-card">
-    <div class="card-header">
-      <h3>Saúde</h3>
-
-      <button type="button" (click)="editSection.emit('health')">Editar saúde</button>
-    </div>
-
-    <dl class="details-list">
-      <div>
-        <dt>Esterilização / castração</dt>
-        <dd>{{ getSterilizationStatusLabel(animal.sterilizationStatus) }}</dd>
-      </div>
-
-      <div>
-        <dt>Data da esterilização</dt>
+        <dt i18n="Animal birth date label@@animals.details.main.birthDate">
+          Data de nascimento
+        </dt>
         <dd>
-          {{ animal.sterilizationDate ? (animal.sterilizationDate | date: 'dd/MM/yyyy') : '-' }}
+          {{ animal.birthDate ? (animal.birthDate | date: 'dd/MM/yyyy') : '-' }}
         </dd>
       </div>
 
       <div>
-        <dt>Microchip</dt>
-        <dd>{{ animal.hasMicrochip ? 'Sim' : 'Não' }}</dd>
+        <dt i18n="Animal status label@@animals.details.main.status">Estado</dt>
+        <dd>{{ getStatusLabel(animal.status) }}</dd>
+      </div>
+
+      <div *ngIf="animal.status === 'adotado'">
+        <dt i18n="Animal adopter label@@animals.details.main.adopter">
+          Adotante
+        </dt>
+        <dd>{{ getAdopterLabel() }}</dd>
       </div>
 
       <div>
-        <dt>Número do microchip</dt>
+        <dt i18n="Animal availability label@@animals.details.main.availability">
+          Disponibilidade
+        </dt>
+
+        <dd>
+          <span
+            *ngIf="animal.available; else notAvailable"
+            i18n="Available status@@animals.status.available"
+          >
+            Disponível
+          </span>
+
+          <ng-template #notAvailable>
+            <span i18n="Unavailable status@@animals.status.unavailable">
+              Indisponível
+            </span>
+          </ng-template>
+        </dd>
+      </div>
+
+    </dl>
+  </section>
+
+  <!-- ================= NOTES ================= -->
+  <section class="details-card">
+    <div class="card-header">
+      <h3 i18n="Notes section title@@animals.details.notes.title">
+        Notas
+      </h3>
+
+      <button
+        type="button"
+        (click)="editSection.emit('notes')"
+        i18n="Edit notes button@@animals.details.notes.edit"
+      >
+        Editar notas
+      </button>
+    </div>
+
+    <!-- GENERAL NOTES -->
+    <div class="note-box">
+      <h4 i18n="General notes title@@animals.details.notes.generalTitle">
+        Notas gerais
+      </h4>
+
+      <ng-container *ngIf="animal.generalNotes; else noGeneralNotes">
+        <p>{{ animal.generalNotes }}</p>
+      </ng-container>
+
+      <ng-template #noGeneralNotes>
+        <p i18n="Empty general notes@@animals.details.notes.generalEmpty">
+          Ainda não existem notas gerais.
+        </p>
+      </ng-template>
+    </div>
+
+    <!-- MEDICAL NOTES -->
+    <div class="note-box">
+      <h4 i18n="Medical notes title@@animals.details.notes.medicalTitle">
+        Notas médicas
+      </h4>
+
+      <ng-container *ngIf="animal.medicalNotes; else noMedicalNotes">
+        <p>{{ animal.medicalNotes }}</p>
+      </ng-container>
+
+      <ng-template #noMedicalNotes>
+        <p i18n="Empty medical notes@@animals.details.notes.medicalEmpty">
+          Ainda não existem notas médicas.
+        </p>
+      </ng-template>
+    </div>
+  </section>
+
+  <!-- ================= HEALTH ================= -->
+  <section class="details-card">
+    <div class="card-header">
+      <h3 i18n="Health section title@@animals.details.health.title">
+        Saúde
+      </h3>
+
+      <button
+        type="button"
+        (click)="editSection.emit('health')"
+        i18n="Edit health button@@animals.details.health.edit"
+      >
+        Editar saúde
+      </button>
+    </div>
+
+    <dl class="details-list">
+
+      <div>
+        <dt i18n="Sterilization status label@@animals.details.health.sterilization">
+          Esterilização / castração
+        </dt>
+        <dd>{{ getSterilizationStatusLabel(animal.sterilizationStatus) }}</dd>
+      </div>
+
+      <div>
+        <dt i18n="Sterilization date label@@animals.details.health.sterilizationDate">
+          Data da esterilização
+        </dt>
+        <dd>
+          {{
+            animal.sterilizationDate
+              ? (animal.sterilizationDate | date: 'dd/MM/yyyy')
+              : '-'
+          }}
+        </dd>
+      </div>
+
+      <div>
+        <dt i18n="Microchip label@@animals.details.health.microchip">
+          Microchip
+        </dt>
+
+        <dd>
+          <span *ngIf="animal.hasMicrochip; else noChip" i18n="Yes@@animals.common.yes">
+            Sim
+          </span>
+
+          <ng-template #noChip>
+            <span i18n="No@@animals.common.no">
+              Não
+            </span>
+          </ng-template>
+        </dd>
+      </div>
+
+      <div>
+        <dt i18n="Microchip number label@@animals.details.health.microchipNumber">
+          Número do microchip
+        </dt>
         <dd>{{ animal.microchipNumber || '-' }}</dd>
       </div>
 
       <div>
-        <dt>Data de colocação</dt>
-        <dd>{{ animal.microchipDate ? (animal.microchipDate | date: 'dd/MM/yyyy') : '-' }}</dd>
+        <dt i18n="Microchip date label@@animals.details.health.microchipDate">
+          Data de colocação
+        </dt>
+        <dd>
+          {{
+            animal.microchipDate
+              ? (animal.microchipDate | date: 'dd/MM/yyyy')
+              : '-'
+          }}
+        </dd>
       </div>
+
     </dl>
   </section>
+
 </div>
