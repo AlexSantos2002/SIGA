@@ -419,6 +419,214 @@
         </context-group>
         <note priority="1" from="description">Remove deworming button</note>
       </trans-unit>
+      <trans-unit id="animals.modal.main.title" datatype="html">
+        <source> Editar informação principal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">7,11</context>
+        </context-group>
+        <note priority="1" from="description">Main modal title</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.name" datatype="html">
+        <source> Nome </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">15,17</context>
+        </context-group>
+        <note priority="1" from="description">Name field label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.species" datatype="html">
+        <source> Espécie </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+        <note priority="1" from="description">Species field label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.breed" datatype="html">
+        <source> Raça </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+        <note priority="1" from="description">Breed field label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.gender" datatype="html">
+        <source> Género </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">36,39</context>
+        </context-group>
+        <note priority="1" from="description">Gender field label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.gender.placeholder" datatype="html">
+        <source> Selecionar género </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">41,44</context>
+        </context-group>
+        <note priority="1" from="description">Gender placeholder</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.birthDate" datatype="html">
+        <source> Data de nascimento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">52,55</context>
+        </context-group>
+        <note priority="1" from="description">Birth date label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.main.status" datatype="html">
+        <source> Estado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">63,66</context>
+        </context-group>
+        <note priority="1" from="description">Status field label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.cancel" datatype="html">
+        <source> Cancelar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">86,89</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">142,145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">249,252</context>
+        </context-group>
+        <note priority="1" from="description">Cancel button</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.save" datatype="html">
+        <source> Guardar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">147,150</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">254,257</context>
+        </context-group>
+        <note priority="1" from="description">Save button</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.saving" datatype="html">
+        <source> A guardar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">99,101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">151,154</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">258,261</context>
+        </context-group>
+        <note priority="1" from="description">Saving state</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.notes.title" datatype="html">
+        <source> Editar notas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">111,115</context>
+        </context-group>
+        <note priority="1" from="description">Notes modal title</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.notes.general" datatype="html">
+        <source> Notas gerais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">119,122</context>
+        </context-group>
+        <note priority="1" from="description">General notes label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.notes.medical" datatype="html">
+        <source> Notas médicas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">127,130</context>
+        </context-group>
+        <note priority="1" from="description">Medical notes label</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.title" datatype="html">
+        <source> Editar saúde </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">161,165</context>
+        </context-group>
+        <note priority="1" from="description">Health modal title</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.sterilizationStatus" datatype="html">
+        <source> Esterilização / castração </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">169,172</context>
+        </context-group>
+        <note priority="1" from="description">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.sterilizationDate" datatype="html">
+        <source> Data da esterilização </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">181,185</context>
+        </context-group>
+        <note priority="1" from="description">Sterilization date</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.sterilizationDate.error" datatype="html">
+        <source> Preencher a data quando a esterilização estiver realizada. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">193,197</context>
+        </context-group>
+        <note priority="1" from="description">Sterilization validation</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.microchip" datatype="html">
+        <source> Tem microchip </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">202,205</context>
+        </context-group>
+        <note priority="1" from="description">Microchip checkbox</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.microchipNumber" datatype="html">
+        <source> Número do microchip </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">209,212</context>
+        </context-group>
+        <note priority="1" from="description">Microchip number</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.microchipNumber.error" datatype="html">
+        <source> Preencher o número do microchip. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">218,222</context>
+        </context-group>
+        <note priority="1" from="description">Microchip number validation</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.microchipDate" datatype="html">
+        <source> Data de colocação </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">224,227</context>
+        </context-group>
+        <note priority="1" from="description">Microchip date</note>
+      </trans-unit>
+      <trans-unit id="animals.modal.health.microchipDate.error" datatype="html">
+        <source> Preencher a data de colocação do microchip. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/edit-animal/components/animal-edit-modal.html</context>
+          <context context-type="linenumber">236,242</context>
+        </context-group>
+        <note priority="1" from="description">Microchip date validation</note>
+      </trans-unit>
       <trans-unit id="animals.details.main.title" datatype="html">
         <source> Informação principal </source>
         <context-group purpose="location">

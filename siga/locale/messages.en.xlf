@@ -1622,6 +1622,135 @@
 
       <!--   Fim do componente de consultas veterinárias     -->
 
+      <!--   Modal de edição de animal     -->
+
+      <!--   Info principal     -->
+      <trans-unit id="animals.modal.main.title">
+        <source>Editar informação principal</source>
+        <target>Edit main information</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.name">
+        <source>Nome</source>
+        <target>Name</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.species">
+        <source>Espécie</source>
+        <target>Species</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.breed">
+        <source>Raça</source>
+        <target>Breed</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.gender">
+        <source>Género</source>
+        <target>Gender</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.gender.placeholder">
+        <source>Selecionar género</source>
+        <target>Select gender</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.birthDate">
+        <source>Data de nascimento</source>
+        <target>Birth date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.main.status">
+        <source>Estado</source>
+        <target>Status</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.cancel">
+        <source>Cancelar</source>
+        <target>Cancel</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.save">
+        <source>Guardar</source>
+        <target>Save</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.saving">
+        <source>A guardar...</source>
+        <target>Saving...</target>
+      </trans-unit>
+      <!--   Fim da info principal     -->
+
+      <!--    Notas    -->
+      <trans-unit id="animals.modal.notes.title" datatype="html">
+        <source>Edit notes</source>
+        <target>Edit notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.notes.general" datatype="html">
+        <source>General notes</source>
+        <target>General notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.notes.medical" datatype="html">
+        <source>Medical notes</source>
+        <target>Medical notes</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.cancel" datatype="html">
+        <source>Cancel</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <!--    Fim das notas    -->
+
+      <!--    Saúde    -->
+      <trans-unit id="animals.modal.health.title" datatype="html">
+        <source>Edit health</source>
+        <target>Edit health</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.sterilizationStatus" datatype="html">
+        <source>Sterilization / neutering</source>
+        <target>Sterilization / neutering</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.sterilizationDate" datatype="html">
+        <source>Sterilization date</source>
+        <target>Sterilization date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.sterilizationDate.error" datatype="html">
+        <source>Please provide the sterilization date when it has been performed.</source>
+        <target>Please provide the sterilization date when it has been performed.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.microchip" datatype="html">
+        <source>Has microchip</source>
+        <target>Has microchip</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.microchipNumber" datatype="html">
+        <source>Microchip number</source>
+        <target>Microchip number</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.microchipNumber.error" datatype="html">
+        <source>Please provide the microchip number.</source>
+        <target>Please provide the microchip number.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.microchipDate" datatype="html">
+        <source>Placement date</source>
+        <target>Placement date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.modal.health.microchipDate.error" datatype="html">
+        <source>Please provide the microchip placement date.</source>
+        <target>Please provide the microchip placement date.</target>
+      </trans-unit>
+      <!--    Fim da saúde    -->
+
+      <!--   Modal de edição de animal     -->
 
       <!--   Fim da página de edição de animais     -->
 

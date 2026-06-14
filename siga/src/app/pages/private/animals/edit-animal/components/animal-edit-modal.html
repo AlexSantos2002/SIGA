@@ -3,29 +3,44 @@
     <ng-container [ngSwitch]="activeModal">
       <form *ngSwitchCase="'main'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
         <div class="modal-header">
-          <h3>Editar informação principal</h3>
+          <h3 i18n="Main modal title@@animals.modal.main.title">
+            Editar informação principal
+          </h3>
         </div>
 
         <div class="modal-grid">
+
           <div class="form-field">
-            <label for="name">Nome</label>
+            <label for="name" i18n="Name field label@@animals.modal.main.name">
+              Nome
+            </label>
             <input id="name" type="text" formControlName="name" />
           </div>
 
           <div class="form-field">
-            <label for="speciesName">Espécie</label>
+            <label for="speciesName" i18n="Species field label@@animals.modal.main.species">
+              Espécie
+            </label>
             <input id="speciesName" type="text" formControlName="speciesName" />
           </div>
 
           <div class="form-field">
-            <label for="breedName">Raça</label>
+            <label for="breedName" i18n="Breed field label@@animals.modal.main.breed">
+              Raça
+            </label>
             <input id="breedName" type="text" formControlName="breedName" />
           </div>
 
           <div class="form-field">
-            <label for="gender">Género</label>
+            <label for="gender" i18n="Gender field label@@animals.modal.main.gender">
+              Género
+            </label>
+
             <select id="gender" formControlName="gender">
-              <option value="" disabled>Selecionar género</option>
+              <option value="" disabled i18n="Gender placeholder@@animals.modal.main.gender.placeholder">
+                Selecionar género
+              </option>
+
               <option *ngFor="let gender of genders" [value]="gender.value">
                 {{ gender.label }}
               </option>
@@ -33,7 +48,10 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="animalBirthDate">Data de nascimento</label>
+            <label for="animalBirthDate" i18n="Birth date label@@animals.modal.main.birthDate">
+              Data de nascimento
+            </label>
+
             <app-date-picker
               inputId="animalBirthDate"
               formControlName="birthDate"
@@ -41,7 +59,10 @@
           </div>
 
           <div class="form-field">
-            <label for="status">Estado</label>
+            <label for="status" i18n="Status field label@@animals.modal.main.status">
+              Estado
+            </label>
+
             <select id="status" formControlName="status">
               <option
                 *ngFor="let status of statusOptions"
@@ -52,51 +73,102 @@
               </option>
             </select>
           </div>
+
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="close.emit()"
+            i18n="Cancel button@@animals.modal.cancel"
+          >
+            Cancelar
+          </button>
 
-          <button type="submit" class="primary-button" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+          <button
+            type="submit"
+            class="primary-button"
+            [disabled]="isSubmitting"
+          >
+          <span *ngIf="!isSubmitting" i18n="Save button@@animals.modal.save">
+            Guardar
+          </span>
+
+          <span *ngIf="isSubmitting" i18n="Saving state@@animals.modal.saving">
+            A guardar...
+          </span>
           </button>
         </div>
       </form>
 
+<!-- FROM HERE      -->
+
+      <!-- ================= NOTES ================= -->
       <form *ngSwitchCase="'notes'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
         <div class="modal-header">
-          <h3>Editar notas</h3>
+          <h3 i18n="Notes modal title@@animals.modal.notes.title">
+            Editar notas
+          </h3>
         </div>
 
         <div class="modal-grid">
+
           <div class="form-field full-width">
-            <label for="generalNotes">Notas gerais</label>
+            <label for="generalNotes" i18n="General notes label@@animals.modal.notes.general">
+              Notas gerais
+            </label>
+
             <textarea id="generalNotes" rows="5" formControlName="generalNotes"></textarea>
           </div>
 
           <div class="form-field full-width">
-            <label for="medicalNotes">Notas médicas</label>
+            <label for="medicalNotes" i18n="Medical notes label@@animals.modal.notes.medical">
+              Notas médicas
+            </label>
+
             <textarea id="medicalNotes" rows="5" formControlName="medicalNotes"></textarea>
           </div>
+
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="close.emit()"
+            i18n="Cancel button@@animals.modal.cancel"
+          >
+            Cancelar
+          </button>
 
           <button type="submit" class="primary-button" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+      <span *ngIf="!isSubmitting" i18n="Save button@@animals.modal.save">
+        Guardar
+      </span>
+
+            <span *ngIf="isSubmitting" i18n="Saving state@@animals.modal.saving">
+        A guardar...
+      </span>
           </button>
         </div>
       </form>
 
+      <!-- ================= HEALTH ================= -->
       <form *ngSwitchCase="'health'" [formGroup]="form" (ngSubmit)="submitAnimal.emit()">
         <div class="modal-header">
-          <h3>Editar saúde</h3>
+          <h3 i18n="Health modal title@@animals.modal.health.title">
+            Editar saúde
+          </h3>
         </div>
 
         <div class="modal-grid">
+
           <div class="form-field">
-            <label for="sterilizationStatus">Esterilização / castração</label>
+            <label for="sterilizationStatus" i18n="Sterilization status@@animals.modal.health.sterilizationStatus">
+              Esterilização / castração
+            </label>
+
             <select id="sterilizationStatus" formControlName="sterilizationStatus">
               <option *ngFor="let status of sterilizationStatuses" [value]="status.value">
                 {{ status.label }}
@@ -105,57 +177,91 @@
           </div>
 
           <div class="form-field">
-            <label for="sterilizationDate">Data da esterilização</label>
+            <label for="sterilizationDate" i18n="Sterilization date@@animals.modal.health.sterilizationDate">
+              Data da esterilização
+            </label>
+
             <app-date-picker
               inputId="sterilizationDate"
               formControlName="sterilizationDate"
             ></app-date-picker>
+
             <small
-              *ngIf="
-                form.get('sterilizationDate')?.touched && form.get('sterilizationDate')?.invalid
-              "
+              *ngIf="form.get('sterilizationDate')?.touched && form.get('sterilizationDate')?.invalid"
+              i18n="Sterilization validation@@animals.modal.health.sterilizationDate.error"
             >
-              Preencher a data quando a esterilizacao estiver realizada.
+              Preencher a data quando a esterilização estiver realizada.
             </small>
           </div>
 
           <div class="checkbox-field full-width">
             <label>
               <input type="checkbox" formControlName="hasMicrochip" />
-              Tem microchip
+
+              <span i18n="Microchip checkbox@@animals.modal.health.microchip">
+          Tem microchip
+        </span>
             </label>
           </div>
 
           <div class="form-field">
-            <label for="microchipNumber">Número do microchip</label>
+            <label for="microchipNumber" i18n="Microchip number@@animals.modal.health.microchipNumber">
+              Número do microchip
+            </label>
+
             <input id="microchipNumber" type="text" formControlName="microchipNumber" />
+
             <small
               *ngIf="form.get('microchipNumber')?.touched && form.get('microchipNumber')?.invalid"
+              i18n="Microchip number validation@@animals.modal.health.microchipNumber.error"
             >
-              Preencher o numero do microchip.
+              Preencher o número do microchip.
             </small>
           </div>
 
           <div class="form-field">
-            <label for="microchipDate">Data de colocação</label>
+            <label for="microchipDate" i18n="Microchip date@@animals.modal.health.microchipDate">
+              Data de colocação
+            </label>
+
             <app-date-picker
               inputId="microchipDate"
               formControlName="microchipDate"
             ></app-date-picker>
-            <small *ngIf="form.get('microchipDate')?.touched && form.get('microchipDate')?.invalid">
-              Preencher a data de colocacao do microchip.
+
+            <small
+              *ngIf="form.get('microchipDate')?.touched && form.get('microchipDate')?.invalid"
+              i18n="Microchip date validation@@animals.modal.health.microchipDate.error"
+            >
+              Preencher a data de colocação do microchip.
             </small>
           </div>
+
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="secondary-button" (click)="close.emit()">Cancelar</button>
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="close.emit()"
+            i18n="Cancel button@@animals.modal.cancel"
+          >
+            Cancelar
+          </button>
 
           <button type="submit" class="primary-button" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'A guardar...' : 'Guardar' }}
+      <span *ngIf="!isSubmitting" i18n="Save button@@animals.modal.save">
+        Guardar
+      </span>
+
+            <span *ngIf="isSubmitting" i18n="Saving state@@animals.modal.saving">
+        A guardar...
+      </span>
           </button>
         </div>
       </form>
+
+<!--   TILL HERE   -->
 
       <form *ngSwitchCase="'vaccine'" [formGroup]="vaccineForm" (ngSubmit)="submitVaccine.emit()">
         <div class="modal-header">
