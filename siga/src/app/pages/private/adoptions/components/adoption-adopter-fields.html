@@ -1,86 +1,144 @@
 <ng-container [formGroup]="form">
+
   <div class="form-section">
-    <h2>Informação pessoal</h2>
+    <h2 i18n="Adoptions personal section@@adoptions.form.adopter.personal.section">
+      Informação pessoal
+    </h2>
 
     <div class="form-grid">
+
       <div class="form-field">
-        <label for="name">Nome</label>
+        <label for="name" i18n="Adoptions name label@@adoptions.form.adopter.name.label">
+          Nome
+        </label>
+
         <input id="name" type="text" formControlName="name" />
-        <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+
+        <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+               i18n="Adoptions name error@@adoptions.form.adopter.name.error.required">
           O nome é obrigatório.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="lastName">Apelido</label>
+        <label for="lastName" i18n="Adoptions last name label@@adoptions.form.adopter.lastName.label">
+          Apelido
+        </label>
+
         <input id="lastName" type="text" formControlName="lastName" />
-        <small *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+
+        <small *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid"
+               i18n="Adoptions last name error@@adoptions.form.adopter.lastName.error.required">
           O apelido é obrigatório.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="email">Email</label>
+        <label for="email" i18n="Adoptions email label@@adoptions.form.adopter.email.label">
+          Email
+        </label>
+
         <input id="email" type="email" formControlName="email" />
-        <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+
+        <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+               i18n="Adoptions email error@@adoptions.form.adopter.email.error.invalid">
           Introduz um email válido.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="phone">Telefone</label>
+        <label for="phone" i18n="Adoptions phone label@@adoptions.form.adopter.phone.label">
+          Telefone
+        </label>
+
         <input id="phone" type="tel" formControlName="phone" />
-        <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+
+        <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid"
+               i18n="Adoptions phone error@@adoptions.form.adopter.phone.error.required">
           O telefone é obrigatório.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="documentType">Tipo de documento</label>
+        <label for="documentType" i18n="Adoptions document type label@@adoptions.form.adopter.documentType.label">
+          Tipo de documento
+        </label>
+
         <select id="documentType" formControlName="documentType">
-          <option value="">Não definido</option>
-          <option *ngFor="let documentType of documentTypes" [value]="documentType.value">
+          <option value="" i18n="Adoptions undefined option@@adoptions.form.adopter.option.undefined">
+            Não definido
+          </option>
+
+          <option *ngFor="let documentType of documentTypes"
+                  [value]="documentType.value">
             {{ documentType.label }}
           </option>
         </select>
       </div>
 
       <div class="form-field">
-        <label for="documentNumber">Número do documento</label>
+        <label for="documentNumber" i18n="Adoptions document number label@@adoptions.form.adopter.documentNumber.label">
+          Número do documento
+        </label>
+
         <input id="documentNumber" type="text" formControlName="documentNumber" />
       </div>
 
       <div class="form-field">
-        <label for="birthDate">Data de nascimento</label>
-        <app-date-picker inputId="birthDate" formControlName="birthDate"></app-date-picker>
+        <label for="birthDate" i18n="Adoptions birth date label@@adoptions.form.adopter.birthDate.label">
+          Data de nascimento
+        </label>
+
+        <app-date-picker inputId="birthDate"
+                         formControlName="birthDate"></app-date-picker>
       </div>
+
     </div>
   </div>
 
   <div class="form-section">
-    <h2>Morada e habitação</h2>
+    <h2 i18n="Adoptions address section@@adoptions.form.adopter.address.section">
+      Morada e habitação
+    </h2>
 
     <div class="form-grid">
+
       <div class="form-field full-width">
-        <label for="address">Morada</label>
+        <label for="address" i18n="Adoptions address label@@adoptions.form.adopter.address.label">
+          Morada
+        </label>
+
         <input id="address" type="text" formControlName="address" />
       </div>
 
       <div class="form-field">
-        <label for="city">Cidade</label>
+        <label for="city" i18n="Adoptions city label@@adoptions.form.adopter.city.label">
+          Cidade
+        </label>
+
         <input id="city" type="text" formControlName="city" />
       </div>
 
       <div class="form-field">
-        <label for="postalCode">Código postal</label>
+        <label for="postalCode" i18n="Adoptions postal code label@@adoptions.form.adopter.postalCode.label">
+          Código postal
+        </label>
+
         <input id="postalCode" type="text" formControlName="postalCode" />
       </div>
 
       <div class="form-field">
-        <label for="housingType">Tipo de habitação</label>
+        <label for="housingType" i18n="Adoptions housing type label@@adoptions.form.adopter.housingType.label">
+          Tipo de habitação
+        </label>
+
         <select id="housingType" formControlName="housingType">
-          <option value="">Não definido</option>
-          <option *ngFor="let housingType of housingTypes" [value]="housingType.value">
+          <option value="" i18n="Adoptions undefined option@@adoptions.form.adopter.option.undefined">
+            Não definido
+          </option>
+
+          <option *ngFor="let housingType of housingTypes"
+                  [value]="housingType.value">
             {{ housingType.label }}
           </option>
         </select>
@@ -88,64 +146,116 @@
 
       <label class="checkbox-field">
         <input type="checkbox" formControlName="hasOutdoorSpace" />
-        <span>Tem espaço exterior</span>
+
+        <span i18n="Adoptions outdoor space@@adoptions.form.adopter.hasOutdoorSpace.label">
+          Tem espaço exterior
+        </span>
       </label>
 
       <div class="form-field full-width">
-        <label for="householdMembers">Agregado familiar</label>
-        <textarea id="householdMembers" formControlName="householdMembers"></textarea>
+        <label for="householdMembers"
+               i18n="Adoptions household label@@adoptions.form.adopter.householdMembers.label">
+          Agregado familiar
+        </label>
+
+        <textarea id="householdMembers"
+                  formControlName="householdMembers"></textarea>
       </div>
 
       <div class="form-field">
-        <label for="employmentStatus">Situação profissional</label>
+        <label for="employmentStatus"
+               i18n="Adoptions employment status label@@adoptions.form.adopter.employmentStatus.label">
+          Situação profissional
+        </label>
+
         <select id="employmentStatus" formControlName="employmentStatus">
-          <option value="">Não definido</option>
-          <option *ngFor="let status of employmentStatuses" [value]="status.value">
+          <option value="" i18n="Adoptions undefined option@@adoptions.form.adopter.option.undefined">
+            Não definido
+          </option>
+
+          <option *ngFor="let status of employmentStatuses"
+                  [value]="status.value">
             {{ status.label }}
           </option>
         </select>
       </div>
+
     </div>
   </div>
 
   <div class="form-section">
-    <h2>Experiência e motivação</h2>
+    <h2 i18n="Adoptions experience section@@adoptions.form.adopter.experience.section">
+      Experiência e motivação
+    </h2>
 
     <div class="form-grid">
+
       <label class="checkbox-field">
         <input type="checkbox" formControlName="hasOtherAnimals" />
-        <span>Tem outros animais</span>
+
+        <span i18n="Adoptions has other animals@@adoptions.form.adopter.hasOtherAnimals.label">
+          Tem outros animais
+        </span>
       </label>
 
       <div class="form-field">
-        <label for="preferredSpecies">Preferência</label>
+        <label for="preferredSpecies"
+               i18n="Adoptions preferred species label@@adoptions.form.adopter.preferredSpecies.label">
+          Preferência
+        </label>
+
         <select id="preferredSpecies" formControlName="preferredSpecies">
-          <option value="">Não definido</option>
-          <option *ngFor="let species of preferredSpecies" [value]="species.value">
+          <option value="" i18n="Adoptions undefined option@@adoptions.form.adopter.option.undefined">
+            Não definido
+          </option>
+
+          <option *ngFor="let species of preferredSpecies"
+                  [value]="species.value">
             {{ species.label }}
           </option>
         </select>
       </div>
 
       <div class="form-field full-width">
-        <label for="otherAnimalsDescription">Outros animais</label>
-        <textarea id="otherAnimalsDescription" formControlName="otherAnimalsDescription"></textarea>
+        <label for="otherAnimalsDescription"
+               i18n="Adoptions other animals label@@adoptions.form.adopter.otherAnimalsDescription.label">
+          Outros animais
+        </label>
+
+        <textarea id="otherAnimalsDescription"
+                  formControlName="otherAnimalsDescription"></textarea>
       </div>
 
       <div class="form-field full-width">
-        <label for="experienceWithAnimals">Experiência com animais</label>
-        <textarea id="experienceWithAnimals" formControlName="experienceWithAnimals"></textarea>
+        <label for="experienceWithAnimals"
+               i18n="Adoptions experience label@@adoptions.form.adopter.experienceWithAnimals.label">
+          Experiência com animais
+        </label>
+
+        <textarea id="experienceWithAnimals"
+                  formControlName="experienceWithAnimals"></textarea>
       </div>
 
       <div class="form-field full-width">
-        <label for="adoptionMotivation">Motivo da adoção</label>
-        <textarea id="adoptionMotivation" formControlName="adoptionMotivation"></textarea>
+        <label for="adoptionMotivation"
+               i18n="Adoptions motivation label@@adoptions.form.adopter.adoptionMotivation.label">
+          Motivo da adoção
+        </label>
+
+        <textarea id="adoptionMotivation"
+                  formControlName="adoptionMotivation"></textarea>
       </div>
 
       <div class="form-field full-width">
-        <label for="notes">Notas internas</label>
+        <label for="notes"
+               i18n="Adoptions notes label@@adoptions.form.adopter.notes.label">
+          Notas internas
+        </label>
+
         <textarea id="notes" formControlName="notes"></textarea>
       </div>
+
     </div>
   </div>
+
 </ng-container>

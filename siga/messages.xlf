@@ -1016,6 +1016,242 @@
         </context-group>
         <note priority="1" from="description">Return adoption button</note>
       </trans-unit>
+      <trans-unit id="adoptions.form.adopter.personal.section" datatype="html">
+        <source> Informação pessoal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">5,10</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions personal section</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.name.label" datatype="html">
+        <source> Nome </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions name label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.name.error.required" datatype="html">
+        <source> O nome é obrigatório. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">19,23</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions name error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.lastName.label" datatype="html">
+        <source> Apelido </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions last name label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.lastName.error.required" datatype="html">
+        <source> O apelido é obrigatório. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">32,37</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions last name error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.email.label" datatype="html">
+        <source> Email </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions email label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.email.error.invalid" datatype="html">
+        <source> Introduz um email válido. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">45,50</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions email error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.phone.label" datatype="html">
+        <source> Telefone </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions phone label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.phone.error.required" datatype="html">
+        <source> O telefone é obrigatório. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">58,63</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions phone error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.documentType.label" datatype="html">
+        <source> Tipo de documento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">64,67</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions document type label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.option.undefined" datatype="html">
+        <source> Não definido </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">69,72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">137,140</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">173,176</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">209,212</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions undefined option</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.documentNumber.label" datatype="html">
+        <source> Número do documento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">81,84</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions document number label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.birthDate.label" datatype="html">
+        <source> Data de nascimento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">89,93</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions birth date label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.address.section" datatype="html">
+        <source> Morada e habitação </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">101,106</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions address section</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.address.label" datatype="html">
+        <source> Morada </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">108,111</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions address label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.city.label" datatype="html">
+        <source> Cidade </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">116,119</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions city label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.postalCode.label" datatype="html">
+        <source> Código postal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">124,127</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions postal code label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.housingType.label" datatype="html">
+        <source> Tipo de habitação </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">132,135</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions housing type label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.hasOutdoorSpace.label" datatype="html">
+        <source> Tem espaço exterior </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">151,155</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions outdoor space</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.householdMembers.label" datatype="html">
+        <source> Agregado familiar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">158,162</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions household label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.employmentStatus.label" datatype="html">
+        <source> Situação profissional </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">168,171</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions employment status label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.experience.section" datatype="html">
+        <source> Experiência e motivação </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">188,193</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions experience section</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.hasOtherAnimals.label" datatype="html">
+        <source> Tem outros animais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">197,202</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions has other animals</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.preferredSpecies.label" datatype="html">
+        <source> Preferência </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">204,207</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions preferred species label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.otherAnimalsDescription.label" datatype="html">
+        <source> Outros animais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">222,226</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions other animals label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.experienceWithAnimals.label" datatype="html">
+        <source> Experiência com animais </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">232,236</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions experience label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.adoptionMotivation.label" datatype="html">
+        <source> Motivo da adoção </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">242,246</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions motivation label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.notes.label" datatype="html">
+        <source> Notas internas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/components/adoption-adopter-fields.html</context>
+          <context context-type="linenumber">252,255</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions notes label</note>
+      </trans-unit>
       <trans-unit id="animals.page.title" datatype="html">
         <source> Animais </source>
         <context-group purpose="location">

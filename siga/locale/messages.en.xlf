@@ -2492,6 +2492,150 @@
         <target> Register return </target>
       </trans-unit>
 
+      <!--    Registo de adotante    -->
+
+      <trans-unit id="adoptions.form.adopter.personal.section" datatype="html">
+        <source> Informação pessoal </source>
+        <target> Personal information </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.name.label" datatype="html">
+        <source> Nome </source>
+        <target> Name </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.name.error.required" datatype="html">
+        <source> O nome é obrigatório. </source>
+        <target> Name is required. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.lastName.label" datatype="html">
+        <source> Apelido </source>
+        <target> Last name </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.lastName.error.required" datatype="html">
+        <source> O apelido é obrigatório. </source>
+        <target> Last name is required. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.email.label" datatype="html">
+        <source> Email </source>
+        <target> Email </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.email.error.invalid" datatype="html">
+        <source> Introduz um email válido. </source>
+        <target> Enter a valid email. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.phone.label" datatype="html">
+        <source> Telefone </source>
+        <target> Phone </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.phone.error.required" datatype="html">
+        <source> O telefone é obrigatório. </source>
+        <target> Phone is required. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.documentType.label" datatype="html">
+        <source> Tipo de documento </source>
+        <target> Document type </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.option.undefined" datatype="html">
+        <source> Não definido </source>
+        <target> Not defined </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.documentNumber.label" datatype="html">
+        <source> Número do documento </source>
+        <target> Document number </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.birthDate.label" datatype="html">
+        <source> Data de nascimento </source>
+        <target> Birth date </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.address.section" datatype="html">
+        <source> Morada e habitação </source>
+        <target> Address and housing </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.address.label" datatype="html">
+        <source> Morada </source>
+        <target> Address </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.city.label" datatype="html">
+        <source> Cidade </source>
+        <target> City </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.postalCode.label" datatype="html">
+        <source> Código postal </source>
+        <target> Postal code </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.housingType.label" datatype="html">
+        <source> Tipo de habitação </source>
+        <target> Housing type </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.hasOutdoorSpace.label" datatype="html">
+        <source> Tem espaço exterior </source>
+        <target> Has outdoor space </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.householdMembers.label" datatype="html">
+        <source> Agregado familiar </source>
+        <target> Household members </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.employmentStatus.label" datatype="html">
+        <source> Situação profissional </source>
+        <target> Employment status </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.experience.section" datatype="html">
+        <source> Experiência e motivação </source>
+        <target> Experience and motivation </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.hasOtherAnimals.label" datatype="html">
+        <source> Tem outros animais </source>
+        <target> Has other animals </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.preferredSpecies.label" datatype="html">
+        <source> Preferência </source>
+        <target> Preference </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.otherAnimalsDescription.label" datatype="html">
+        <source> Outros animais </source>
+        <target> Other animals </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.experienceWithAnimals.label" datatype="html">
+        <source> Experiência com animais </source>
+        <target> Experience with animals </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.adoptionMotivation.label" datatype="html">
+        <source> Motivo da adoção </source>
+        <target> Adoption motivation </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.notes.label" datatype="html">
+        <source> Notas internas </source>
+        <target> Internal notes </target>
+      </trans-unit>
+
+      <!--    Fim do registo de adotante    -->
+
       <!--   Página de adoções     -->
 
     </body>
