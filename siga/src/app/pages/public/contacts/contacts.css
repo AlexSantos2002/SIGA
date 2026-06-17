@@ -173,10 +173,44 @@
   border-bottom-color: #4b88a2;
 }
 
+.grupo-campo input.campo-invalido,
+.grupo-campo textarea.campo-invalido {
+  border-bottom-color: #b42318;
+}
+
+.grupo-campo small {
+  font-size: 0.82rem;
+  color: #b42318;
+}
+
 /* Área de texto ajustável */
 .grupo-campo textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+.campo-oculto {
+  display: none;
+}
+
+.mensagem-formulario {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.mensagem-formulario.sucesso {
+  border: 1px solid rgba(36, 130, 76, 0.22);
+  background: rgba(36, 130, 76, 0.08);
+  color: #216e43;
+}
+
+.mensagem-formulario.erro {
+  border: 1px solid rgba(180, 35, 24, 0.22);
+  background: rgba(180, 35, 24, 0.08);
+  color: #b42318;
 }
 
 /* Botão de envio */
@@ -197,6 +231,13 @@
 .botao-enviar:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(75, 136, 162, 0.2);
+}
+
+.botao-enviar:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+  box-shadow: none;
 }
 
 /*Animação de entrada*/

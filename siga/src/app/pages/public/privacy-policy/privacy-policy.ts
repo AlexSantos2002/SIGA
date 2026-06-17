@@ -67,7 +67,7 @@ const policyContent: Record<'pt' | 'en', PolicyContent> = {
         title: '4. Acesso, correção e eliminação',
         paragraphs: [
           'O titular dos dados pode solicitar o acesso, a correção, a limitação do tratamento ou a eliminação dos seus dados pessoais.',
-          'Atualmente, estes pedidos devem ser enviados por email para geral@siga.pt, indicando a organização associada, o email utilizado na plataforma e os dados que pretende consultar, corrigir ou eliminar.',
+          'Atualmente, estes pedidos devem ser enviados por email para info@sigaanimal.com, indicando a organização associada, o email utilizado na plataforma e os dados que pretende consultar, corrigir ou eliminar.',
           'Antes de executar o pedido, poderá ser solicitada informação adicional para confirmação de identidade ou legitimidade. Após validação, o SIGA procederá à eliminação ou anonimização dos dados sempre que tal seja possível.',
           'Alguns dados poderão ter de ser mantidos quando exista obrigação legal, necessidade de segurança, prevenção de fraude, resolução de litígios ou outro fundamento legítimo aplicável.',
         ],
@@ -132,7 +132,7 @@ const policyContent: Record<'pt' | 'en', PolicyContent> = {
         title: '4. Access, correction, and deletion',
         paragraphs: [
           'The data subject may request access, correction, restriction of processing, or deletion of their personal data.',
-          'At this stage, these requests should be sent by email to geral@siga.pt, identifying the associated organization, the email used on the platform, and the data to be accessed, corrected, or deleted.',
+          'At this stage, these requests should be sent by email to info@sigaanimal.com, identifying the associated organization, the email used on the platform, and the data to be accessed, corrected, or deleted.',
           'Before carrying out the request, additional information may be requested to confirm identity or legitimacy. After validation, SIGA will delete or anonymize the data whenever possible.',
           'Some data may need to be retained where there is a legal obligation, security need, fraud prevention need, dispute resolution need, or other applicable legitimate basis.',
         ],

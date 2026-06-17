@@ -38,7 +38,7 @@
       <!-- Dados de contacto -->
       <div class="linha-contacto">
         <span class="rotulo-contacto" i18n>Email</span>
-        <span class="valor-contacto">geral@siga.pt</span>
+        <span class="valor-contacto">info@sigaanimal.com</span>
       </div>
 
       <div class="linha-contacto">
@@ -59,22 +59,50 @@
     </div>
 
     <!-- Formulário de contacto -->
-    <form class="formulario-contactos">
+    <form [formGroup]="form" (ngSubmit)="sendMessage()" class="formulario-contactos" novalidate>
       <h2 i18n>Envie uma mensagem</h2>
 
       <div class="grupo-campo">
         <label for="nome" i18n>Nome</label>
-        <input id="nome" type="text" placeholder="O seu nome" i18n-placeholder />
+        <input
+          id="nome"
+          type="text"
+          formControlName="name"
+          placeholder="O seu nome"
+          autocomplete="name"
+          [class.campo-invalido]="isInvalid('name')"
+          (input)="clearFeedback()"
+          i18n-placeholder
+        />
+        <small *ngIf="isInvalid('name')">Indique o seu nome.</small>
       </div>
 
       <div class="grupo-campo">
         <label for="email" i18n>Email</label>
-        <input id="email" type="email" placeholder="o.seu@email.com" />
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="o.seu@email.com"
+          autocomplete="email"
+          [class.campo-invalido]="isInvalid('email')"
+          (input)="clearFeedback()"
+        />
+        <small *ngIf="isInvalid('email')">Indique um email válido.</small>
       </div>
 
       <div class="grupo-campo">
         <label for="assunto" i18n>Assunto</label>
-        <input id="assunto" type="text" placeholder="Assunto da mensagem" i18n-placeholder />
+        <input
+          id="assunto"
+          type="text"
+          formControlName="subject"
+          placeholder="Assunto da mensagem"
+          [class.campo-invalido]="isInvalid('subject')"
+          (input)="clearFeedback()"
+          i18n-placeholder
+        />
+        <small *ngIf="isInvalid('subject')">Indique o assunto da mensagem.</small>
       </div>
 
       <div class="grupo-campo">
@@ -82,14 +110,32 @@
         <textarea
           id="mensagem"
           rows="6"
+          formControlName="message"
           placeholder="Escreva aqui a sua mensagem"
+          [class.campo-invalido]="isInvalid('message')"
+          (input)="clearFeedback()"
           i18n-placeholder
         ></textarea>
+        <small *ngIf="isInvalid('message')">Escreva a sua mensagem.</small>
       </div>
 
+      <div class="campo-oculto" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <p *ngIf="successMessage" class="mensagem-formulario sucesso" role="status">
+        {{ successMessage }}
+      </p>
+
+      <p *ngIf="errorMessage" class="mensagem-formulario erro" role="alert">
+        {{ errorMessage }}
+      </p>
+
       <!-- Botão de envio -->
-      <button type="submit" class="botao-enviar" i18n>
-        Enviar mensagem
+      <button type="submit" class="botao-enviar" [disabled]="isSubmitting">
+        <span *ngIf="!isSubmitting">Enviar mensagem</span>
+        <span *ngIf="isSubmitting">A enviar...</span>
       </button>
     </form>
 
