@@ -1,11 +1,22 @@
 <section class="adopter-form-page">
   <div class="page-header">
     <div>
-      <h1>Registar adotante</h1>
-      <p>Regista a informação completa do adotante na tua organização.</p>
+      <h1 i18n="Register adopter page title@@adopters.create.header.title">
+        Registar adotante
+      </h1>
+
+      <p i18n="Register adopter page description@@adopters.create.header.description">
+        Regista a informação completa do adotante na tua organização.
+      </p>
     </div>
 
-    <a routerLink="/app/adopters" class="back-button">Voltar à lista</a>
+    <a
+      routerLink="/app/adopters"
+      class="back-button"
+      i18n="Back to adopters list@@adopters.create.actions.back"
+    >
+      Voltar à lista
+    </a>
   </div>
 
   <div *ngIf="errorMessage" class="error-message">

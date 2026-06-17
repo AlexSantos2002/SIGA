@@ -1842,6 +1842,439 @@
 
       <!--   Fim da página de edição de animais     -->
 
+      <!--    Página de adotantes    -->
+
+      <trans-unit id="adopters.header.title" datatype="html">
+        <source> Adotantes </source>
+        <target> Adopters </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.header.description" datatype="html">
+        <source> Consulta e gere os adotantes registados na tua organizacao. </source>
+        <target> View and manage the adopters registered in your organization. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.actions.create" datatype="html">
+        <source> Registar adotante </source>
+        <target> Register adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.loading" datatype="html">
+        <source> A carregar adotantes... </source>
+        <target> Loading adopters... </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.empty" datatype="html">
+        <source> Ainda nao existem adotantes registados nesta organizacao. </source>
+        <target> There are no adopters registered in this organization yet. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.name" datatype="html">
+        <source> Nome </source>
+        <target> Name </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.email" datatype="html">
+        <source> Email </source>
+        <target> Email </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.phone" datatype="html">
+        <source> Telefone </source>
+        <target> Phone </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.city" datatype="html">
+        <source> Cidade </source>
+        <target> City </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.housingType" datatype="html">
+        <source> Habitação </source>
+        <target> Housing </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.status" datatype="html">
+        <source> Estado </source>
+        <target> Status </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.createdAt" datatype="html">
+        <source> Registado em </source>
+        <target> Registered on </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.documentNumber" datatype="html">
+        <source> Doc: <x id="INTERPOLATION" equiv-text="{{ adopter.documentNumber }}"/> </source>
+        <target> ID: <x id="INTERPOLATION" equiv-text="{{ adopter.documentNumber }}"/> </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.status.flagged" datatype="html">
+        <source> Sinalizado </source>
+        <target> Flagged </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.status.active" datatype="html">
+        <source> Ativo </source>
+        <target> Active </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.actions.edit.title" datatype="html">
+        <source>Editar adotante</source>
+        <target>Edit adopter</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.actions.delete.title" datatype="html">
+        <source>Eliminar adotante</source>
+        <target>Delete adopter</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.confirmation" datatype="html">
+        <source> Tem a certeza que quer eliminar <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getFullName(adopterToDelete) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>? </source>
+        <target> Are you sure you want to delete <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getFullName(adopterToDelete) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>? </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.cancel" datatype="html">
+        <source> Cancelar </source>
+        <target> Cancel </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.loading" datatype="html">
+        <source> A eliminar... </source>
+        <target> Deleting... </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.confirm" datatype="html">
+        <source> Eliminar </source>
+        <target> Delete </target>
+      </trans-unit>
+
+
+      <!--    Fim da página de adotantes    -->
+
+      <!--    Página de registo de adotantes    -->
+
+      <trans-unit id="adopters.create.header.title" datatype="html">
+        <source> Registar adotante </source>
+        <target> Register adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.create.header.description" datatype="html">
+        <source> Regista a informação completa do adotante na tua organização. </source>
+        <target> Register the complete adopter information in your organization. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.create.actions.back" datatype="html">
+        <source> Voltar à lista </source>
+        <target> Back to list </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.personal.section" datatype="html">
+        <source> Informação pessoal </source>
+        <target> Personal information </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.address.section" datatype="html">
+        <source> Morada e habitação </source>
+        <target> Address and housing </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.experience.section" datatype="html">
+        <source> Experiência e adoção </source>
+        <target> Experience and adoption </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.internal.section" datatype="html">
+        <source> Gestão interna </source>
+        <target> Internal management </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.name.label" datatype="html">
+        <source> Nome </source>
+        <target> First name </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.name.placeholder" datatype="html">
+        <source>Ex: Ana</source>
+        <target>e.g. Ana</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.name.error.required" datatype="html">
+        <source> O nome é obrigatório. </source>
+        <target> Name is required. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.lastName.label" datatype="html">
+        <source> Apelido </source>
+        <target> Last name </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.lastName.placeholder" datatype="html">
+        <source>Ex: Silva</source>
+        <target>e.g. Silva</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.lastName.error.required" datatype="html">
+        <source> O apelido é obrigatório. </source>
+        <target> Last name is required. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.email.label" datatype="html">
+        <source> Email </source>
+        <target> Email </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.email.placeholder" datatype="html">
+        <source>Ex: ana@email.com</source>
+        <target>e.g. ana@email.com</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.email.error.invalid" datatype="html">
+        <source> Introduz um email válido. </source>
+        <target> Enter a valid email. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.phone.label" datatype="html">
+        <source> Telefone </source>
+        <target> Phone </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.phone.placeholder" datatype="html">
+        <source>Ex: 912345678</source>
+        <target>e.g. 912345678</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.phone.error.required" datatype="html">
+        <source> O telefone é obrigatório. </source>
+        <target> Phone is required. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.documentType.label" datatype="html">
+        <source> Tipo de documento </source>
+        <target> Document type </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.documentNumber.label" datatype="html">
+        <source> Número do documento </source>
+        <target> Document number </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.birthDate.label" datatype="html">
+        <source> Data de nascimento </source>
+        <target> Birth date </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.address.label" datatype="html">
+        <source> Morada </source>
+        <target> Address </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.city.label" datatype="html">
+        <source> Cidade </source>
+        <target> City </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.postalCode.label" datatype="html">
+        <source> Código postal </source>
+        <target> Postal code </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.housingType.label" datatype="html">
+        <source> Tipo de habitação </source>
+        <target> Housing type </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.hasOutdoorSpace.label" datatype="html">
+        <source> Tem espaço exterior </source>
+        <target> Has outdoor space </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.householdMembers.label" datatype="html">
+        <source> Agregado familiar </source>
+        <target> Household members </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.employmentStatus.label" datatype="html">
+        <source> Situação profissional </source>
+        <target> Employment status </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.experience.section" datatype="html">
+        <source> Experiência e adoção </source>
+        <target> Experience and adoption </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.hasOtherAnimals.label" datatype="html">
+        <source> Tem outros animais </source>
+        <target> Has other animals </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.preferredSpecies.label" datatype="html">
+        <source> Preferência </source>
+        <target> Preference </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.otherAnimalsDescription.label" datatype="html">
+        <source> Outros animais </source>
+        <target> Other animals </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.experienceWithAnimals.label" datatype="html">
+        <source> Experiência com animais </source>
+        <target> Experience with animals </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.adoptionMotivation.label" datatype="html">
+        <source> Motivo da adoção </source>
+        <target> Adoption motivation </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.internal.section" datatype="html">
+        <source> Gestão interna </source>
+        <target> Internal management </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.notes.label" datatype="html">
+        <source> Notas internas </source>
+        <target> Internal notes </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.isFlagged.label" datatype="html">
+        <source> Sinalizar adotante </source>
+        <target> Flag adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.flagReason.label" datatype="html">
+        <source> Motivo da sinalização </source>
+        <target> Flag reason </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.flagReason.error.required" datatype="html">
+        <source> O motivo é obrigatório quando o adotante está sinalizado. </source>
+        <target> Reason is required when the adopter is flagged. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.actions.cancel" datatype="html">
+        <source> Cancelar </source>
+        <target> Cancel </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.submit" datatype="html">
+        <source> Guardar adotante </source>
+        <target> Save adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.form.submitting" datatype="html">
+        <source> A guardar... </source>
+        <target> Saving... </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.header.title" datatype="html">
+        <source> Adotantes </source>
+        <target> Adopters </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.header.description" datatype="html">
+        <source> Consulta e gere os adotantes registados na tua organizacao. </source>
+        <target> View and manage the adopters registered in your organization. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.actions.create" datatype="html">
+        <source> Registar adotante </source>
+        <target> Register adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.loading" datatype="html">
+        <source> A carregar adotantes... </source>
+        <target> Loading adopters... </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.empty" datatype="html">
+        <source> Ainda nao existem adotantes registados nesta organizacao. </source>
+        <target> There are no adopters registered in this organization yet. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.name" datatype="html">
+        <source> Nome </source>
+        <target> Name </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.email" datatype="html">
+        <source> Email </source>
+        <target> Email </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.phone" datatype="html">
+        <source> Telefone </source>
+        <target> Phone </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.city" datatype="html">
+        <source> Cidade </source>
+        <target> City </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.housingType" datatype="html">
+        <source> Habitação </source>
+        <target> Housing </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.status" datatype="html">
+        <source> Estado </source>
+        <target> Status </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.createdAt" datatype="html">
+        <source> Registado em </source>
+        <target> Registered at </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.table.documentNumber" datatype="html">
+        <source> Doc: <x id="INTERPOLATION" equiv-text="{{ adopter.documentNumber }}"/> </source>
+        <target> Doc: <x id="INTERPOLATION" equiv-text="{{ adopter.documentNumber }}"/> </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.status.flagged" datatype="html">
+        <source> Sinalizado </source>
+        <target> Flagged </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.status.active" datatype="html">
+        <source> Ativo </source>
+        <target> Active </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.actions.edit.title" datatype="html">
+        <source>Editar adotante</source>
+        <target>Edit adopter</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.actions.delete.title" datatype="html">
+        <source>Eliminar adotante</source>
+        <target>Delete adopter</target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.confirmation" datatype="html">
+        <source> Tem a certeza que quer eliminar <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getFullName(adopterToDelete) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>? </source>
+        <target> Are you sure you want to delete <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getFullName(adopterToDelete) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>? </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.cancel" datatype="html">
+        <source> Cancelar </source>
+        <target> Cancel </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.loading" datatype="html">
+        <source> A eliminar... </source>
+        <target> Deleting... </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.delete.confirm" datatype="html">
+        <source> Eliminar </source>
+        <target> Delete </target>
+      </trans-unit>
+      <!--    Fim da página de registo de adotantes    -->
+
     </body>
   </file>
 </xliff>

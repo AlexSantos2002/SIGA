@@ -1,161 +1,241 @@
 <section class="adopters-page">
   <div class="page-header">
     <div>
-      <h1>Adotantes</h1>
-      <p>Consulta e gere os adotantes registados na tua organizacao.</p>
+      <h1 i18n="Adopters page title@@adopters.header.title">
+        Adotantes
+      </h1>
+
+      <p i18n="Adopters page description@@adopters.header.description">
+        Consulta e gere os adotantes registados na tua organizacao.
+      </p>
     </div>
 
-    <a routerLink="/app/adopters/new" class="add-adopter-button"> Registar adotante </a>
+    <a
+      routerLink="/app/adopters/new"
+      class="add-adopter-button"
+      i18n="Register adopter button@@adopters.actions.create"
+    >
+      Registar adotante
+    </a>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar adotantes...</div>
+  <div
+    *ngIf="isLoading"
+    class="loading"
+    i18n="Loading adopters@@adopters.loading"
+  >
+    A carregar adotantes...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <div *ngIf="!isLoading && !errorMessage && adopters.length === 0" class="empty-state">
+  <div
+    *ngIf="!isLoading && !errorMessage && adopters.length === 0"
+    class="empty-state"
+    i18n="No adopters registered@@adopters.empty"
+  >
     Ainda nao existem adotantes registados nesta organizacao.
   </div>
 
   <div *ngIf="!isLoading && adopters.length > 0" class="table-wrapper">
     <table>
       <thead>
-        <tr>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'name'"
-              [attr.aria-label]="getSortAriaLabel('Nome', 'name')"
-              (click)="sortBy('name')"
-            >
-              Nome <span>{{ getSortIndicator('name') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'email'"
-              [attr.aria-label]="getSortAriaLabel('Email', 'email')"
-              (click)="sortBy('email')"
-            >
-              Email <span>{{ getSortIndicator('email') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'phone'"
-              [attr.aria-label]="getSortAriaLabel('Telefone', 'phone')"
-              (click)="sortBy('phone')"
-            >
-              Telefone <span>{{ getSortIndicator('phone') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'city'"
-              [attr.aria-label]="getSortAriaLabel('Cidade', 'city')"
-              (click)="sortBy('city')"
-            >
-              Cidade <span>{{ getSortIndicator('city') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'housingType'"
-              [attr.aria-label]="getSortAriaLabel('Habitação', 'housingType')"
-              (click)="sortBy('housingType')"
-            >
-              Habitação <span>{{ getSortIndicator('housingType') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'status'"
-              [attr.aria-label]="getSortAriaLabel('Estado', 'status')"
-              (click)="sortBy('status')"
-            >
-              Estado <span>{{ getSortIndicator('status') }}</span>
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              class="sort-header"
-              [class.active]="sortField === 'createdAt'"
-              [attr.aria-label]="getSortAriaLabel('Registado em', 'createdAt')"
-              (click)="sortBy('createdAt')"
-            >
-              Registado em <span>{{ getSortIndicator('createdAt') }}</span>
-            </button>
-          </th>
-          <th class="actions-column"></th>
-        </tr>
+      <tr>
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'name'"
+            [attr.aria-label]="getSortAriaLabel('Nome', 'name')"
+            (click)="sortBy('name')"
+          >
+              <span i18n="Adopter name column@@adopters.table.name">
+                Nome
+              </span>
+
+            <span>{{ getSortIndicator('name') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'email'"
+            [attr.aria-label]="getSortAriaLabel('Email', 'email')"
+            (click)="sortBy('email')"
+          >
+              <span i18n="Adopter email column@@adopters.table.email">
+                Email
+              </span>
+
+            <span>{{ getSortIndicator('email') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'phone'"
+            [attr.aria-label]="getSortAriaLabel('Telefone', 'phone')"
+            (click)="sortBy('phone')"
+          >
+              <span i18n="Adopter phone column@@adopters.table.phone">
+                Telefone
+              </span>
+
+            <span>{{ getSortIndicator('phone') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'city'"
+            [attr.aria-label]="getSortAriaLabel('Cidade', 'city')"
+            (click)="sortBy('city')"
+          >
+              <span i18n="Adopter city column@@adopters.table.city">
+                Cidade
+              </span>
+
+            <span>{{ getSortIndicator('city') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'housingType'"
+            [attr.aria-label]="getSortAriaLabel('Habitação', 'housingType')"
+            (click)="sortBy('housingType')"
+          >
+              <span i18n="Housing type column@@adopters.table.housingType">
+                Habitação
+              </span>
+
+            <span>{{ getSortIndicator('housingType') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'status'"
+            [attr.aria-label]="getSortAriaLabel('Estado', 'status')"
+            (click)="sortBy('status')"
+          >
+              <span i18n="Status column@@adopters.table.status">
+                Estado
+              </span>
+
+            <span>{{ getSortIndicator('status') }}</span>
+          </button>
+        </th>
+
+        <th>
+          <button
+            type="button"
+            class="sort-header"
+            [class.active]="sortField === 'createdAt'"
+            [attr.aria-label]="getSortAriaLabel('Registado em', 'createdAt')"
+            (click)="sortBy('createdAt')"
+          >
+              <span i18n="Registration date column@@adopters.table.createdAt">
+                Registado em
+              </span>
+
+            <span>{{ getSortIndicator('createdAt') }}</span>
+          </button>
+        </th>
+
+        <th class="actions-column"></th>
+      </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let adopter of sortedAdopters" [class.flagged-row]="adopter.isFlagged">
-          <td>
-            <strong>{{ getFullName(adopter) }}</strong>
-            <span *ngIf="adopter.documentNumber" class="secondary-line">
+      <tr *ngFor="let adopter of sortedAdopters" [class.flagged-row]="adopter.isFlagged">
+        <td>
+          <strong>{{ getFullName(adopter) }}</strong>
+
+          <span
+            *ngIf="adopter.documentNumber"
+            class="secondary-line"
+            i18n="Document number prefix@@adopters.table.documentNumber"
+          >
               Doc: {{ adopter.documentNumber }}
             </span>
-          </td>
-          <td>{{ adopter.email }}</td>
-          <td>{{ adopter.phone || '-' }}</td>
-          <td>{{ adopter.city || '-' }}</td>
-          <td>{{ getHousingTypeLabel(adopter.housingType) }}</td>
-          <td>
+        </td>
+
+        <td>{{ adopter.email }}</td>
+        <td>{{ adopter.phone || '-' }}</td>
+        <td>{{ adopter.city || '-' }}</td>
+        <td>{{ getHousingTypeLabel(adopter.housingType) }}</td>
+
+        <td>
             <span
               class="status-badge"
               [class.flagged]="adopter.isFlagged"
               [class.clear]="!adopter.isFlagged"
             >
-              {{ adopter.isFlagged ? 'Sinalizado' : 'Ativo' }}
+              <span
+                *ngIf="adopter.isFlagged"
+                i18n="Flagged adopter status@@adopters.status.flagged"
+              >
+                Sinalizado
+              </span>
+
+              <span
+                *ngIf="!adopter.isFlagged"
+                i18n="Active adopter status@@adopters.status.active"
+              >
+                Ativo
+              </span>
             </span>
-          </td>
-          <td>{{ adopter.createdAt | date: 'dd/MM/yyyy' }}</td>
+        </td>
 
-          <td class="actions-column">
-            <div class="actions-buttons">
-              <a
-                class="edit-adopter-button"
-                title="Editar adotante"
-                [routerLink]="['/app/adopters', adopter.id, 'edit']"
-              >
-                &#9998;
-              </a>
+        <td>{{ adopter.createdAt | date: 'dd/MM/yyyy' }}</td>
 
-              <button
-                type="button"
-                class="delete-adopter-button"
-                title="Eliminar adotante"
-                [disabled]="deletingAdopterId === adopter.id"
-                (click)="openDeleteModal(adopter)"
-              >
-                <span *ngIf="deletingAdopterId === adopter.id">...</span>
-                <span *ngIf="deletingAdopterId !== adopter.id">&times;</span>
-              </button>
-            </div>
-          </td>
-        </tr>
+        <td class="actions-column">
+          <div class="actions-buttons">
+            <a
+              class="edit-adopter-button"
+              title="Editar adotante"
+              i18n-title="Edit adopter tooltip@@adopters.actions.edit.title"
+              [routerLink]="['/app/adopters', adopter.id, 'edit']"
+            >
+              &#9998;
+            </a>
+
+            <button
+              type="button"
+              class="delete-adopter-button"
+              title="Eliminar adotante"
+              i18n-title="Delete adopter tooltip@@adopters.actions.delete.title"
+              [disabled]="deletingAdopterId === adopter.id"
+              (click)="openDeleteModal(adopter)"
+            >
+              <span *ngIf="deletingAdopterId === adopter.id">...</span>
+              <span *ngIf="deletingAdopterId !== adopter.id">&times;</span>
+            </button>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
 
   <div *ngIf="isDeleteModalOpen" class="modal-backdrop" (click)="closeDeleteModal()">
     <div class="delete-modal" (click)="$event.stopPropagation()">
-      <p>
+      <p
+        i18n="Delete adopter confirmation@@adopters.delete.confirmation"
+      >
         Tem a certeza que quer eliminar
         <strong>{{ getFullName(adopterToDelete) }}</strong
         >?
@@ -167,6 +247,7 @@
           class="modal-cancel-button"
           [disabled]="!!deletingAdopterId"
           (click)="closeDeleteModal()"
+          i18n="Cancel delete adopter@@adopters.delete.cancel"
         >
           Cancelar
         </button>
@@ -177,7 +258,19 @@
           [disabled]="!!deletingAdopterId"
           (click)="confirmDeleteAdopter()"
         >
-          {{ deletingAdopterId ? 'A eliminar...' : 'Eliminar' }}
+          <span
+            *ngIf="deletingAdopterId"
+            i18n="Deleting adopter@@adopters.delete.loading"
+          >
+            A eliminar...
+          </span>
+
+          <span
+            *ngIf="!deletingAdopterId"
+            i18n="Delete adopter@@adopters.delete.confirm"
+          >
+            Eliminar
+          </span>
         </button>
       </div>
     </div>

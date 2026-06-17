@@ -1,44 +1,78 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="adopter-form">
+
   <div class="form-section">
-    <h2>Informação pessoal</h2>
+    <h2 i18n="Personal information section@@adopters.form.personal.section">
+      Informação pessoal
+    </h2>
 
     <div class="form-grid">
+
       <div class="form-field">
-        <label for="name">Nome</label>
-        <input id="name" type="text" formControlName="name" placeholder="Ex: Ana" />
-        <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        <label for="name" i18n="Name label@@adopters.form.name.label">
+          Nome
+        </label>
+
+        <input id="name" type="text" formControlName="name" placeholder="Ex: Ana"
+               i18n-placeholder="Name placeholder@@adopters.form.name.placeholder" />
+
+        <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+               i18n="Name required error@@adopters.form.name.error.required">
           O nome é obrigatório.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="lastName">Apelido</label>
-        <input id="lastName" type="text" formControlName="lastName" placeholder="Ex: Silva" />
-        <small *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+        <label for="lastName" i18n="Last name label@@adopters.form.lastName.label">
+          Apelido
+        </label>
+
+        <input id="lastName" type="text" formControlName="lastName" placeholder="Ex: Silva"
+               i18n-placeholder="Last name placeholder@@adopters.form.lastName.placeholder" />
+
+        <small *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid"
+               i18n="Last name required error@@adopters.form.lastName.error.required">
           O apelido é obrigatório.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" placeholder="Ex: ana@email.com" />
-        <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        <label for="email" i18n="Email label@@adopters.form.email.label">
+          Email
+        </label>
+
+        <input id="email" type="email" formControlName="email" placeholder="Ex: ana@email.com"
+               i18n-placeholder="Email placeholder@@adopters.form.email.placeholder" />
+
+        <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+               i18n="Email invalid error@@adopters.form.email.error.invalid">
           Introduz um email válido.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="phone">Telefone</label>
-        <input id="phone" type="tel" formControlName="phone" placeholder="Ex: 912345678" />
-        <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+        <label for="phone" i18n="Phone label@@adopters.form.phone.label">
+          Telefone
+        </label>
+
+        <input id="phone" type="tel" formControlName="phone" placeholder="Ex: 912345678"
+               i18n-placeholder="Phone placeholder@@adopters.form.phone.placeholder" />
+
+        <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid"
+               i18n="Phone required error@@adopters.form.phone.error.required">
           O telefone é obrigatório.
         </small>
       </div>
 
       <div class="form-field">
-        <label for="documentType">Tipo de documento</label>
+        <label for="documentType" i18n="Document type label@@adopters.form.documentType.label">
+          Tipo de documento
+        </label>
+
         <select id="documentType" formControlName="documentType">
-          <option value="">Não definido</option>
+          <option value="" i18n="Undefined option@@adopters.form.option.undefined">
+            Não definido
+          </option>
+
           <option *ngFor="let documentType of documentTypes" [value]="documentType.value">
             {{ documentType.label }}
           </option>
@@ -46,40 +80,65 @@
       </div>
 
       <div class="form-field">
-        <label for="documentNumber">Número do documento</label>
+        <label for="documentNumber" i18n="Document number label@@adopters.form.documentNumber.label">
+          Número do documento
+        </label>
+
         <input id="documentNumber" type="text" formControlName="documentNumber" />
       </div>
 
       <div class="form-field">
-        <label for="birthDate">Data de nascimento</label>
+        <label for="birthDate" i18n="Birth date label@@adopters.form.birthDate.label">
+          Data de nascimento
+        </label>
+
         <app-date-picker inputId="birthDate" formControlName="birthDate"></app-date-picker>
       </div>
+
     </div>
   </div>
 
   <div class="form-section">
-    <h2>Morada e habitação</h2>
+    <h2 i18n="Address section@@adopters.form.address.section">
+      Morada e habitação
+    </h2>
 
     <div class="form-grid">
+
       <div class="form-field full-width">
-        <label for="address">Morada</label>
+        <label for="address" i18n="Address label@@adopters.form.address.label">
+          Morada
+        </label>
+
         <input id="address" type="text" formControlName="address" />
       </div>
 
       <div class="form-field">
-        <label for="city">Cidade</label>
+        <label for="city" i18n="City label@@adopters.form.city.label">
+          Cidade
+        </label>
+
         <input id="city" type="text" formControlName="city" />
       </div>
 
       <div class="form-field">
-        <label for="postalCode">Código postal</label>
+        <label for="postalCode" i18n="Postal code label@@adopters.form.postalCode.label">
+          Código postal
+        </label>
+
         <input id="postalCode" type="text" formControlName="postalCode" />
       </div>
 
       <div class="form-field">
-        <label for="housingType">Tipo de habitação</label>
+        <label for="housingType" i18n="Housing type label@@adopters.form.housingType.label">
+          Tipo de habitação
+        </label>
+
         <select id="housingType" formControlName="housingType">
-          <option value="">Não definido</option>
+          <option value="" i18n="Undefined option@@adopters.form.option.undefined">
+            Não definido
+          </option>
+
           <option *ngFor="let housingType of housingTypes" [value]="housingType.value">
             {{ housingType.label }}
           </option>
@@ -88,39 +147,64 @@
 
       <label class="checkbox-field">
         <input type="checkbox" formControlName="hasOutdoorSpace" />
-        <span>Tem espaço exterior</span>
+
+        <span i18n="Outdoor space checkbox@@adopters.form.hasOutdoorSpace.label">
+          Tem espaço exterior
+        </span>
       </label>
 
       <div class="form-field full-width">
-        <label for="householdMembers">Agregado familiar</label>
+        <label for="householdMembers" i18n="Household label@@adopters.form.householdMembers.label">
+          Agregado familiar
+        </label>
+
         <textarea id="householdMembers" formControlName="householdMembers"></textarea>
       </div>
 
       <div class="form-field">
-        <label for="employmentStatus">Situação profissional</label>
+        <label for="employmentStatus" i18n="Employment status label@@adopters.form.employmentStatus.label">
+          Situação profissional
+        </label>
+
         <select id="employmentStatus" formControlName="employmentStatus">
-          <option value="">Não definido</option>
+          <option value="" i18n="Undefined option@@adopters.form.option.undefined">
+            Não definido
+          </option>
+
           <option *ngFor="let status of employmentStatuses" [value]="status.value">
             {{ status.label }}
           </option>
         </select>
       </div>
+
     </div>
   </div>
 
   <div class="form-section">
-    <h2>Experiência e adoção</h2>
+    <h2 i18n="Experience section@@adopters.form.experience.section">
+      Experiência e adoção
+    </h2>
 
     <div class="form-grid">
+
       <label class="checkbox-field">
         <input type="checkbox" formControlName="hasOtherAnimals" />
-        <span>Tem outros animais</span>
+
+        <span i18n="Has other animals checkbox@@adopters.form.hasOtherAnimals.label">
+          Tem outros animais
+        </span>
       </label>
 
       <div class="form-field">
-        <label for="preferredSpecies">Preferencia</label>
+        <label for="preferredSpecies" i18n="Preferred species label@@adopters.form.preferredSpecies.label">
+          Preferência
+        </label>
+
         <select id="preferredSpecies" formControlName="preferredSpecies">
-          <option value="">Não definido</option>
+          <option value="" i18n="Undefined option@@adopters.form.option.undefined">
+            Não definido
+          </option>
+
           <option *ngFor="let species of preferredSpecies" [value]="species.value">
             {{ species.label }}
           </option>
@@ -128,50 +212,92 @@
       </div>
 
       <div class="form-field full-width">
-        <label for="otherAnimalsDescription">Outros animais</label>
+        <label for="otherAnimalsDescription" i18n="Other animals label@@adopters.form.otherAnimalsDescription.label">
+          Outros animais
+        </label>
+
         <textarea id="otherAnimalsDescription" formControlName="otherAnimalsDescription"></textarea>
       </div>
 
       <div class="form-field full-width">
-        <label for="experienceWithAnimals">Experiência com animais</label>
+        <label for="experienceWithAnimals" i18n="Experience label@@adopters.form.experienceWithAnimals.label">
+          Experiência com animais
+        </label>
+
         <textarea id="experienceWithAnimals" formControlName="experienceWithAnimals"></textarea>
       </div>
 
       <div class="form-field full-width">
-        <label for="adoptionMotivation">Motivo da adoção</label>
+        <label for="adoptionMotivation" i18n="Motivation label@@adopters.form.adoptionMotivation.label">
+          Motivo da adoção
+        </label>
+
         <textarea id="adoptionMotivation" formControlName="adoptionMotivation"></textarea>
       </div>
+
     </div>
   </div>
 
   <div class="form-section">
-    <h2>Gestão interna</h2>
+    <h2 i18n="Internal section@@adopters.form.internal.section">
+      Gestão interna
+    </h2>
 
     <div class="form-grid">
+
       <div class="form-field full-width">
-        <label for="notes">Notas internas</label>
+        <label for="notes" i18n="Notes label@@adopters.form.notes.label">
+          Notas internas
+        </label>
+
         <textarea id="notes" formControlName="notes"></textarea>
       </div>
 
       <label class="checkbox-field">
         <input type="checkbox" formControlName="isFlagged" />
-        <span>Sinalizar adotante</span>
+
+        <span i18n="Flag adopter checkbox@@adopters.form.isFlagged.label">
+          Sinalizar adotante
+        </span>
       </label>
 
       <div class="form-field full-width" *ngIf="form.value.isFlagged">
-        <label for="flagReason">Motivo da sinalização</label>
+        <label for="flagReason" i18n="Flag reason label@@adopters.form.flagReason.label">
+          Motivo da sinalização
+        </label>
+
         <textarea id="flagReason" formControlName="flagReason"></textarea>
-        <small *ngIf="form.get('flagReason')?.touched && form.get('flagReason')?.invalid">
+
+        <small *ngIf="form.get('flagReason')?.touched && form.get('flagReason')?.invalid"
+               i18n="Flag reason required error@@adopters.form.flagReason.error.required">
           O motivo é obrigatório quando o adotante está sinalizado.
         </small>
       </div>
+
     </div>
   </div>
 
   <div class="form-actions">
-    <a routerLink="/app/adopters" class="cancel-button">Cancelar</a>
+    <a routerLink="/app/adopters" class="cancel-button"
+       i18n="Cancel button@@adopters.form.actions.cancel">
+      Cancelar
+    </a>
+
     <button type="submit" [disabled]="isSubmitting">
-      {{ isSubmitting ? submittingLabel : submitLabel }}
+
+      <span *ngIf="!isSubmitting; else submitting">
+        <span i18n="Submit adopter form@@adopters.form.submit">
+          Guardar adotante
+        </span>
+      </span>
+
+      <ng-template #submitting>
+        <span i18n="Submitting adopter form@@adopters.form.submitting">
+          A guardar...
+        </span>
+      </ng-template>
+
     </button>
   </div>
+
 </form>
