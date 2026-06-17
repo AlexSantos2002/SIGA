@@ -2765,7 +2765,181 @@
 
       <!--    Fim do registo de adotante    -->
 
-      <!--   Página de adoções     -->
+      <!--   Fim da página de adoções     -->
+
+      <!--   Página de cuidados     -->
+
+      <trans-unit id="cares.page.title" datatype="html">
+        <source>Cuidados</source>
+        <target>Care</target>
+      </trans-unit>
+
+      <trans-unit id="cares.page.description" datatype="html">
+        <source>Regista e acompanha vacinas, desparasitações, consultas e tratamentos dos animais.</source>
+        <target>Register and track vaccines, deworming, appointments, and treatments for animals.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.loading" datatype="html">
+        <source>A carregar cuidados...</source>
+        <target>Loading care records...</target>
+      </trans-unit>
+
+      <trans-unit id="cares.summary.overdue" datatype="html">
+        <source>Em atraso</source>
+        <target>Overdue</target>
+      </trans-unit>
+
+      <trans-unit id="cares.summary.dueSoon" datatype="html">
+        <source>Próximos 30 dias</source>
+        <target>Next 30 days</target>
+      </trans-unit>
+
+      <trans-unit id="cares.summary.pending" datatype="html">
+        <source>Pendentes</source>
+        <target>Pending</target>
+      </trans-unit>
+
+      <trans-unit id="cares.summary.completed" datatype="html">
+        <source>Concluídos</source>
+        <target>Completed</target>
+      </trans-unit>
+
+      <trans-unit id="cares.form.title" datatype="html">
+        <source>Novo cuidado</source>
+        <target>New care</target>
+      </trans-unit>
+
+      <trans-unit id="cares.form.type.label" datatype="html">
+        <source>Tipo</source>
+        <target>Type</target>
+      </trans-unit>
+
+      <trans-unit id="cares.form.animal.label" datatype="html">
+        <source>Animal</source>
+        <target>Animal</target>
+      </trans-unit>
+
+      <trans-unit id="cares.form.animal.placeholder" datatype="html">
+        <source>Selecionar animal</source>
+        <target>Select animal</target>
+      </trans-unit>
+
+      <trans-unit id="cares.form.animal.error" datatype="html">
+        <source>Selecionar o animal associado ao cuidado.</source>
+        <target>Select the animal associated with the care.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.name.label" datatype="html">
+        <source>Nome da vacina</source>
+        <target>Vaccine name</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.name.error" datatype="html">
+        <source>Preencher o nome da vacina.</source>
+        <target>Fill in the vaccine name.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.status.label" datatype="html">
+        <source>Estado</source>
+        <target>Status</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.dateTaken.label" datatype="html">
+        <source>Data tomada</source>
+        <target>Date taken</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.dateTaken.error" datatype="html">
+        <source>Preencher a data em que a vacina foi tomada.</source>
+        <target>Fill in the date the vaccine was taken.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.scheduledDate.label" datatype="html">
+        <source>Data prevista</source>
+        <target>Scheduled date</target>
+      </trans-unit>
+
+      <trans-unit id="cares.vaccine.nextDueDate.label" datatype="html">
+        <source>Próxima dose</source>
+        <target>Next dose</target>
+      </trans-unit>
+
+      <trans-unit id="cares.deworming.type.label" datatype="html">
+        <source>Tipo</source>
+        <target>Type</target>
+      </trans-unit>
+
+      <trans-unit id="cares.deworming.date.label" datatype="html">
+        <source>Data realizada</source>
+        <target>Date performed</target>
+      </trans-unit>
+
+      <trans-unit id="cares.deworming.date.error" datatype="html">
+        <source>Preencher a data da desparasitação.</source>
+        <target>Fill in the deworming date.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.deworming.product.label" datatype="html">
+        <source>Produto usado</source>
+        <target>Product used</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.date.label" datatype="html">
+        <source>Data</source>
+        <target>Date</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.date.error" datatype="html">
+        <source>Preencher a data da consulta ou tratamento.</source>
+        <target>Fill in the appointment or treatment date.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.reason.label" datatype="html">
+        <source>Motivo / tratamento</source>
+        <target>Reason / treatment</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.reason.error" datatype="html">
+        <source>Preencher o motivo ou tratamento.</source>
+        <target>Fill in the reason or treatment.</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.clinic.label" datatype="html">
+        <source>Clínica</source>
+        <target>Clinic</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.vet.label" datatype="html">
+        <source>Veterinário</source>
+        <target>Veterinarian</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.result.label" datatype="html">
+        <source>Resultado</source>
+        <target>Result</target>
+      </trans-unit>
+
+      <trans-unit id="cares.appointment.next.label" datatype="html">
+        <source>Próxima consulta</source>
+        <target>Next appointment</target>
+      </trans-unit>
+
+      <trans-unit id="cares.notes.label" datatype="html">
+        <source>Observações</source>
+        <target>Notes</target>
+      </trans-unit>
+
+      <trans-unit id="cares.submit" datatype="html">
+        <source>Registar cuidado</source>
+        <target>Register care</target>
+      </trans-unit>
+
+      <trans-unit id="cares.submitting" datatype="html">
+        <source>A registar...</source>
+        <target>Registering...</target>
+      </trans-unit>
+
+      <!--   Fim da página de cuidados     -->
 
     </body>
   </file>

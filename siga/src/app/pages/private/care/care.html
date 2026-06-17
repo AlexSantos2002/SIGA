@@ -1,47 +1,57 @@
 <section class="care-page">
   <div class="page-header">
     <div>
-      <h1>Cuidados</h1>
-      <p>Regista e acompanha vacinas, desparasitações, consultas e tratamentos dos animais.</p>
+      <h1 i18n="Care page title@@cares.page.title">Cuidados</h1>
+      <p i18n="Care page description@@cares.page.description">
+        Regista e acompanha vacinas, desparasitações, consultas e tratamentos dos animais.
+      </p>
     </div>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar cuidados...</div>
+  <div *ngIf="isLoading" class="loading" i18n="Loading cares@@cares.loading">
+    A carregar cuidados...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
   <ng-container *ngIf="!isLoading">
+
+    <!-- SUMMARY -->
     <div class="summary-grid">
       <article class="summary-card warning">
-        <span>Em atraso</span>
+        <span i18n="Overdue label@@cares.summary.overdue">Em atraso</span>
         <strong>{{ overdueCount }}</strong>
       </article>
 
       <article class="summary-card attention">
-        <span>Próximos 30 dias</span>
+        <span i18n="Due soon label@@cares.summary.dueSoon">Próximos 30 dias</span>
         <strong>{{ dueSoonCount }}</strong>
       </article>
 
       <article class="summary-card">
-        <span>Pendentes</span>
+        <span i18n="Pending label@@cares.summary.pending">Pendentes</span>
         <strong>{{ pendingCount }}</strong>
       </article>
 
       <article class="summary-card">
-        <span>Concluídos</span>
+        <span i18n="Completed label@@cares.summary.completed">Concluídos</span>
         <strong>{{ completedCount }}</strong>
       </article>
     </div>
 
+    <!-- FORM -->
     <form [formGroup]="form" (ngSubmit)="submitCare()" class="care-form">
+
       <section class="form-section">
-        <h2>Novo cuidado</h2>
+        <h2 i18n="New care section@@cares.form.title">Novo cuidado</h2>
 
         <div class="form-grid">
+
+          <!-- CARE TYPE -->
           <div class="form-field">
-            <label for="careType">Tipo</label>
+            <label for="careType" i18n="Care type label@@cares.form.type.label">Tipo</label>
             <select id="careType" formControlName="careType">
               <option *ngFor="let type of careTypes" [value]="type.value">
                 {{ type.label }}
@@ -49,16 +59,17 @@
             </select>
           </div>
 
+          <!-- ANIMAL -->
           <div class="form-field">
-            <label for="animalId">Animal</label>
+            <label for="animalId" i18n="Animal label@@cares.form.animal.label">Animal</label>
+
             <select id="animalId" formControlName="animalId">
               <option value="" disabled>
-                {{
-                  animalsAvailableForCare.length
-                    ? 'Selecionar animal'
-                    : 'Nenhum animal ativo para cuidados'
-                }}
+                <span i18n="Animal select placeholder@@cares.form.animal.placeholder">
+                  Selecionar animal
+                </span>
               </option>
+
               <option
                 *ngFor="let animal of animalsAvailableForCare; trackBy: trackByAnimalId"
                 [value]="animal.id"
@@ -66,22 +77,37 @@
                 {{ getAnimalOptionLabel(animal) }}
               </option>
             </select>
-            <small *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid">
+
+            <small
+              *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid"
+              i18n="Animal required error@@cares.form.animal.error"
+            >
               Selecionar o animal associado ao cuidado.
             </small>
           </div>
 
+          <!-- VACCINE -->
           <ng-container *ngIf="careType === 'vaccine'">
+
             <div class="form-field">
-              <label for="name">Nome da vacina</label>
+              <label for="name" i18n="Vaccine name label@@cares.vaccine.name.label">
+                Nome da vacina
+              </label>
               <input id="name" type="text" formControlName="name" />
-              <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+
+              <small
+                *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+                i18n="Vaccine name error@@cares.vaccine.name.error"
+              >
                 Preencher o nome da vacina.
               </small>
             </div>
 
             <div class="form-field">
-              <label for="vaccineStatus">Estado</label>
+              <label for="vaccineStatus" i18n="Vaccine status label@@cares.vaccine.status.label">
+                Estado
+              </label>
+
               <select id="vaccineStatus" formControlName="vaccineStatus">
                 <option *ngFor="let status of vaccineStatuses" [value]="status.value">
                   {{ status.label }}
@@ -90,38 +116,46 @@
             </div>
 
             <div class="form-field">
-              <label for="dateTaken">Data tomada</label>
+              <label for="dateTaken" i18n="Vaccine date taken label@@cares.vaccine.dateTaken.label">
+                Data tomada
+              </label>
+
               <app-date-picker inputId="dateTaken" formControlName="dateTaken"></app-date-picker>
-              <small *ngIf="form.get('dateTaken')?.touched && form.get('dateTaken')?.invalid">
+
+              <small
+                *ngIf="form.get('dateTaken')?.touched && form.get('dateTaken')?.invalid"
+                i18n="Vaccine date taken error@@cares.vaccine.dateTaken.error"
+              >
                 Preencher a data em que a vacina foi tomada.
               </small>
             </div>
 
             <div class="form-field">
-              <label for="scheduledDate">Data prevista</label>
-              <app-date-picker
-                inputId="scheduledDate"
-                formControlName="scheduledDate"
-              ></app-date-picker>
-              <small
-                *ngIf="form.get('scheduledDate')?.touched && form.get('scheduledDate')?.invalid"
-              >
-                Preencher a data prevista para a vacina pendente.
-              </small>
+              <label for="scheduledDate" i18n="Vaccine scheduled date label@@cares.vaccine.scheduledDate.label">
+                Data prevista
+              </label>
+
+              <app-date-picker inputId="scheduledDate" formControlName="scheduledDate"></app-date-picker>
             </div>
 
             <div class="form-field">
-              <label for="nextDueDate">Próxima dose</label>
-              <app-date-picker
-                inputId="nextDueDate"
-                formControlName="nextDueDate"
-              ></app-date-picker>
+              <label for="nextDueDate" i18n="Vaccine next dose label@@cares.vaccine.nextDueDate.label">
+                Próxima dose
+              </label>
+
+              <app-date-picker inputId="nextDueDate" formControlName="nextDueDate"></app-date-picker>
             </div>
+
           </ng-container>
 
+          <!-- DEWORMING -->
           <ng-container *ngIf="careType === 'deworming'">
+
             <div class="form-field">
-              <label for="dewormingType">Tipo</label>
+              <label for="dewormingType" i18n="Deworming type label@@cares.deworming.type.label">
+                Tipo
+              </label>
+
               <select id="dewormingType" formControlName="dewormingType">
                 <option *ngFor="let type of dewormingTypes" [value]="type.value">
                   {{ type.label }}
@@ -130,247 +164,122 @@
             </div>
 
             <div class="form-field">
-              <label for="dateDone">Data realizada</label>
+              <label for="dateDone" i18n="Deworming date label@@cares.deworming.date.label">
+                Data realizada
+              </label>
+
               <app-date-picker inputId="dateDone" formControlName="dateDone"></app-date-picker>
-              <small *ngIf="form.get('dateDone')?.touched && form.get('dateDone')?.invalid">
+
+              <small
+                *ngIf="form.get('dateDone')?.touched && form.get('dateDone')?.invalid"
+                i18n="Deworming date error@@cares.deworming.date.error"
+              >
                 Preencher a data da desparasitação.
               </small>
             </div>
 
             <div class="form-field">
-              <label for="dewormingNextDueDate">Próxima data</label>
-              <app-date-picker
-                inputId="dewormingNextDueDate"
-                formControlName="nextDueDate"
-              ></app-date-picker>
-            </div>
+              <label for="productName" i18n="Deworming product label@@cares.deworming.product.label">
+                Produto usado
+              </label>
 
-            <div class="form-field">
-              <label for="productName">Produto usado</label>
               <input id="productName" type="text" formControlName="productName" />
             </div>
+
           </ng-container>
 
+          <!-- APPOINTMENT -->
           <ng-container *ngIf="careType === 'appointment'">
+
             <div class="form-field">
-              <label for="appointmentDate">Data</label>
-              <app-date-picker
-                inputId="appointmentDate"
-                formControlName="appointmentDate"
-              ></app-date-picker>
+              <label for="appointmentDate" i18n="Appointment date label@@cares.appointment.date.label">
+                Data
+              </label>
+
+              <app-date-picker inputId="appointmentDate" formControlName="appointmentDate"></app-date-picker>
+
               <small
                 *ngIf="form.get('appointmentDate')?.touched && form.get('appointmentDate')?.invalid"
+                i18n="Appointment date error@@cares.appointment.date.error"
               >
                 Preencher a data da consulta ou tratamento.
               </small>
             </div>
 
             <div class="form-field">
-              <label for="reason">Motivo / tratamento</label>
+              <label for="reason" i18n="Appointment reason label@@cares.appointment.reason.label">
+                Motivo / tratamento
+              </label>
+
               <input id="reason" type="text" formControlName="reason" />
-              <small *ngIf="form.get('reason')?.touched && form.get('reason')?.invalid">
+
+              <small
+                *ngIf="form.get('reason')?.touched && form.get('reason')?.invalid"
+                i18n="Appointment reason error@@cares.appointment.reason.error"
+              >
                 Preencher o motivo ou tratamento.
               </small>
             </div>
 
             <div class="form-field">
-              <label for="clinicName">Clínica</label>
+              <label for="clinicName" i18n="Clinic label@@cares.appointment.clinic.label">
+                Clínica
+              </label>
+
               <input id="clinicName" type="text" formControlName="clinicName" />
             </div>
 
             <div class="form-field">
-              <label for="veterinarianName">Veterinário</label>
+              <label for="veterinarianName" i18n="Vet label@@cares.appointment.vet.label">
+                Veterinário
+              </label>
+
               <input id="veterinarianName" type="text" formControlName="veterinarianName" />
             </div>
 
             <div class="form-field">
-              <label for="result">Resultado</label>
+              <label for="result" i18n="Result label@@cares.appointment.result.label">
+                Resultado
+              </label>
+
               <input id="result" type="text" formControlName="result" />
             </div>
 
             <div class="form-field">
-              <label for="nextAppointmentDate">Próxima consulta</label>
-              <app-date-picker
-                inputId="nextAppointmentDate"
-                formControlName="nextAppointmentDate"
-              ></app-date-picker>
+              <label for="nextAppointmentDate" i18n="Next appointment label@@cares.appointment.next.label">
+                Próxima consulta
+              </label>
+
+              <app-date-picker inputId="nextAppointmentDate" formControlName="nextAppointmentDate"></app-date-picker>
             </div>
+
           </ng-container>
 
+          <!-- NOTES -->
           <div class="form-field full-width">
-            <label for="notes">Observações</label>
+            <label for="notes" i18n="Notes label@@cares.notes.label">
+              Observações
+            </label>
+
             <textarea id="notes" formControlName="notes"></textarea>
           </div>
+
         </div>
       </section>
 
       <div class="form-actions">
         <button type="submit" class="primary-button" [disabled]="isSubmitting">
-          {{ isSubmitting ? 'A registar...' : 'Registar cuidado' }}
+          <span *ngIf="!isSubmitting" i18n="Submit care@@cares.submit">
+            Registar cuidado
+          </span>
+
+          <span *ngIf="isSubmitting" i18n="Submitting care@@cares.submitting">
+            A registar...
+          </span>
         </button>
       </div>
+
     </form>
 
-    <section class="records-section">
-      <div class="section-header">
-        <h2>Registos e próximos cuidados</h2>
-      </div>
-
-      <div class="filters-grid">
-        <div class="form-field">
-          <label for="filterType">Tipo</label>
-          <select id="filterType" [(ngModel)]="filterType" (ngModelChange)="onCareFiltersChange()">
-            <option value="all">Todos</option>
-            <option *ngFor="let type of careTypes" [value]="type.value">
-              {{ type.label }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label for="filterAnimal">Animal</label>
-          <select
-            id="filterAnimal"
-            [(ngModel)]="filterAnimalId"
-            (ngModelChange)="onCareFiltersChange()"
-          >
-            <option value="all">Todos</option>
-            <option *ngFor="let animal of animals; trackBy: trackByAnimalId" [value]="animal.id">
-              {{ getAnimalOptionLabel(animal) }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label for="filterState">Aviso</label>
-          <select
-            id="filterState"
-            [(ngModel)]="filterState"
-            (ngModelChange)="onCareFiltersChange()"
-          >
-            <option value="all">Todos</option>
-            <option *ngFor="let state of timelineStates" [value]="state.value">
-              {{ state.label }}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div *ngIf="careRecords.length === 0" class="empty-state">
-        Ainda não existem cuidados registados.
-      </div>
-
-      <div *ngIf="careRecords.length > 0 && filteredCareRecords.length === 0" class="empty-state">
-        Não existem cuidados com os filtros selecionados.
-      </div>
-
-      <div *ngIf="filteredCareRecords.length > 0" class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Animal</th>
-              <th>Tipo</th>
-              <th>Cuidado</th>
-              <th>Datas</th>
-              <th>Aviso</th>
-              <th>Observações</th>
-              <th class="actions-column"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let record of paginatedCareRecords; trackBy: trackByRecordKey">
-              <td>
-                <a class="primary-link" [routerLink]="['/app/animals', record.animalId, 'edit']">
-                  {{ record.animal.name }}
-                </a>
-                <span class="secondary-line">{{ getAnimalDescription(record) }}</span>
-              </td>
-
-              <td>{{ getCareTypeLabel(record.type) }}</td>
-
-              <td>
-                <strong>{{ record.title }}</strong>
-                <span class="secondary-line">{{ record.detail || '-' }}</span>
-              </td>
-
-              <td>
-                <span>
-                  Previsto:
-                  {{ record.scheduledDate ? (record.scheduledDate | date: 'dd/MM/yyyy') : '-' }}
-                </span>
-                <span class="secondary-line">
-                  Realizado:
-                  {{ record.completedDate ? (record.completedDate | date: 'dd/MM/yyyy') : '-' }}
-                </span>
-                <span class="secondary-line">
-                  Próximo:
-                  {{ record.nextDueDate ? (record.nextDueDate | date: 'dd/MM/yyyy') : '-' }}
-                </span>
-              </td>
-
-              <td>
-                <span
-                  class="timeline-badge"
-                  [class.overdue]="getTimelineState(record) === 'overdue'"
-                  [class.due-soon]="getTimelineState(record) === 'due_soon'"
-                  [class.scheduled]="getTimelineState(record) === 'scheduled'"
-                  [class.completed]="getTimelineState(record) === 'completed'"
-                  [class.unscheduled]="getTimelineState(record) === 'unscheduled'"
-                >
-                  {{ getTimelineLabel(record) }}
-                </span>
-                <span class="secondary-line">{{ getTimelineDescription(record) }}</span>
-              </td>
-
-              <td>{{ record.notes || '-' }}</td>
-
-              <td class="actions-column">
-                <div class="record-actions">
-                  <button
-                    *ngIf="record.status === 'pending'"
-                    type="button"
-                    class="primary-button"
-                    [disabled]="
-                      confirmingRecordKey === getRecordKey(record) ||
-                      deletingRecordKey === getRecordKey(record)
-                    "
-                    (click)="confirmRecord(record)"
-                  >
-                    {{ confirmingRecordKey === getRecordKey(record) ? '...' : 'Confirmar' }}
-                  </button>
-
-                  <button
-                    type="button"
-                    class="remove-button"
-                    [disabled]="
-                      deletingRecordKey === getRecordKey(record) ||
-                      confirmingRecordKey === getRecordKey(record)
-                    "
-                    (click)="deleteRecord(record)"
-                  >
-                    {{ deletingRecordKey === getRecordKey(record) ? '...' : 'Remover' }}
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div *ngIf="filteredCareRecords.length > pageSize" class="pagination-bar">
-        <span> {{ pageStart }}-{{ pageEnd }} de {{ filteredCareRecords.length }} </span>
-
-        <div class="pagination-actions">
-          <button type="button" [disabled]="!hasPreviousPage" (click)="previousPage()">
-            Anterior
-          </button>
-
-          <span>Pagina {{ currentPage }} de {{ totalPages }}</span>
-
-          <button type="button" [disabled]="!hasNextPage" (click)="nextPage()">Seguinte</button>
-        </div>
-      </div>
-    </section>
   </ng-container>
 </section>

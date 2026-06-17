@@ -1,8 +1,10 @@
 <section class="statistics-page">
   <div class="page-header">
     <div>
-      <h1>Estatísticas</h1>
-      <p>Resumo visual dos animais, adoções, adotantes e cuidados da organização.</p>
+      <h1 i18n="@@stats.page.title">Estatísticas</h1>
+      <p i18n="@@stats.page.description">
+        Resumo visual dos animais, adoções, adotantes e cuidados da organização.
+      </p>
     </div>
 
     <button
@@ -11,11 +13,14 @@
       [disabled]="isLoading || isExporting || !!errorMessage"
       (click)="exportStatisticsToExcel()"
     >
-      {{ isExporting ? 'A exportar...' : 'Exportar Excel' }}
+      <span *ngIf="!isExporting" i18n="@@stats.export.button">Exportar Excel</span>
+      <span *ngIf="isExporting" i18n="@@stats.export.loading">A exportar...</span>
     </button>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar estatísticas...</div>
+  <div *ngIf="isLoading" class="loading" i18n="@@stats.loading">
+    A carregar estatísticas...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
@@ -31,12 +36,15 @@
     </div>
 
     <div class="charts-grid">
+
       <section class="chart-panel wide">
         <div class="section-header">
-          <h2>Animais por estado</h2>
+          <h2 i18n="@@stats.animals.status.title">Animais por estado</h2>
         </div>
 
-        <div *ngIf="animalStatusBars.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="animalStatusBars.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="animalStatusBars.length > 0" class="chart-body chart-body-horizontal">
           <canvas #statisticsChart data-chart-id="animal-status"></canvas>
@@ -45,10 +53,10 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Disponibilidade dos animais</h2>
+          <h2 i18n="@@stats.animals.availability.title">Disponibilidade dos animais</h2>
         </div>
 
-        <div *ngIf="animalAvailabilityPie.length === 0" class="empty-state">
+        <div *ngIf="animalAvailabilityPie.length === 0" class="empty-state" i18n="@@stats.empty">
           Sem dados registados.
         </div>
 
@@ -69,7 +77,7 @@
 
       <section class="chart-panel wide">
         <div class="section-header">
-          <h2>Pedidos de adoção por mês</h2>
+          <h2 i18n="@@stats.adoptions.requests.title">Pedidos de adoção por mês</h2>
         </div>
 
         <div class="chart-body chart-body-monthly">
@@ -79,7 +87,7 @@
 
       <section class="chart-panel wide">
         <div class="section-header">
-          <h2>Adoções aceites por mês</h2>
+          <h2 i18n="@@stats.adoptions.accepted.title">Adoções aceites por mês</h2>
         </div>
 
         <div class="chart-body chart-body-monthly">
@@ -89,10 +97,12 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Estado das adoções</h2>
+          <h2 i18n="@@stats.adoptions.status.title">Estado das adoções</h2>
         </div>
 
-        <div *ngIf="adoptionStatusPie.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="adoptionStatusPie.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="adoptionStatusPie.length > 0" class="chart-body pie-layout">
           <div class="pie-canvas">
@@ -111,10 +121,10 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Espécies mais adotadas</h2>
+          <h2 i18n="@@stats.adoptions.species.title">Espécies mais adotadas</h2>
         </div>
 
-        <div *ngIf="adoptedSpeciesBars.length === 0" class="empty-state">
+        <div *ngIf="adoptedSpeciesBars.length === 0" class="empty-state" i18n="@@stats.empty">
           Sem adoções aceites registadas.
         </div>
 
@@ -125,10 +135,10 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Raças mais adotadas</h2>
+          <h2 i18n="@@stats.adoptions.breeds.title">Raças mais adotadas</h2>
         </div>
 
-        <div *ngIf="adoptedBreedBars.length === 0" class="empty-state">
+        <div *ngIf="adoptedBreedBars.length === 0" class="empty-state" i18n="@@stats.empty">
           Sem adoções aceites registadas.
         </div>
 
@@ -139,10 +149,12 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Animais por espécie</h2>
+          <h2 i18n="@@stats.animals.species.title">Animais por espécie</h2>
         </div>
 
-        <div *ngIf="speciesBars.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="speciesBars.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="speciesBars.length > 0" class="chart-body chart-body-compact">
           <canvas #statisticsChart data-chart-id="species"></canvas>
@@ -151,10 +163,12 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Género dos animais</h2>
+          <h2 i18n="@@stats.animals.gender.title">Género dos animais</h2>
         </div>
 
-        <div *ngIf="animalGenderPie.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="animalGenderPie.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="animalGenderPie.length > 0" class="chart-body pie-layout">
           <div class="pie-canvas">
@@ -173,10 +187,12 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Microchip</h2>
+          <h2 i18n="@@stats.animals.microchip.title">Microchip</h2>
         </div>
 
-        <div *ngIf="microchipPie.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="microchipPie.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="microchipPie.length > 0" class="chart-body pie-layout">
           <div class="pie-canvas">
@@ -195,10 +211,12 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Cuidados registados</h2>
+          <h2 i18n="@@stats.cares.registered.title">Cuidados registados</h2>
         </div>
 
-        <div *ngIf="careTypeBars.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="careTypeBars.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="careTypeBars.length > 0" class="chart-body chart-body-compact">
           <canvas #statisticsChart data-chart-id="care-types"></canvas>
@@ -207,10 +225,12 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Estado dos cuidados</h2>
+          <h2 i18n="@@stats.cares.status.title">Estado dos cuidados</h2>
         </div>
 
-        <div *ngIf="careStatusPie.length === 0" class="empty-state">Sem dados registados.</div>
+        <div *ngIf="careStatusPie.length === 0" class="empty-state" i18n="@@stats.empty">
+          Sem dados registados.
+        </div>
 
         <div *ngIf="careStatusPie.length > 0" class="chart-body pie-layout">
           <div class="pie-canvas">
@@ -229,10 +249,10 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Tipo de habitação dos adotantes</h2>
+          <h2 i18n="@@stats.adopters.housing.title">Tipo de habitação dos adotantes</h2>
         </div>
 
-        <div *ngIf="adopterHousingBars.length === 0" class="empty-state">
+        <div *ngIf="adopterHousingBars.length === 0" class="empty-state" i18n="@@stats.empty">
           Sem adotantes registados.
         </div>
 
@@ -243,10 +263,10 @@
 
       <section class="chart-panel">
         <div class="section-header">
-          <h2>Espécies preferidas pelos adotantes</h2>
+          <h2 i18n="@@stats.adopters.species.title">Espécies preferidas pelos adotantes</h2>
         </div>
 
-        <div *ngIf="adopterPreferredSpeciesBars.length === 0" class="empty-state">
+        <div *ngIf="adopterPreferredSpeciesBars.length === 0" class="empty-state" i18n="@@stats.empty">
           Sem adotantes registados.
         </div>
 
@@ -254,6 +274,7 @@
           <canvas #statisticsChart data-chart-id="adopter-preferred-species"></canvas>
         </div>
       </section>
+
     </div>
   </ng-container>
 </section>

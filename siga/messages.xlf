@@ -2608,6 +2608,278 @@
         </context-group>
         <note priority="1" from="description">Removing photo state</note>
       </trans-unit>
+      <trans-unit id="cares.page.title" datatype="html">
+        <source>Cuidados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <note priority="1" from="description">Care page title</note>
+      </trans-unit>
+      <trans-unit id="cares.page.description" datatype="html">
+        <source> Regista e acompanha vacinas, desparasitações, consultas e tratamentos dos animais. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">6,11</context>
+        </context-group>
+        <note priority="1" from="description">Care page description</note>
+      </trans-unit>
+      <trans-unit id="cares.loading" datatype="html">
+        <source> A carregar cuidados... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+        <note priority="1" from="description">Loading cares</note>
+      </trans-unit>
+      <trans-unit id="cares.summary.overdue" datatype="html">
+        <source>Em atraso</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <note priority="1" from="description">Overdue label</note>
+      </trans-unit>
+      <trans-unit id="cares.summary.dueSoon" datatype="html">
+        <source>Próximos 30 dias</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <note priority="1" from="description">Due soon label</note>
+      </trans-unit>
+      <trans-unit id="cares.summary.pending" datatype="html">
+        <source>Pendentes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <note priority="1" from="description">Pending label</note>
+      </trans-unit>
+      <trans-unit id="cares.summary.completed" datatype="html">
+        <source>Concluídos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <note priority="1" from="description">Completed label</note>
+      </trans-unit>
+      <trans-unit id="cares.form.title" datatype="html">
+        <source>Novo cuidado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">48,52</context>
+        </context-group>
+        <note priority="1" from="description">New care section</note>
+      </trans-unit>
+      <trans-unit id="cares.form.type.label" datatype="html">
+        <source>Tipo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+        <note priority="1" from="description">Care type label</note>
+      </trans-unit>
+      <trans-unit id="cares.form.animal.label" datatype="html">
+        <source>Animal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">64,66</context>
+        </context-group>
+        <note priority="1" from="description">Animal label</note>
+      </trans-unit>
+      <trans-unit id="cares.form.animal.placeholder" datatype="html">
+        <source> Selecionar animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">69,71</context>
+        </context-group>
+        <note priority="1" from="description">Animal select placeholder</note>
+      </trans-unit>
+      <trans-unit id="cares.form.animal.error" datatype="html">
+        <source> Selecionar o animal associado ao cuidado. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">85,89</context>
+        </context-group>
+        <note priority="1" from="description">Animal required error</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.name.label" datatype="html">
+        <source> Nome da vacina </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">94,96</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine name label</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.name.error" datatype="html">
+        <source> Preencher o nome da vacina. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">102,104</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine name error</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.status.label" datatype="html">
+        <source> Estado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">108,111</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine status label</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.dateTaken.label" datatype="html">
+        <source> Data tomada </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">120,123</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine date taken label</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.dateTaken.error" datatype="html">
+        <source> Preencher a data em que a vacina foi tomada. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">129,133</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine date taken error</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.scheduledDate.label" datatype="html">
+        <source> Data prevista </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">135,138</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine scheduled date label</note>
+      </trans-unit>
+      <trans-unit id="cares.vaccine.nextDueDate.label" datatype="html">
+        <source> Próxima dose </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">143,146</context>
+        </context-group>
+        <note priority="1" from="description">Vaccine next dose label</note>
+      </trans-unit>
+      <trans-unit id="cares.deworming.type.label" datatype="html">
+        <source> Tipo </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">156,159</context>
+        </context-group>
+        <note priority="1" from="description">Deworming type label</note>
+      </trans-unit>
+      <trans-unit id="cares.deworming.date.label" datatype="html">
+        <source> Data realizada </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">168,171</context>
+        </context-group>
+        <note priority="1" from="description">Deworming date label</note>
+      </trans-unit>
+      <trans-unit id="cares.deworming.date.error" datatype="html">
+        <source> Preencher a data da desparasitação. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">177,179</context>
+        </context-group>
+        <note priority="1" from="description">Deworming date error</note>
+      </trans-unit>
+      <trans-unit id="cares.deworming.product.label" datatype="html">
+        <source> Produto usado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">183,186</context>
+        </context-group>
+        <note priority="1" from="description">Deworming product label</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.date.label" datatype="html">
+        <source> Data </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">196,199</context>
+        </context-group>
+        <note priority="1" from="description">Appointment date label</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.date.error" datatype="html">
+        <source> Preencher a data da consulta ou tratamento. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">205,209</context>
+        </context-group>
+        <note priority="1" from="description">Appointment date error</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.reason.label" datatype="html">
+        <source> Motivo / tratamento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">211,214</context>
+        </context-group>
+        <note priority="1" from="description">Appointment reason label</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.reason.error" datatype="html">
+        <source> Preencher o motivo ou tratamento. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">220,224</context>
+        </context-group>
+        <note priority="1" from="description">Appointment reason error</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.clinic.label" datatype="html">
+        <source> Clínica </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">226,229</context>
+        </context-group>
+        <note priority="1" from="description">Clinic label</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.vet.label" datatype="html">
+        <source> Veterinário </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">234,237</context>
+        </context-group>
+        <note priority="1" from="description">Vet label</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.result.label" datatype="html">
+        <source> Resultado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">242,245</context>
+        </context-group>
+        <note priority="1" from="description">Result label</note>
+      </trans-unit>
+      <trans-unit id="cares.appointment.next.label" datatype="html">
+        <source> Próxima consulta </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">250,253</context>
+        </context-group>
+        <note priority="1" from="description">Next appointment label</note>
+      </trans-unit>
+      <trans-unit id="cares.notes.label" datatype="html">
+        <source> Observações </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">261,264</context>
+        </context-group>
+        <note priority="1" from="description">Notes label</note>
+      </trans-unit>
+      <trans-unit id="cares.submit" datatype="html">
+        <source> Registar cuidado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">273,276</context>
+        </context-group>
+        <note priority="1" from="description">Submit care</note>
+      </trans-unit>
+      <trans-unit id="cares.submitting" datatype="html">
+        <source> A registar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/care/care.html</context>
+          <context context-type="linenumber">277,279</context>
+        </context-group>
+        <note priority="1" from="description">Submitting care</note>
+      </trans-unit>
       <trans-unit id="dashboard.header.title" datatype="html">
         <source> Dashboard </source>
         <context-group purpose="location">
