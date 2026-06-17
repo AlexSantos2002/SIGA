@@ -1,117 +1,195 @@
 <section class="add-animal-page">
   <div class="page-header">
     <div>
-      <h1>Adicionar animal</h1>
-      <p>Regista um novo animal associado à tua organização.</p>
+      <h1 i18n="Add animal page title@@animals.add.header.title">
+        Adicionar animal
+      </h1>
+
+      <p i18n="Add animal page description@@animals.add.header.description">
+        Regista um novo animal associado à tua organização.
+      </p>
     </div>
 
-    <a routerLink="/app/animals" class="back-button"> Voltar à lista </a>
+    <a routerLink="/app/animals"
+       class="back-button"
+       i18n="Back to list button@@animals.add.back">
+      Voltar à lista
+    </a>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="animal-form">
     <div class="form-section">
-      <h2>Informação principal</h2>
+      <h2 i18n="Main info section@@animals.add.section.main">
+        Informação principal
+      </h2>
 
       <div class="form-grid">
-        <div class="form-field">
-          <label for="name">Nome do animal</label>
-          <input id="name" type="text" formControlName="name" placeholder="Ex: Rex" />
 
-          <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        <!-- Name -->
+        <div class="form-field">
+          <label for="name" i18n="Animal name label@@animals.add.name.label">
+            Nome do animal
+          </label>
+
+          <input id="name"
+                 type="text"
+                 formControlName="name"
+                 placeholder="Ex: Rex"
+                 i18n-placeholder="Animal name placeholder@@animals.add.name.placeholder" />
+
+          <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+                 i18n="Animal name required error@@animals.add.name.error.required">
             O nome é obrigatório.
           </small>
         </div>
 
+        <!-- Species -->
         <div class="form-field">
-          <label for="speciesName">Espécie</label>
-          <input
-            id="speciesName"
-            type="text"
-            formControlName="speciesName"
-            placeholder="Ex: Cão, Gato, Ave"
-          />
+          <label for="speciesName" i18n="Species label@@animals.add.species.label">
+            Espécie
+          </label>
 
-          <small *ngIf="form.get('speciesName')?.touched && form.get('speciesName')?.invalid">
+          <input id="speciesName"
+                 type="text"
+                 formControlName="speciesName"
+                 placeholder="Ex: Cão, Gato, Ave"
+                 i18n-placeholder="Species placeholder@@animals.add.species.placeholder" />
+
+          <small *ngIf="form.get('speciesName')?.touched && form.get('speciesName')?.invalid"
+                 i18n="Species required error@@animals.add.species.error.required">
             A espécie é obrigatória.
           </small>
         </div>
 
+        <!-- Breed -->
         <div class="form-field">
-          <label for="breedName">Raça</label>
-          <input
-            id="breedName"
-            type="text"
-            formControlName="breedName"
-            placeholder="Ex: Labrador, Pastor Alemão, Mista"
-          />
+          <label for="breedName" i18n="Breed label@@animals.add.breed.label">
+            Raça
+          </label>
 
-          <small *ngIf="form.get('breedName')?.touched && form.get('breedName')?.invalid">
+          <input id="breedName"
+                 type="text"
+                 formControlName="breedName"
+                 placeholder="Ex: Labrador, Pastor Alemão, Mista"
+                 i18n-placeholder="Breed placeholder@@animals.add.breed.placeholder" />
+
+          <small *ngIf="form.get('breedName')?.touched && form.get('breedName')?.invalid"
+                 i18n="Breed required error@@animals.add.breed.error.required">
             A raça é obrigatória.
           </small>
         </div>
 
+        <!-- Gender -->
         <div class="form-field">
-          <label for="gender">Género</label>
+          <label for="gender" i18n="Gender label@@animals.add.gender.label">
+            Género
+          </label>
+
           <select id="gender" formControlName="gender">
-            <option value="" disabled>Seleciona o género</option>
+            <option value="" disabled
+                    i18n="Gender placeholder@@animals.add.gender.placeholder">
+              Seleciona o género
+            </option>
+
             <option *ngFor="let gender of genders" [value]="gender.value">
               {{ gender.label }}
             </option>
           </select>
 
-          <small *ngIf="form.get('gender')?.touched && form.get('gender')?.invalid">
+          <small *ngIf="form.get('gender')?.touched && form.get('gender')?.invalid"
+                 i18n="Gender required error@@animals.add.gender.error.required">
             O género é obrigatório.
           </small>
         </div>
 
+        <!-- Birth date -->
         <div class="form-field full-date-field">
-          <label for="birthDate">Data de nascimento</label>
-          <app-date-picker inputId="birthDate" formControlName="birthDate"></app-date-picker>
+          <label for="birthDate" i18n="Birth date label@@animals.add.birthDate.label">
+            Data de nascimento
+          </label>
 
-          <small *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid">
+          <app-date-picker inputId="birthDate"
+                           formControlName="birthDate">
+          </app-date-picker>
+
+          <small *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid"
+                 i18n="Birth date required error@@animals.add.birthDate.error.required">
             A data de nascimento é obrigatória.
           </small>
         </div>
 
+        <!-- Status -->
         <div class="form-field">
-          <label for="status">Estado do animal</label>
+          <label for="status" i18n="Status label@@animals.add.status.label">
+            Estado do animal
+          </label>
+
           <select id="status" formControlName="status">
             <option *ngFor="let status of statuses" [value]="status.value">
               {{ status.label }}
             </option>
           </select>
 
-          <small *ngIf="form.get('status')?.touched && form.get('status')?.invalid">
+          <small *ngIf="form.get('status')?.touched && form.get('status')?.invalid"
+                 i18n="Status required error@@animals.add.status.error.required">
             O estado é obrigatório.
           </small>
         </div>
+
       </div>
     </div>
 
-    <div *ngIf="errorMessage" class="error-message">
+    <!-- Error -->
+    <div *ngIf="errorMessage"
+         class="error-message"
+         i18n="General error message@@animals.add.error.general">
       {{ errorMessage }}
     </div>
 
+    <!-- Actions -->
     <div class="form-actions">
-      <a routerLink="/app/animals" class="cancel-button"> Cancelar </a>
 
-      <button type="button" [disabled]="isSubmitting" (click)="openImagePicker()">
-        {{ selectedFile?.name || 'Adicionar foto' }}
+      <a routerLink="/app/animals"
+         class="cancel-button"
+         i18n="Cancel button@@animals.add.cancel">
+        Cancelar
+      </a>
+
+      <button type="button" [disabled]="isSubmitting">
+        <span *ngIf="selectedFile; else defaultText">
+          {{ selectedFile.name }}
+        </span>
+
+        <ng-template #defaultText>
+          <span i18n="Add photo button label@@animals.add.image.button.default">
+            Adicionar foto
+          </span>
+        </ng-template>
       </button>
 
-      <input
-        #imageInput
-        id="image-upload"
-        class="image-button"
-        type="file"
-        hidden
-        accept="image/jpeg,image/png,image/webp"
-        (change)="onFileSelected($event)"
-      />
+      <input #imageInput
+             id="image-upload"
+             type="file"
+             hidden
+             accept="image/jpeg,image/png,image/webp"
+             (change)="onFileSelected($event)" />
 
-      <button type="submit" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'A guardar...' : 'Guardar animal' }}
+      <button type="submit"
+              [disabled]="isSubmitting">
+
+        <span *ngIf="!isSubmitting; else saving"
+              i18n="Save animal button@@animals.add.submit">
+          Guardar animal
+        </span>
+
+        <ng-template #saving>
+          <span i18n="Saving animal state@@animals.add.submitting">
+            A guardar...
+          </span>
+        </ng-template>
+
       </button>
+
     </div>
   </form>
 </section>

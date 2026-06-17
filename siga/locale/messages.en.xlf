@@ -1259,6 +1259,135 @@
       </trans-unit>
       <!--   Fim da página de animais     -->
 
+      <!--   Página de registo de animais     -->
+
+      <trans-unit id="animals.add.header.title" datatype="html">
+        <source>Adicionar animal</source>
+        <target>Add animal</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.header.description" datatype="html">
+        <source>Regista um novo animal associado à tua organização.</source>
+        <target>Register a new animal associated with your organization.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.back" datatype="html">
+        <source>Voltar à lista</source>
+        <target>Back to list</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.section.main" datatype="html">
+        <source>Informação principal</source>
+        <target>Main information</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.name.label" datatype="html">
+        <source>Nome do animal</source>
+        <target>Animal name</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.name.placeholder" datatype="html">
+        <source>Ex: Rex</source>
+        <target>Ex: Rex</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.name.error.required" datatype="html">
+        <source>O nome é obrigatório.</source>
+        <target>Name is required.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.species.label" datatype="html">
+        <source>Espécie</source>
+        <target>Species</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.species.placeholder" datatype="html">
+        <source>Ex: Cão, Gato, Ave</source>
+        <target>Ex: Dog, Cat, Bird</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.species.error.required" datatype="html">
+        <source>A espécie é obrigatória.</source>
+        <target>Species is required.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.breed.label" datatype="html">
+        <source>Raça</source>
+        <target>Breed</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.breed.placeholder" datatype="html">
+        <source>Ex: Labrador, Pastor Alemão, Mista</source>
+        <target>Ex: Labrador, German Shepherd, Mixed</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.breed.error.required" datatype="html">
+        <source>A raça é obrigatória.</source>
+        <target>Breed is required.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.gender.label" datatype="html">
+        <source>Género</source>
+        <target>Gender</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.gender.placeholder" datatype="html">
+        <source>Seleciona o género</source>
+        <target>Select gender</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.gender.error.required" datatype="html">
+        <source>O género é obrigatório.</source>
+        <target>Gender is required.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.birthDate.label" datatype="html">
+        <source>Data de nascimento</source>
+        <target>Birth date</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.birthDate.error.required" datatype="html">
+        <source>A data de nascimento é obrigatória.</source>
+        <target>Birth date is required.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.status.label" datatype="html">
+        <source>Estado do animal</source>
+        <target>Animal status</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.status.error.required" datatype="html">
+        <source>O estado é obrigatório.</source>
+        <target>Status is required.</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.error.general" datatype="html">
+        <source>{{ errorMessage }}</source>
+        <target>{{ errorMessage }}</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.cancel" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancel</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.image.button.default" datatype="html">
+        <source>Adicionar foto</source>
+        <target>Add photo</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.submit" datatype="html">
+        <source>Guardar animal</source>
+        <target>Save animal</target>
+      </trans-unit>
+
+      <trans-unit id="animals.add.submitting" datatype="html">
+        <source>A guardar...</source>
+        <target>Saving...</target>
+      </trans-unit>
+
+      <!--   Fim da página de registo de animais     -->
+
       <!--    Página de edição de animais    -->
 
       <trans-unit id="animals.edit.title">

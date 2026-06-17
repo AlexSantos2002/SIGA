@@ -1252,6 +1252,206 @@
         </context-group>
         <note priority="1" from="description">Adoptions notes label</note>
       </trans-unit>
+      <trans-unit id="animals.add.header.title" datatype="html">
+        <source> Adicionar animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+        <note priority="1" from="description">Add animal page title</note>
+      </trans-unit>
+      <trans-unit id="animals.add.header.description" datatype="html">
+        <source> Regista um novo animal associado à tua organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">9,14</context>
+        </context-group>
+        <note priority="1" from="description">Add animal page description</note>
+      </trans-unit>
+      <trans-unit id="animals.add.back" datatype="html">
+        <source> Voltar à lista </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">16,20</context>
+        </context-group>
+        <note priority="1" from="description">Back to list button</note>
+      </trans-unit>
+      <trans-unit id="animals.add.section.main" datatype="html">
+        <source> Informação principal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">23,27</context>
+        </context-group>
+        <note priority="1" from="description">Main info section</note>
+      </trans-unit>
+      <trans-unit id="animals.add.name.label" datatype="html">
+        <source> Nome do animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">31,34</context>
+        </context-group>
+        <note priority="1" from="description">Animal name label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.name.placeholder" datatype="html">
+        <source>Ex: Rex</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+        <note priority="1" from="description">Animal name placeholder</note>
+      </trans-unit>
+      <trans-unit id="animals.add.name.error.required" datatype="html">
+        <source> O nome é obrigatório. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">42,46</context>
+        </context-group>
+        <note priority="1" from="description">Animal name required error</note>
+      </trans-unit>
+      <trans-unit id="animals.add.species.label" datatype="html">
+        <source> Espécie </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">49,52</context>
+        </context-group>
+        <note priority="1" from="description">Species label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.species.placeholder" datatype="html">
+        <source>Ex: Cão, Gato, Ave</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+        <note priority="1" from="description">Species placeholder</note>
+      </trans-unit>
+      <trans-unit id="animals.add.species.error.required" datatype="html">
+        <source> A espécie é obrigatória. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">60,64</context>
+        </context-group>
+        <note priority="1" from="description">Species required error</note>
+      </trans-unit>
+      <trans-unit id="animals.add.breed.label" datatype="html">
+        <source> Raça </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">67,70</context>
+        </context-group>
+        <note priority="1" from="description">Breed label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.breed.placeholder" datatype="html">
+        <source>Ex: Labrador, Pastor Alemão, Mista</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">73,74</context>
+        </context-group>
+        <note priority="1" from="description">Breed placeholder</note>
+      </trans-unit>
+      <trans-unit id="animals.add.breed.error.required" datatype="html">
+        <source> A raça é obrigatória. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">78,82</context>
+        </context-group>
+        <note priority="1" from="description">Breed required error</note>
+      </trans-unit>
+      <trans-unit id="animals.add.gender.label" datatype="html">
+        <source> Género </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">85,88</context>
+        </context-group>
+        <note priority="1" from="description">Gender label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.gender.placeholder" datatype="html">
+        <source> Seleciona o género </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">91,94</context>
+        </context-group>
+        <note priority="1" from="description">Gender placeholder</note>
+      </trans-unit>
+      <trans-unit id="animals.add.gender.error.required" datatype="html">
+        <source> O género é obrigatório. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">101,105</context>
+        </context-group>
+        <note priority="1" from="description">Gender required error</note>
+      </trans-unit>
+      <trans-unit id="animals.add.birthDate.label" datatype="html">
+        <source> Data de nascimento </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">108,111</context>
+        </context-group>
+        <note priority="1" from="description">Birth date label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.birthDate.error.required" datatype="html">
+        <source> A data de nascimento é obrigatória. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">117,121</context>
+        </context-group>
+        <note priority="1" from="description">Birth date required error</note>
+      </trans-unit>
+      <trans-unit id="animals.add.status.label" datatype="html">
+        <source> Estado do animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">124,127</context>
+        </context-group>
+        <note priority="1" from="description">Status label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.status.error.required" datatype="html">
+        <source> O estado é obrigatório. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">135,140</context>
+        </context-group>
+        <note priority="1" from="description">Status required error</note>
+      </trans-unit>
+      <trans-unit id="animals.add.error.general" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ errorMessage }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">146,149</context>
+        </context-group>
+        <note priority="1" from="description">General error message</note>
+      </trans-unit>
+      <trans-unit id="animals.add.cancel" datatype="html">
+        <source> Cancelar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">155,158</context>
+        </context-group>
+        <note priority="1" from="description">Cancel button</note>
+      </trans-unit>
+      <trans-unit id="animals.add.image.button.default" datatype="html">
+        <source> Adicionar foto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">165,168</context>
+        </context-group>
+        <note priority="1" from="description">Add photo button label</note>
+      </trans-unit>
+      <trans-unit id="animals.add.submit" datatype="html">
+        <source> Guardar animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">182,185</context>
+        </context-group>
+        <note priority="1" from="description">Save animal button</note>
+      </trans-unit>
+      <trans-unit id="animals.add.submitting" datatype="html">
+        <source> A guardar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/animals/add-animal/add-animal.html</context>
+          <context context-type="linenumber">187,189</context>
+        </context-group>
+        <note priority="1" from="description">Saving animal state</note>
+      </trans-unit>
       <trans-unit id="animals.page.title" datatype="html">
         <source> Animais </source>
         <context-group purpose="location">
