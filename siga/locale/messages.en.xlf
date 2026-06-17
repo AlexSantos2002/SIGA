@@ -2295,6 +2295,205 @@
       </trans-unit>
       <!--    Fim da página de registo de adotantes    -->
 
+      <!--   Página de adoções     -->
+
+      <trans-unit id="adoptions.header.title" datatype="html">
+        <source> Processos de adoção </source>
+        <target> Adoption Processes </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.header.description" datatype="html">
+        <source> Inicia, acompanha e conclui os processos de adoção da organização. </source>
+        <target> Start, track and complete the organization's adoption processes. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.loading" datatype="html">
+        <source> A carregar processos de adoção... </source>
+        <target> Loading adoption processes... </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.summary.pending.label" datatype="html">
+        <source> Processos em aberto </source>
+        <target> Open processes </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.summary.completed.label" datatype="html">
+        <source> Adoções concluídas </source>
+        <target> Completed adoptions </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.summary.available.label" datatype="html">
+        <source> Animais disponíveis </source>
+        <target> Available animals </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.new.section" datatype="html">
+        <source> Novo processo </source>
+        <target> New process </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.animal.label" datatype="html">
+        <source> Animal </source>
+        <target> Animal </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.animal.placeholder" datatype="html">
+        <source> Seleciona o animal </source>
+        <target> Select an animal </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.animal.empty" datatype="html">
+        <source> Nenhum animal disponível para adoção </source>
+        <target> No animals available for adoption </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.placeholder" datatype="html">
+        <source> Seleciona o adotante </source>
+        <target> Select adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.adopter.empty" datatype="html">
+        <source> Nenhum adotante disponível para adoção </source>
+        <target> No adopter available for adoption </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.animal.error" datatype="html">
+        <source> Seleciona o animal para iniciar o processo. </source>
+        <target> Select an animal to start the process. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.mode.new" datatype="html">
+        <source> Novo adotante </source>
+        <target> New adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.mode.existing" datatype="html">
+        <source> Adotante registado </source>
+        <target> Registered adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.mode.error" datatype="html">
+        <source> Seleciona se é um novo adotante ou um adotante registado. </source>
+        <target> Select whether it is a new or registered adopter. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.existingAdopter.label" datatype="html">
+        <source> Adotante </source>
+        <target> Adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.animal.placeholder" datatype="html">
+        <source> Seleciona o animal </source>
+        <target> Select an animal </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.animal.empty" datatype="html">
+        <source> Nenhum animal disponível para adoção </source>
+        <target> No animals available for adoption </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.existingAdopter.error" datatype="html">
+        <source> Seleciona o adotante registado. </source>
+        <target> Select a registered adopter. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.submit" datatype="html">
+        <source> Iniciar processo </source>
+        <target> Start process </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.form.submitting" datatype="html">
+        <source> A iniciar... </source>
+        <target> Starting... </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.pending.section" datatype="html">
+        <source> Processos em aberto </source>
+        <target> Open processes </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.pending.empty" datatype="html">
+        <source> Não existem processos de adoção em aberto. </source>
+        <target> There are no open adoption processes. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.table.animal" datatype="html">
+        <source> Animal </source>
+        <target> Animal </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.table.adopter" datatype="html">
+        <source> Adotante </source>
+        <target> Adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.table.contact" datatype="html">
+        <source> Contacto </source>
+        <target> Contact </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.table.requestDate" datatype="html">
+        <source> Pedido em </source>
+        <target> Requested on </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.table.status" datatype="html">
+        <source> Estado </source>
+        <target> Status </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.pending.approve" datatype="html">
+        <source> Aprovar </source>
+        <target> Approve </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.pending.reject" datatype="html">
+        <source> Rejeitar </source>
+        <target> Reject </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.completed.section" datatype="html">
+        <source> Processos concluídos </source>
+        <target> Completed processes </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.completed.empty" datatype="html">
+        <source> Ainda não existem processos concluídos. </source>
+        <target> There are no completed processes yet. </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.sort.animal" datatype="html">
+        <source> Animal </source>
+        <target> Animal </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.sort.adopter" datatype="html">
+        <source> Adotante </source>
+        <target> Adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.sort.contact" datatype="html">
+        <source> Contacto </source>
+        <target> Contact </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.sort.decision" datatype="html">
+        <source> Decisão </source>
+        <target> Decision </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.sort.status" datatype="html">
+        <source> Estado </source>
+        <target> Status </target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.completed.return" datatype="html">
+        <source> Registar devolução </source>
+        <target> Register return </target>
+      </trans-unit>
+
+      <!--   Página de adoções     -->
+
     </body>
   </file>
 </xliff>

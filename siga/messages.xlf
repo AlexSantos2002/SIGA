@@ -720,6 +720,302 @@
         </context-group>
         <note priority="1" from="description">Loading adopter text</note>
       </trans-unit>
+      <trans-unit id="adoptions.header.title" datatype="html">
+        <source> Processos de adoção </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">6,9</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions page title</note>
+      </trans-unit>
+      <trans-unit id="adoptions.header.description" datatype="html">
+        <source> Inicia, acompanha e conclui os processos de adoção da organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">10,15</context>
+        </context-group>
+        <note priority="1" from="description">Adoptions page description</note>
+      </trans-unit>
+      <trans-unit id="adoptions.loading" datatype="html">
+        <source> A carregar processos de adoção... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">18,21</context>
+        </context-group>
+        <note priority="1" from="description">Loading adoptions</note>
+      </trans-unit>
+      <trans-unit id="adoptions.summary.pending.label" datatype="html">
+        <source> Processos em aberto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <note priority="1" from="description">Pending adoptions label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.summary.completed.label" datatype="html">
+        <source> Adoções concluídas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+        <note priority="1" from="description">Completed adoptions label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.summary.available.label" datatype="html">
+        <source> Animais disponíveis </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+        <note priority="1" from="description">Available animals label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.new.section" datatype="html">
+        <source> Novo processo </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">60,65</context>
+        </context-group>
+        <note priority="1" from="description">New adoption process section</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.animal.label" datatype="html">
+        <source> Animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">70,73</context>
+        </context-group>
+        <note priority="1" from="description">Animal field label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.animal.placeholder" datatype="html">
+        <source> Seleciona um animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">78,81</context>
+        </context-group>
+        <note priority="1" from="description">Animal select placeholder</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.animal.empty" datatype="html">
+        <source> Nenhum animal disponível para adoção </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">83,85</context>
+        </context-group>
+        <note priority="1" from="description">No animals available placeholder</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.animal.error" datatype="html">
+        <source> Seleciona o animal para iniciar o processo. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">97,102</context>
+        </context-group>
+        <note priority="1" from="description">Animal required error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.mode.new" datatype="html">
+        <source> Novo adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">111,113</context>
+        </context-group>
+        <note priority="1" from="description">New adopter mode</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.mode.existing" datatype="html">
+        <source> Adotante registado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">121,124</context>
+        </context-group>
+        <note priority="1" from="description">Existing adopter mode</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.mode.error" datatype="html">
+        <source> Seleciona se é um novo adotante ou um adotante registado. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">130,133</context>
+        </context-group>
+        <note priority="1" from="description">Adopter mode error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.existingAdopter.label" datatype="html">
+        <source> Adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">139,142</context>
+        </context-group>
+        <note priority="1" from="description">Existing adopter label</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.placeholder" datatype="html">
+        <source> Seleciona um adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">148,150</context>
+        </context-group>
+        <note priority="1" from="description">Adopter select placeholder</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.adopter.empty" datatype="html">
+        <source> Nenhum adotante disponível para adoção </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">154,156</context>
+        </context-group>
+        <note priority="1" from="description">No adopters available placeholder</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.existingAdopter.error" datatype="html">
+        <source> Seleciona o adotante registado. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">168,174</context>
+        </context-group>
+        <note priority="1" from="description">Existing adopter required error</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.submit" datatype="html">
+        <source> Iniciar processo </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">192,197</context>
+        </context-group>
+        <note priority="1" from="description">Start adoption process button</note>
+      </trans-unit>
+      <trans-unit id="adoptions.form.submitting" datatype="html">
+        <source> A iniciar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">199,202</context>
+        </context-group>
+        <note priority="1" from="description">Starting process loading</note>
+      </trans-unit>
+      <trans-unit id="adoptions.pending.section" datatype="html">
+        <source> Processos em aberto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">214,218</context>
+        </context-group>
+        <note priority="1" from="description">Pending processes section</note>
+      </trans-unit>
+      <trans-unit id="adoptions.pending.empty" datatype="html">
+        <source> Não existem processos de adoção em aberto. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">221,224</context>
+        </context-group>
+        <note priority="1" from="description">No pending adoptions</note>
+      </trans-unit>
+      <trans-unit id="adoptions.table.animal" datatype="html">
+        <source> Animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">232,235</context>
+        </context-group>
+        <note priority="1" from="description">Animal column</note>
+      </trans-unit>
+      <trans-unit id="adoptions.table.adopter" datatype="html">
+        <source> Adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">236,239</context>
+        </context-group>
+        <note priority="1" from="description">Adopter column</note>
+      </trans-unit>
+      <trans-unit id="adoptions.table.contact" datatype="html">
+        <source> Contacto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">240,243</context>
+        </context-group>
+        <note priority="1" from="description">Contact column</note>
+      </trans-unit>
+      <trans-unit id="adoptions.table.requestDate" datatype="html">
+        <source> Pedido em </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">244,247</context>
+        </context-group>
+        <note priority="1" from="description">Request date column</note>
+      </trans-unit>
+      <trans-unit id="adoptions.table.status" datatype="html">
+        <source> Estado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">248,251</context>
+        </context-group>
+        <note priority="1" from="description">Status column</note>
+      </trans-unit>
+      <trans-unit id="adoptions.pending.approve" datatype="html">
+        <source> Aprovar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">324,327</context>
+        </context-group>
+        <note priority="1" from="description">Approve adoption button</note>
+      </trans-unit>
+      <trans-unit id="adoptions.pending.reject" datatype="html">
+        <source> Rejeitar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">332,335</context>
+        </context-group>
+        <note priority="1" from="description">Reject adoption button</note>
+      </trans-unit>
+      <trans-unit id="adoptions.completed.section" datatype="html">
+        <source> Processos concluídos </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">353,357</context>
+        </context-group>
+        <note priority="1" from="description">Completed processes section</note>
+      </trans-unit>
+      <trans-unit id="adoptions.completed.empty" datatype="html">
+        <source> Ainda não existem processos concluídos. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">360,363</context>
+        </context-group>
+        <note priority="1" from="description">No completed adoptions</note>
+      </trans-unit>
+      <trans-unit id="adoptions.sort.animal" datatype="html">
+        <source> Animal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">379,380</context>
+        </context-group>
+        <note priority="1" from="description">Sort animal</note>
+      </trans-unit>
+      <trans-unit id="adoptions.sort.adopter" datatype="html">
+        <source> Adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">395,397</context>
+        </context-group>
+        <note priority="1" from="description">Sort adopter</note>
+      </trans-unit>
+      <trans-unit id="adoptions.sort.contact" datatype="html">
+        <source> Contacto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">411,413</context>
+        </context-group>
+        <note priority="1" from="description">Sort contact</note>
+      </trans-unit>
+      <trans-unit id="adoptions.sort.decision" datatype="html">
+        <source> Decisão </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">427,430</context>
+        </context-group>
+        <note priority="1" from="description">Sort decision date</note>
+      </trans-unit>
+      <trans-unit id="adoptions.sort.status" datatype="html">
+        <source> Estado </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">443,444</context>
+        </context-group>
+        <note priority="1" from="description">Sort status</note>
+      </trans-unit>
+      <trans-unit id="adoptions.completed.return" datatype="html">
+        <source> Registar devolução </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">536,539</context>
+        </context-group>
+        <note priority="1" from="description">Return adoption button</note>
+      </trans-unit>
       <trans-unit id="animals.page.title" datatype="html">
         <source> Animais </source>
         <context-group purpose="location">

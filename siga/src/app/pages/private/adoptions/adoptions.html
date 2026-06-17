@@ -1,358 +1,553 @@
 <section class="adoptions-page">
+
   <div class="page-header">
     <div>
-      <h1>Processos de adoção</h1>
-      <p>Inicia, acompanha e conclui os processos de adoção da organização.</p>
+      <h1 i18n="Adoptions page title@@adoptions.header.title">
+        Processos de adoção
+      </h1>
+
+      <p i18n="Adoptions page description@@adoptions.header.description">
+        Inicia, acompanha e conclui os processos de adoção da organização.
+      </p>
     </div>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar processos de adoção...</div>
+  <div *ngIf="isLoading"
+       class="loading"
+       i18n="Loading adoptions@@adoptions.loading">
+    A carregar processos de adoção...
+  </div>
 
   <div *ngIf="!isLoading && errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
   <ng-container *ngIf="!isLoading">
+
+    <!-- 📊 Summary -->
     <div class="summary-grid">
+
       <article class="summary-card">
-        <span>Processos em aberto</span>
+        <span i18n="Pending adoptions label@@adoptions.summary.pending.label">
+          Processos em aberto
+        </span>
         <strong>{{ pendingAdoptions.length }}</strong>
       </article>
 
       <article class="summary-card">
-        <span>Adoções concluídas</span>
+        <span i18n="Completed adoptions label@@adoptions.summary.completed.label">
+          Adoções concluídas
+        </span>
         <strong>{{ completedAdoptions.length }}</strong>
       </article>
 
       <article class="summary-card">
-        <span>Animais disponíveis</span>
+        <span i18n="Available animals label@@adoptions.summary.available.label">
+          Animais disponíveis
+        </span>
         <strong>{{ availableAnimals.length }}</strong>
       </article>
+
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="startProcess()" class="adoption-process-form">
+    <form [formGroup]="form"
+          (ngSubmit)="startProcess()"
+          class="adoption-process-form">
+
       <div class="form-section">
-        <h2>Novo processo</h2>
+
+        <h2 i18n="New adoption process section@@adoptions.new.section">
+          Novo processo
+        </h2>
 
         <div class="form-grid">
+
+          <!-- Animal -->
           <div class="form-field full-width">
-            <label for="animalId">Animal</label>
+
+            <label for="animalId"
+                   i18n="Animal field label@@adoptions.form.animal.label">
+              Animal
+            </label>
+
             <select id="animalId" formControlName="animalId">
+
               <option value="" disabled>
-                {{
-                  availableAnimals.length
-                    ? 'Seleciona o animal'
-                    : 'Nenhum animal disponível para adoção'
-                }}
+                <span *ngIf="availableAnimals.length; else noAnimals"
+                      i18n="Animal select placeholder@@adoptions.form.animal.placeholder">
+                  Seleciona um animal
+                </span>
+
+                <ng-template #noAnimals>
+                  <span i18n="No animals available placeholder@@adoptions.form.animal.empty">
+                    Nenhum animal disponível para adoção
+                  </span>
+                </ng-template>
               </option>
-              <option *ngFor="let animal of availableAnimals" [value]="animal.id">
+
+              <option *ngFor="let animal of availableAnimals"
+                      [value]="animal.id">
                 {{ getAnimalLabel(animal) }}
               </option>
+
             </select>
-            <small *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid">
+
+            <small *ngIf="form.get('animalId')?.touched && form.get('animalId')?.invalid"
+                   i18n="Animal required error@@adoptions.form.animal.error">
               Seleciona o animal para iniciar o processo.
             </small>
+
           </div>
 
+          <!-- Adopter mode -->
           <div class="adopter-mode full-width">
+
             <label>
-              <input type="radio" formControlName="adopterMode" value="new" />
-              Novo adotante
+              <input type="radio"
+                     formControlName="adopterMode"
+                     value="new" />
+
+              <span i18n="New adopter mode@@adoptions.form.mode.new">
+                Novo adotante
+              </span>
             </label>
 
             <label>
-              <input type="radio" formControlName="adopterMode" value="existing" />
-              Adotante registado
+              <input type="radio"
+                     formControlName="adopterMode"
+                     value="existing" />
+
+              <span i18n="Existing adopter mode@@adoptions.form.mode.existing">
+                Adotante registado
+              </span>
             </label>
+
           </div>
 
-          <small
-            class="mode-error full-width"
-            *ngIf="form.get('adopterMode')?.touched && form.get('adopterMode')?.invalid"
-          >
+          <small class="mode-error full-width"
+                 *ngIf="form.get('adopterMode')?.touched && form.get('adopterMode')?.invalid"
+                 i18n="Adopter mode error@@adoptions.form.mode.error">
             Seleciona se é um novo adotante ou um adotante registado.
           </small>
 
-          <div class="form-field full-width" *ngIf="isExistingAdopterMode">
-            <label for="existingAdopterId">Adotante</label>
-            <select id="existingAdopterId" formControlName="existingAdopterId">
+          <!-- Existing adopter -->
+          <div class="form-field full-width"
+               *ngIf="isExistingAdopterMode">
+
+            <label for="existingAdopterId"
+                   i18n="Existing adopter label@@adoptions.form.existingAdopter.label">
+              Adotante
+            </label>
+
+            <select id="existingAdopterId"
+                    formControlName="existingAdopterId">
+
               <option value="" disabled>
-                {{ adopters.length ? 'Seleciona o adotante' : 'Nenhum adotante registado' }}
+                <ng-container *ngIf="availableAnimals.length; else noAnimals">
+                  <span i18n="Adopter select placeholder@@adoptions.form.adopter.placeholder">
+                    Seleciona um adotante
+                  </span>
+                </ng-container>
+
+                <ng-template #noAnimals>
+                  <span i18n="No adopters available placeholder@@adoptions.form.adopter.empty">
+                    Nenhum adotante disponível para adoção
+                  </span>
+                </ng-template>
               </option>
-              <option *ngFor="let adopter of adopters" [value]="adopter.id">
+
+              <option *ngFor="let adopter of adopters"
+                      [value]="adopter.id">
                 {{ getAdopterLabel(adopter) }}
               </option>
+
             </select>
-            <small
-              *ngIf="
-                form.get('existingAdopterId')?.touched && form.get('existingAdopterId')?.invalid
-              "
-            >
+
+            <small *ngIf="form.get('existingAdopterId')?.touched && form.get('existingAdopterId')?.invalid"
+                   i18n="Existing adopter required error@@adoptions.form.existingAdopter.error">
               Seleciona o adotante registado.
             </small>
+
           </div>
+
         </div>
       </div>
 
+      <!-- 👤 New adopter fields -->
       <app-adoption-adopter-fields
         *ngIf="isNewAdopterMode"
-        [form]="form"
-      ></app-adoption-adopter-fields>
+        [form]="form">
+      </app-adoption-adopter-fields>
 
+      <!-- Submit -->
       <div class="form-actions">
-        <button type="submit" class="primary-button" [disabled]="isSubmitting">
-          {{ isSubmitting ? 'A iniciar...' : 'Iniciar processo' }}
+
+        <button type="submit"
+                class="primary-button"
+                [disabled]="isSubmitting">
+
+          <span *ngIf="!isSubmitting; else submitting">
+
+            <span i18n="Start adoption process button@@adoptions.form.submit">
+              Iniciar processo
+            </span>
+
+          </span>
+
+          <ng-template #submitting>
+            <span i18n="Starting process loading@@adoptions.form.submitting">
+              A iniciar...
+            </span>
+          </ng-template>
+
         </button>
+
       </div>
+
     </form>
 
+    <!-- 📌 Pending -->
     <section class="process-section">
+
       <div class="section-header">
-        <h2>Processos em aberto</h2>
+        <h2 i18n="Pending processes section@@adoptions.pending.section">
+          Processos em aberto
+        </h2>
       </div>
 
-      <div *ngIf="pendingAdoptions.length === 0" class="empty-state">
+      <div *ngIf="pendingAdoptions.length === 0"
+           class="empty-state"
+           i18n="No pending adoptions@@adoptions.pending.empty">
         Não existem processos de adoção em aberto.
       </div>
 
-      <div *ngIf="pendingAdoptions.length > 0" class="table-wrapper">
+      <div *ngIf="pendingAdoptions.length > 0"
+           class="table-wrapper">
+
         <table>
+
           <thead>
-            <tr>
-              <th>Animal</th>
-              <th>Adotante</th>
-              <th>Contacto</th>
-              <th>Pedido em</th>
-              <th>Estado</th>
-              <th class="actions-column"></th>
-            </tr>
+          <tr>
+            <th i18n="Animal column@@adoptions.table.animal">
+              Animal
+            </th>
+
+            <th i18n="Adopter column@@adoptions.table.adopter">
+              Adotante
+            </th>
+
+            <th i18n="Contact column@@adoptions.table.contact">
+              Contacto
+            </th>
+
+            <th i18n="Request date column@@adoptions.table.requestDate">
+              Pedido em
+            </th>
+
+            <th i18n="Status column@@adoptions.table.status">
+              Estado
+            </th>
+
+            <th class="actions-column"></th>
+          </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let adoption of pendingAdoptions">
-              <td>
-                <div class="animal-cell">
-                  <img
-                    *ngIf="getAnimalImageUrl(adoption) as imageUrl"
-                    class="animal-thumbnail"
-                    [src]="imageUrl"
-                    [alt]="'Imagem de ' + adoption.animal.name"
-                  />
+          <tr *ngFor="let adoption of pendingAdoptions">
 
-                  <div class="animal-cell-content">
-                    <a
-                      class="primary-link"
-                      [routerLink]="['/app/animals', adoption.animal.id, 'edit']"
-                    >
-                      {{ adoption.animal.name }}
-                    </a>
-                    <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
-                    <span class="tertiary-line"
-                      >Género: {{ getGenderLabel(adoption.animal.gender) }}</span
-                    >
-                  </div>
+            <td>
+              <div class="animal-cell">
+
+                <img *ngIf="getAnimalImageUrl(adoption) as imageUrl"
+                     class="animal-thumbnail"
+                     [src]="imageUrl"
+                     [alt]="'Imagem de ' + adoption.animal.name" />
+
+                <div class="animal-cell-content">
+
+                  <a class="primary-link"
+                     [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
+                    {{ adoption.animal.name }}
+                  </a>
+
+                  <span class="secondary-line">
+                      {{ getAnimalDescription(adoption) }}
+                    </span>
+
+                  <span class="tertiary-line">
+                      Género: {{ getGenderLabel(adoption.animal.gender) }}
+                    </span>
+
                 </div>
-              </td>
 
-              <td>
-                <a
-                  class="primary-link"
-                  [routerLink]="['/app/adopters', adoption.adopter.id, 'edit']"
-                >
-                  {{ getAdopterFullName(adoption.adopter) }}
-                </a>
-                <span class="secondary-line">{{ adoption.adopter.email || '-' }}</span>
-              </td>
+              </div>
+            </td>
 
-              <td>
-                <span>{{ adoption.adopter.phone || '-' }}</span>
-                <span class="secondary-line">{{
-                  adoption.adopter.city || 'Cidade não indicada'
-                }}</span>
-              </td>
+            <td>
+              <a class="primary-link"
+                 [routerLink]="['/app/adopters', adoption.adopter.id, 'edit']">
+                {{ getAdopterFullName(adoption.adopter) }}
+              </a>
 
-              <td>{{ adoption.applicationDate | date: 'dd/MM/yyyy' }}</td>
+              <span class="secondary-line">
+                  {{ adoption.adopter.email || '-' }}
+                </span>
+            </td>
 
-              <td>
-                <span class="status-badge pending">{{ getStatusLabel(adoption.status) }}</span>
-              </td>
+            <td>
+              <span>{{ adoption.adopter.phone || '-' }}</span>
 
-              <td class="actions-column">
-                <div class="actions-buttons">
-                  <button
-                    type="button"
-                    class="approve-button"
-                    [disabled]="updatingAdoptionId === adoption.id"
-                    (click)="concludeProcess(adoption, 'aceita')"
-                  >
-                    Aprovar
-                  </button>
+              <span class="secondary-line">
+                  {{ adoption.adopter.city || 'Cidade não indicada' }}
+                </span>
+            </td>
 
-                  <button
-                    type="button"
-                    class="reject-button"
-                    [disabled]="updatingAdoptionId === adoption.id"
-                    (click)="concludeProcess(adoption, 'rejeitada')"
-                  >
-                    Rejeitar
-                  </button>
-                </div>
-              </td>
-            </tr>
+            <td>
+              {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}
+            </td>
+
+            <td>
+                <span class="status-badge pending">
+                  {{ getStatusLabel(adoption.status) }}
+                </span>
+            </td>
+
+            <td class="actions-column">
+
+              <div class="actions-buttons">
+
+                <button type="button"
+                        class="approve-button"
+                        [disabled]="updatingAdoptionId === adoption.id"
+                        (click)="concludeProcess(adoption, 'aceita')"
+                        i18n="Approve adoption button@@adoptions.pending.approve">
+                  Aprovar
+                </button>
+
+                <button type="button"
+                        class="reject-button"
+                        [disabled]="updatingAdoptionId === adoption.id"
+                        (click)="concludeProcess(adoption, 'rejeitada')"
+                        i18n="Reject adoption button@@adoptions.pending.reject">
+                  Rejeitar
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
           </tbody>
+
         </table>
+
       </div>
+
     </section>
 
+    <!-- 📌 Completed -->
     <section class="process-section">
+
       <div class="section-header">
-        <h2>Processos concluídos</h2>
+        <h2 i18n="Completed processes section@@adoptions.completed.section">
+          Processos concluídos
+        </h2>
       </div>
 
-      <div *ngIf="completedAdoptions.length === 0" class="empty-state">
+      <div *ngIf="completedAdoptions.length === 0"
+           class="empty-state"
+           i18n="No completed adoptions@@adoptions.completed.empty">
         Ainda não existem processos concluídos.
       </div>
 
-      <div *ngIf="completedAdoptions.length > 0" class="table-wrapper">
+      <div *ngIf="completedAdoptions.length > 0"
+           class="table-wrapper">
+
         <table>
+
           <thead>
-            <tr>
-              <th>
-                <button
-                  type="button"
-                  class="sort-header"
-                  [class.active]="completedSortField === 'animal'"
-                  [attr.aria-label]="getCompletedSortAriaLabel('Animal', 'animal')"
-                  (click)="sortCompletedBy('animal')"
-                >
-                  Animal <span>{{ getCompletedSortIndicator('animal') }}</span>
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  class="sort-header"
-                  [class.active]="completedSortField === 'adopter'"
-                  [attr.aria-label]="getCompletedSortAriaLabel('Adotante', 'adopter')"
-                  (click)="sortCompletedBy('adopter')"
-                >
-                  Adotante <span>{{ getCompletedSortIndicator('adopter') }}</span>
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  class="sort-header"
-                  [class.active]="completedSortField === 'contact'"
-                  [attr.aria-label]="getCompletedSortAriaLabel('Contacto', 'contact')"
-                  (click)="sortCompletedBy('contact')"
-                >
-                  Contacto <span>{{ getCompletedSortIndicator('contact') }}</span>
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  class="sort-header"
-                  [class.active]="completedSortField === 'decisionDate'"
-                  [attr.aria-label]="getCompletedSortAriaLabel('Decisão', 'decisionDate')"
-                  (click)="sortCompletedBy('decisionDate')"
-                >
-                  Decisão <span>{{ getCompletedSortIndicator('decisionDate') }}</span>
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  class="sort-header"
-                  [class.active]="completedSortField === 'status'"
-                  [attr.aria-label]="getCompletedSortAriaLabel('Estado', 'status')"
-                  (click)="sortCompletedBy('status')"
-                >
-                  Estado <span>{{ getCompletedSortIndicator('status') }}</span>
-                </button>
-              </th>
-              <th class="actions-column"></th>
-            </tr>
+          <tr>
+
+            <th>
+              <button type="button"
+                      class="sort-header"
+                      [class.active]="completedSortField === 'animal'"
+                      [attr.aria-label]="getCompletedSortAriaLabel('Animal', 'animal')"
+                      (click)="sortCompletedBy('animal')">
+
+                  <span i18n="Sort animal@@adoptions.sort.animal">
+                    Animal
+                  </span>
+
+                <span>{{ getCompletedSortIndicator('animal') }}</span>
+
+              </button>
+            </th>
+
+            <th>
+              <button type="button"
+                      class="sort-header"
+                      [class.active]="completedSortField === 'adopter'"
+                      [attr.aria-label]="getCompletedSortAriaLabel('Adotante', 'adopter')"
+                      (click)="sortCompletedBy('adopter')">
+
+                  <span i18n="Sort adopter@@adoptions.sort.adopter">
+                    Adotante
+                  </span>
+
+                <span>{{ getCompletedSortIndicator('adopter') }}</span>
+
+              </button>
+            </th>
+
+            <th>
+              <button type="button"
+                      class="sort-header"
+                      [class.active]="completedSortField === 'contact'"
+                      [attr.aria-label]="getCompletedSortAriaLabel('Contacto', 'contact')"
+                      (click)="sortCompletedBy('contact')">
+
+                  <span i18n="Sort contact@@adoptions.sort.contact">
+                    Contacto
+                  </span>
+
+                <span>{{ getCompletedSortIndicator('contact') }}</span>
+
+              </button>
+            </th>
+
+            <th>
+              <button type="button"
+                      class="sort-header"
+                      [class.active]="completedSortField === 'decisionDate'"
+                      [attr.aria-label]="getCompletedSortAriaLabel('Decisão', 'decisionDate')"
+                      (click)="sortCompletedBy('decisionDate')">
+
+                  <span i18n="Sort decision date@@adoptions.sort.decision">
+                    Decisão
+                  </span>
+
+                <span>{{ getCompletedSortIndicator('decisionDate') }}</span>
+
+              </button>
+            </th>
+
+            <th>
+              <button type="button"
+                      class="sort-header"
+                      [class.active]="completedSortField === 'status'"
+                      [attr.aria-label]="getCompletedSortAriaLabel('Estado', 'status')"
+                      (click)="sortCompletedBy('status')">
+
+                  <span i18n="Sort status@@adoptions.sort.status">
+                    Estado
+                  </span>
+
+                <span>{{ getCompletedSortIndicator('status') }}</span>
+
+              </button>
+            </th>
+
+            <th class="actions-column"></th>
+
+          </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let adoption of sortedCompletedAdoptions">
-              <td>
-                <div class="animal-cell">
-                  <img
-                    *ngIf="getAnimalImageUrl(adoption) as imageUrl"
-                    class="animal-thumbnail"
-                    [src]="imageUrl"
-                    [alt]="'Imagem de ' + adoption.animal.name"
-                  />
 
-                  <div class="animal-cell-content">
-                    <a
-                      class="primary-link"
-                      [routerLink]="['/app/animals', adoption.animal.id, 'edit']"
-                    >
-                      {{ adoption.animal.name }}
-                    </a>
-                    <span class="secondary-line">{{ getAnimalDescription(adoption) }}</span>
-                  </div>
+          <tr *ngFor="let adoption of sortedCompletedAdoptions">
+
+            <td>
+              <div class="animal-cell">
+
+                <img *ngIf="getAnimalImageUrl(adoption) as imageUrl"
+                     class="animal-thumbnail"
+                     [src]="imageUrl"
+                     [alt]="'Imagem de ' + adoption.animal.name" />
+
+                <div class="animal-cell-content">
+
+                  <a class="primary-link"
+                     [routerLink]="['/app/animals', adoption.animal.id, 'edit']">
+                    {{ adoption.animal.name }}
+                  </a>
+
+                  <span class="secondary-line">
+                      {{ getAnimalDescription(adoption) }}
+                    </span>
+
                 </div>
-              </td>
 
-              <td>
-                <a
-                  class="primary-link"
-                  [routerLink]="['/app/adopters', adoption.adopter.id, 'edit']"
-                >
-                  {{ getAdopterFullName(adoption.adopter) }}
-                </a>
-                <span class="secondary-line">{{ adoption.adopter.email || '-' }}</span>
-              </td>
+              </div>
+            </td>
 
-              <td>
-                <span>{{ adoption.adopter.phone || '-' }}</span>
-                <span class="secondary-line">{{
-                  adoption.adopter.city || 'Cidade não indicada'
-                }}</span>
-              </td>
+            <td>
+              <a class="primary-link"
+                 [routerLink]="['/app/adopters', adoption.adopter.id, 'edit']">
+                {{ getAdopterFullName(adoption.adopter) }}
+              </a>
 
-              <td>
+              <span class="secondary-line">
+                  {{ adoption.adopter.email || '-' }}
+                </span>
+            </td>
+
+            <td>
+              <span>{{ adoption.adopter.phone || '-' }}</span>
+
+              <span class="secondary-line">
+                  {{ adoption.adopter.city || 'Cidade não indicada' }}
+                </span>
+            </td>
+
+            <td>
                 <span>
                   {{
-                    getProcessDate(adoption) ? (getProcessDate(adoption) | date: 'dd/MM/yyyy') : '-'
+                    getProcessDate(adoption)
+                      ? (getProcessDate(adoption) | date: 'dd/MM/yyyy')
+                      : '-'
                   }}
                 </span>
-                <span class="secondary-line">
+
+              <span class="secondary-line">
                   Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}
                 </span>
-              </td>
+            </td>
 
-              <td>
-                <span
-                  class="status-badge"
-                  [class.accepted]="adoption.status === 'aceita'"
-                  [class.rejected]="adoption.status === 'rejeitada'"
-                  [class.returned]="adoption.status === 'devolvida'"
-                >
+            <td>
+                <span class="status-badge"
+                      [class.accepted]="adoption.status === 'aceita'"
+                      [class.rejected]="adoption.status === 'rejeitada'"
+                      [class.returned]="adoption.status === 'devolvida'">
+
                   {{ getStatusLabel(adoption.status) }}
-                </span>
-              </td>
 
-              <td class="actions-column">
-                <button
-                  *ngIf="adoption.status === 'aceita'"
-                  type="button"
-                  class="return-button"
-                  [disabled]="updatingAdoptionId === adoption.id"
-                  (click)="concludeProcess(adoption, 'devolvida')"
-                >
-                  Registar devolução
-                </button>
-              </td>
-            </tr>
+                </span>
+            </td>
+
+            <td class="actions-column">
+
+              <button *ngIf="adoption.status === 'aceita'"
+                      type="button"
+                      class="return-button"
+                      [disabled]="updatingAdoptionId === adoption.id"
+                      (click)="concludeProcess(adoption, 'devolvida')"
+                      i18n="Return adoption button@@adoptions.completed.return">
+                Registar devolução
+              </button>
+
+            </td>
+
+          </tr>
+
           </tbody>
+
         </table>
+
       </div>
+
     </section>
+
   </ng-container>
+
 </section>
