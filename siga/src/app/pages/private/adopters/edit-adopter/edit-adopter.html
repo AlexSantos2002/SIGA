@@ -1,16 +1,31 @@
 <section class="adopter-form-page">
+
   <div class="page-header">
     <div>
-      <h1>Editar adotante</h1>
-      <p>Atualiza a ficha e a sinalização do adotante.</p>
+      <h1 i18n="Edit adopter page title@@adopters.edit.header.title">
+        Editar adotante
+      </h1>
+
+      <p i18n="Edit adopter page description@@adopters.edit.header.description">
+        Atualiza a ficha e a sinalização do adotante.
+      </p>
     </div>
 
-    <a routerLink="/app/adopters" class="back-button">Voltar à lista</a>
+    <a routerLink="/app/adopters"
+       class="back-button"
+       i18n="Back to adopters list button@@adopters.edit.actions.back">
+      Voltar à lista
+    </a>
   </div>
 
-  <div *ngIf="isLoading" class="loading">A carregar adotante...</div>
+  <div *ngIf="isLoading"
+       class="loading"
+       i18n="Loading adopter text@@adopters.edit.loading">
+    A carregar adotante...
+  </div>
 
-  <div *ngIf="!isLoading && errorMessage" class="error-message">
+  <div *ngIf="!isLoading && errorMessage"
+       class="error-message">
     {{ errorMessage }}
   </div>
 
@@ -20,6 +35,7 @@
     [isSubmitting]="isSubmitting"
     submitLabel="Guardar alteracoes"
     submittingLabel="A guardar..."
-    (formSubmit)="submit()"
-  ></app-adopter-form>
+    (formSubmit)="submit()">
+  </app-adopter-form>
+
 </section>

@@ -688,6 +688,38 @@
         </context-group>
         <note priority="1" from="description">Delete adopter</note>
       </trans-unit>
+      <trans-unit id="adopters.edit.header.title" datatype="html">
+        <source> Editar adotante </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adopters/edit-adopter/edit-adopter.html</context>
+          <context context-type="linenumber">6,9</context>
+        </context-group>
+        <note priority="1" from="description">Edit adopter page title</note>
+      </trans-unit>
+      <trans-unit id="adopters.edit.header.description" datatype="html">
+        <source> Atualiza a ficha e a sinalização do adotante. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adopters/edit-adopter/edit-adopter.html</context>
+          <context context-type="linenumber">10,15</context>
+        </context-group>
+        <note priority="1" from="description">Edit adopter page description</note>
+      </trans-unit>
+      <trans-unit id="adopters.edit.actions.back" datatype="html">
+        <source> Voltar à lista </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adopters/edit-adopter/edit-adopter.html</context>
+          <context context-type="linenumber">17,22</context>
+        </context-group>
+        <note priority="1" from="description">Back to adopters list button</note>
+      </trans-unit>
+      <trans-unit id="adopters.edit.loading" datatype="html">
+        <source> A carregar adotante... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adopters/edit-adopter/edit-adopter.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+        <note priority="1" from="description">Loading adopter text</note>
+      </trans-unit>
       <trans-unit id="animals.page.title" datatype="html">
         <source> Animais </source>
         <context-group purpose="location">

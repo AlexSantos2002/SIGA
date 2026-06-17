@@ -2273,6 +2273,26 @@
         <source> Eliminar </source>
         <target> Delete </target>
       </trans-unit>
+
+      <trans-unit id="adopters.edit.header.title" datatype="html">
+        <source> Editar adotante </source>
+        <target> Edit adopter </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.edit.header.description" datatype="html">
+        <source> Atualiza a ficha e a sinalização do adotante. </source>
+        <target> Update the adopter profile and flag status. </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.edit.actions.back" datatype="html">
+        <source> Voltar à lista </source>
+        <target> Back to list </target>
+      </trans-unit>
+
+      <trans-unit id="adopters.edit.loading" datatype="html">
+        <source> A carregar adotante... </source>
+        <target> Loading adopter... </target>
+      </trans-unit>
       <!--    Fim da página de registo de adotantes    -->
 
     </body>
