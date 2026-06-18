@@ -3144,6 +3144,190 @@
         </context-group>
         <note priority="1" from="description">Register care</note>
       </trans-unit>
+      <trans-unit id="stats.page.title" datatype="html">
+        <source>Estatísticas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.page.description" datatype="html">
+        <source> Resumo visual dos animais, adoções, adotantes e cuidados da organização. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.export.button" datatype="html">
+        <source>Exportar Excel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.export.loading" datatype="html">
+        <source>A exportar...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.loading" datatype="html">
+        <source> A carregar estatísticas... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">22,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.animals.status.title" datatype="html">
+        <source>Animais por estado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">42,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.empty" datatype="html">
+        <source> Sem dados registados. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">104,105</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">128,129</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">142,143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">156,157</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">170,171</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">194,195</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">218,219</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">232,233</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">256,257</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">270,271</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.animals.availability.title" datatype="html">
+        <source>Disponibilidade dos animais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">56,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adoptions.requests.title" datatype="html">
+        <source>Pedidos de adoção por mês</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">80,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adoptions.accepted.title" datatype="html">
+        <source>Adoções aceites por mês</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">90,93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adoptions.status.title" datatype="html">
+        <source>Estado das adoções</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">100,103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adoptions.species.title" datatype="html">
+        <source>Espécies mais adotadas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">124,127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adoptions.breeds.title" datatype="html">
+        <source>Raças mais adotadas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">138,141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.animals.species.title" datatype="html">
+        <source>Animais por espécie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">152,155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.animals.gender.title" datatype="html">
+        <source>Género dos animais</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">166,169</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.animals.microchip.title" datatype="html">
+        <source>Microchip</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">190,193</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.cares.registered.title" datatype="html">
+        <source>Cuidados registados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">214,217</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.cares.status.title" datatype="html">
+        <source>Estado dos cuidados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">228,231</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adopters.housing.title" datatype="html">
+        <source>Tipo de habitação dos adotantes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">252,255</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stats.adopters.species.title" datatype="html">
+        <source>Espécies preferidas pelos adotantes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
+          <context context-type="linenumber">266,269</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8513029167698384448" datatype="html">
         <source>Sobre o SIGA</source>
         <context-group purpose="location">

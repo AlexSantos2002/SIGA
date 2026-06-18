@@ -2941,6 +2941,110 @@
 
       <!--   Fim da página de cuidados     -->
 
+      <!--   Página de estatísticas     -->
+
+      <trans-unit id="stats.page.title" datatype="html">
+        <source>Estatísticas</source>
+        <target>Statistics</target>
+      </trans-unit>
+
+      <trans-unit id="stats.page.description" datatype="html">
+        <source> Resumo visual dos animais, adoções, adotantes e cuidados da organização. </source>
+        <target> Visual summary of animals, adoptions, adopters, and organization care records. </target>
+      </trans-unit>
+
+      <trans-unit id="stats.export.button" datatype="html">
+        <source>Exportar Excel</source>
+        <target>Export Excel</target>
+      </trans-unit>
+
+      <trans-unit id="stats.export.loading" datatype="html">
+        <source>A exportar...</source>
+        <target>Exporting...</target>
+      </trans-unit>
+
+      <trans-unit id="stats.loading" datatype="html">
+        <source> A carregar estatísticas... </source>
+        <target> Loading statistics... </target>
+      </trans-unit>
+
+      <trans-unit id="stats.animals.status.title" datatype="html">
+        <source>Animais por estado</source>
+        <target>Animals by status</target>
+      </trans-unit>
+
+      <trans-unit id="stats.empty" datatype="html">
+        <source> Sem dados registados. </source>
+        <target> No data recorded. </target>
+      </trans-unit>
+
+      <trans-unit id="stats.animals.availability.title" datatype="html">
+        <source>Disponibilidade dos animais</source>
+        <target>Animal availability</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adoptions.requests.title" datatype="html">
+        <source>Pedidos de adoção por mês</source>
+        <target>Adoption requests per month</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adoptions.accepted.title" datatype="html">
+        <source>Adoções aceites por mês</source>
+        <target>Accepted adoptions per month</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adoptions.status.title" datatype="html">
+        <source>Estado das adoções</source>
+        <target>Adoption status</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adoptions.species.title" datatype="html">
+        <source>Espécies mais adotadas</source>
+        <target>Most adopted species</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adoptions.breeds.title" datatype="html">
+        <source>Raças mais adotadas</source>
+        <target>Most adopted breeds</target>
+      </trans-unit>
+
+      <trans-unit id="stats.animals.species.title" datatype="html">
+        <source>Animais por espécie</source>
+        <target>Animals by species</target>
+      </trans-unit>
+
+      <trans-unit id="stats.animals.gender.title" datatype="html">
+        <source>Género dos animais</source>
+        <target>Animal gender</target>
+      </trans-unit>
+
+      <trans-unit id="stats.animals.microchip.title" datatype="html">
+        <source>Microchip</source>
+        <target>Microchip</target>
+      </trans-unit>
+
+      <trans-unit id="stats.cares.registered.title" datatype="html">
+        <source>Cuidados registados</source>
+        <target>Registered care records</target>
+      </trans-unit>
+
+      <trans-unit id="stats.cares.status.title" datatype="html">
+        <source>Estado dos cuidados</source>
+        <target>Care status</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adopters.housing.title" datatype="html">
+        <source>Tipo de habitação dos adotantes</source>
+        <target>Adopters housing type</target>
+      </trans-unit>
+
+      <trans-unit id="stats.adopters.species.title" datatype="html">
+        <source>Espécies preferidas pelos adotantes</source>
+        <target>Adopters preferred species</target>
+      </trans-unit>
+
+      <!--   Página de estatísticas     -->
+
     </body>
   </file>
 </xliff>
