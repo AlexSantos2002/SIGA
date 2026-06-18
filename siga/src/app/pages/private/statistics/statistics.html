@@ -5,14 +5,18 @@
       <p>Resumo visual dos animais, adoções, adotantes e cuidados da organização.</p>
     </div>
 
-    <button
-      type="button"
-      class="export-button"
-      [disabled]="isLoading || isExporting || !!errorMessage"
-      (click)="exportStatisticsToExcel()"
-    >
-      {{ isExporting ? 'A exportar...' : 'Exportar Excel' }}
-    </button>
+    <div class="export-actions">
+      <button
+        type="button"
+        class="export-button"
+        [disabled]="isLoading || isExporting || !!errorMessage"
+        (click)="exportStatisticsToExcel()"
+      >
+        {{ isExporting ? 'A exportar...' : 'Exportar Excel' }}
+      </button>
+
+      <span *ngIf="exportErrorMessage" class="export-error">{{ exportErrorMessage }}</span>
+    </div>
   </div>
 
   <div *ngIf="isLoading" class="loading">A carregar estatísticas...</div>

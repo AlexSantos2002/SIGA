@@ -21,6 +21,63 @@ export class AuthService {
 
   constructor(private organizationService: OrganizationService) {}
 
+  async requestPasswordReset(email: string): Promise<void> {
+    const { error } = await supabase.auth.resetPasswordForEmail(this.normalizeEmail(email), {
+      redirectTo: this.getPasswordResetRedirectUrl(),
+    });
+
+    if (error) {
+      throw new AuthenticationError(ERROR_CODES.PASSWORD_RESET_FAILED);
+    }
+  }
+
+  async waitForPasswordRecoverySession(): Promise<boolean> {
+    const { data } = await supabase.auth.getSession();
+
+    if (data.session) {
+      return true;
+    }
+
+    return new Promise((resolve) => {
+      let resolved = false;
+      let subscription: { unsubscribe: () => void } | null = null;
+
+      const finish = (hasSession: boolean): void => {
+        if (resolved) {
+          return;
+        }
+
+        resolved = true;
+        window.clearTimeout(timeout);
+        subscription?.unsubscribe();
+        resolve(hasSession);
+      };
+
+      const timeout = window.setTimeout(() => finish(false), 2500);
+      const authListener = supabase.auth.onAuthStateChange((event, session) => {
+        if ((event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session) {
+          finish(true);
+        }
+      });
+
+      subscription = authListener.data.subscription;
+
+      if (resolved) {
+        subscription.unsubscribe();
+      }
+    });
+  }
+
+  async updatePassword(password: string): Promise<void> {
+    const { error } = await supabase.auth.updateUser({
+      password,
+    });
+
+    if (error) {
+      throw new AuthenticationError(ERROR_CODES.PASSWORD_UPDATE_FAILED);
+    }
+  }
+
   async login(request: LoginRequest): Promise<User> {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: this.normalizeEmail(request.email),
@@ -129,6 +186,10 @@ export class AuthService {
 
   private normalizeEmail(email: string): string {
     return email.trim().toLowerCase();
+  }
+
+  private getPasswordResetRedirectUrl(): string {
+    return `${globalThis.location?.origin ?? ''}/reset-password`;
   }
 
   private isEmailNotConfirmedError(error: AuthApiError): boolean {

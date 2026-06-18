@@ -46,6 +46,8 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   AUTHENTICATION_ERROR: 'Erro durante a autenticação',
   INVALID_CREDENTIALS: 'Email ou palavra-passe incorretos',
   NOT_AUTHENTICATED: 'Usuário não autenticado',
+  PASSWORD_RESET_FAILED: 'Não foi possível enviar o email de recuperação.',
+  PASSWORD_UPDATE_FAILED: 'Não foi possível atualizar a palavra-passe.',
 
   // STORAGE
   IMAGE_UPLOAD_FAILED: 'Falha ao armazenar imagem',

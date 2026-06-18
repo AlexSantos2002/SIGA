@@ -7,34 +7,51 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/public/public-layout').then((m) => m.PublicLayout),
-    canActivate: [guestGuard],
     children: [
       {
         path: '',
+        canActivate: [guestGuard],
         loadComponent: () => import('./pages/public/home/home').then((m) => m.Home),
       },
       {
         path: 'register',
+        canActivate: [guestGuard],
         loadComponent: () => import('./pages/public/register/register').then((m) => m.Register),
       },
       {
         path: 'login',
+        canActivate: [guestGuard],
         loadComponent: () => import('./pages/public/login/login').then((m) => m.Login),
       },
       {
+        path: 'recover-password',
+        canActivate: [guestGuard],
+        loadComponent: () =>
+          import('./pages/public/recover-password/recover-password').then((m) => m.RecoverPassword),
+      },
+      {
+        path: 'reset-password',
+        loadComponent: () =>
+          import('./pages/public/reset-password/reset-password').then((m) => m.ResetPassword),
+      },
+      {
         path: 'about',
+        canActivate: [guestGuard],
         loadComponent: () => import('./pages/public/about/about').then((m) => m.About),
       },
       {
         path: 'faq',
+        canActivate: [guestGuard],
         loadComponent: () => import('./pages/public/faq/faq').then((m) => m.Faq),
       },
       {
         path: 'contacts',
+        canActivate: [guestGuard],
         loadComponent: () => import('./pages/public/contacts/contacts').then((m) => m.Contacts),
       },
       {
         path: 'privacy-policy',
+        canActivate: [guestGuard],
         loadComponent: () =>
           import('./pages/public/privacy-policy/privacy-policy').then((m) => m.PrivacyPolicy),
       },

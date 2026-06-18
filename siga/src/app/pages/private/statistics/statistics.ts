@@ -61,6 +61,10 @@ interface ExportSection {
   rows: (string | number)[][];
 }
 
+type ExcelJsModule = typeof import('exceljs') & {
+  default?: typeof import('exceljs');
+};
+
 interface BarChartItem extends ChartEntry {
   percent: number;
 }
@@ -98,6 +102,7 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
   isLoading = true;
   isExporting = false;
   errorMessage = '';
+  exportErrorMessage = '';
 
   private charts = new Map<string, Chart>();
   private chartCanvasChangesSubscription?: Subscription;
@@ -378,11 +383,18 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
 
     try {
       this.isExporting = true;
+      this.exportErrorMessage = '';
       this.cdr.detectChanges();
 
-      const ExcelJS = await import('exceljs');
+      const ExcelJS = (await import('exceljs')) as ExcelJsModule;
+      const Workbook = ExcelJS.Workbook ?? ExcelJS.default?.Workbook;
+
+      if (!Workbook) {
+        throw new Error('ExcelJS Workbook is unavailable.');
+      }
+
       const sections = this.buildExportSections();
-      const workbook = new ExcelJS.Workbook();
+      const workbook = new Workbook();
 
       workbook.creator = 'SIGA';
       workbook.created = new Date();
@@ -397,13 +409,10 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
       const blob = new Blob([buffer], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-
-      link.href = url;
-      link.download = `estatisticas-siga-${this.getExportDate()}.xlsx`;
-      link.click();
-      URL.revokeObjectURL(url);
+      this.downloadBlob(blob, `estatisticas-siga-${this.getExportDate()}.xlsx`);
+    } catch (error) {
+      console.error('Erro ao exportar estatisticas para Excel:', error);
+      this.exportErrorMessage = 'Nao foi possivel exportar o ficheiro Excel.';
     } finally {
       this.isExporting = false;
       this.cdr.detectChanges();
@@ -930,6 +939,22 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
     const day = String(today.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+
+  private downloadBlob(blob: Blob, fileName: string): void {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = fileName;
+    link.rel = 'noopener';
+    link.style.display = 'none';
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
   private formatSimpleLabel(value: string | null | undefined, fallback: string): string {
