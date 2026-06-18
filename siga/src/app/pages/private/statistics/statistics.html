@@ -7,15 +7,25 @@
       </p>
     </div>
 
-    <button
-      type="button"
-      class="export-button"
-      [disabled]="isLoading || isExporting || !!errorMessage"
-      (click)="exportStatisticsToExcel()"
-    >
-      <span *ngIf="!isExporting" i18n="@@stats.export.button">Exportar Excel</span>
-      <span *ngIf="isExporting" i18n="@@stats.export.loading">A exportar...</span>
-    </button>
+    <div class="export-actions">
+      <button
+        type="button"
+        class="export-button"
+        [disabled]="isLoading || isExporting || !!errorMessage"
+        (click)="exportStatisticsToExcel()"
+      >
+        <span *ngIf="!isExporting" i18n="@@stats.export.button">
+        Exportar Excel
+        </span>
+
+        <span *ngIf="isExporting" i18n="@@stats.export.loading">
+          A exportar...
+        </span>
+      </button>
+      <span *ngIf="exportErrorMessage" class="export-error">
+    {{ exportErrorMessage }}
+  </span>
+    </div>
   </div>
 
   <div *ngIf="isLoading" class="loading" i18n="@@stats.loading">
