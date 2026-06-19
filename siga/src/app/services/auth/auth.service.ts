@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthApiError, User as SupabaseUser } from '@supabase/supabase-js';
+import { AuthApiError, EmailOtpType, User as SupabaseUser } from '@supabase/supabase-js';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { supabase } from '../../../../supabase/supabase';
 import { AuthenticationError, DBError } from '../../error/app-error';
@@ -66,6 +66,15 @@ export class AuthService {
         subscription.unsubscribe();
       }
     });
+  }
+
+  async verifyPasswordRecoveryToken(tokenHash: string): Promise<boolean> {
+    const { data, error } = await supabase.auth.verifyOtp({
+      token_hash: tokenHash,
+      type: 'recovery' as EmailOtpType,
+    });
+
+    return !error && !!data.session;
   }
 
   async updatePassword(password: string): Promise<void> {
@@ -189,7 +198,13 @@ export class AuthService {
   }
 
   private getPasswordResetRedirectUrl(): string {
-    return `${globalThis.location?.origin ?? ''}/reset-password`;
+    const location = globalThis.location;
+    const resetPasswordPath =
+      location?.pathname === '/en' || location?.pathname.startsWith('/en/')
+        ? '/en/reset-password'
+        : '/reset-password';
+
+    return `${location?.origin ?? ''}${resetPasswordPath}`;
   }
 
   private isEmailNotConfirmedError(error: AuthApiError): boolean {
