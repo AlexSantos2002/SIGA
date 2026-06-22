@@ -15,7 +15,7 @@ import {
   DEWORMING_TYPES,
   SelectOption,
   VACCINE_STATUSES,
-  getOptionLabel,
+  getOptionLabel, CARE_TYPES
 } from '../../../constants/form-options';
 import {
   AnimalCareRecord,
@@ -71,11 +71,7 @@ export class Care implements OnInit, OnDestroy {
   deletingRecordKey: string | null = null;
   confirmingRecordKey: string | null = null;
 
-  readonly careTypes: SelectOption[] = [
-    { value: 'vaccine', label: 'Vacina' },
-    { value: 'deworming', label: 'Desparasitação' },
-    { value: 'appointment', label: 'Consulta / tratamento' },
-  ];
+  readonly careTypes = CARE_TYPES;
   readonly vaccineStatuses = VACCINE_STATUSES;
   readonly dewormingTypes = DEWORMING_TYPES;
   readonly timelineStates: SelectOption[] = [

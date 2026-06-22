@@ -938,6 +938,42 @@
 
       <!--    Fim da página de login    -->
 
+      <!--   Navbar privada     -->
+
+      <trans-unit id="navbar.private.organization.label" datatype="html">
+        <source>Organização</source>
+        <target>Organization</target>
+      </trans-unit>
+
+      <trans-unit id="navbar.private.organization.associated" datatype="html">
+        <source>Organização associada</source>
+        <target>Associated organization</target>
+      </trans-unit>
+
+      <trans-unit id="navbar.private.organization.default" datatype="html">
+        <source>Organização</source>
+        <target>Organization</target>
+      </trans-unit>
+
+      <trans-unit id="navbar.private.menu.profile" datatype="html">
+        <source>Perfil</source>
+        <target>Profile</target>
+      </trans-unit>
+
+      <trans-unit id="navbar.private.menu.settings" datatype="html">
+        <source>Definições</source>
+        <target>Settings</target>
+      </trans-unit>
+
+      <trans-unit id="navbar.private.menu.logout" datatype="html">
+        <source>Terminar sessão</source>
+        <target>Log out</target>
+      </trans-unit>
+      ``` 🤠
+
+      <!--   Fim da navbar privada     -->
+
+
       <!--   Side menu     -->
 
       <trans-unit id="sidebar.dashboard" datatype="html">
@@ -2939,6 +2975,21 @@
         <target>Registering...</target>
       </trans-unit>
 
+      <trans-unit id="care.type.vaccine" datatype="html">
+        <source>Vacina</source>
+        <target>Vaccine</target>
+      </trans-unit>
+
+      <trans-unit id="care.type.deworming" datatype="html">
+        <source>Desparasitação</source>
+        <target>Deworming</target>
+      </trans-unit>
+
+      <trans-unit id="care.type.appointment" datatype="html">
+        <source>Consulta / tratamento</source>
+        <target>Appointment / Treatment</target>
+      </trans-unit>
+
       <!--   Fim da página de cuidados     -->
 
       <!--   Página de estatísticas     -->
@@ -3044,6 +3095,185 @@
       </trans-unit>
 
       <!--   Página de estatísticas     -->
+
+      <!--   Form options     -->
+
+      <trans-unit id="animal.status.por_adotar" datatype="html">
+        <source>Por adotar</source>
+        <target>Up for adoption</target>
+      </trans-unit>
+
+      <trans-unit id="animal.status.em_tratamento" datatype="html">
+        <source>Em tratamento</source>
+        <target>Under treatment</target>
+      </trans-unit>
+
+      <trans-unit id="animal.status.acolhimento" datatype="html">
+        <source>Em acolhimento</source>
+        <target>In foster care</target>
+      </trans-unit>
+
+      <trans-unit id="animal.status.reservado" datatype="html">
+        <source>Reservado</source>
+        <target>Reserved</target>
+      </trans-unit>
+
+      <trans-unit id="animal.status.indisponivel" datatype="html">
+        <source>Indisponível</source>
+        <target>Unavailable</target>
+      </trans-unit>
+
+      <trans-unit id="animal.status.adotado" datatype="html">
+        <source>Adotado</source>
+        <target>Adopted</target>
+      </trans-unit>
+
+      <trans-unit id="animal.gender.male" datatype="html">
+        <source>Macho</source>
+        <target>Male</target>
+      </trans-unit>
+
+      <trans-unit id="animal.gender.female" datatype="html">
+        <source>Fêmea</source>
+        <target>Female</target>
+      </trans-unit>
+
+      <trans-unit id="sterilization.status.undefined" datatype="html">
+        <source>Não definido</source>
+        <target>Not defined</target>
+      </trans-unit>
+
+      <trans-unit id="sterilization.status.nao_realizada" datatype="html">
+        <source>Não realizada</source>
+        <target>Not performed</target>
+      </trans-unit>
+
+      <trans-unit id="sterilization.status.realizada" datatype="html">
+        <source>Realizada</source>
+        <target>Performed</target>
+      </trans-unit>
+
+      <trans-unit id="sterilization.status.agendada" datatype="html">
+        <source>Agendada</source>
+        <target>Scheduled</target>
+      </trans-unit>
+
+      <trans-unit id="sterilization.status.nao_aplicavel" datatype="html">
+        <source>Não aplicável</source>
+        <target>Not applicable</target>
+      </trans-unit>
+
+      <trans-unit id="sterilization.status.desconhecido" datatype="html">
+        <source>Desconhecido</source>
+        <target>Unknown</target>
+      </trans-unit>
+
+      <trans-unit id="vaccine.status.pendente" datatype="html">
+        <source>Pendente</source>
+        <target>Pending</target>
+      </trans-unit>
+
+      <trans-unit id="vaccine.status.tomada" datatype="html">
+        <source>Tomada</source>
+        <target>Taken</target>
+      </trans-unit>
+
+      <trans-unit id="deworming.type.interna" datatype="html">
+        <source>Interna</source>
+        <target>Internal</target>
+      </trans-unit>
+
+      <trans-unit id="deworming.type.externa" datatype="html">
+        <source>Externa</source>
+        <target>External</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.document.cartao_cidadao" datatype="html">
+        <source>Cartão de cidadão</source>
+        <target>Citizen card</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.document.passaporte" datatype="html">
+        <source>Passaporte</source>
+        <target>Passport</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.document.titulo_residencia" datatype="html">
+        <source>Título de residência</source>
+        <target>Residence permit</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.document.outro" datatype="html">
+        <source>Outro</source>
+        <target>Other</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.housing.apartamento" datatype="html">
+        <source>Apartamento</source>
+        <target>Apartment</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.housing.moradia" datatype="html">
+        <source>Moradia</source>
+        <target>House</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.housing.quinta" datatype="html">
+        <source>Quinta</source>
+        <target>Farm</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.housing.outro" datatype="html">
+        <source>Outro</source>
+        <target>Other</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.employment.empregado" datatype="html">
+        <source>Empregado</source>
+        <target>Employed</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.employment.desempregado" datatype="html">
+        <source>Desempregado</source>
+        <target>Unemployed</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.employment.estudante" datatype="html">
+        <source>Estudante</source>
+        <target>Student</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.employment.reformado" datatype="html">
+        <source>Reformado</source>
+        <target>Retired</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.employment.outro" datatype="html">
+        <source>Outro</source>
+        <target>Other</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.species.cao" datatype="html">
+        <source>Cão</source>
+        <target>Dog</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.species.gato" datatype="html">
+        <source>Gato</source>
+        <target>Cat</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.species.indiferente" datatype="html">
+        <source>Indiferente</source>
+        <target>Indifferent</target>
+      </trans-unit>
+
+      <trans-unit id="adopter.species.outro" datatype="html">
+        <source>Outro</source>
+        <target>Other</target>
+      </trans-unit>
+
+      <!--   Fim do form options     -->
 
     </body>
   </file>

@@ -98,6 +98,54 @@
           <context context-type="linenumber">65,66</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="navbar.private.organization.label" datatype="html">
+        <source> Organização </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
+          <context context-type="linenumber">15,19</context>
+        </context-group>
+        <note priority="1" from="description">Organization label</note>
+      </trans-unit>
+      <trans-unit id="navbar.private.organization.associated" datatype="html">
+        <source> Organização associada </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
+          <context context-type="linenumber">21,25</context>
+        </context-group>
+        <note priority="1" from="description">Associated organization text</note>
+      </trans-unit>
+      <trans-unit id="navbar.private.organization.default" datatype="html">
+        <source> Organização </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
+          <context context-type="linenumber">27,30</context>
+        </context-group>
+        <note priority="1" from="description">Organization text</note>
+      </trans-unit>
+      <trans-unit id="navbar.private.menu.profile" datatype="html">
+        <source> Perfil </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
+          <context context-type="linenumber">55,58</context>
+        </context-group>
+        <note priority="1" from="description">Profile menu item</note>
+      </trans-unit>
+      <trans-unit id="navbar.private.menu.settings" datatype="html">
+        <source> Definições </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
+          <context context-type="linenumber">60,64</context>
+        </context-group>
+        <note priority="1" from="description">Settings menu item</note>
+      </trans-unit>
+      <trans-unit id="navbar.private.menu.logout" datatype="html">
+        <source> Terminar sessão </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
+          <context context-type="linenumber">66,70</context>
+        </context-group>
+        <note priority="1" from="description">Logout button</note>
+      </trans-unit>
       <trans-unit id="2806917038528218276" datatype="html">
         <source>FAQ</source>
         <context-group purpose="location">
@@ -170,6 +218,366 @@
           <context context-type="linenumber">56,61</context>
         </context-group>
         <note priority="1" from="description">Sidebar statistics link</note>
+      </trans-unit>
+      <trans-unit id="animal.status.por_adotar" datatype="html">
+        <source>Por adotar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal status</note>
+      </trans-unit>
+      <trans-unit id="animal.status.em_tratamento" datatype="html">
+        <source>Em tratamento</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal status</note>
+      </trans-unit>
+      <trans-unit id="animal.status.acolhimento" datatype="html">
+        <source>Em acolhimento</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal status</note>
+      </trans-unit>
+      <trans-unit id="animal.status.reservado" datatype="html">
+        <source>Reservado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal status</note>
+      </trans-unit>
+      <trans-unit id="animal.status.indisponivel" datatype="html">
+        <source>Indisponível</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal status</note>
+      </trans-unit>
+      <trans-unit id="animal.status.adotado" datatype="html">
+        <source>Adotado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal status</note>
+      </trans-unit>
+      <trans-unit id="animal.gender.male" datatype="html">
+        <source>Macho</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal gender</note>
+      </trans-unit>
+      <trans-unit id="animal.gender.female" datatype="html">
+        <source>Fêmea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal gender</note>
+      </trans-unit>
+      <trans-unit id="sterilization.status.undefined" datatype="html">
+        <source>Não definido</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <note priority="1" from="meaning">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="sterilization.status.nao_realizada" datatype="html">
+        <source>Não realizada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <note priority="1" from="meaning">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="sterilization.status.realizada" datatype="html">
+        <source>Realizada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <note priority="1" from="meaning">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="sterilization.status.agendada" datatype="html">
+        <source>Agendada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <note priority="1" from="meaning">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="sterilization.status.nao_aplicavel" datatype="html">
+        <source>Não aplicável</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <note priority="1" from="meaning">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="sterilization.status.desconhecido" datatype="html">
+        <source>Desconhecido</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <note priority="1" from="meaning">Sterilization status</note>
+      </trans-unit>
+      <trans-unit id="care.type.vaccine" datatype="html">
+        <source>Vacina</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <note priority="1" from="meaning">Care type</note>
+      </trans-unit>
+      <trans-unit id="care.type.deworming" datatype="html">
+        <source>Desparasitação</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <note priority="1" from="meaning">Care type</note>
+      </trans-unit>
+      <trans-unit id="care.type.appointment" datatype="html">
+        <source>Consulta / tratamento</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <note priority="1" from="meaning">Care type</note>
+      </trans-unit>
+      <trans-unit id="vaccine.status.pendente" datatype="html">
+        <source>Pendente</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <note priority="1" from="meaning">Vaccine status</note>
+      </trans-unit>
+      <trans-unit id="vaccine.status.tomada" datatype="html">
+        <source>Tomada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <note priority="1" from="meaning">Vaccine status</note>
+      </trans-unit>
+      <trans-unit id="deworming.type.interna" datatype="html">
+        <source>Interna</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+        <note priority="1" from="meaning">Deworming type</note>
+      </trans-unit>
+      <trans-unit id="deworming.type.externa" datatype="html">
+        <source>Externa</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <note priority="1" from="meaning">Deworming type</note>
+      </trans-unit>
+      <trans-unit id="adopter.document.cartao_cidadao" datatype="html">
+        <source>Cartão de cidadão</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter document type</note>
+      </trans-unit>
+      <trans-unit id="adopter.document.passaporte" datatype="html">
+        <source>Passaporte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter document type</note>
+      </trans-unit>
+      <trans-unit id="adopter.document.titulo_residencia" datatype="html">
+        <source>Título de residência</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter document type</note>
+      </trans-unit>
+      <trans-unit id="adopter.document.outro" datatype="html">
+        <source>Outro</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter document type</note>
+      </trans-unit>
+      <trans-unit id="adopter.housing.apartamento" datatype="html">
+        <source>Apartamento</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter housing type</note>
+      </trans-unit>
+      <trans-unit id="adopter.housing.moradia" datatype="html">
+        <source>Moradia</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter housing type</note>
+      </trans-unit>
+      <trans-unit id="adopter.housing.quinta" datatype="html">
+        <source>Quinta</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter housing type</note>
+      </trans-unit>
+      <trans-unit id="adopter.housing.outro" datatype="html">
+        <source>Outro</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter housing type</note>
+      </trans-unit>
+      <trans-unit id="adopter.employment.empregado" datatype="html">
+        <source>Empregado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter employment status</note>
+      </trans-unit>
+      <trans-unit id="adopter.employment.desempregado" datatype="html">
+        <source>Desempregado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter employment status</note>
+      </trans-unit>
+      <trans-unit id="adopter.employment.estudante" datatype="html">
+        <source>Estudante</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter employment status</note>
+      </trans-unit>
+      <trans-unit id="adopter.employment.reformado" datatype="html">
+        <source>Reformado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter employment status</note>
+      </trans-unit>
+      <trans-unit id="adopter.employment.outro" datatype="html">
+        <source>Outro</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter employment status</note>
+      </trans-unit>
+      <trans-unit id="adopter.species.cao" datatype="html">
+        <source>Cão</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter preferred species</note>
+      </trans-unit>
+      <trans-unit id="adopter.species.gato" datatype="html">
+        <source>Gato</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter preferred species</note>
+      </trans-unit>
+      <trans-unit id="adopter.species.indiferente" datatype="html">
+        <source>Indiferente</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter preferred species</note>
+      </trans-unit>
+      <trans-unit id="adopter.species.outro" datatype="html">
+        <source>Outro</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <note priority="1" from="meaning">Adopter preferred species</note>
       </trans-unit>
       <trans-unit id="adopters.create.header.title" datatype="html">
         <source> Registar adotante </source>
@@ -748,7 +1156,7 @@
         <source> Processos em aberto </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">32,34</context>
+          <context context-type="linenumber">31,33</context>
         </context-group>
         <note priority="1" from="description">Pending adoptions label</note>
       </trans-unit>
@@ -756,7 +1164,7 @@
         <source> Adoções concluídas </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">39,41</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
         <note priority="1" from="description">Completed adoptions label</note>
       </trans-unit>
@@ -764,7 +1172,7 @@
         <source> Animais disponíveis </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
         <note priority="1" from="description">Available animals label</note>
       </trans-unit>
@@ -772,7 +1180,7 @@
         <source> Novo processo </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">60,65</context>
+          <context context-type="linenumber">59,64</context>
         </context-group>
         <note priority="1" from="description">New adoption process section</note>
       </trans-unit>
@@ -780,7 +1188,7 @@
         <source> Animal </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">69,72</context>
         </context-group>
         <note priority="1" from="description">Animal field label</note>
       </trans-unit>
@@ -788,7 +1196,7 @@
         <source> Seleciona um animal </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">78,81</context>
+          <context context-type="linenumber">77,80</context>
         </context-group>
         <note priority="1" from="description">Animal select placeholder</note>
       </trans-unit>
@@ -796,7 +1204,7 @@
         <source> Nenhum animal disponível para adoção </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">83,85</context>
+          <context context-type="linenumber">82,84</context>
         </context-group>
         <note priority="1" from="description">No animals available placeholder</note>
       </trans-unit>
@@ -804,7 +1212,7 @@
         <source> Seleciona o animal para iniciar o processo. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">97,102</context>
+          <context context-type="linenumber">96,101</context>
         </context-group>
         <note priority="1" from="description">Animal required error</note>
       </trans-unit>
@@ -812,7 +1220,7 @@
         <source> Novo adotante </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">110,112</context>
         </context-group>
         <note priority="1" from="description">New adopter mode</note>
       </trans-unit>
@@ -820,7 +1228,7 @@
         <source> Adotante registado </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">121,124</context>
+          <context context-type="linenumber">120,123</context>
         </context-group>
         <note priority="1" from="description">Existing adopter mode</note>
       </trans-unit>
@@ -828,7 +1236,7 @@
         <source> Seleciona se é um novo adotante ou um adotante registado. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">130,133</context>
+          <context context-type="linenumber">129,132</context>
         </context-group>
         <note priority="1" from="description">Adopter mode error</note>
       </trans-unit>
@@ -836,7 +1244,7 @@
         <source> Adotante </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">139,142</context>
+          <context context-type="linenumber">138,141</context>
         </context-group>
         <note priority="1" from="description">Existing adopter label</note>
       </trans-unit>
@@ -844,7 +1252,7 @@
         <source> Seleciona um adotante </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">148,150</context>
+          <context context-type="linenumber">147,149</context>
         </context-group>
         <note priority="1" from="description">Adopter select placeholder</note>
       </trans-unit>
@@ -852,7 +1260,7 @@
         <source> Nenhum adotante disponível para adoção </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">154,156</context>
+          <context context-type="linenumber">153,155</context>
         </context-group>
         <note priority="1" from="description">No adopters available placeholder</note>
       </trans-unit>
@@ -860,7 +1268,7 @@
         <source> Seleciona o adotante registado. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">168,174</context>
+          <context context-type="linenumber">167,173</context>
         </context-group>
         <note priority="1" from="description">Existing adopter required error</note>
       </trans-unit>
@@ -868,7 +1276,7 @@
         <source> Iniciar processo </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">192,197</context>
+          <context context-type="linenumber">190,195</context>
         </context-group>
         <note priority="1" from="description">Start adoption process button</note>
       </trans-unit>
@@ -876,7 +1284,7 @@
         <source> A iniciar... </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">199,202</context>
+          <context context-type="linenumber">197,200</context>
         </context-group>
         <note priority="1" from="description">Starting process loading</note>
       </trans-unit>
@@ -884,7 +1292,7 @@
         <source> Processos em aberto </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">214,218</context>
+          <context context-type="linenumber">211,215</context>
         </context-group>
         <note priority="1" from="description">Pending processes section</note>
       </trans-unit>
@@ -892,7 +1300,7 @@
         <source> Não existem processos de adoção em aberto. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">221,224</context>
+          <context context-type="linenumber">218,221</context>
         </context-group>
         <note priority="1" from="description">No pending adoptions</note>
       </trans-unit>
@@ -900,7 +1308,7 @@
         <source> Animal </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">232,235</context>
+          <context context-type="linenumber">229,232</context>
         </context-group>
         <note priority="1" from="description">Animal column</note>
       </trans-unit>
@@ -908,7 +1316,7 @@
         <source> Adotante </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">236,239</context>
+          <context context-type="linenumber">233,236</context>
         </context-group>
         <note priority="1" from="description">Adopter column</note>
       </trans-unit>
@@ -916,7 +1324,7 @@
         <source> Contacto </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">240,243</context>
+          <context context-type="linenumber">237,240</context>
         </context-group>
         <note priority="1" from="description">Contact column</note>
       </trans-unit>
@@ -924,7 +1332,7 @@
         <source> Pedido em </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">244,247</context>
+          <context context-type="linenumber">241,244</context>
         </context-group>
         <note priority="1" from="description">Request date column</note>
       </trans-unit>
@@ -932,7 +1340,7 @@
         <source> Estado </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">248,251</context>
+          <context context-type="linenumber">245,248</context>
         </context-group>
         <note priority="1" from="description">Status column</note>
       </trans-unit>
@@ -940,7 +1348,7 @@
         <source> Aprovar </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">324,327</context>
+          <context context-type="linenumber">321,324</context>
         </context-group>
         <note priority="1" from="description">Approve adoption button</note>
       </trans-unit>
@@ -948,7 +1356,7 @@
         <source> Rejeitar </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">332,335</context>
+          <context context-type="linenumber">329,332</context>
         </context-group>
         <note priority="1" from="description">Reject adoption button</note>
       </trans-unit>
@@ -956,7 +1364,7 @@
         <source> Processos concluídos </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">353,357</context>
+          <context context-type="linenumber">349,353</context>
         </context-group>
         <note priority="1" from="description">Completed processes section</note>
       </trans-unit>
@@ -964,7 +1372,7 @@
         <source> Ainda não existem processos concluídos. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">360,363</context>
+          <context context-type="linenumber">356,359</context>
         </context-group>
         <note priority="1" from="description">No completed adoptions</note>
       </trans-unit>
@@ -972,7 +1380,7 @@
         <source> Animal </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">379,380</context>
+          <context context-type="linenumber">375,376</context>
         </context-group>
         <note priority="1" from="description">Sort animal</note>
       </trans-unit>
@@ -980,7 +1388,7 @@
         <source> Adotante </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">395,397</context>
+          <context context-type="linenumber">391,393</context>
         </context-group>
         <note priority="1" from="description">Sort adopter</note>
       </trans-unit>
@@ -988,7 +1396,7 @@
         <source> Contacto </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">411,413</context>
+          <context context-type="linenumber">407,409</context>
         </context-group>
         <note priority="1" from="description">Sort contact</note>
       </trans-unit>
@@ -996,7 +1404,7 @@
         <source> Decisão </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">427,430</context>
+          <context context-type="linenumber">423,426</context>
         </context-group>
         <note priority="1" from="description">Sort decision date</note>
       </trans-unit>
@@ -1004,7 +1412,7 @@
         <source> Estado </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">443,444</context>
+          <context context-type="linenumber">439,440</context>
         </context-group>
         <note priority="1" from="description">Sort status</note>
       </trans-unit>
@@ -1012,7 +1420,7 @@
         <source> Registar devolução </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">536,539</context>
+          <context context-type="linenumber">533,536</context>
         </context-group>
         <note priority="1" from="description">Return adoption button</note>
       </trans-unit>
@@ -3159,173 +3567,173 @@
         </context-group>
       </trans-unit>
       <trans-unit id="stats.export.button" datatype="html">
-        <source>Exportar Excel</source>
+        <source> Exportar Excel </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">16,17</context>
+          <context context-type="linenumber">18,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.export.loading" datatype="html">
-        <source>A exportar...</source>
+        <source> A exportar... </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">17,20</context>
+          <context context-type="linenumber">22,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.loading" datatype="html">
         <source> A carregar estatísticas... </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">22,25</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.animals.status.title" datatype="html">
         <source>Animais por estado</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">42,45</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.empty" datatype="html">
         <source> Sem dados registados. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">56,57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">60,61</context>
+          <context context-type="linenumber">70,71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">104,105</context>
+          <context context-type="linenumber">114,115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">128,129</context>
+          <context context-type="linenumber">138,139</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">142,143</context>
+          <context context-type="linenumber">152,153</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">156,157</context>
+          <context context-type="linenumber">166,167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">170,171</context>
+          <context context-type="linenumber">180,181</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">194,195</context>
+          <context context-type="linenumber">204,205</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">218,219</context>
+          <context context-type="linenumber">228,229</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">232,233</context>
+          <context context-type="linenumber">242,243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">256,257</context>
+          <context context-type="linenumber">266,267</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">270,271</context>
+          <context context-type="linenumber">280,281</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.animals.availability.title" datatype="html">
         <source>Disponibilidade dos animais</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">56,59</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adoptions.requests.title" datatype="html">
         <source>Pedidos de adoção por mês</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adoptions.accepted.title" datatype="html">
         <source>Adoções aceites por mês</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">90,93</context>
+          <context context-type="linenumber">100,103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adoptions.status.title" datatype="html">
         <source>Estado das adoções</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">100,103</context>
+          <context context-type="linenumber">110,113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adoptions.species.title" datatype="html">
         <source>Espécies mais adotadas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">124,127</context>
+          <context context-type="linenumber">134,137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adoptions.breeds.title" datatype="html">
         <source>Raças mais adotadas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">138,141</context>
+          <context context-type="linenumber">148,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.animals.species.title" datatype="html">
         <source>Animais por espécie</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">152,155</context>
+          <context context-type="linenumber">162,165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.animals.gender.title" datatype="html">
         <source>Género dos animais</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">166,169</context>
+          <context context-type="linenumber">176,179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.animals.microchip.title" datatype="html">
         <source>Microchip</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">190,193</context>
+          <context context-type="linenumber">200,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.cares.registered.title" datatype="html">
         <source>Cuidados registados</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">214,217</context>
+          <context context-type="linenumber">224,227</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.cares.status.title" datatype="html">
         <source>Estado dos cuidados</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">228,231</context>
+          <context context-type="linenumber">238,241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adopters.housing.title" datatype="html">
         <source>Tipo de habitação dos adotantes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">252,255</context>
+          <context context-type="linenumber">262,265</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stats.adopters.species.title" datatype="html">
         <source>Espécies preferidas pelos adotantes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
-          <context context-type="linenumber">266,269</context>
+          <context context-type="linenumber">276,279</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8513029167698384448" datatype="html">

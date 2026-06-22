@@ -10,10 +10,23 @@
     </div>
 
     <div class="info-organizacao">
-      <span class="etiqueta">Organização</span>
+      <span class="etiqueta"
+            i18n="Organization label@@navbar.private.organization.label">
+        Organização
+      </span>
 
       <strong>
-        {{ organizationId ? 'Organização associada' : 'Organização' }}
+        <ng-container *ngIf="organizationId; else noOrganization">
+          <span i18n="Associated organization text@@navbar.private.organization.associated">
+            Organização associada
+          </span>
+        </ng-container>
+
+        <ng-template #noOrganization>
+          <span i18n="Organization text@@navbar.private.organization.default">
+            Organização
+          </span>
+        </ng-template>
       </strong>
     </div>
   </div>
@@ -37,11 +50,21 @@
     </button>
 
     <div *ngIf="isMenuOpen" class="menu-utilizador">
-      <a routerLink="/app/profile"> Perfil </a>
+      <a routerLink="/app/profile"
+         i18n="Profile menu item@@navbar.private.menu.profile">
+        Perfil
+      </a>
 
-      <a routerLink="/app/settings"> Definições </a>
+      <a routerLink="/app/settings"
+         i18n="Settings menu item@@navbar.private.menu.settings">
+        Definições
+      </a>
 
-      <button type="button" (click)="logout()">Terminar sessão</button>
+      <button type="button"
+              (click)="logout()"
+              i18n="Logout button@@navbar.private.menu.logout">
+        Terminar sessão
+      </button>
     </div>
   </div>
 </header>

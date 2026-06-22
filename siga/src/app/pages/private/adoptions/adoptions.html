@@ -24,7 +24,6 @@
 
   <ng-container *ngIf="!isLoading">
 
-    <!-- 📊 Summary -->
     <div class="summary-grid">
 
       <article class="summary-card">
@@ -173,7 +172,6 @@
         </div>
       </div>
 
-      <!-- 👤 New adopter fields -->
       <app-adoption-adopter-fields
         *ngIf="isNewAdopterMode"
         [form]="form">
@@ -206,7 +204,6 @@
 
     </form>
 
-    <!-- 📌 Pending -->
     <section class="process-section">
 
       <div class="section-header">
@@ -345,7 +342,6 @@
 
     </section>
 
-    <!-- 📌 Completed -->
     <section class="process-section">
 
       <div class="section-header">
@@ -455,6 +451,7 @@
 
           <tbody>
 
+          <!--      TODO: Fazer tradução    -->
           <tr *ngFor="let adoption of sortedCompletedAdoptions">
 
             <td>
