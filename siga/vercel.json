@@ -1,4 +1,18 @@
 {
+  "rewrites": [
+    {
+      "source": "/en",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/en/:path((?!.*\\..*).*)",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/:path((?!api/|en/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
