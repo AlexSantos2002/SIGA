@@ -924,6 +924,16 @@
         <target>Create account</target>
       </trans-unit>
 
+      <trans-unit id="register.org.email.placeholder" datatype="html">
+        <source>contacto@organizacao.pt</source>
+        <target>contact@organization.com</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.email.placeholder" datatype="html">
+        <source>email@exemplo.pt</source>
+        <target>admin@example.com</target>
+      </trans-unit>
+
       <!--   Fim da página de registo     -->
 
       <!--    Página de login    -->
