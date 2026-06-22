@@ -145,29 +145,29 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
   get metrics(): SummaryMetric[] {
     return [
       {
-        label: 'Animais registados',
+        label: $localize`:Dashboard metric label|@@stats.metric.animalsRegistered:Animais registados`,
         value: this.animals.length,
-        detail: `${this.availableAnimalsCount} disponiveis para adocao`,
+        detail: $localize`:Dashboard metric detail|@@stats.metric.animalsRegistered.detail:${this.availableAnimalsCount}:count: disponiveis para adocao`,
       },
       {
-        label: 'Taxa de adocao',
+        label: $localize`:Dashboard metric label|@@stats.metric.adoptionRate:Taxa de adocao`,
         value: `${this.adoptionSuccessRate}%`,
-        detail: `${this.acceptedAdoptionsCount} processos aceites`,
+        detail: $localize`:Dashboard metric detail|@@stats.metric.adoptionRate.detail:${this.acceptedAdoptionsCount}:count: processos aceites`,
       },
       {
-        label: 'Processos em aberto',
+        label: $localize`:Dashboard metric label|@@stats.metric.openProcesses:Processos em aberto`,
         value: this.pendingAdoptionsCount,
-        detail: `${this.completedAdoptionsCount} processos concluidos`,
+        detail: $localize`:Dashboard metric detail|@@stats.metric.openProcesses.detail:${this.completedAdoptionsCount}:count: processos concluidos`,
       },
       {
-        label: 'Avisos de cuidados',
+        label: $localize`:Dashboard metric label|@@stats.metric.careAlerts:Avisos de cuidados`,
         value: this.careAlertsCount,
-        detail: `${this.pendingCareRecordsCount} cuidados pendentes`,
+        detail: $localize`:Dashboard metric detail|@@stats.metric.careAlerts.detail:${this.pendingCareRecordsCount}:count: cuidados pendentes`,
       },
       {
-        label: 'Adotantes',
+        label: $localize`:Dashboard metric label|@@stats.metric.adopters:Adotantes`,
         value: this.adopters.length,
-        detail: `${this.flaggedAdoptersCount} sinalizados`,
+        detail: $localize`:Dashboard metric detail|@@stats.metric.adopters.detail:${this.flaggedAdoptersCount}:count: sinalizados`,
       },
     ];
   }
@@ -256,25 +256,49 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
 
   get careTypeBars(): BarChartItem[] {
     const labels: Record<AnimalCareType, string> = {
-      vaccine: 'Vacinas',
-      deworming: 'Desparasitacoes',
-      appointment: 'Consultas',
+      vaccine: 'vaccine',
+      deworming: 'deworming',
+      appointment: 'appointment',
     };
 
-    const counts = this.countBy(this.careRecords, (record) => labels[record.type]);
+    const counts = this.countBy(
+      this.careRecords,
+      (record) => labels[record.type]
+    );
 
-    return this.createBarItems(this.mapCountsToEntries(counts));
+    return this.createBarItems(
+      this.mapCountsToEntries(counts).map(entry => ({
+        ...entry,
+        label: this.translateCareType(entry.label),
+      }))
+    );
+  }
+
+  private translateCareType(key: string): string {
+    switch (key) {
+      case 'vaccine':
+        return $localize`:Care type|@@stats.bar.careType.vaccine:Vacinas`;
+
+      case 'deworming':
+        return $localize`:Care type|@@stats.bar.careType.deworming:Desparasitações`;
+
+      case 'appointment':
+        return $localize`:Care type|@@stats.bar.careType.appointment:Consultas`;
+
+      default:
+        return key;
+    }
   }
 
   get animalAvailabilityPie(): PieSegment[] {
     return this.createPieSegments([
       {
-        label: 'Disponiveis',
+        label: $localize`:Animal pie segment|@@stats.pie.animals.available:Disponíveis`,
         value: this.availableAnimalsCount,
         color: '#16a34a',
       },
       {
-        label: 'Indisponiveis',
+        label: $localize`:Animal pie segment|@@stats.pie.animals.unavailable:Indisponíveis`,
         value: this.animals.length - this.availableAnimalsCount,
         color: '#94a3b8',
       },
@@ -283,16 +307,24 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
 
   get adoptionStatusPie(): PieSegment[] {
     return this.createPieSegments([
-      { label: 'Em aberto', value: this.pendingAdoptionsCount, color: '#f59e0b' },
-      { label: 'Aceites', value: this.acceptedAdoptionsCount, color: '#16a34a' },
       {
-        label: 'Rejeitados',
-        value: this.adoptions.filter((adoption) => adoption.status === 'rejeitada').length,
+        label: $localize`:Adoption pie segment|@@stats.pie.adoptions.pending:Em aberto`,
+        value: this.pendingAdoptionsCount,
+        color: '#f59e0b',
+      },
+      {
+        label: $localize`:Adoption pie segment|@@stats.pie.adoptions.accepted:Aceites`,
+        value: this.acceptedAdoptionsCount,
+        color: '#16a34a',
+      },
+      {
+        label: $localize`:Adoption pie segment|@@stats.pie.adoptions.rejected:Rejeitados`,
+        value: this.adoptions.filter(a => a.status === 'rejeitada').length,
         color: '#ef4444',
       },
       {
-        label: 'Devolvidos',
-        value: this.adoptions.filter((adoption) => adoption.status === 'devolvida').length,
+        label: $localize`:Adoption pie segment|@@stats.pie.adoptions.returned:Devolvidos`,
+        value: this.adoptions.filter(a => a.status === 'devolvida').length,
         color: '#64748b',
       },
     ]);
@@ -309,13 +341,13 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
   get careStatusPie(): PieSegment[] {
     return this.createPieSegments([
       {
-        label: 'Pendentes',
+        label: $localize`:Care pie segment|@@stats.pie.care.pending:Pendentes`,
         value: this.pendingCareRecordsCount,
         color: '#f59e0b',
       },
       {
-        label: 'Concluidos',
-        value: this.careRecords.filter((record) => record.status === 'completed').length,
+        label: $localize`:Care pie segment|@@stats.pie.care.completed:Concluídos`,
+        value: this.careRecords.filter(r => r.status === 'completed').length,
         color: '#16a34a',
       },
     ]);
@@ -324,13 +356,13 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
   get microchipPie(): PieSegment[] {
     return this.createPieSegments([
       {
-        label: 'Com microchip',
-        value: this.animals.filter((animal) => animal.hasMicrochip).length,
+        label: $localize`:Microchip pie segment|@@stats.pie.microchip.with:Com microchip`,
+        value: this.animals.filter(a => a.hasMicrochip).length,
         color: '#2f6fd6',
       },
       {
-        label: 'Sem microchip',
-        value: this.animals.filter((animal) => !animal.hasMicrochip).length,
+        label: $localize`:Microchip pie segment|@@stats.pie.microchip.without:Sem microchip`,
+        value: this.animals.filter(a => !a.hasMicrochip).length,
         color: '#94a3b8',
       },
     ]);

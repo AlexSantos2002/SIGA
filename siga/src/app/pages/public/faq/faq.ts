@@ -15,8 +15,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Faq implements OnInit {
 
-  // TODO: Refatorar para usar i18n
-
   /**
    * @description
    * Lista de perguntas frequentes apresentadas na página

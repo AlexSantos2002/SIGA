@@ -155,7 +155,7 @@
         Cancelar
       </a>
 
-      <button type="button" [disabled]="isSubmitting">
+      <button type="button" (click)="openImagePicker()" [disabled]="isSubmitting">
         <span *ngIf="selectedFile; else defaultText">
           {{ selectedFile.name }}
         </span>

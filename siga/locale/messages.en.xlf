@@ -969,7 +969,6 @@
         <source>Terminar sessão</source>
         <target>Log out</target>
       </trans-unit>
-      ``` 🤠
 
       <!--   Fim da navbar privada     -->
 
@@ -2134,6 +2133,11 @@
         <target> Back to list </target>
       </trans-unit>
 
+      <trans-unit id="adopters.form.option.undefined" datatype="html">
+        <source> Não definido </source>
+        <target> Not defined </target>
+      </trans-unit>
+
       <trans-unit id="adopters.form.personal.section" datatype="html">
         <source> Informação pessoal </source>
         <target> Personal information </target>
@@ -2799,6 +2803,31 @@
         <target> Internal notes </target>
       </trans-unit>
 
+      <trans-unit id="adoption.status.pendente" datatype="html">
+        <source>Em aberto</source>
+        <target>Open</target>
+      </trans-unit>
+
+      <trans-unit id="adoption.status.aceita" datatype="html">
+        <source>Concluído</source>
+        <target>Completed</target>
+      </trans-unit>
+
+      <trans-unit id="adoption.status.rejeitada" datatype="html">
+        <source>Rejeitado</source>
+        <target>Rejected</target>
+      </trans-unit>
+
+      <trans-unit id="adoption.status.devolvida" datatype="html">
+        <source>Devolvido</source>
+        <target>Returned</target>
+      </trans-unit>
+
+      <trans-unit id="adoptions.applicationDate" datatype="html">
+        <source>Pedido em <x id="INTERPOLATION"/></source>
+        <target>Requested on <x id="INTERPOLATION"/></target>
+      </trans-unit>
+
       <!--    Fim do registo de adotante    -->
 
       <!--   Fim da página de adoções     -->
@@ -2994,6 +3023,56 @@
 
       <!--   Página de estatísticas     -->
 
+      <trans-unit id="stats.metric.animalsRegistered">
+        <source>Animais registados</source>
+        <target>Registered animals</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.animalsRegistered.detail">
+        <source><x id="count"/> disponiveis para adocao</source>
+        <target><x id="count"/> available for adoption</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.adoptionRate">
+        <source>Taxa de adocao</source>
+        <target>Adoption rate</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.adoptionRate.detail">
+        <source><x id="count"/> processos aceites</source>
+        <target><x id="count"/> accepted applications</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.openProcesses">
+        <source>Processos em aberto</source>
+        <target>Open applications</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.openProcesses.detail">
+        <source><x id="count"/> processos concluidos</source>
+        <target><x id="count"/> completed applications</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.careAlerts">
+        <source>Avisos de cuidados</source>
+        <target>Care alerts</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.careAlerts.detail">
+        <source><x id="count"/> cuidados pendentes</source>
+        <target><x id="count"/> pending care records</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.adopters">
+        <source>Adotantes</source>
+        <target>Adopters</target>
+      </trans-unit>
+
+      <trans-unit id="stats.metric.adopters.detail">
+        <source><x id="count"/> sinalizados</source>
+        <target><x id="count"/> flagged</target>
+      </trans-unit>
+
       <trans-unit id="stats.page.title" datatype="html">
         <source>Estatísticas</source>
         <target>Statistics</target>
@@ -3094,7 +3173,72 @@
         <target>Adopters preferred species</target>
       </trans-unit>
 
-      <!--   Página de estatísticas     -->
+      <trans-unit id="stats.pie.animals.available" datatype="html">
+        <source>Disponíveis</source>
+        <target>Available</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.animals.unavailable" datatype="html">
+        <source>Indisponíveis</source>
+        <target>Unavabilable</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.adoptions.pending" datatype="html">
+        <source>Em aberto</source>
+        <target>Open</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.adoptions.accepted" datatype="html">
+        <source>Aceites</source>
+        <target>Accepted</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.adoptions.rejected" datatype="html">
+        <source>Rejeitados</source>
+        <target>Rejected</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.adoptions.returned" datatype="html">
+        <source>Devolvidos</source>
+        <target>Returned</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.care.pending" datatype="html">
+        <source>Pendentes</source>
+        <target>Pending</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.care.completed" datatype="html">
+        <source>Concluídos</source>
+        <target>Completed</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.microchip.with" datatype="html">
+        <source>Com microchip</source>
+        <target>With microchip</target>
+      </trans-unit>
+
+      <trans-unit id="stats.pie.microchip.without" datatype="html">
+        <source>Sem microchip</source>
+        <target>Without microchip</target>
+      </trans-unit>
+
+      <trans-unit id="stats.bar.careType.vaccine" datatype="html">
+        <source>Vacinas</source>
+        <target>Vaccines</target>
+      </trans-unit>
+
+      <trans-unit id="stats.bar.careType.deworming" datatype="html">
+        <source>Desparasitações</source>
+        <target>Deworming</target>
+      </trans-unit>
+
+      <trans-unit id="stats.bar.careType.appointment" datatype="html">
+        <source>Consultas</source>
+        <target>Appointments</target>
+      </trans-unit>
+
+      <!--   Fim da página de estatísticas     -->
 
       <!--   Form options     -->
 

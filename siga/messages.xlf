@@ -102,7 +102,7 @@
         <source> Organização </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
-          <context context-type="linenumber">15,19</context>
+          <context context-type="linenumber">14,18</context>
         </context-group>
         <note priority="1" from="description">Organization label</note>
       </trans-unit>
@@ -110,7 +110,7 @@
         <source> Organização associada </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
-          <context context-type="linenumber">21,25</context>
+          <context context-type="linenumber">20,24</context>
         </context-group>
         <note priority="1" from="description">Associated organization text</note>
       </trans-unit>
@@ -118,7 +118,7 @@
         <source> Organização </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
-          <context context-type="linenumber">27,30</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
         <note priority="1" from="description">Organization text</note>
       </trans-unit>
@@ -126,7 +126,7 @@
         <source> Perfil </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
-          <context context-type="linenumber">55,58</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <note priority="1" from="description">Profile menu item</note>
       </trans-unit>
@@ -134,7 +134,7 @@
         <source> Definições </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
-          <context context-type="linenumber">60,64</context>
+          <context context-type="linenumber">59,63</context>
         </context-group>
         <note priority="1" from="description">Settings menu item</note>
       </trans-unit>
@@ -142,7 +142,7 @@
         <source> Terminar sessão </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar-private/navbar-private.html</context>
-          <context context-type="linenumber">66,70</context>
+          <context context-type="linenumber">65,69</context>
         </context-group>
         <note priority="1" from="description">Logout button</note>
       </trans-unit>
@@ -578,6 +578,38 @@
           <context context-type="linenumber">96</context>
         </context-group>
         <note priority="1" from="meaning">Adopter preferred species</note>
+      </trans-unit>
+      <trans-unit id="adoption.status.pendente" datatype="html">
+        <source>Em aberto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption status</note>
+      </trans-unit>
+      <trans-unit id="adoption.status.aceita" datatype="html">
+        <source>Concluído</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption status</note>
+      </trans-unit>
+      <trans-unit id="adoption.status.rejeitada" datatype="html">
+        <source>Rejeitado</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption status</note>
+      </trans-unit>
+      <trans-unit id="adoption.status.devolvida" datatype="html">
+        <source>Devolvido</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants/form-options.ts</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption status</note>
       </trans-unit>
       <trans-unit id="adopters.create.header.title" datatype="html">
         <source> Registar adotante </source>
@@ -1416,11 +1448,19 @@
         </context-group>
         <note priority="1" from="description">Sort status</note>
       </trans-unit>
+      <trans-unit id="adoptions.applicationDate" datatype="html">
+        <source> Pedido em <x id="INTERPOLATION" equiv-text="{{ adoption.applicationDate | date: &apos;dd/MM/yyyy&apos; }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
+          <context context-type="linenumber">510,511</context>
+        </context-group>
+        <note priority="1" from="description">Application date label</note>
+      </trans-unit>
       <trans-unit id="adoptions.completed.return" datatype="html">
         <source> Registar devolução </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/private/adoptions/adoptions.html</context>
-          <context context-type="linenumber">533,536</context>
+          <context context-type="linenumber">534,537</context>
         </context-group>
         <note priority="1" from="description">Return adoption button</note>
       </trans-unit>
@@ -3735,6 +3775,190 @@
           <context context-type="sourcefile">src/app/pages/private/statistics/statistics.html</context>
           <context context-type="linenumber">276,279</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="stats.metric.animalsRegistered" datatype="html">
+        <source>Animais registados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric label</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.animalsRegistered.detail" datatype="html">
+        <source><x id="count" equiv-text="this.availableAnimalsCount"/> disponiveis para adocao</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric detail</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.adoptionRate" datatype="html">
+        <source>Taxa de adocao</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric label</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.adoptionRate.detail" datatype="html">
+        <source><x id="count" equiv-text="this.acceptedAdoptionsCount"/> processos aceites</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric detail</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.openProcesses" datatype="html">
+        <source>Processos em aberto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric label</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.openProcesses.detail" datatype="html">
+        <source><x id="count" equiv-text="this.completedAdoptionsCount"/> processos concluidos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric detail</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.careAlerts" datatype="html">
+        <source>Avisos de cuidados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric label</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.careAlerts.detail" datatype="html">
+        <source><x id="count" equiv-text="this.pendingCareRecordsCount"/> cuidados pendentes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric detail</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.adopters" datatype="html">
+        <source>Adotantes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric label</note>
+      </trans-unit>
+      <trans-unit id="stats.metric.adopters.detail" datatype="html">
+        <source><x id="count" equiv-text="this.flaggedAdoptersCount"/> sinalizados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+        <note priority="1" from="meaning">Dashboard metric detail</note>
+      </trans-unit>
+      <trans-unit id="stats.bar.careType.vaccine" datatype="html">
+        <source>Vacinas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">280</context>
+        </context-group>
+        <note priority="1" from="meaning">Care type</note>
+      </trans-unit>
+      <trans-unit id="stats.bar.careType.deworming" datatype="html">
+        <source>Desparasitações</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">283</context>
+        </context-group>
+        <note priority="1" from="meaning">Care type</note>
+      </trans-unit>
+      <trans-unit id="stats.bar.careType.appointment" datatype="html">
+        <source>Consultas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">286</context>
+        </context-group>
+        <note priority="1" from="meaning">Care type</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.animals.available" datatype="html">
+        <source>Disponíveis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">296</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.animals.unavailable" datatype="html">
+        <source>Indisponíveis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">301</context>
+        </context-group>
+        <note priority="1" from="meaning">Animal pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.adoptions.pending" datatype="html">
+        <source>Em aberto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">311</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.adoptions.accepted" datatype="html">
+        <source>Aceites</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">316</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.adoptions.rejected" datatype="html">
+        <source>Rejeitados</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">321</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.adoptions.returned" datatype="html">
+        <source>Devolvidos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">326</context>
+        </context-group>
+        <note priority="1" from="meaning">Adoption pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.care.pending" datatype="html">
+        <source>Pendentes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">344</context>
+        </context-group>
+        <note priority="1" from="meaning">Care pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.care.completed" datatype="html">
+        <source>Concluídos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">349</context>
+        </context-group>
+        <note priority="1" from="meaning">Care pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.microchip.with" datatype="html">
+        <source>Com microchip</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">359</context>
+        </context-group>
+        <note priority="1" from="meaning">Microchip pie segment</note>
+      </trans-unit>
+      <trans-unit id="stats.pie.microchip.without" datatype="html">
+        <source>Sem microchip</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/private/statistics/statistics.ts</context>
+          <context context-type="linenumber">364</context>
+        </context-group>
+        <note priority="1" from="meaning">Microchip pie segment</note>
       </trans-unit>
       <trans-unit id="8513029167698384448" datatype="html">
         <source>Sobre o SIGA</source>

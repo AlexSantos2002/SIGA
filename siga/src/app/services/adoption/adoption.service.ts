@@ -346,7 +346,6 @@ export class AdoptionService {
     return this.toAdoption(data);
   }
 
-  // TODO: Permitir a remoção de adoções aceitas/rejeitadas?
   /**
    * Remove uma adoção (apenas se estiver pendente)
    */

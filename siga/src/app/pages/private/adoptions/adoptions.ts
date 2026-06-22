@@ -4,7 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { ANIMAL_GENDER_LABELS, getMappedLabel } from '../../../constants/form-options';
+import {
+  ADOPTION_STATUSES,
+  ANIMAL_GENDER_LABELS,
+  getMappedLabel,
+  getOptionLabel
+} from '../../../constants/form-options';
 import { Adoption } from '../../../models/adoption/adoption.model';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { Animal } from '../../../models/animal/animal.model';
@@ -232,14 +237,7 @@ export class Adoptions implements OnInit, OnDestroy {
   }
 
   getStatusLabel(status: Adoption['status']): string {
-    const labels: Record<Adoption['status'], string> = {
-      pendente: 'Em aberto',
-      aceita: 'Concluído',
-      rejeitada: 'Rejeitado',
-      devolvida: 'Devolvido',
-    };
-
-    return labels[status];
+    return getOptionLabel(ADOPTION_STATUSES, status);
   }
 
   getProcessDate(adoption: Adoption): string | null {

@@ -451,7 +451,6 @@
 
           <tbody>
 
-          <!--      TODO: Fazer tradução    -->
           <tr *ngFor="let adoption of sortedCompletedAdoptions">
 
             <td>
@@ -506,9 +505,11 @@
                   }}
                 </span>
 
-              <span class="secondary-line">
-                  Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}
-                </span>
+              <span class="secondary-line"
+                    i18n="Application date label@@adoptions.applicationDate">
+                Pedido em {{ adoption.applicationDate | date: 'dd/MM/yyyy' }}
+              </span>
+
             </td>
 
             <td>

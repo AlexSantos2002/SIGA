@@ -96,6 +96,13 @@ export const ADOPTER_PREFERRED_SPECIES: SelectOption[] = [
   { value: 'outro',       label: $localize`:Adopter preferred species|@@adopter.species.outro:Outro` },
 ];
 
+export const ADOPTION_STATUSES: SelectOption[] = [
+  { value: 'pendente', label: $localize`:Adoption status|@@adoption.status.pendente:Em aberto`, },
+  { value: 'aceita', label: $localize`:Adoption status|@@adoption.status.aceita:Concluído`, },
+  { value: 'rejeitada', label: $localize`:Adoption status|@@adoption.status.rejeitada:Rejeitado`, },
+  { value: 'devolvida', label: $localize`:Adoption status|@@adoption.status.devolvida:Devolvido`, },
+];
+
 export function getOptionLabel(
   options: SelectOption[],
   value: string | number | null | undefined,
