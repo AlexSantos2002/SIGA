@@ -7,48 +7,63 @@
 
     <!-- Cabeçalho da página -->
     <div class="cabecalho-registo">
-      <p class="etiqueta-registo" i18n>REGISTO</p>
+      <p class="etiqueta-registo" i18n="@@register.tag">
+        REGISTO
+      </p>
 
-      <h1 i18n>Criar conta da organização</h1>
+      <h1 i18n="@@register.title">
+        Criar conta da organização
+      </h1>
 
       <div class="linha-registo"></div>
 
-      <p class="descricao-registo" i18n>
-        Preencha os dados da organização e do administrador principal para criar
-        a conta inicial no SIGA.
+      <p class="descricao-registo" i18n="@@register.description">
+        Preencha os dados da organização e do administrador principal para criar a conta inicial no SIGA.
       </p>
     </div>
 
-    <!--Formulário de registo-->
+    <!-- Formulário -->
     <form [formGroup]="form" (ngSubmit)="register()" class="formulario-registo">
 
-      <!--Dados da organização-->
+      <!-- ================= ORGANIZAÇÃO ================= -->
       <div class="secao-formulario">
-        <h2 i18n>Dados da organização</h2>
+        <h2 i18n="@@register.org.title">Dados da organização</h2>
 
         <div class="linha-formulario">
+
+          <!-- Nome -->
           <div class="grupo-campo">
-            <label for="nomeOrganizacao" i18n>Nome da organização</label>
+            <label for="nomeOrganizacao" i18n="@@register.org.name.label">
+              Nome da organização
+            </label>
 
             <input
               id="nomeOrganizacao"
               type="text"
               placeholder="Associação Patas Seguras"
               formControlName="name"
-              i18n-placeholder
+              i18n-placeholder="@@register.org.name.placeholder"
             />
 
-            <small class="text-red-500" *ngIf="isInvalid('name') && form.get('name')?.hasError('required')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('name') && form.get('name')?.hasError('required')"
+                   i18n="@@register.org.name.error.required">
               Campo obrigatório
             </small>
 
-            <small class="text-red-500" *ngIf="isInvalid('name') && form.get('name')?.hasError('minlength')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('name') && form.get('name')?.hasError('minlength')"
+                   i18n="@@register.org.name.error.minlength">
               Nome demasiado curto
             </small>
           </div>
 
+          <!-- Email -->
           <div class="grupo-campo">
-            <label for="emailOrganizacao" i18n>Email da organização</label>
+            <label for="emailOrganizacao" i18n="@@register.org.email.label">
+              Email da organização
+            </label>
+
             <input
               id="emailOrganizacao"
               type="email"
@@ -56,19 +71,29 @@
               formControlName="email"
             />
 
-            <small class="text-red-500" *ngIf="isInvalid('email') && form.get('email')?.hasError('required')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('email') && form.get('email')?.hasError('required')"
+                   i18n="@@register.org.email.error.required">
               Campo obrigatório
             </small>
 
-            <small class="text-red-500" *ngIf="isInvalid('email') && form.get('email')?.hasError('email')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('email') && form.get('email')?.hasError('email')"
+                   i18n="@@register.org.email.error.invalid">
               Email inválido
             </small>
           </div>
+
         </div>
 
         <div class="linha-formulario">
+
+          <!-- Telefone -->
           <div class="grupo-campo">
-            <label for="telefone" i18n>Telefone</label>
+            <label for="telefone" i18n="@@register.org.phone.label">
+              Telefone
+            </label>
+
             <input
               id="telefone"
               type="text"
@@ -77,60 +102,83 @@
             />
 
             <small class="text-red-500"
-                   *ngIf="form.get('phone')?.touched && form.get('phone')?.hasError('required')">
+                   *ngIf="form.get('phone')?.touched && form.get('phone')?.hasError('required')"
+                   i18n="@@register.org.phone.error.required">
               Campo obrigatório
             </small>
 
             <small class="text-red-500"
-                   *ngIf="form.get('phone')?.touched && form.get('phone')?.hasError('pattern')">
+                   *ngIf="form.get('phone')?.touched && form.get('phone')?.hasError('pattern')"
+                   i18n="@@register.org.phone.error.invalid">
               Número inválido (9 dígitos)
             </small>
           </div>
 
+          <!-- Morada -->
           <div class="grupo-campo">
-            <label for="morada" i18n>Morada</label>
+            <label for="morada" i18n="@@register.org.address.label">
+              Morada
+            </label>
+
             <input
               id="morada"
               type="text"
               placeholder="Rua das Flores, 10"
               formControlName="address"
-              i18n-placeholder
+              i18n-placeholder="@@register.org.address.placeholder"
             />
 
             <small class="text-red-500"
-                   *ngIf="form.get('address')?.touched && form.get('address')?.hasError('required')">
+                   *ngIf="form.get('address')?.touched && form.get('address')?.hasError('required')"
+                   i18n="@@register.org.address.error.required">
               Campo obrigatório
             </small>
           </div>
+
         </div>
       </div>
 
-      <!--Dados do administrador-->
+      <!-- ================= ADMIN ================= -->
       <div class="secao-formulario">
-        <h2 i18n>Administrador principal</h2>
+        <h2 i18n="@@register.admin.title">
+          Administrador principal
+        </h2>
 
         <div class="linha-formulario">
+
+          <!-- Nome -->
           <div class="grupo-campo">
-            <label for="nomeAdmin" i18n>Nome</label>
+            <label for="nomeAdmin" i18n="@@register.admin.name.label">
+              Nome
+            </label>
+
             <input
               id="nomeAdmin"
               type="text"
               placeholder="Nome do responsável"
               formControlName="adminName"
-              i18n-placeholder
+              i18n-placeholder="@@register.admin.name.placeholder"
             />
 
-            <small class="text-red-500" *ngIf="isInvalid('adminName') && form.get('adminName')?.hasError('required')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('adminName') && form.get('adminName')?.hasError('required')"
+                   i18n="@@register.admin.name.error.required">
               Campo obrigatório
             </small>
 
-            <small class="text-red-500" *ngIf="isInvalid('adminName') && form.get('adminName')?.hasError('minlength')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('adminName') && form.get('adminName')?.hasError('minlength')"
+                   i18n="@@register.admin.name.error.minlength">
               Nome demasiado curto
             </small>
           </div>
 
+          <!-- Email -->
           <div class="grupo-campo">
-            <label for="emailAdmin" i18n>Email de acesso</label>
+            <label for="emailAdmin" i18n="@@register.admin.email.label">
+              Email de acesso
+            </label>
+
             <input
               id="emailAdmin"
               type="email"
@@ -138,78 +186,115 @@
               formControlName="adminEmail"
             />
 
-            <small class="text-red-500" *ngIf="isInvalid('adminEmail') && form.get('adminEmail')?.hasError('required')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('adminEmail') && form.get('adminEmail')?.hasError('required')"
+                   i18n="@@register.admin.email.error.required">
               Campo obrigatório
             </small>
 
-            <small class="text-red-500" *ngIf="isInvalid('adminEmail') && form.get('adminEmail')?.hasError('email')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('adminEmail') && form.get('adminEmail')?.hasError('email')"
+                   i18n="@@register.admin.email.error.invalid">
               Email inválido
             </small>
           </div>
+
         </div>
 
         <div class="linha-formulario">
+
+          <!-- Password -->
           <div class="grupo-campo">
-            <label for="password" i18n>Palavra-passe</label>
+            <label for="password" i18n="@@register.admin.password.label">
+              Palavra-passe
+            </label>
+
             <input
               id="password"
               type="password"
               placeholder="Introduza a palavra-passe"
               formControlName="adminPassword"
-              i18n-placeholder/>
+              i18n-placeholder="@@register.admin.password.placeholder"
+            />
 
-            <small class="text-red-500" *ngIf="isInvalid('adminPassword') && form.get('adminPassword')?.hasError('minlength')">
+            <small class="text-red-500"
+                   *ngIf="isInvalid('adminPassword') && form.get('adminPassword')?.hasError('minlength')"
+                   i18n="@@register.admin.password.error.minlength">
               A palavra-passe deve ter ao menos 6 caracteres
             </small>
           </div>
 
+          <!-- Confirm password -->
           <div class="grupo-campo">
-            <label for="confirmarPassword" i18n>Confirmar palavra-passe</label>
+            <label for="confirmarPassword" i18n="@@register.admin.passwordConfirm.label">
+              Confirmar palavra-passe
+            </label>
+
             <input
               id="confirmarPassword"
               type="password"
               placeholder="Repita a palavra-passe"
               formControlName="adminPasswordConfirm"
-              i18n-placeholder
+              i18n-placeholder="@@register.admin.passwordConfirm.placeholder"
             />
 
             <small class="text-red-500"
-                   *ngIf="form.hasError('passwordMismatch') && form.get('adminPasswordConfirm')?.touched">
+                   *ngIf="form.hasError('passwordMismatch') && form.get('adminPasswordConfirm')?.touched"
+                   i18n="@@register.admin.passwordConfirm.error.mismatch">
               As palavras-passe não são iguais
             </small>
           </div>
+
         </div>
       </div>
 
-      <p *ngIf="errorMessage" class="feedback-message error-message">
+      <!-- ================= FEEDBACK ================= -->
+      <p *ngIf="errorMessage"
+         class="feedback-message error-message"
+         i18n="@@register.error.generic">
         {{ errorMessage }}
       </p>
 
-      <p *ngIf="successMessage" class="feedback-message success-message">
+      <p *ngIf="successMessage"
+         class="feedback-message success-message"
+         i18n="@@register.success.emailConfirmation">
         {{ successMessage }}
       </p>
 
-      <!-- Confirmação de dados -->
+      <!-- ================= CHECKBOX ================= -->
       <label class="grupo-checkbox">
         <input type="checkbox" />
-        <span i18n>
-          Confirmo que os dados introduzidos são verdadeiros e pertencem à
-          organização registada.
+
+        <span i18n="@@register.checkbox.confirmData">
+          Confirmo que os dados introduzidos são verdadeiros e pertencem à organização registada.
         </span>
       </label>
 
+      <!-- ================= POLICY ================= -->
       <p class="politica-dados-registo">
-        <span i18n="@@registerDataPolicyIntro">Antes de criar conta, consulte a</span>
-        <a routerLink="/privacy-policy" i18n="@@registerDataPolicyLink"> Política de dados (RGPD)</a>.
+        <span i18n="@@register.policy.intro">
+          Antes de criar conta, consulte a
+        </span>
+
+        <a routerLink="/privacy-policy"
+           i18n="@@register.policy.link">
+          Política de dados (RGPD)
+        </a>
       </p>
 
-      <!-- Ações do formulário -->
+      <!-- ================= ACTIONS ================= -->
       <div class="acoes-formulario">
-        <button type="submit" [disabled]="form.invalid || isLoading" class="botao-submeter">
-          {{ isLoading ? 'A criar...' : 'Criar conta' }}
+        <button
+          type="submit"
+          [disabled]="form.invalid || isLoading"
+          class="botao-submeter"
+        >
+          {{ submitButtonLabel }}
         </button>
 
-        <a routerLink="/login" class="link-login" i18n>
+        <a routerLink="/login"
+           class="link-login"
+           i18n="@@register.login.link">
           Já tenho conta
         </a>
       </div>

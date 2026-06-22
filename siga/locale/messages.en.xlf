@@ -682,202 +682,210 @@
           <context context-type="linenumber">133,135</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3992804442088140699" datatype="html">
-        <source> Cria a tua conta e começa a organizar a gestão animal da tua organização de forma mais simples e estruturada. </source>
-        <target> Create your account and start organizing your organization's animal management in a simpler and more structured way. </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
-          <context context-type="linenumber">136,137</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3456063921733794586" datatype="html">
-        <source> Criar conta </source>
-        <target> Create account </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/home/home.html</context>
-          <context context-type="linenumber">142,143</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4723729699972393049" datatype="html">
+
+      <!--   Página de registo     -->
+
+      <trans-unit id="register.tag" datatype="html">
         <source>REGISTO</source>
         <target>REGISTRATION</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">10,12</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="5713500916207198774" datatype="html">
+
+      <trans-unit id="register.title" datatype="html">
         <source>Criar conta da organização</source>
         <target>Create organization account</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">12,14</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="167599553203686836" datatype="html">
-        <source> Preencha os dados da organização e do administrador principal para criar a conta inicial no SIGA. </source>
-        <target> Fill in the organization and main administrator data to create the initial account on SIGA. </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">17,18</context>
-        </context-group>
+
+      <trans-unit id="register.description" datatype="html">
+        <source>Preencha os dados da organização e do administrador principal para criar a conta inicial no SIGA.</source>
+        <target>Fill in the organization and main administrator details to create the initial SIGA account.</target>
       </trans-unit>
-      <trans-unit id="599279694964963577" datatype="html">
+
+      <trans-unit id="register.org.title" datatype="html">
         <source>Dados da organização</source>
-        <target>Organization data</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">27,29</context>
-        </context-group>
+        <target>Organization details</target>
       </trans-unit>
-      <trans-unit id="4727065767125378286" datatype="html">
+
+      <trans-unit id="register.org.name.label" datatype="html">
         <source>Nome da organização</source>
         <target>Organization name</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">31,32</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="6342404303245908766" datatype="html">
+
+      <trans-unit id="register.org.name.placeholder" datatype="html">
         <source>Associação Patas Seguras</source>
         <target>Safe Paws Association</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">35,36</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="596226359555435876" datatype="html">
+
+      <trans-unit id="register.org.name.error.required" datatype="html">
+        <source>Campo obrigatório</source>
+        <target>Required field</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.name.error.minlength" datatype="html">
+        <source>Nome demasiado curto</source>
+        <target>Name is too short</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.email.label" datatype="html">
         <source>Email da organização</source>
         <target>Organization email</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">42,43</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="2249942102904409775" datatype="html">
+
+      <trans-unit id="register.org.email.error.required" datatype="html">
+        <source>Campo obrigatório</source>
+        <target>Required field</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.email.error.invalid" datatype="html">
+        <source>Email inválido</source>
+        <target>Invalid email</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.phone.label" datatype="html">
+        <source>Telefone</source>
+        <target>Phone number</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.phone.error.required" datatype="html">
+        <source>Campo obrigatório</source>
+        <target>Required field</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.phone.error.invalid" datatype="html">
+        <source>Número inválido (9 dígitos)</source>
+        <target>Invalid number (9 digits)</target>
+      </trans-unit>
+
+      <trans-unit id="register.org.address.label" datatype="html">
         <source>Morada</source>
         <target>Address</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="1345987950970462943" datatype="html">
+
+      <trans-unit id="register.org.address.placeholder" datatype="html">
         <source>Rua das Flores, 10</source>
-        <target>10 Flowers Street</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">68,69</context>
-        </context-group>
+        <target>Flower Street, 10</target>
       </trans-unit>
-      <trans-unit id="1041155509366923391" datatype="html">
+
+      <trans-unit id="register.org.address.error.required" datatype="html">
+        <source>Campo obrigatório</source>
+        <target>Required field</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.title" datatype="html">
         <source>Administrador principal</source>
         <target>Main administrator</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">78,80</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="1527229157887963172" datatype="html">
+
+      <trans-unit id="register.admin.name.label" datatype="html">
+        <source>Nome</source>
+        <target>Name</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.name.placeholder" datatype="html">
         <source>Nome do responsável</source>
-        <target>Name of the person in charge</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">86,87</context>
-        </context-group>
+        <target>Responsible person's name</target>
       </trans-unit>
-      <trans-unit id="6831917850141525267" datatype="html">
+
+      <trans-unit id="register.admin.name.error.required" datatype="html">
+        <source>Campo obrigatório</source>
+        <target>Required field</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.name.error.minlength" datatype="html">
+        <source>Nome demasiado curto</source>
+        <target>Name is too short</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.email.label" datatype="html">
         <source>Email de acesso</source>
-        <target>Access email</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">93,94</context>
-        </context-group>
+        <target>Login email</target>
       </trans-unit>
-      <trans-unit id="3625214439166825841" datatype="html">
+
+      <trans-unit id="register.admin.email.error.required" datatype="html">
+        <source>Campo obrigatório</source>
+        <target>Required field</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.email.error.invalid" datatype="html">
+        <source>Email inválido</source>
+        <target>Invalid email</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.password.label" datatype="html">
         <source>Palavra-passe</source>
         <target>Password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">105,106</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="579908806089817338" datatype="html">
+
+      <trans-unit id="register.admin.password.placeholder" datatype="html">
         <source>Introduza a palavra-passe</source>
-        <target>Enter the password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">109,110</context>
-        </context-group>
+        <target>Enter password</target>
       </trans-unit>
-      <trans-unit id="2780740608724801087" datatype="html">
+
+      <trans-unit id="register.admin.password.error.minlength" datatype="html">
+        <source>A palavra-passe deve ter ao menos 6 caracteres</source>
+        <target>Password must be at least 6 characters long</target>
+      </trans-unit>
+
+      <trans-unit id="register.admin.passwordConfirm.label" datatype="html">
         <source>Confirmar palavra-passe</source>
         <target>Confirm password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">116,117</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="2803155010811042517" datatype="html">
+
+      <trans-unit id="register.admin.passwordConfirm.placeholder" datatype="html">
         <source>Repita a palavra-passe</source>
-        <target>Repeat the password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">120,121</context>
-        </context-group>
+        <target>Repeat password</target>
       </trans-unit>
-      <trans-unit id="2321174301230730808" datatype="html">
-        <source> Confirmo que os dados introduzidos são verdadeiros e pertencem à organização registada. </source>
-        <target> I confirm that the data entered is true and belongs to the registered organization. </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">131,132</context>
-        </context-group>
+
+      <trans-unit id="register.admin.passwordConfirm.error.mismatch" datatype="html">
+        <source>As palavras-passe não são iguais</source>
+        <target>Passwords do not match</target>
       </trans-unit>
-      <trans-unit id="5766127861654266929" datatype="html">
-        <source> Já tenho conta </source>
-        <target> I already have an account </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
+
+      <trans-unit id="register.error.generic" datatype="html">
+        <source>Ocorreu um erro ao criar a conta.</source>
+        <target>An error occurred while creating the account.</target>
       </trans-unit>
-      <trans-unit id="footerLegalTitle" datatype="html">
-        <source>Legal</source>
-        <target>Legal</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
+
+      <trans-unit id="register.success.emailConfirmation" datatype="html">
+        <source>Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessão.</source>
+        <target>Account created. Check your email and click the link sent to confirm your account before signing in.</target>
       </trans-unit>
-      <trans-unit id="footerPrivacyPolicyLink" datatype="html">
-        <source>Política de dados</source>
-        <target>Data policy</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/footer/footer.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
+
+      <trans-unit id="register.checkbox.confirmData" datatype="html">
+        <source>Confirmo que os dados introduzidos são verdadeiros e pertencem à organização registada.</source>
+        <target>I confirm that the provided data is true and belongs to the registered organization.</target>
       </trans-unit>
-      <trans-unit id="registerDataPolicyIntro" datatype="html">
+
+      <trans-unit id="register.policy.intro" datatype="html">
         <source>Antes de criar conta, consulte a</source>
-        <target>Before creating an account, review the</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
+        <target>Before creating an account, please review the </target>
       </trans-unit>
-      <trans-unit id="registerDataPolicyLink" datatype="html">
+
+      <trans-unit id="register.policy.link" datatype="html">
         <source>Política de dados (RGPD)</source>
         <target>Data policy (GDPR)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/public/register/register.html</context>
-          <context context-type="linenumber">140</context>
-        </context-group>
       </trans-unit>
+
+      <trans-unit id="register.login.link" datatype="html">
+        <source>Já tenho conta</source>
+        <target>I already have an account</target>
+      </trans-unit>
+
+      <trans-unit id="auth.success.emailConfirmation" datatype="html">
+        <source>Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessão.</source>
+        <target>Account created. Check your email and click the link sent to confirm your account before signing in.</target>
+      </trans-unit>
+
+      <trans-unit id="auth.button.creating" datatype="html">
+        <source>A criar...</source>
+        <target>Creating...</target>
+      </trans-unit>
+
+      <trans-unit id="auth.button.createAccount" datatype="html">
+        <source>Criar conta</source>
+        <target>Create account</target>
+      </trans-unit>
+
+      <!--   Fim da página de registo     -->
 
       <!--    Página de login    -->
 

@@ -97,8 +97,7 @@ export class Register {
       this.form.reset();
 
       if (result.requiresEmailConfirmation) {
-        this.successMessage =
-          'Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessao.';
+        this.successMessage = $localize`:Auth success message|@@auth.success.emailConfirmation:Conta criada. Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessão.`;
         return;
       }
 
@@ -129,4 +128,10 @@ export class Register {
 
     return password === confirm ? null : { passwordMismatch: true };
   };
+
+  get submitButtonLabel(): string {
+    return this.isLoading
+      ? $localize`:Auth button|@@auth.button.creating:A criar...`
+      : $localize`:Auth button|@@auth.button.createAccount:Criar conta`;
+  }
 }
