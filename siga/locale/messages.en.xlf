@@ -683,6 +683,45 @@
         </context-group>
       </trans-unit>
 
+      <!--   Página de contactos     -->
+
+      <trans-unit id="contact.email.placeholder" datatype="html">
+        <source>o.seu@email.com</source>
+        <target>your.email@example.com</target>
+      </trans-unit>
+
+      <trans-unit id="contact.name.error.required" datatype="html">
+        <source>Indique o seu nome.</source>
+        <target>Please enter your name.</target>
+      </trans-unit>
+
+      <trans-unit id="contact.email.error.invalid" datatype="html">
+        <source>Indique um email válido.</source>
+        <target>Please enter a valid email address.</target>
+      </trans-unit>
+
+      <trans-unit id="contact.subject.error.required" datatype="html">
+        <source>Indique o assunto da mensagem.</source>
+        <target>Please enter the subject of your message.</target>
+      </trans-unit>
+
+      <trans-unit id="contact.message.error.required" datatype="html">
+        <source>Escreva a sua mensagem.</source>
+        <target>Please write your message.</target>
+      </trans-unit>
+
+      <trans-unit id="contact.button.send" datatype="html">
+        <source>Enviar mensagem</source>
+        <target>Send message</target>
+      </trans-unit>
+
+      <trans-unit id="contact.button.sending" datatype="html">
+        <source>A enviar...</source>
+        <target>Sending...</target>
+      </trans-unit>
+
+      <!--   Página de contactos     -->
+
       <!--   Página de registo     -->
 
       <trans-unit id="register.tag" datatype="html">

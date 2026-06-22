@@ -56,10 +56,11 @@ export class Contacts {
       const result = await response.json().catch(() => null);
 
       if (!response.ok || !result?.ok) {
-        throw new Error(result?.message || 'Não foi possível enviar a mensagem.');
+        throw new Error(result?.message || $localize`:@@contact.error.message:Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.`);
       }
 
-      this.successMessage = 'Mensagem enviada com sucesso. Vamos responder assim que possível.';
+      this.successMessage = $localize`:@@contact.success.message:A sua mensagem foi enviada com sucesso. Entraremos em contacto brevemente.`;
+
       this.form.reset({
         name: '',
         email: '',
@@ -71,7 +72,7 @@ export class Contacts {
       this.errorMessage =
         error instanceof Error
           ? error.message
-          : 'Não foi possível enviar a mensagem. Tente novamente mais tarde.';
+          : $localize`:@@contact.error.message:Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.`;
     } finally {
       this.isSubmitting = false;
       this.cdr.detectChanges();

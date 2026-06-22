@@ -4143,7 +4143,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
-          <context context-type="linenumber">81,82</context>
+          <context context-type="linenumber">83,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6499251675131147754" datatype="html">
@@ -4188,32 +4188,99 @@
           <context context-type="linenumber">71,72</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="contact.name.error.required" datatype="html">
+        <source> Indique o seu nome. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">78,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.email.placeholder" datatype="html">
+        <source>o.seu@email.com</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">89,91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.email.error.invalid" datatype="html">
+        <source> Indique um email válido. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">97,99</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4435552890100036332" datatype="html">
         <source>Assunto</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
-          <context context-type="linenumber">95,96</context>
+          <context context-type="linenumber">102,103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5979220134786002379" datatype="html">
         <source>Assunto da mensagem</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
-          <context context-type="linenumber">100,101</context>
+          <context context-type="linenumber">108,109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.subject.error.required" datatype="html">
+        <source> Indique o assunto da mensagem. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">115,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7006504226018571450" datatype="html">
         <source>Mensagem</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
-          <context context-type="linenumber">109,110</context>
+          <context context-type="linenumber">120,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1041467469516131858" datatype="html">
         <source>Escreva aqui a sua mensagem</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
-          <context context-type="linenumber">114,115</context>
+          <context context-type="linenumber">126,127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.message.error.required" datatype="html">
+        <source> Escreva a sua mensagem. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">133,136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.button.send" datatype="html">
+        <source> Enviar mensagem </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">153,155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.button.sending" datatype="html">
+        <source> A enviar... </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.html</context>
+          <context context-type="linenumber">156,158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.error.message" datatype="html">
+        <source>Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contact.success.message" datatype="html">
+        <source>A sua mensagem foi enviada com sucesso. Entraremos em contacto brevemente.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/public/contacts/contacts.ts</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5244642504083940533" datatype="html">

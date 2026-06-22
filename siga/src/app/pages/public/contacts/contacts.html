@@ -74,11 +74,14 @@
           (input)="clearFeedback()"
           i18n-placeholder
         />
-        <small *ngIf="isInvalid('name')">Indique o seu nome.</small>
+        <small *ngIf="isInvalid('name')" i18n="@@contact.name.error.required">
+          Indique o seu nome.
+        </small>
       </div>
 
       <div class="grupo-campo">
         <label for="email" i18n>Email</label>
+
         <input
           id="email"
           type="email"
@@ -87,12 +90,17 @@
           autocomplete="email"
           [class.campo-invalido]="isInvalid('email')"
           (input)="clearFeedback()"
+          i18n-placeholder="@@contact.email.placeholder"
         />
-        <small *ngIf="isInvalid('email')">Indique um email válido.</small>
+
+        <small *ngIf="isInvalid('email')" i18n="@@contact.email.error.invalid">
+          Indique um email válido.
+        </small>
       </div>
 
       <div class="grupo-campo">
         <label for="assunto" i18n>Assunto</label>
+
         <input
           id="assunto"
           type="text"
@@ -102,11 +110,15 @@
           (input)="clearFeedback()"
           i18n-placeholder
         />
-        <small *ngIf="isInvalid('subject')">Indique o assunto da mensagem.</small>
+
+        <small *ngIf="isInvalid('subject')" i18n="@@contact.subject.error.required">
+          Indique o assunto da mensagem.
+        </small>
       </div>
 
       <div class="grupo-campo">
         <label for="mensagem" i18n>Mensagem</label>
+
         <textarea
           id="mensagem"
           rows="6"
@@ -116,9 +128,11 @@
           (input)="clearFeedback()"
           i18n-placeholder
         ></textarea>
-        <small *ngIf="isInvalid('message')">Escreva a sua mensagem.</small>
-      </div>
 
+        <small *ngIf="isInvalid('message')" i18n="@@contact.message.error.required">
+          Escreva a sua mensagem.
+        </small>
+      </div>
       <div class="campo-oculto" aria-hidden="true">
         <label for="website">Website</label>
         <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
@@ -133,9 +147,14 @@
       </p>
 
       <!-- Botão de envio -->
+      <!-- Botão de envio -->
       <button type="submit" class="botao-enviar" [disabled]="isSubmitting">
-        <span *ngIf="!isSubmitting">Enviar mensagem</span>
-        <span *ngIf="isSubmitting">A enviar...</span>
+        <span *ngIf="!isSubmitting" i18n="@@contact.button.send">
+          Enviar mensagem
+        </span>
+        <span *ngIf="isSubmitting" i18n="@@contact.button.sending">
+          A enviar...
+        </span>
       </button>
     </form>
 
