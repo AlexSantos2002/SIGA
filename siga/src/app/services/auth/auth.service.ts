@@ -68,6 +68,15 @@ export class AuthService {
     });
   }
 
+  async verifyPasswordRecoveryToken(tokenHash: string): Promise<boolean> {
+    const { data, error } = await supabase.auth.verifyOtp({
+      token_hash: tokenHash,
+      type: 'recovery',
+    });
+
+    return !error && !!data.session;
+  }
+
   async updatePassword(password: string): Promise<void> {
     const { error } = await supabase.auth.updateUser({
       password,
@@ -189,7 +198,13 @@ export class AuthService {
   }
 
   private getPasswordResetRedirectUrl(): string {
-    return `${globalThis.location?.origin ?? ''}/reset-password`;
+    const location = globalThis.location;
+    const resetPasswordPath =
+      location?.pathname === '/en' || location?.pathname.startsWith('/en/')
+        ? '/en/reset-password'
+        : '/reset-password';
+
+    return `${location?.origin ?? ''}${resetPasswordPath}`;
   }
 
   private isEmailNotConfirmedError(error: AuthApiError): boolean {

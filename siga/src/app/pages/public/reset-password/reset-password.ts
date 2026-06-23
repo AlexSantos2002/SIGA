@@ -9,7 +9,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppError } from '../../../error/app-error';
 import { AuthService } from '../../../services/auth/auth.service';
 
@@ -31,6 +31,8 @@ export class ResetPassword implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group(
@@ -44,7 +46,22 @@ export class ResetPassword implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      this.hasRecoverySession = await this.authService.waitForPasswordRecoverySession();
+      const tokenHash = this.route.snapshot.queryParamMap.get('token_hash');
+      const type = this.route.snapshot.queryParamMap.get('type');
+
+      if (tokenHash && type === 'recovery') {
+        this.hasRecoverySession = await this.authService.verifyPasswordRecoveryToken(tokenHash);
+
+        if (this.hasRecoverySession) {
+          await this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {},
+            replaceUrl: true,
+          });
+        }
+      } else {
+        this.hasRecoverySession = await this.authService.waitForPasswordRecoverySession();
+      }
 
       if (!this.hasRecoverySession) {
         this.errorMessage = 'A ligação de recuperação é inválida ou expirou. Pede um novo email de recuperação.';

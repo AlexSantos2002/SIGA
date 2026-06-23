@@ -194,7 +194,16 @@ export class OrganizationService {
       organizationId: this.getMetadataString(metadata, REGISTRATION_METADATA.organizationId) || undefined,
     };
 
-    if (Object.values(registrationData).some((value) => !value)) {
+    const requiredFields = [
+      registrationData.name,
+      registrationData.email,
+      registrationData.phone,
+      registrationData.address,
+      registrationData.adminName,
+      registrationData.adminEmail,
+    ];
+
+    if (requiredFields.some((value) => !value)) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
@@ -268,7 +277,13 @@ export class OrganizationService {
   }
 
   private getEmailRedirectUrl(): string {
-    return `${globalThis.location?.origin ?? ''}/login`;
+    const location = globalThis.location;
+    const loginPath =
+      location?.pathname === '/en' || location?.pathname.startsWith('/en/')
+        ? '/en/login'
+        : '/login';
+
+    return `${location?.origin ?? ''}${loginPath}`;
   }
 
   private normalizeEmail(email: string): string {
