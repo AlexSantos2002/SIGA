@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import {
+  ANIMAL_GENDERS,
+  ANIMAL_STATUSES,
   ANIMAL_GENDER_LABELS,
   ANIMAL_STATUS_LABELS,
+  SelectOption,
   getMappedLabel,
 } from '../../../constants/form-options';
 import { Animal } from '../../../models/animal/animal.model';
@@ -31,16 +35,37 @@ type AnimalSortField =
   | 'availability'
   | 'createdAt';
 
+interface AnimalFilters {
+  search: string;
+  species: string;
+  breed: string;
+  gender: string;
+  status: string;
+  availability: string;
+}
+
 @Component({
   selector: 'app-animals',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './animals.html',
   styleUrl: './animals.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Animals implements OnInit {
   animals: Animal[] = [];
+
+  filters: AnimalFilters = {
+    search: '',
+    species: '',
+    breed: '',
+    gender: '',
+    status: '',
+    availability: '',
+  };
+
+  readonly genderOptions = ANIMAL_GENDERS;
+  readonly statusOptions = ANIMAL_STATUSES;
 
   sortState: SortState<AnimalSortField> = createSortState();
 
@@ -62,7 +87,31 @@ export class Animals implements OnInit {
   }
 
   get sortedAnimals(): Animal[] {
-    return sortItems(this.animals, this.sortState, this.animalSortConfig);
+    return sortItems(this.filteredAnimals, this.sortState, this.animalSortConfig);
+  }
+
+  get filteredAnimals(): Animal[] {
+    return this.animals.filter((animal) => this.matchesFilters(animal));
+  }
+
+  get speciesOptions(): SelectOption[] {
+    return this.getUniqueOptions(
+      this.animals
+        .map((animal) => animal.species?.name)
+        .filter((species): species is string => !!species),
+    );
+  }
+
+  get breedOptions(): SelectOption[] {
+    return this.getUniqueOptions(
+      this.animals
+        .map((animal) => animal.breed?.name)
+        .filter((breed): breed is string => !!breed),
+    );
+  }
+
+  get hasActiveFilters(): boolean {
+    return Object.values(this.filters).some((value) => value.trim() !== '');
   }
 
   get sortField(): AnimalSortField | null {
@@ -133,6 +182,17 @@ export class Animals implements OnInit {
     return getMappedLabel(ANIMAL_STATUS_LABELS, status);
   }
 
+  resetFilters(): void {
+    this.filters = {
+      search: '',
+      species: '',
+      breed: '',
+      gender: '',
+      status: '',
+      availability: '',
+    };
+  }
+
   getAnimalImageUrl(animal: Animal): string | null {
     return this.imageService.getAnimalImage(animal.imagePath);
   }
@@ -156,6 +216,68 @@ export class Animals implements OnInit {
       this.isLoading = false;
       this.cdr.detectChanges();
     }
+  }
+
+  private matchesFilters(animal: Animal): boolean {
+    const search = this.normalize(this.filters.search);
+
+    if (search) {
+      const searchableText = [
+        animal.name,
+        animal.species?.name,
+        animal.breed?.name,
+        animal.microchipNumber,
+        animal.generalNotes,
+        animal.medicalNotes,
+      ]
+        .map((value) => this.normalize(value))
+        .join(' ');
+
+      if (!searchableText.includes(search)) {
+        return false;
+      }
+    }
+
+    if (this.filters.species && animal.species?.name !== this.filters.species) {
+      return false;
+    }
+
+    if (this.filters.breed && animal.breed?.name !== this.filters.breed) {
+      return false;
+    }
+
+    if (this.filters.gender && animal.gender !== this.filters.gender) {
+      return false;
+    }
+
+    if (this.filters.status && animal.status !== this.filters.status) {
+      return false;
+    }
+
+    if (this.filters.availability === 'available' && !animal.available) {
+      return false;
+    }
+
+    if (this.filters.availability === 'unavailable' && animal.available) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private getUniqueOptions(values: string[]): SelectOption[] {
+    return Array.from(new Set(values))
+      .sort((first, second) => first.localeCompare(second, 'pt', { sensitivity: 'base' }))
+      .map((value) => ({ value, label: value }));
+  }
+
+  private normalize(value: string | null | undefined): string {
+    return (value ?? '')
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
   }
 
   private readonly animalStatusPriority: Record<string, number> = {

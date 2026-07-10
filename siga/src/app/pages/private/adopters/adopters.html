@@ -39,7 +39,158 @@
     Ainda nao existem adotantes registados nesta organizacao.
   </div>
 
-  <div *ngIf="!isLoading && adopters.length > 0" class="table-wrapper">
+  <details
+    *ngIf="!isLoading && !errorMessage && adopters.length > 0"
+    class="filters-panel"
+    [class.has-active-filters]="hasActiveFilters"
+    aria-label="Filtros de adotantes"
+    i18n-aria-label="Adopter filters panel label@@adopters.filters.ariaLabel"
+  >
+    <summary class="filters-summary">
+      <span class="filters-summary-main">
+        <span class="filters-summary-icon" aria-hidden="true"></span>
+        <span i18n="Adopter filters summary label@@adopters.filters.summary">Filtros</span>
+      </span>
+
+      <span class="filters-summary-meta">
+        <span
+          *ngIf="hasActiveFilters"
+          class="filters-active-badge"
+          i18n="Active adopter filters badge@@adopters.filters.activeBadge"
+        >
+          Ativos
+        </span>
+        <span>
+          {{ sortedAdopters.length }} / {{ adopters.length }}
+          <ng-container i18n="Filtered adopters count suffix@@adopters.filters.count">
+            adotantes
+          </ng-container>
+        </span>
+      </span>
+    </summary>
+
+    <div class="filters-grid">
+      <label>
+        <span i18n="Adopter search filter@@adopters.filters.search">Pesquisar</span>
+        <input
+          type="search"
+          name="adopterSearch"
+          [(ngModel)]="filters.search"
+          placeholder="Nome, email, documento ou morada"
+          i18n-placeholder="Adopter search placeholder@@adopters.filters.search.placeholder"
+        />
+      </label>
+
+      <label>
+        <span i18n="Adopter city filter@@adopters.filters.city">Cidade</span>
+        <select name="adopterCity" [(ngModel)]="filters.city">
+          <option value="" i18n="All cities option@@adopters.filters.city.all">
+            Todas
+          </option>
+          <option *ngFor="let city of cityOptions" [value]="city.value">
+            {{ city.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Adopter phone filter@@adopters.filters.phone">Telefone</span>
+        <input
+          type="search"
+          name="adopterPhone"
+          [(ngModel)]="filters.phone"
+          placeholder="Número de telefone"
+          i18n-placeholder="Adopter phone placeholder@@adopters.filters.phone.placeholder"
+        />
+      </label>
+
+      <label>
+        <span i18n="Adopter housing filter@@adopters.filters.housingType">
+          Habitação
+        </span>
+        <select name="adopterHousingType" [(ngModel)]="filters.housingType">
+          <option value="" i18n="All housing types option@@adopters.filters.housingType.all">
+            Todas
+          </option>
+          <option *ngFor="let housingType of housingTypeOptions" [value]="housingType.value">
+            {{ housingType.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Adopter status filter@@adopters.filters.status">Estado</span>
+        <select name="adopterStatus" [(ngModel)]="filters.status">
+          <option value="" i18n="All adopter statuses option@@adopters.filters.status.all">
+            Todos
+          </option>
+          <option value="active" i18n="Active adopter filter option@@adopters.filters.status.active">
+            Ativo
+          </option>
+          <option value="flagged" i18n="Flagged adopter filter option@@adopters.filters.status.flagged">
+            Sinalizado
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Adopter outdoor space filter@@adopters.filters.outdoorSpace">
+          Espaço exterior
+        </span>
+        <select name="adopterOutdoorSpace" [(ngModel)]="filters.outdoorSpace">
+          <option value="" i18n="All outdoor space option@@adopters.filters.outdoorSpace.all">
+            Todos
+          </option>
+          <option value="yes" i18n="Outdoor space yes option@@adopters.filters.outdoorSpace.yes">
+            Sim
+          </option>
+          <option value="no" i18n="Outdoor space no option@@adopters.filters.outdoorSpace.no">
+            Não
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Adopter other animals filter@@adopters.filters.otherAnimals">
+          Outros animais
+        </span>
+        <select name="adopterOtherAnimals" [(ngModel)]="filters.otherAnimals">
+          <option value="" i18n="All other animals option@@adopters.filters.otherAnimals.all">
+            Todos
+          </option>
+          <option value="yes" i18n="Other animals yes option@@adopters.filters.otherAnimals.yes">
+            Sim
+          </option>
+          <option value="no" i18n="Other animals no option@@adopters.filters.otherAnimals.no">
+            Não
+          </option>
+        </select>
+      </label>
+    </div>
+
+    <div class="filters-footer">
+      <span>
+        {{ sortedAdopters.length }} / {{ adopters.length }}
+        <ng-container i18n="Filtered adopters count suffix@@adopters.filters.count">
+          adotantes
+        </ng-container>
+      </span>
+
+      <button type="button" [disabled]="!hasActiveFilters" (click)="resetFilters()">
+        <span i18n="Clear adopter filters@@adopters.filters.clear">Limpar filtros</span>
+      </button>
+    </div>
+  </details>
+
+  <div
+    *ngIf="!isLoading && !errorMessage && adopters.length > 0 && sortedAdopters.length === 0"
+    class="empty-state"
+    i18n="No filtered adopters empty state@@adopters.empty.noFilteredAdopters"
+  >
+    Nenhum adotante corresponde aos filtros selecionados.
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && sortedAdopters.length > 0" class="table-wrapper">
     <table>
       <thead>
       <tr>

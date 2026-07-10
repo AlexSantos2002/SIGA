@@ -1,8 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ADOPTER_HOUSING_TYPES, getOptionLabel } from '../../../constants/form-options';
+import {
+  ADOPTER_HOUSING_TYPES,
+  SelectOption,
+  getOptionLabel,
+} from '../../../constants/form-options';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import {
@@ -25,15 +30,37 @@ type AdopterSortField =
   | 'status'
   | 'createdAt';
 
+interface AdopterFilters {
+  search: string;
+  city: string;
+  phone: string;
+  housingType: string;
+  status: string;
+  outdoorSpace: string;
+  otherAnimals: string;
+}
+
 @Component({
   selector: 'app-adopters',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './adopters.html',
   styleUrl: './adopters.css',
 })
 export class Adopters implements OnInit {
   adopters: Adopter[] = [];
+
+  filters: AdopterFilters = {
+    search: '',
+    city: '',
+    phone: '',
+    housingType: '',
+    status: '',
+    outdoorSpace: '',
+    otherAnimals: '',
+  };
+
+  readonly housingTypeOptions = ADOPTER_HOUSING_TYPES;
 
   sortState: SortState<AdopterSortField> = createSortState();
 
@@ -54,7 +81,23 @@ export class Adopters implements OnInit {
   }
 
   get sortedAdopters(): Adopter[] {
-    return sortItems(this.adopters, this.sortState, this.adopterSortConfig);
+    return sortItems(this.filteredAdopters, this.sortState, this.adopterSortConfig);
+  }
+
+  get filteredAdopters(): Adopter[] {
+    return this.adopters.filter((adopter) => this.matchesFilters(adopter));
+  }
+
+  get cityOptions(): SelectOption[] {
+    return this.getUniqueOptions(
+      this.adopters
+        .map((adopter) => adopter.city)
+        .filter((city): city is string => !!city),
+    );
+  }
+
+  get hasActiveFilters(): boolean {
+    return Object.values(this.filters).some((value) => value.trim() !== '');
   }
 
   get sortField(): AdopterSortField | null {
@@ -147,6 +190,97 @@ export class Adopters implements OnInit {
 
   getHousingTypeLabel(housingType: string | null | undefined): string {
     return getOptionLabel(ADOPTER_HOUSING_TYPES, housingType);
+  }
+
+  resetFilters(): void {
+    this.filters = {
+      search: '',
+      city: '',
+      phone: '',
+      housingType: '',
+      status: '',
+      outdoorSpace: '',
+      otherAnimals: '',
+    };
+  }
+
+  private matchesFilters(adopter: Adopter): boolean {
+    const search = this.normalize(this.filters.search);
+    const phone = this.normalize(this.filters.phone);
+
+    if (search) {
+      const searchableText = [
+        this.getFullName(adopter),
+        adopter.email,
+        adopter.phone,
+        adopter.documentNumber,
+        adopter.address,
+        adopter.city,
+        adopter.postalCode,
+        adopter.preferredSpecies,
+        adopter.notes,
+        adopter.flagReason,
+      ]
+        .map((value) => this.normalize(value))
+        .join(' ');
+
+      if (!searchableText.includes(search)) {
+        return false;
+      }
+    }
+
+    if (this.filters.city && adopter.city !== this.filters.city) {
+      return false;
+    }
+
+    if (phone && !this.normalize(adopter.phone).includes(phone)) {
+      return false;
+    }
+
+    if (this.filters.housingType && adopter.housingType !== this.filters.housingType) {
+      return false;
+    }
+
+    if (this.filters.status === 'flagged' && !adopter.isFlagged) {
+      return false;
+    }
+
+    if (this.filters.status === 'active' && adopter.isFlagged) {
+      return false;
+    }
+
+    if (this.filters.outdoorSpace === 'yes' && !adopter.hasOutdoorSpace) {
+      return false;
+    }
+
+    if (this.filters.outdoorSpace === 'no' && adopter.hasOutdoorSpace) {
+      return false;
+    }
+
+    if (this.filters.otherAnimals === 'yes' && !adopter.hasOtherAnimals) {
+      return false;
+    }
+
+    if (this.filters.otherAnimals === 'no' && adopter.hasOtherAnimals) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private getUniqueOptions(values: string[]): SelectOption[] {
+    return Array.from(new Set(values))
+      .sort((first, second) => first.localeCompare(second, 'pt', { sensitivity: 'base' }))
+      .map((value) => ({ value, label: value }));
+  }
+
+  private normalize(value: string | null | undefined): string {
+    return (value ?? '')
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
   }
 
   private readonly adopterSortConfig: SortConfig<Adopter, AdopterSortField> = {

@@ -39,8 +39,138 @@
     Ainda não existem animais registados nesta organização.
   </div>
 
-  <div
+  <details
     *ngIf="!isLoading && !errorMessage && animals.length > 0"
+    class="filters-panel"
+    [class.has-active-filters]="hasActiveFilters"
+    aria-label="Filtros de animais"
+    i18n-aria-label="Animal filters panel label@@animals.filters.ariaLabel"
+  >
+    <summary class="filters-summary">
+      <span class="filters-summary-main">
+        <span class="filters-summary-icon" aria-hidden="true"></span>
+        <span i18n="Animal filters summary label@@animals.filters.summary">Filtros</span>
+      </span>
+
+      <span class="filters-summary-meta">
+        <span
+          *ngIf="hasActiveFilters"
+          class="filters-active-badge"
+          i18n="Active filters badge@@animals.filters.activeBadge"
+        >
+          Ativos
+        </span>
+        <span>
+          {{ sortedAnimals.length }} / {{ animals.length }}
+          <ng-container i18n="Filtered animals count suffix@@animals.filters.count">
+            animais
+          </ng-container>
+        </span>
+      </span>
+    </summary>
+
+    <div class="filters-grid">
+      <label>
+        <span i18n="Animal search filter@@animals.filters.search">Pesquisar</span>
+        <input
+          type="search"
+          name="animalSearch"
+          [(ngModel)]="filters.search"
+          placeholder="Nome, microchip ou notas"
+          i18n-placeholder="Animal search filter placeholder@@animals.filters.search.placeholder"
+        />
+      </label>
+
+      <label>
+        <span i18n="Animal species filter@@animals.filters.species">Espécie</span>
+        <select name="animalSpecies" [(ngModel)]="filters.species">
+          <option value="" i18n="All species option@@animals.filters.species.all">
+            Todas
+          </option>
+          <option *ngFor="let species of speciesOptions" [value]="species.value">
+            {{ species.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Animal breed filter@@animals.filters.breed">Raça</span>
+        <select name="animalBreed" [(ngModel)]="filters.breed">
+          <option value="" i18n="All breeds option@@animals.filters.breed.all">
+            Todas
+          </option>
+          <option *ngFor="let breed of breedOptions" [value]="breed.value">
+            {{ breed.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Animal gender filter@@animals.filters.gender">Género</span>
+        <select name="animalGender" [(ngModel)]="filters.gender">
+          <option value="" i18n="All genders option@@animals.filters.gender.all">
+            Todos
+          </option>
+          <option *ngFor="let gender of genderOptions" [value]="gender.value">
+            {{ gender.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Animal status filter@@animals.filters.status">Estado</span>
+        <select name="animalStatus" [(ngModel)]="filters.status">
+          <option value="" i18n="All statuses option@@animals.filters.status.all">
+            Todos
+          </option>
+          <option *ngFor="let status of statusOptions" [value]="status.value">
+            {{ status.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span i18n="Animal availability filter@@animals.filters.availability">
+          Disponibilidade
+        </span>
+        <select name="animalAvailability" [(ngModel)]="filters.availability">
+          <option value="" i18n="All availability option@@animals.filters.availability.all">
+            Todas
+          </option>
+          <option value="available" i18n="Available filter option@@animals.filters.availability.available">
+            Disponível
+          </option>
+          <option value="unavailable" i18n="Unavailable filter option@@animals.filters.availability.unavailable">
+            Indisponível
+          </option>
+        </select>
+      </label>
+    </div>
+
+    <div class="filters-footer">
+      <span>
+        {{ sortedAnimals.length }} / {{ animals.length }}
+        <ng-container i18n="Filtered animals count suffix@@animals.filters.count">
+          animais
+        </ng-container>
+      </span>
+
+      <button type="button" [disabled]="!hasActiveFilters" (click)="resetFilters()">
+        <span i18n="Clear animal filters@@animals.filters.clear">Limpar filtros</span>
+      </button>
+    </div>
+  </details>
+
+  <div
+    *ngIf="!isLoading && !errorMessage && animals.length > 0 && sortedAnimals.length === 0"
+    class="empty-state"
+    i18n="No filtered animals empty state@@animals.empty.noFilteredAnimals"
+  >
+    Nenhum animal corresponde aos filtros selecionados.
+  </div>
+
+  <div
+    *ngIf="!isLoading && !errorMessage && sortedAnimals.length > 0"
     class="table-wrapper"
   >
     <table>
