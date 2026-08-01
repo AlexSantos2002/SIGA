@@ -33,7 +33,7 @@ export class AnimalVaccineService {
    * @description
    * Obtém as vacinas associadas a um animal.
    */
-  async getByAnimalId(animalId: string): Promise<AnimalVaccine[]> {
+  async getByAnimalId(animalId: string, timeoutMs = 10000): Promise<AnimalVaccine[]> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -60,6 +60,7 @@ export class AnimalVaccineService {
         .eq('animal_id', animalId)
         .eq('organization_id', organizationId)
         .order('created_at', { ascending: false }),
+      timeoutMs,
     );
 
     if (error) {

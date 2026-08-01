@@ -1,5 +1,3 @@
-import '@angular/localize/init';
-
 export interface SelectOption {
   value: string | number;
   label: string;

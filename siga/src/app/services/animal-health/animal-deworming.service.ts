@@ -34,7 +34,7 @@ export class AnimalDewormingService {
    * @description
    * Obtém os registos de desparasitação associados a um animal.
    */
-  async getByAnimalId(animalId: string): Promise<AnimalDeworming[]> {
+  async getByAnimalId(animalId: string, timeoutMs = 10000): Promise<AnimalDeworming[]> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -57,7 +57,8 @@ export class AnimalDewormingService {
         `)
         .eq('animal_id', animalId)
         .eq('organization_id', organizationId)
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: false }),
+      timeoutMs,
     );
 
     if (error) {

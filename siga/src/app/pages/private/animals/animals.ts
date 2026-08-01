@@ -13,6 +13,7 @@ import {
 } from '../../../constants/form-options';
 import { Animal } from '../../../models/animal/animal.model';
 import { AnimalService } from '../../../services/animal/animal.service';
+import { AnimalReportService } from '../../../services/animal-report/animal-report.service';
 import { ImageService } from '../../../services/image/image.service';
 import {
   createSortState,
@@ -73,11 +74,14 @@ export class Animals implements OnInit {
   errorMessage = '';
 
   deletingAnimalId: string | null = null;
+  exportingAnimalId: string | null = null;
+  reportErrorMessage = '';
   animalToDelete: Animal | null = null;
   isDeleteModalOpen = false;
 
   constructor(
     private animalService: AnimalService,
+    private animalReportService: AnimalReportService,
     private imageService: ImageService,
     private cdr: ChangeDetectorRef,
   ) {}
@@ -137,6 +141,26 @@ export class Animals implements OnInit {
   openDeleteModal(animal: Animal): void {
     this.animalToDelete = animal;
     this.isDeleteModalOpen = true;
+  }
+
+  async exportAnimalReport(animal: Animal): Promise<void> {
+    if (this.exportingAnimalId) {
+      return;
+    }
+
+    try {
+      this.exportingAnimalId = animal.id;
+      this.reportErrorMessage = '';
+      this.cdr.detectChanges();
+      await this.animalReportService.exportAnimal(animal);
+    } catch (error: any) {
+      console.error('Erro ao exportar relatório do animal:', error);
+      this.reportErrorMessage =
+        'Não foi possível carregar todos os dados do relatório. Verifica a ligação e tenta novamente.';
+    } finally {
+      this.exportingAnimalId = null;
+      this.cdr.detectChanges();
+    }
   }
 
   closeDeleteModal(): void {

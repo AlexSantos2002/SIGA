@@ -336,11 +336,11 @@ tbody tr:last-child td {
   color: #374151;
 }
 
-/* Botões de ação: editar e eliminar */
+/* Botões de ação: exportar, editar e eliminar */
 
 .actions-column {
-  width: 80px;
-  min-width: 80px;
+  width: 130px;
+  min-width: 130px;
   text-align: center;
   padding-left: 8px;
   padding-right: 8px;
@@ -354,6 +354,7 @@ tbody tr:last-child td {
 }
 
 .edit-animal-button,
+.export-animal-button,
 .delete-animal-button {
   width: 28px;
   height: 28px;
@@ -368,6 +369,53 @@ tbody tr:last-child td {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.export-animal-button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.export-animal-button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.export-animal-button:hover:not(:disabled) {
+  border-color: #93c5fd;
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.export-animal-button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.report-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #bfdbfe;
+  border-top-color: #1d4ed8;
+  border-radius: 999px;
+  animation: report-spinner 700ms linear infinite;
+}
+
+@keyframes report-spinner {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .edit-animal-button:hover {

@@ -4,6 +4,7 @@
 export interface Animal {
   id: string;
   name: string;
+  organizationName: string | null;
 
   species: {
     id: string;

@@ -22,6 +22,7 @@ export class AnimalService {
     return {
       id: animal.id,
       name: animal.name,
+      organizationName: animal.organization?.name ?? null,
       species: animal.species,
       breed: animal.breed,
       gender: animal.gender,
@@ -182,6 +183,9 @@ export class AnimalService {
           microchip_date,
           created_at,
           image_path,
+          organization:organization_id (
+            name
+          ),
           species:species_id (
             id,
             name
@@ -283,6 +287,9 @@ export class AnimalService {
           microchip_date,
           created_at,
           image_path,
+          organization:organization_id (
+            name
+          ),
           species:species_id (
             id,
             name

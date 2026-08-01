@@ -36,7 +36,7 @@ export class AnimalVetAppointmentService {
    * @description
    * Obtém as consultas veterinárias associadas a um animal.
    */
-  async getByAnimalId(animalId: string): Promise<AnimalVetAppointment[]> {
+  async getByAnimalId(animalId: string, timeoutMs = 10000): Promise<AnimalVetAppointment[]> {
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -61,7 +61,8 @@ export class AnimalVetAppointmentService {
         `)
         .eq('animal_id', animalId)
         .eq('organization_id', organizationId)
-        .order('appointment_date', { ascending: false })
+        .order('appointment_date', { ascending: false }),
+      timeoutMs,
     );
 
     if (error) {
