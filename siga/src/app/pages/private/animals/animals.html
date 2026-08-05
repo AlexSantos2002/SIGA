@@ -396,7 +396,10 @@
               title="Editar animal"
               i18n-title="Edit animal tooltip@@animals.actions.editTooltip"
             >
-              ✎
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
             </a>
 
             <button
@@ -407,7 +410,14 @@
               title="Eliminar animal"
               i18n-title="Delete animal tooltip@@animals.actions.deleteTooltip"
             >
-              {{ deletingAnimalId === animal.id ? '...' : '×' }}
+              <span *ngIf="deletingAnimalId === animal.id; else deleteIcon">...</span>
+
+              <ng-template #deleteIcon>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </ng-template>
             </button>
           </div>
         </td>

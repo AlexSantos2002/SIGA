@@ -2,15 +2,15 @@
 @import './app/pages/private/private-shared.css';
 
 .animals-page .history-animal-button {
-  border-color: #d1fae5;
-  background: #ecfdf5;
-  color: #047857;
+  border-color: #d8dee7;
+  background: #ffffff;
+  color: #536272;
 }
 
 .animals-page .history-animal-button:hover {
-  border-color: #a7f3d0;
-  background: #d1fae5;
-  color: #065f46;
+  border-color: #bac4d1;
+  background: #f8fafc;
+  color: #243244;
 }
 
 .animals-page .history-modal-backdrop {
@@ -135,30 +135,38 @@
 }
 
 .animals-page .history-item span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   border-radius: 999px;
-  background: #e2e8f0;
-  color: #334155;
+  border: 1px solid #d7dde5;
+  background: #ffffff;
+  color: #475569;
   font-size: 12px;
-  font-weight: 700;
-  padding: 4px 9px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 9px;
   white-space: nowrap;
 }
 
 .animals-page .history-item span.adoption {
-  background: #dbeafe;
-  color: #1d4ed8;
+  border-color: #cfd9e6;
+  background: #f6f8fb;
+  color: #345779;
 }
 
 .animals-page .history-item span.vaccine,
 .animals-page .history-item span.appointment {
-  background: #fef3c7;
-  color: #92400e;
+  border-color: #e4d7b8;
+  background: #fbf8ef;
+  color: #765018;
 }
 
 .animals-page .history-item span.deworming,
 .animals-page .history-item span.animal {
-  background: #dcfce7;
-  color: #166534;
+  border-color: #c8d8cb;
+  background: #f6faf7;
+  color: #2f6840;
 }
 
 .animals-page .history-item time,

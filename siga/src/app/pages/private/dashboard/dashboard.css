@@ -107,7 +107,7 @@
 .notice-item.warning .notice-count,
 .status-badge,
 .timeline-badge.due-soon {
-  color: #92400e;
+  color: #765018;
 }
 
 .notices-section,
@@ -188,18 +188,18 @@
 
 .notice-item.danger .notice-count,
 .timeline-badge.overdue {
-  color: #a40000;
+  color: #8f1f1f;
 }
 
 .notice-item.danger .notice-count,
 .timeline-badge.overdue {
-  background: #fff2f2;
+  background: #fbf6f6;
 }
 
 .notice-item.warning .notice-count,
 .status-badge,
 .timeline-badge.due-soon {
-  background: #fff7dd;
+  background: #fbf8ef;
 }
 
 .notice-item strong,
@@ -234,20 +234,31 @@
 .availability-badge {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
-  border: 1px solid #cfd8dc;
+  min-height: 24px;
+  border: 1px solid #d7dde5;
   border-radius: 999px;
-  padding: 4px 10px;
-  background: #f1f5f9;
+  padding: 3px 9px;
+  background: #ffffff;
   color: #475569;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 1;
   white-space: nowrap;
 }
 
 .availability-badge.available {
-  background: #e7f6e7;
-  color: #166534;
+  border-color: #c8d8cb;
+  background: #f6faf7;
+  color: #2f6840;
+}
+
+.timeline-badge.overdue {
+  border-color: #e1c7c7;
+}
+
+.timeline-badge.due-soon,
+.status-badge {
+  border-color: #e4d7b8;
 }
 
 .quick-actions {

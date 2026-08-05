@@ -85,33 +85,42 @@
 }
 
 .adoptions-page .status-badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border: 1px solid #cfd8dc;
-  background: #f8f8f8;
-  color: #374151;
-  font-size: 13px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 9px;
+  border: 1px solid #d7dde5;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .adoptions-page .status-badge.pending {
-  background: #fff7dd;
-  color: #92400e;
+  border-color: #cfd9e6;
+  background: #f6f8fb;
+  color: #345779;
 }
 
 .adoptions-page .status-badge.accepted {
-  background: #e7f6e7;
-  color: #166534;
+  border-color: #c8d8cb;
+  background: #f6faf7;
+  color: #2f6840;
 }
 
 .adoptions-page .status-badge.rejected {
-  background: #fff2f2;
-  color: #a40000;
+  border-color: #e1c7c7;
+  background: #fbf6f6;
+  color: #8f1f1f;
 }
 
 .adoptions-page .status-badge.returned {
-  background: #e8f1ff;
-  color: #1f4f9f;
+  border-color: #e4d7b8;
+  background: #fbf8ef;
+  color: #765018;
 }
 
 .adoptions-page .actions-column {
