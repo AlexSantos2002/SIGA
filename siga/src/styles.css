@@ -1,2 +1,181 @@
 @import 'tailwindcss';
 @import './app/pages/private/private-shared.css';
+
+.animals-page .history-animal-button {
+  border-color: #d1fae5;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.animals-page .history-animal-button:hover {
+  border-color: #a7f3d0;
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.animals-page .history-modal-backdrop {
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.animals-page .history-modal {
+  width: min(760px, 100%);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.22);
+}
+
+.animals-page .history-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.animals-page .history-modal-header p {
+  margin: 0 0 4px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.animals-page .history-modal-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.animals-page .history-modal-close {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.animals-page .history-state {
+  margin: 20px 24px 24px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #475569;
+}
+
+.animals-page .history-state.error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.animals-page .history-list {
+  margin: 0;
+  padding: 20px 24px 24px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.animals-page .history-item {
+  position: relative;
+  margin-left: 10px;
+  padding: 0 0 18px 22px;
+  border-left: 2px solid #e2e8f0;
+}
+
+.animals-page .history-item:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.animals-page .history-item::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: -10px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #bfdbfe;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.animals-page .history-item.completed::before {
+  border-color: #86efac;
+}
+
+.animals-page .history-item.pending::before {
+  border-color: #fde68a;
+}
+
+.animals-page .history-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 0;
+  border: 1px solid #e5e7eb;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.animals-page .history-item strong {
+  color: #111827;
+  font-size: 16px;
+}
+
+.animals-page .history-item span {
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 9px;
+  white-space: nowrap;
+}
+
+.animals-page .history-item span.adoption {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.animals-page .history-item span.vaccine,
+.animals-page .history-item span.appointment {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.animals-page .history-item span.deworming,
+.animals-page .history-item span.animal {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.animals-page .history-item time,
+.animals-page .history-item ul {
+  display: block;
+  margin: 0;
+  padding: 8px 16px 0;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.animals-page .history-item ul {
+  padding: 8px 16px 14px 34px;
+  border-bottom: 1px solid #e5e7eb;
+  border-radius: 0 0 8px 8px;
+  color: #475569;
+  font-size: 14px;
+}

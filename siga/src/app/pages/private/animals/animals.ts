@@ -11,7 +11,9 @@ import {
   SelectOption,
   getMappedLabel,
 } from '../../../constants/form-options';
+import { AnimalHistoryEvent } from '../../../models/animal/animal-history-event.model';
 import { Animal } from '../../../models/animal/animal.model';
+import { AnimalHistoryService } from '../../../services/animal-history/animal-history.service';
 import { AnimalService } from '../../../services/animal/animal.service';
 import { AnimalReportService } from '../../../services/animal-report/animal-report.service';
 import { ImageService } from '../../../services/image/image.service';
@@ -78,9 +80,15 @@ export class Animals implements OnInit {
   reportErrorMessage = '';
   animalToDelete: Animal | null = null;
   isDeleteModalOpen = false;
+  historyAnimal: Animal | null = null;
+  historyEntries: AnimalHistoryEvent[] = [];
+  isHistoryModalOpen = false;
+  isHistoryLoading = false;
+  historyErrorMessage = '';
 
   constructor(
     private animalService: AnimalService,
+    private animalHistoryService: AnimalHistoryService,
     private animalReportService: AnimalReportService,
     private imageService: ImageService,
     private cdr: ChangeDetectorRef,
@@ -143,6 +151,37 @@ export class Animals implements OnInit {
     this.isDeleteModalOpen = true;
   }
 
+  async openHistoryModal(animal: Animal): Promise<void> {
+    const animalId = animal.id;
+
+    this.historyAnimal = animal;
+    this.historyEntries = [];
+    this.historyErrorMessage = '';
+    this.isHistoryModalOpen = true;
+    this.isHistoryLoading = true;
+    this.cdr.detectChanges();
+
+    try {
+      const entries = await this.animalHistoryService.getAnimalHistory(animal);
+
+      if (this.isHistoryModalOpen && this.historyAnimal?.id === animalId) {
+        this.historyEntries = entries;
+      }
+    } catch (error: any) {
+      console.error('Erro ao carregar historico do animal:', error);
+
+      if (this.isHistoryModalOpen && this.historyAnimal?.id === animalId) {
+        this.historyErrorMessage =
+          error?.message || error?.details || 'Nao foi possivel carregar o historico do animal.';
+      }
+    } finally {
+      if (this.isHistoryModalOpen && this.historyAnimal?.id === animalId) {
+        this.isHistoryLoading = false;
+        this.cdr.detectChanges();
+      }
+    }
+  }
+
   async exportAnimalReport(animal: Animal): Promise<void> {
     if (this.exportingAnimalId) {
       return;
@@ -170,6 +209,14 @@ export class Animals implements OnInit {
 
     this.animalToDelete = null;
     this.isDeleteModalOpen = false;
+  }
+
+  closeHistoryModal(): void {
+    this.historyAnimal = null;
+    this.historyEntries = [];
+    this.historyErrorMessage = '';
+    this.isHistoryModalOpen = false;
+    this.isHistoryLoading = false;
   }
 
   async confirmDeleteAnimal(): Promise<void> {
@@ -223,6 +270,10 @@ export class Animals implements OnInit {
 
   trackByAnimalId(_index: number, animal: Animal): string {
     return animal.id;
+  }
+
+  trackByHistoryEntryId(_index: number, entry: AnimalHistoryEvent): string {
+    return entry.id;
   }
 
   private async loadAnimals(): Promise<void> {

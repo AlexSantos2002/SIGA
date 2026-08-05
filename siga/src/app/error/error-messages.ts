@@ -7,6 +7,7 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   ANIMALS_NOT_FOUND: 'Nenhum animal foi encontrado',
   UNABLE_TO_GET_ANIMAL: 'Não foi possível buscar o animal',
   UNABLE_TO_GET_ANIMALS: 'Não foi possível buscar os animais',
+  UNABLE_TO_GET_ANIMAL_HISTORY: 'Não foi possível carregar o histórico do animal',
 
   UNABLE_TO_GET_SPECIES: 'Não foi possível encontrar as espécies',
   UNABLE_TO_GET_BREEDS: 'Não foi possível encontrar as raças',

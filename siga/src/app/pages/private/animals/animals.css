@@ -339,8 +339,8 @@ tbody tr:last-child td {
 /* Botões de ação: exportar, editar e eliminar */
 
 .actions-column {
-  width: 130px;
-  min-width: 130px;
+  width: 150px;
+  min-width: 150px;
   text-align: center;
   padding-left: 8px;
   padding-right: 8px;
@@ -350,7 +350,7 @@ tbody tr:last-child td {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .edit-animal-button,
