@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 
+import { PERMISSIONS } from './constants/permissions';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
+import { permissionGuard } from './guards/permission.guard';
 
 export const routes: Routes = [
   {
@@ -77,11 +79,15 @@ export const routes: Routes = [
       },
       {
         path: 'animals/new',
+        canActivate: [permissionGuard],
+        data: { permission: PERMISSIONS.animalsCreate },
         loadComponent: () =>
           import('./pages/private/animals/add-animal/add-animal').then((m) => m.AddAnimal),
       },
       {
         path: 'animals/:id/edit',
+        canActivate: [permissionGuard],
+        data: { permission: PERMISSIONS.animalsUpdate },
         loadComponent: () =>
           import('./pages/private/animals/edit-animal/edit-animal').then((m) => m.EditAnimal),
       },
@@ -91,11 +97,15 @@ export const routes: Routes = [
       },
       {
         path: 'adopters/new',
+        canActivate: [permissionGuard],
+        data: { permission: PERMISSIONS.adoptersCreate },
         loadComponent: () =>
           import('./pages/private/adopters/add-adopter/add-adopter').then((m) => m.AddAdopter),
       },
       {
         path: 'adopters/:id/edit',
+        canActivate: [permissionGuard],
+        data: { permission: PERMISSIONS.adoptersUpdate },
         loadComponent: () =>
           import('./pages/private/adopters/edit-adopter/edit-adopter').then((m) => m.EditAdopter),
       },
@@ -109,8 +119,21 @@ export const routes: Routes = [
       },
       {
         path: 'statistics',
+        canActivate: [permissionGuard],
+        data: { permission: PERMISSIONS.statisticsView },
         loadComponent: () =>
           import('./pages/private/statistics/statistics').then((m) => m.Statistics),
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./pages/private/settings/settings').then((m) => m.Settings),
+      },
+      {
+        path: 'users',
+        canActivate: [permissionGuard],
+        data: { permission: PERMISSIONS.usersView },
+        loadComponent: () => import('./pages/private/users/users').then((m) => m.Users),
       },
     ],
   },

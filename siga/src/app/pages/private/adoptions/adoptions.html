@@ -50,6 +50,7 @@
     </div>
 
     <form [formGroup]="form"
+          *ngIf="permissionService.can(permissions.adoptionsManage)"
           (ngSubmit)="startProcess()"
           class="adoption-process-form">
 
@@ -314,6 +315,7 @@
               <div class="actions-buttons">
 
                 <button type="button"
+                        *ngIf="permissionService.can(permissions.adoptionsManage)"
                         class="approve-button"
                         [disabled]="updatingAdoptionId === adoption.id"
                         (click)="concludeProcess(adoption, 'aceita')"
@@ -322,6 +324,7 @@
                 </button>
 
                 <button type="button"
+                        *ngIf="permissionService.can(permissions.adoptionsManage)"
                         class="reject-button"
                         [disabled]="updatingAdoptionId === adoption.id"
                         (click)="concludeProcess(adoption, 'rejeitada')"
@@ -528,6 +531,7 @@
               <button *ngIf="adoption.status === 'aceita'"
                       type="button"
                       class="return-button"
+                      [hidden]="!permissionService.can(permissions.adoptionsManage)"
                       [disabled]="updatingAdoptionId === adoption.id"
                       (click)="concludeProcess(adoption, 'devolvida')"
                       i18n="Return adoption button@@adoptions.completed.return">

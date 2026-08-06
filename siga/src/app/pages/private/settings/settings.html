@@ -1,0 +1,31 @@
+<section class="pagina-definicoes">
+  <header class="cabecalho-pagina">
+    <div>
+      <p class="sobretitulo">Conta</p>
+      <h1>Definições</h1>
+      <p class="descricao-pagina">Gere as opções da tua conta e da organização.</p>
+    </div>
+  </header>
+
+  <div class="lista-definicoes">
+    <a
+      *ngIf="permissionService.can(permissions.usersUpdate)"
+      routerLink="/app/users"
+      class="item-definicao"
+    >
+      <span class="icone-definicao" aria-hidden="true">♙</span>
+      <span class="texto-definicao">
+        <strong>Utilizadores</strong>
+        <small>Cria utilizadores e edita os acessos da organização.</small>
+      </span>
+      <span class="seta-definicao" aria-hidden="true">›</span>
+    </a>
+
+    <p
+      *ngIf="!permissionService.can(permissions.usersUpdate)"
+      class="sem-definicoes"
+    >
+      Não existem definições disponíveis para o teu nível de acesso.
+    </p>
+  </div>
+</section>

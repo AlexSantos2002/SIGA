@@ -10,6 +10,7 @@ import { AnimalVaccineService } from '../animal-health/animal-vaccine.service';
 import { AnimalVetAppointmentService } from '../animal-health/animal-vet-appointment.service';
 import { AuthService } from '../auth/auth.service';
 import { ImageService } from '../image/image.service';
+import { PermissionService } from '../permission/permission.service';
 import { createAnimalReportPdf, getAnimalReportFilename } from './animal-report-pdf';
 
 const REPORT_QUERY_TIMEOUT_MS = 20000;
@@ -26,9 +27,12 @@ export class AnimalReportService {
     private adoptionService: AdoptionService,
     private authService: AuthService,
     private imageService: ImageService,
+    private permissionService: PermissionService,
   ) {}
 
   async exportAnimal(animal: Animal): Promise<void> {
+    this.permissionService.assert('animals.export');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {

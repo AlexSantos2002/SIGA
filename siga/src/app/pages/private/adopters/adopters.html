@@ -11,6 +11,7 @@
     </div>
 
     <a
+      *ngIf="permissionService.can(permissions.adoptersCreate)"
       routerLink="/app/adopters/new"
       class="add-adopter-button"
       i18n="Register adopter button@@adopters.actions.create"
@@ -356,6 +357,7 @@
         <td class="actions-column">
           <div class="actions-buttons">
             <a
+              *ngIf="permissionService.can(permissions.adoptersUpdate)"
               class="edit-adopter-button"
               title="Editar adotante"
               i18n-title="Edit adopter tooltip@@adopters.actions.edit.title"
@@ -365,6 +367,7 @@
             </a>
 
             <button
+              *ngIf="permissionService.can(permissions.adoptersDelete)"
               type="button"
               class="delete-adopter-button"
               title="Eliminar adotante"

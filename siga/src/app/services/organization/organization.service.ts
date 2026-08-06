@@ -118,6 +118,8 @@ export class OrganizationService {
         email: this.normalizeEmail(request.adminEmail),
         organization_id: organization.id,
         role: 'admin',
+        permissions: {},
+        is_active: true,
       },
     ]);
 
@@ -258,17 +260,15 @@ export class OrganizationService {
   }
 
   private async organizationHasUsers(organizationId: string): Promise<boolean> {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('organization_id', organizationId)
-      .limit(1);
+    const { data, error } = await supabase.rpc('siga_organization_has_no_users', {
+      target_organization_id: organizationId,
+    });
 
     if (error) {
       throw new DBError(ERROR_CODES.DB_ERROR_UPDATE);
     }
 
-    return !!data?.length;
+    return data === false;
   }
 
   private getMetadataString(metadata: Record<string, unknown>, key: string): string {

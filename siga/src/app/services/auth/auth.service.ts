@@ -181,15 +181,22 @@ export class AuthService {
       return null;
     }
 
+    if (data.is_active === false) {
+      throw new AuthenticationError(ERROR_CODES.USER_INACTIVE);
+    }
+
     return this.mapToUser(data);
   }
 
   private mapToUser(profile: any): User {
     return {
+      id: profile.id,
       name: profile.name,
       email: profile.email,
       role: profile.role,
       organizationId: profile.organization_id,
+      permissions: profile.permissions ?? {},
+      isActive: profile.is_active ?? true,
     };
   }
 

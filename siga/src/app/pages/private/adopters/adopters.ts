@@ -8,8 +8,10 @@ import {
   SelectOption,
   getOptionLabel,
 } from '../../../constants/form-options';
+import { PERMISSIONS } from '../../../constants/permissions';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
+import { PermissionService } from '../../../services/permission/permission.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -61,6 +63,7 @@ export class Adopters implements OnInit {
   };
 
   readonly housingTypeOptions = ADOPTER_HOUSING_TYPES;
+  readonly permissions = PERMISSIONS;
 
   sortState: SortState<AdopterSortField> = createSortState();
 
@@ -73,6 +76,7 @@ export class Adopters implements OnInit {
 
   constructor(
     private adopterService: AdoptersService,
+    public permissionService: PermissionService,
     private cdr: ChangeDetectorRef,
   ) {}
 

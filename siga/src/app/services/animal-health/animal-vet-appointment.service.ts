@@ -7,13 +7,17 @@ import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
 import { AuthenticationError, DBError } from '../../error/app-error';
 import { ERROR_CODES } from '../../error/error-codes';
+import { PermissionService } from '../permission/permission.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalVetAppointmentService {
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private permissionService: PermissionService,
+  ) {
   }
 
   private mapAppointment(appointment: any): AnimalVetAppointment {
@@ -79,6 +83,8 @@ export class AnimalVetAppointmentService {
    * Cria uma consulta veterinária associada a um animal.
    */
   async create(request: RegisterAnimalVetAppointmentRequest): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -109,6 +115,8 @@ export class AnimalVetAppointmentService {
    * Confirma que uma consulta ou tratamento agendado foi realizado.
    */
   async confirmCompleted(appointmentId: string): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -135,6 +143,8 @@ export class AnimalVetAppointmentService {
    * Remove uma consulta veterinária.
    */
   async delete(appointmentId: string): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {

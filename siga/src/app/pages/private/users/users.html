@@ -1,0 +1,152 @@
+<section class="users-page">
+  <div class="page-header">
+    <div>
+      <h1>Utilizadores</h1>
+      <p>Gere os acessos e as permissoes da equipa desta organizacao.</p>
+    </div>
+
+    <button
+      *ngIf="canCreateUsers"
+      type="button"
+      class="secondary-button"
+      (click)="startCreate()"
+    >
+      Novo utilizador
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="success-message" role="status">
+    {{ successMessage }}
+  </div>
+
+  <div class="users-layout">
+    <form
+      *ngIf="canCreateUsers || (isEditing && canUpdateUsers)"
+      [formGroup]="form"
+      class="user-form"
+      (ngSubmit)="submit()"
+    >
+      <div class="section-header">
+        <h2>{{ isEditing ? 'Editar utilizador' : 'Criar utilizador' }}</h2>
+      </div>
+
+      <div class="form-grid">
+        <label class="form-field">
+          <span>Nome</span>
+          <input type="text" formControlName="name" />
+        </label>
+
+        <label class="form-field">
+          <span>Email</span>
+          <input type="email" formControlName="email" />
+        </label>
+
+        <label class="form-field">
+          <span>Password</span>
+          <input type="password" formControlName="password" />
+          <small *ngIf="!isEditing">Minimo 8 caracteres.</small>
+          <small *ngIf="isEditing">Deixa vazio para manter a password atual.</small>
+        </label>
+
+        <label class="toggle-field">
+          <input type="checkbox" formControlName="isActive" />
+          <span>Utilizador ativo</span>
+        </label>
+      </div>
+
+      <div formGroupName="permissions" class="permissions-panel">
+        <section *ngFor="let group of groups" class="permission-group">
+          <h3>{{ group }}</h3>
+
+          <label *ngFor="let permission of getPermissionsByGroup(group)" class="permission-option">
+            <input type="checkbox" [formControlName]="permission.key" />
+
+            <span>
+              <strong>{{ permission.label }}</strong>
+              <small>{{ permission.description }}</small>
+            </span>
+          </label>
+        </section>
+      </div>
+
+      <div class="form-actions">
+        <button
+          *ngIf="canCreateUsers"
+          type="button"
+          class="secondary-button"
+          (click)="startCreate()"
+          [disabled]="isSubmitting"
+        >
+          Limpar
+        </button>
+
+        <button type="submit" class="primary-button" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'A guardar...' : 'Guardar utilizador' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="users-list">
+      <div class="section-header">
+        <h2>Membros da organizacao</h2>
+      </div>
+
+      <div *ngIf="isLoading" class="loading">
+        A carregar utilizadores...
+      </div>
+
+      <table *ngIf="!isLoading && users.length > 0">
+        <thead>
+        <tr>
+          <th>Utilizador</th>
+          <th>Perfil</th>
+          <th>Estado</th>
+          <th class="actions-column"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let user of users" [class.inactive]="!user.isActive">
+          <td>
+            <strong>{{ user.name }}</strong>
+            <span>{{ user.email }}</span>
+          </td>
+
+          <td>{{ user.role === 'admin' ? 'Admin' : 'Staff' }}</td>
+
+          <td>
+            <span class="status-badge" [class.active]="user.isActive" [class.inactive]="!user.isActive">
+              {{ user.isActive ? 'Ativo' : 'Desativado' }}
+            </span>
+          </td>
+
+          <td class="actions-column">
+            <button
+              *ngIf="canUpdateUsers && user.role !== 'admin'"
+              type="button"
+              class="text-button"
+              (click)="startEdit(user)"
+            >
+              Editar
+            </button>
+
+            <button
+              *ngIf="canDeactivateUsers"
+              type="button"
+              class="text-button danger"
+              [disabled]="user.role === 'admin' || user.id === currentUserId || !user.isActive"
+              (click)="deactivate(user)"
+            >
+              Desativar
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

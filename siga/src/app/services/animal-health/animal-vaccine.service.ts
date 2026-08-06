@@ -7,12 +7,16 @@ import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
 import { AuthenticationError, DBError } from '../../error/app-error';
 import { ERROR_CODES } from '../../error/error-codes';
+import { PermissionService } from '../permission/permission.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalVaccineService {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private permissionService: PermissionService,
+  ) {}
 
   private mapVaccine(vaccine: any): AnimalVaccine {
     return {
@@ -75,6 +79,8 @@ export class AnimalVaccineService {
    * Cria uma vacina associada a um animal.
    */
   async create(request: RegisterAnimalVaccineRequest): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -104,6 +110,8 @@ export class AnimalVaccineService {
    * Confirma que uma vacina pendente foi tomada.
    */
   async confirmTaken(vaccineId: string, dateTaken: string): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -131,6 +139,8 @@ export class AnimalVaccineService {
    * Remove uma vacina associada a um animal.
    */
   async delete(vaccineId: string): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {

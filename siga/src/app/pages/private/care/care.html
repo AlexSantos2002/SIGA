@@ -42,7 +42,12 @@
     </div>
 
     <!-- FORM -->
-    <form [formGroup]="form" (ngSubmit)="submitCare()" class="care-form">
+    <form
+      *ngIf="permissionService.can(permissions.careManage)"
+      [formGroup]="form"
+      (ngSubmit)="submitCare()"
+      class="care-form"
+    >
 
       <section class="form-section">
         <h2 i18n="New care section@@cares.form.title">Novo cuidado</h2>

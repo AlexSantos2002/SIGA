@@ -42,11 +42,15 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   EMAIL_ALREADY_EXISTS: 'O email do usuário já está registado',
   EMAIL_NOT_CONFIRMED: 'Verifique o seu email e clique no link enviado para confirmar a conta antes de iniciar sessao.',
   ORGANIZATION_ALREADY_EXISTS: 'O email da organização já está registado',
+  USER_INACTIVE: 'Este utilizador esta desativado.',
+  USER_CREATE_FAILED: 'Nao foi possivel criar o utilizador.',
+  UNABLE_TO_GET_USERS: 'Nao foi possivel carregar os utilizadores.',
 
   // AUTENTICAÇÃO
   AUTHENTICATION_ERROR: 'Erro durante a autenticação',
   INVALID_CREDENTIALS: 'Email ou palavra-passe incorretos',
   NOT_AUTHENTICATED: 'Usuário não autenticado',
+  PERMISSION_DENIED: 'Nao tem permissao para realizar esta acao.',
   PASSWORD_RESET_FAILED: 'Não foi possível enviar o email de recuperação.',
   PASSWORD_UPDATE_FAILED: 'Não foi possível atualizar a palavra-passe.',
 

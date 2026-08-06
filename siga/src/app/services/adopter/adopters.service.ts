@@ -9,13 +9,17 @@ import { RegisterAdopterRequest } from '../../models/adopter/register-adopter-re
 import { UpdateAdopterRequest } from '../../models/adopter/update-adopter-request';
 import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
+import { PermissionService } from '../permission/permission.service';
 import { AdopterRow, buildAdopterPayload, mapAdopterRow } from './adopter.mapper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdoptersService {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private permissionService: PermissionService,
+  ) {}
 
   async getAll(): Promise<Adopter[]> {
     const organizationId = this.getCurrentOrganizationId();
@@ -59,6 +63,8 @@ export class AdoptersService {
   }
 
   async register(request: RegisterAdopterRequest): Promise<Adopter> {
+    this.permissionService.assert('adopters.create');
+
     const organizationId = this.getCurrentOrganizationId();
     const payload = buildAdopterPayload(request);
 
@@ -95,6 +101,8 @@ export class AdoptersService {
   }
 
   async update(adopterId: string, request: UpdateAdopterRequest): Promise<Adopter> {
+    this.permissionService.assert('adopters.update');
+
     const organizationId = this.getCurrentOrganizationId();
     const payload = buildAdopterPayload(request);
 
@@ -134,6 +142,8 @@ export class AdoptersService {
   }
 
   async delete(adopterId: string): Promise<void> {
+    this.permissionService.assert('adopters.delete');
+
     const organizationId = this.getCurrentOrganizationId();
 
     await this.getById(adopterId);

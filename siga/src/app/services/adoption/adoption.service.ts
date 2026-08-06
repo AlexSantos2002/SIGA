@@ -10,6 +10,7 @@ import { ERROR_CODES } from '../../error/error-codes';
 import { AuthService } from '../auth/auth.service';
 import { AdoptersService } from '../adopter/adopters.service';
 import { AnimalCareService } from '../animal-health/animal-care.service';
+import { PermissionService } from '../permission/permission.service';
 
 @Injectable({
   providedIn: 'root',
@@ -70,12 +71,15 @@ export class AdoptionService {
     private animalService: AnimalService,
     private adoptersService: AdoptersService,
     private animalCareService: AnimalCareService,
+    private permissionService: PermissionService,
   ) {}
 
   /**
    * Regista uma adoção
    */
   async register(request: RegisterAdoptionRequest): Promise<Adoption> {
+    this.permissionService.assert('adoptions.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -234,6 +238,8 @@ export class AdoptionService {
    * Liga um animal adotado ao adotante que o adotou.
    */
   async linkAcceptedAdoptionToAnimal(animalId: string, adopterId: string): Promise<Adoption> {
+    this.permissionService.assert('adoptions.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -286,6 +292,8 @@ export class AdoptionService {
    * Atualiza o estado de uma adoção
    */
   async update(request: UpdateAdoptionRequest): Promise<Adoption> {
+    this.permissionService.assert('adoptions.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
     const adoption: Adoption = await this.getById(request.adoptionId);
 
@@ -350,6 +358,8 @@ export class AdoptionService {
    * Remove uma adoção (apenas se estiver pendente)
    */
   async delete(adoptionId: string): Promise<void> {
+    this.permissionService.assert('adoptions.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
     const adoption: Adoption = await this.getById(adoptionId);
 

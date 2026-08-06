@@ -11,12 +11,14 @@ import {
   SelectOption,
   getMappedLabel,
 } from '../../../constants/form-options';
+import { PERMISSIONS } from '../../../constants/permissions';
 import { AnimalHistoryEvent } from '../../../models/animal/animal-history-event.model';
 import { Animal } from '../../../models/animal/animal.model';
 import { AnimalHistoryService } from '../../../services/animal-history/animal-history.service';
 import { AnimalService } from '../../../services/animal/animal.service';
 import { AnimalReportService } from '../../../services/animal-report/animal-report.service';
 import { ImageService } from '../../../services/image/image.service';
+import { PermissionService } from '../../../services/permission/permission.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -69,6 +71,7 @@ export class Animals implements OnInit {
 
   readonly genderOptions = ANIMAL_GENDERS;
   readonly statusOptions = ANIMAL_STATUSES;
+  readonly permissions = PERMISSIONS;
 
   sortState: SortState<AnimalSortField> = createSortState();
 
@@ -91,6 +94,7 @@ export class Animals implements OnInit {
     private animalHistoryService: AnimalHistoryService,
     private animalReportService: AnimalReportService,
     private imageService: ImageService,
+    public permissionService: PermissionService,
     private cdr: ChangeDetectorRef,
   ) {}
 

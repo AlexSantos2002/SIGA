@@ -10,6 +10,7 @@ import {
   getMappedLabel,
   getOptionLabel
 } from '../../../constants/form-options';
+import { PERMISSIONS } from '../../../constants/permissions';
 import { Adoption } from '../../../models/adoption/adoption.model';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { Animal } from '../../../models/animal/animal.model';
@@ -17,6 +18,7 @@ import { AdoptionService } from '../../../services/adoption/adoption.service';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalService } from '../../../services/animal/animal.service';
 import { ImageService } from '../../../services/image/image.service';
+import { PermissionService } from '../../../services/permission/permission.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -57,6 +59,7 @@ export class Adoptions implements OnInit, OnDestroy {
   updatingAdoptionId: string | null = null;
 
   completedSortState: SortState<CompletedAdoptionSortField> = createSortState();
+  readonly permissions = PERMISSIONS;
 
   private adopterModeSubscription: Subscription | null = null;
 
@@ -66,6 +69,7 @@ export class Adoptions implements OnInit, OnDestroy {
     private adoptersService: AdoptersService,
     private animalService: AnimalService,
     private imageService: ImageService,
+    public permissionService: PermissionService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = createAdoptionProcessForm(this.fb);

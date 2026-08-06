@@ -1,0 +1,273 @@
+.users-page {
+  padding: 28px;
+  width: 100%;
+  color: #1f2933;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #d7dde5;
+}
+
+.page-header h1,
+.section-header h2 {
+  margin: 0;
+  color: #111827;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.page-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.users-layout {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(460px, 1.1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.user-form,
+.users-list {
+  overflow: hidden;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.section-header {
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+  padding: 13px 16px;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.form-grid,
+.permissions-panel {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-field,
+.toggle-field,
+.permission-option {
+  display: flex;
+  min-width: 0;
+}
+
+.form-field {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field span,
+.permission-group h3 {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-field input {
+  min-height: 38px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: #111827;
+  font: inherit;
+}
+
+.form-field small,
+.permission-option small,
+.users-list td span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.toggle-field,
+.permission-option {
+  align-items: flex-start;
+  gap: 10px;
+  color: #334155;
+}
+
+.toggle-field input,
+.permission-option input {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+}
+
+.permissions-panel {
+  border-top: 1px solid #eef2f7;
+}
+
+.permission-group {
+  display: grid;
+  gap: 9px;
+}
+
+.permission-group h3 {
+  margin: 0;
+}
+
+.permission-option strong {
+  display: block;
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #e5e7eb;
+  background: #f8fafc;
+  padding: 14px 16px;
+}
+
+.primary-button,
+.secondary-button,
+.text-button {
+  border-radius: 7px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 36px;
+  padding: 8px 13px;
+}
+
+.primary-button {
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondary-button {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.error-message,
+.success-message,
+.loading {
+  margin-bottom: 16px;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 14px;
+  color: #475569;
+}
+
+.error-message {
+  border-color: #e1c7c7;
+  background: #fbf6f6;
+  color: #8f1f1f;
+}
+
+.success-message {
+  border-color: #c8d8cb;
+  background: #f6faf7;
+  color: #2f6840;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 13px 14px;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #fbfcfd;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+td strong,
+td span {
+  display: block;
+}
+
+tr.inactive {
+  background: #f8fafc;
+}
+
+.status-badge {
+  display: inline-flex;
+  width: auto;
+  min-height: 24px;
+  border: 1px solid #d6dce4;
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: #f8fafc;
+  color: #536272;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.active {
+  border-color: #c8d8cb;
+  background: #f6faf7;
+  color: #2f6840;
+}
+
+.actions-column {
+  width: 150px;
+  white-space: nowrap;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: #2563eb;
+  padding: 4px 6px;
+}
+
+.text-button.danger {
+  color: #8f1f1f;
+}
+
+@media (max-width: 980px) {
+  .users-layout,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

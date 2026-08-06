@@ -11,6 +11,7 @@
     </div>
 
     <a
+      *ngIf="permissionService.can(permissions.animalsCreate)"
       routerLink="/app/animals/new"
       class="add-animal-button"
       i18n="Add animal button@@animals.actions.add"
@@ -356,6 +357,7 @@
         <td class="actions-column">
           <div class="actions-buttons">
             <button
+              *ngIf="permissionService.can(permissions.animalsExport)"
               type="button"
               class="export-animal-button"
               [disabled]="!!exportingAnimalId"
@@ -391,6 +393,7 @@
             </button>
 
             <a
+              *ngIf="permissionService.can(permissions.animalsUpdate)"
               class="edit-animal-button"
               [routerLink]="['/app/animals', animal.id, 'edit']"
               title="Editar animal"
@@ -403,6 +406,7 @@
             </a>
 
             <button
+              *ngIf="permissionService.can(permissions.animalsDelete)"
               type="button"
               class="delete-animal-button"
               [disabled]="deletingAnimalId === animal.id"

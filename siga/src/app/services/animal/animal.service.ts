@@ -7,12 +7,16 @@ import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
 import { AuthenticationError, DBError } from '../../error/app-error';
 import { ERROR_CODES } from '../../error/error-codes';
+import { PermissionService } from '../permission/permission.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalService {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private permissionService: PermissionService,
+  ) {}
 
   /**
    * @description
@@ -212,6 +216,8 @@ export class AnimalService {
    * Regista um novo animal na organização autenticada.
    */
   async createAnimal(request: RegisterAnimalRequest): Promise<Animal> {
+    this.permissionService.assert('animals.create');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -398,6 +404,8 @@ export class AnimalService {
    * Remove um animal da organização autenticada.
    */
   async deleteAnimal(animalId: string): Promise<void> {
+    this.permissionService.assert('animals.delete');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -432,6 +440,8 @@ export class AnimalService {
    * Atualiza os dados de um animal da organização autenticada.
    */
   async updateAnimal(animalId: string, request: RegisterAnimalRequest): Promise<void> {
+    this.permissionService.assert('animals.update');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {

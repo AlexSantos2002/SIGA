@@ -1,6 +1,11 @@
+import { PermissionMap } from '../../constants/permissions';
+
 export interface User {
-  name: string,
-  email: string,
-  role: string,
-  organizationId: string
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  organizationId: string;
+  permissions: PermissionMap;
+  isActive: boolean;
 }

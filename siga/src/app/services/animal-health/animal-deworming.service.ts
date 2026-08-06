@@ -7,13 +7,17 @@ import { withTimeout } from '../../utils/utils';
 import { AuthService } from '../auth/auth.service';
 import { AuthenticationError, DBError } from '../../error/app-error';
 import { ERROR_CODES } from '../../error/error-codes';
+import { PermissionService } from '../permission/permission.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimalDewormingService {
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private permissionService: PermissionService,
+  ) {
   }
 
   private mapDeworming(deworming: any): AnimalDeworming {
@@ -75,6 +79,8 @@ export class AnimalDewormingService {
    * Cria um registo de desparasitação associado a um animal.
    */
   async create(request: RegisterAnimalDewormingRequest): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {
@@ -103,6 +109,8 @@ export class AnimalDewormingService {
    * Remove um registo de desparasitação.
    */
   async delete(dewormingId: string): Promise<void> {
+    this.permissionService.assert('care.manage');
+
     const organizationId = this.authService.getCurrentOrganizationId();
 
     if (!organizationId) {

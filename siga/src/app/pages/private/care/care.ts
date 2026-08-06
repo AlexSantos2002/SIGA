@@ -17,6 +17,7 @@ import {
   VACCINE_STATUSES,
   getOptionLabel, CARE_TYPES
 } from '../../../constants/form-options';
+import { PERMISSIONS } from '../../../constants/permissions';
 import {
   AnimalCareRecord,
   AnimalCareType,
@@ -27,6 +28,7 @@ import { AnimalDewormingService } from '../../../services/animal-health/animal-d
 import { AnimalVaccineService } from '../../../services/animal-health/animal-vaccine.service';
 import { AnimalVetAppointmentService } from '../../../services/animal-health/animal-vet-appointment.service';
 import { AnimalService } from '../../../services/animal/animal.service';
+import { PermissionService } from '../../../services/permission/permission.service';
 import { getTodayDate, toNullableString } from '../../../utils/utils';
 import {
   createCareForm,
@@ -72,6 +74,7 @@ export class Care implements OnInit, OnDestroy {
   confirmingRecordKey: string | null = null;
 
   readonly careTypes = CARE_TYPES;
+  readonly permissions = PERMISSIONS;
   readonly vaccineStatuses = VACCINE_STATUSES;
   readonly dewormingTypes = DEWORMING_TYPES;
   readonly timelineStates: SelectOption[] = [
@@ -98,6 +101,7 @@ export class Care implements OnInit, OnDestroy {
     private vaccineService: AnimalVaccineService,
     private dewormingService: AnimalDewormingService,
     private vetAppointmentService: AnimalVetAppointmentService,
+    public permissionService: PermissionService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = createCareForm(this.fb);
