@@ -29,6 +29,7 @@ import { AnimalVaccineService } from '../../../services/animal-health/animal-vac
 import { AnimalVetAppointmentService } from '../../../services/animal-health/animal-vet-appointment.service';
 import { AnimalService } from '../../../services/animal/animal.service';
 import { PermissionService } from '../../../services/permission/permission.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import { getTodayDate, toNullableString } from '../../../utils/utils';
 import {
   createCareForm,
@@ -102,6 +103,7 @@ export class Care implements OnInit, OnDestroy {
     private dewormingService: AnimalDewormingService,
     private vetAppointmentService: AnimalVetAppointmentService,
     public permissionService: PermissionService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = createCareForm(this.fb);
@@ -207,6 +209,7 @@ export class Care implements OnInit, OnDestroy {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.createCareRecord();
       resetCareForm(this.form, this.careType);
@@ -216,6 +219,7 @@ export class Care implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Não foi possível registar o cuidado.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -228,6 +232,7 @@ export class Care implements OnInit, OnDestroy {
       this.deletingRecordKey = recordKey;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       if (record.type === 'vaccine') {
         await this.vaccineService.delete(record.id);
@@ -248,6 +253,7 @@ export class Care implements OnInit, OnDestroy {
       console.error('Erro ao remover cuidado:', error);
       this.errorMessage = error?.message || error?.details || 'Não foi possível remover o cuidado.';
     } finally {
+      this.loading.stop();
       this.deletingRecordKey = null;
       this.cdr.detectChanges();
     }
@@ -264,6 +270,7 @@ export class Care implements OnInit, OnDestroy {
       this.confirmingRecordKey = recordKey;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       if (record.type === 'vaccine') {
         await this.vaccineService.confirmTaken(record.id, getTodayDate());
@@ -279,6 +286,7 @@ export class Care implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Não foi possível confirmar o cuidado.';
     } finally {
+      this.loading.stop();
       this.confirmingRecordKey = null;
       this.cdr.detectChanges();
     }
@@ -331,6 +339,7 @@ export class Care implements OnInit, OnDestroy {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const [animals, careRecords] = await Promise.all([
         this.animalService.getAnimalsFromCurrentOrganization(),
@@ -344,6 +353,7 @@ export class Care implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Não foi possível carregar os cuidados.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

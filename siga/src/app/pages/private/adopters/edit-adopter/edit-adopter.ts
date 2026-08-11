@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { Adopter } from '../../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../../services/adopter/adopters.service';
+import { LoadingService } from '../../../../services/services/loading.service';
 import { AdopterForm } from '../adopter-form/adopter-form';
 import {
   buildAdopterRequest,
@@ -32,6 +33,7 @@ export class EditAdopter implements OnInit {
   constructor(
     private fb: FormBuilder,
     private adopterService: AdoptersService,
+    private loading: LoadingService,
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef,
@@ -56,6 +58,7 @@ export class EditAdopter implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       this.adopter = await this.adopterService.getById(this.adopterId);
       patchAdopterForm(this.form, this.adopter);
@@ -64,6 +67,7 @@ export class EditAdopter implements OnInit {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel carregar o adotante.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }
@@ -81,6 +85,7 @@ export class EditAdopter implements OnInit {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.adopterService.update(this.adopterId, buildAdopterRequest(this.form));
 
@@ -90,6 +95,7 @@ export class EditAdopter implements OnInit {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel atualizar o adotante.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }

@@ -19,6 +19,7 @@ import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalService } from '../../../services/animal/animal.service';
 import { ImageService } from '../../../services/image/image.service';
 import { PermissionService } from '../../../services/permission/permission.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -70,6 +71,7 @@ export class Adoptions implements OnInit, OnDestroy {
     private animalService: AnimalService,
     private imageService: ImageService,
     public permissionService: PermissionService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = createAdoptionProcessForm(this.fb);
@@ -157,6 +159,7 @@ export class Adoptions implements OnInit, OnDestroy {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const adopterId = await this.resolveAdopterId();
 
@@ -174,6 +177,7 @@ export class Adoptions implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel iniciar o processo de adocao.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -187,6 +191,7 @@ export class Adoptions implements OnInit, OnDestroy {
       this.updatingAdoptionId = adoption.id;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.adoptionService.update({
         adoptionId: adoption.id,
@@ -200,6 +205,7 @@ export class Adoptions implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel concluir o processo de adocao.';
     } finally {
+      this.loading.stop();
       this.updatingAdoptionId = null;
       this.cdr.detectChanges();
     }
@@ -253,6 +259,7 @@ export class Adoptions implements OnInit, OnDestroy {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const [adoptions, animals, adopters] = await Promise.all([
         this.adoptionService.getAll(),
@@ -268,6 +275,7 @@ export class Adoptions implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel carregar os processos de adocao.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

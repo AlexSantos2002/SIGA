@@ -8,6 +8,25 @@ import { Injectable, signal } from '@angular/core';
 export class LoadingService {
   readonly isLoading = signal(false);
 
-  start() { this.isLoading.set(true); }
-  stop()  { this.isLoading.set(false); }
+  private pendingOperations = 0;
+
+  start(): void {
+    this.pendingOperations += 1;
+    this.isLoading.set(true);
+  }
+
+  stop(): void {
+    this.pendingOperations = Math.max(0, this.pendingOperations - 1);
+    this.isLoading.set(this.pendingOperations > 0);
+  }
+
+  async track<T>(operation: Promise<T>): Promise<T> {
+    this.start();
+
+    try {
+      return await operation;
+    } finally {
+      this.stop();
+    }
+  }
 }

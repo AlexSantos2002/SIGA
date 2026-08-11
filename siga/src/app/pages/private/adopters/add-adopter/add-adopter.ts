@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 import { AdoptersService } from '../../../../services/adopter/adopters.service';
+import { LoadingService } from '../../../../services/services/loading.service';
 import { AdopterForm } from '../adopter-form/adopter-form';
 import {
   buildAdopterRequest,
@@ -27,6 +28,7 @@ export class AddAdopter {
   constructor(
     private fb: FormBuilder,
     private adopterService: AdoptersService,
+    private loading: LoadingService,
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
@@ -45,6 +47,7 @@ export class AddAdopter {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.adopterService.register(buildAdopterRequest(this.form));
 
@@ -54,6 +57,7 @@ export class AddAdopter {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel registar o adotante.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }

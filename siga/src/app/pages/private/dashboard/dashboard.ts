@@ -16,6 +16,7 @@ import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalCareService } from '../../../services/animal-health/animal-care.service';
 import { AnimalService } from '../../../services/animal/animal.service';
 import { AuthService } from '../../../services/auth/auth.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import {
   compareCareRecords,
   getAlertDate,
@@ -57,6 +58,7 @@ export class Dashboard implements OnInit {
     private adoptersService: AdoptersService,
     private animalCareService: AnimalCareService,
     private authService: AuthService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -267,6 +269,7 @@ export class Dashboard implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const [animals, adoptions, adopters, careRecords] = await Promise.all([
         this.animalService.getAnimalsFromCurrentOrganization(),
@@ -284,6 +287,7 @@ export class Dashboard implements OnInit {
       this.errorMessage =
         error?.message || error?.details || 'Não foi possível carregar o dashboard.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

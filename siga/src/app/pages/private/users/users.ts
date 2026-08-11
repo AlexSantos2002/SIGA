@@ -11,6 +11,7 @@ import {
 } from '../../../constants/permissions';
 import { AuthService } from '../../../services/auth/auth.service';
 import { PermissionService } from '../../../services/permission/permission.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import {
   OrganizationUser,
   UserManagementService,
@@ -43,6 +44,7 @@ export class Users implements OnInit {
     private userManagementService: UserManagementService,
     private authService: AuthService,
     public permissionService: PermissionService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
@@ -137,6 +139,7 @@ export class Users implements OnInit {
       this.errorMessage = '';
       this.successMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       if (this.editingUser) {
         await this.userManagementService.updateUser({
@@ -162,6 +165,7 @@ export class Users implements OnInit {
       console.error('Erro ao guardar utilizador:', error);
       this.errorMessage = error?.message || error?.details || 'Nao foi possivel guardar o utilizador.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -174,6 +178,7 @@ export class Users implements OnInit {
 
     try {
       this.errorMessage = '';
+      this.loading.start();
       await this.userManagementService.deactivateUser(user.id);
       await this.loadUsers();
       if (this.editingUser?.id === user.id) {
@@ -183,6 +188,8 @@ export class Users implements OnInit {
       console.error('Erro ao desativar utilizador:', error);
       this.errorMessage = error?.message || error?.details || 'Nao foi possivel desativar o utilizador.';
       this.cdr.detectChanges();
+    } finally {
+      this.loading.stop();
     }
   }
 
@@ -195,11 +202,13 @@ export class Users implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
       this.users = await this.userManagementService.getUsers();
     } catch (error: any) {
       console.error('Erro ao carregar utilizadores:', error);
       this.errorMessage = error?.message || error?.details || 'Nao foi possivel carregar os utilizadores.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

@@ -12,6 +12,7 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppError } from '../../../error/app-error';
 import { AuthService } from '../../../services/auth/auth.service';
+import { LoadingService } from '../../../services/services/loading.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -33,6 +34,7 @@ export class ResetPassword implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group(
@@ -46,6 +48,7 @@ export class ResetPassword implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
+      this.loading.start();
       const tokenHash = this.route.snapshot.queryParamMap.get('token_hash');
       const type = this.route.snapshot.queryParamMap.get('type');
 
@@ -69,6 +72,7 @@ export class ResetPassword implements OnInit {
     } catch {
       this.errorMessage = 'Não foi possível validar a ligação de recuperação.';
     } finally {
+      this.loading.stop();
       this.isCheckingSession = false;
       this.cdr.detectChanges();
     }
@@ -85,6 +89,7 @@ export class ResetPassword implements OnInit {
     try {
       this.isSubmitting = true;
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.authService.updatePassword(this.form.value.password);
       await this.authService.logout();
@@ -98,6 +103,7 @@ export class ResetPassword implements OnInit {
           ? error.message
           : 'Não foi possível atualizar a palavra-passe. Tente novamente mais tarde.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }

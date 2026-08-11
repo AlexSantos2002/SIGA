@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoadingService } from '../../../services/services/loading.service';
 
 /**
  * @description
@@ -21,6 +22,7 @@ export class Contacts {
 
   constructor(
     private fb: FormBuilder,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
@@ -44,6 +46,7 @@ export class Contacts {
     try {
       this.isSubmitting = true;
       this.cdr.detectChanges();
+      this.loading.start();
 
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -74,6 +77,7 @@ export class Contacts {
           ? error.message
           : $localize`:@@contact.error.message:Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.`;
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }

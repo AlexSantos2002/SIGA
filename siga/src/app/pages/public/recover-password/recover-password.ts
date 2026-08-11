@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterModule } from '@angular/router';
 import { AppError } from '../../../error/app-error';
 import { AuthService } from '../../../services/auth/auth.service';
+import { LoadingService } from '../../../services/services/loading.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -21,6 +22,7 @@ export class RecoverPassword {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
@@ -40,6 +42,7 @@ export class RecoverPassword {
     try {
       this.isSubmitting = true;
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.authService.requestPasswordReset(this.form.value.email);
 
@@ -52,6 +55,7 @@ export class RecoverPassword {
           ? error.message
           : 'Não foi possível enviar o email de recuperação. Tente novamente mais tarde.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }

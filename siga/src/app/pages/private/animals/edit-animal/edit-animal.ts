@@ -29,6 +29,7 @@ import { AnimalVaccinesSection } from './components/animal-vaccines-section';
 import { AnimalVetAppointmentsSection } from './components/animal-vet-appointments-section';
 import { EditAnimalModal } from './edit-animal.types';
 import { ImageService } from '../../../../services/image/image.service';
+import { LoadingService } from '../../../../services/services/loading.service';
 
 @Component({
   selector: 'app-edit-animal',
@@ -82,6 +83,7 @@ export class EditAnimal implements OnInit, OnDestroy {
     private dewormingService: AnimalDewormingService,
     private vetAppointmentService: AnimalVetAppointmentService,
     private imageService: ImageService,
+    private loading: LoadingService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
   ) {
@@ -233,6 +235,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.isImageSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       if (this.animal.imagePath) {
         await this.imageService.replaceImage(
@@ -250,6 +253,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       console.error('Erro ao guardar imagem do animal:', error);
       this.errorMessage = error?.message || error?.details || 'Nao foi possivel guardar a imagem.';
     } finally {
+      this.loading.stop();
       this.isImageSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -264,6 +268,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.isImageSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.imageService.deleteImage(this.animal.id, this.animal.imagePath);
       await this.reloadAnimal();
@@ -272,6 +277,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       console.error('Erro ao remover imagem do animal:', error);
       this.errorMessage = error?.message || error?.details || 'Nao foi possivel remover a imagem.';
     } finally {
+      this.loading.stop();
       this.isImageSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -299,6 +305,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.animalService.updateAnimal(this.animalId, {
         name: formValue.name,
@@ -331,6 +338,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel atualizar o animal.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -347,6 +355,7 @@ export class EditAnimal implements OnInit, OnDestroy {
     try {
       this.isSubmitting = true;
       this.errorMessage = '';
+      this.loading.start();
 
       await this.vaccineService.create({
         animalId: this.animalId,
@@ -364,6 +373,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       console.error('Erro ao adicionar vacina:', error);
       this.errorMessage = error?.message || 'Nao foi possivel adicionar a vacina.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -371,12 +381,14 @@ export class EditAnimal implements OnInit, OnDestroy {
 
   async deleteVaccine(vaccineId: string): Promise<void> {
     try {
+      this.loading.start();
       await this.vaccineService.delete(vaccineId);
       this.vaccines = this.vaccines.filter((vaccine) => vaccine.id !== vaccineId);
     } catch (error: any) {
       console.error('Erro ao remover vacina:', error);
       this.errorMessage = error?.message || 'Nao foi possivel remover a vacina.';
     } finally {
+      this.loading.stop();
       this.cdr.detectChanges();
     }
   }
@@ -390,6 +402,7 @@ export class EditAnimal implements OnInit, OnDestroy {
     try {
       this.isSubmitting = true;
       this.errorMessage = '';
+      this.loading.start();
 
       await this.dewormingService.create({
         animalId: this.animalId,
@@ -406,6 +419,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       console.error('Erro ao adicionar desparasitacao:', error);
       this.errorMessage = error?.message || 'Nao foi possivel adicionar a desparasitacao.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -413,12 +427,14 @@ export class EditAnimal implements OnInit, OnDestroy {
 
   async deleteDeworming(dewormingId: string): Promise<void> {
     try {
+      this.loading.start();
       await this.dewormingService.delete(dewormingId);
       this.dewormingRecords = this.dewormingRecords.filter((record) => record.id !== dewormingId);
     } catch (error: any) {
       console.error('Erro ao remover desparasitacao:', error);
       this.errorMessage = error?.message || 'Nao foi possivel remover a desparasitacao.';
     } finally {
+      this.loading.stop();
       this.cdr.detectChanges();
     }
   }
@@ -432,6 +448,7 @@ export class EditAnimal implements OnInit, OnDestroy {
     try {
       this.isSubmitting = true;
       this.errorMessage = '';
+      this.loading.start();
 
       await this.vetAppointmentService.create({
         animalId: this.animalId,
@@ -450,6 +467,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       console.error('Erro ao adicionar consulta veterinaria:', error);
       this.errorMessage = error?.message || 'Nao foi possivel adicionar a consulta veterinaria.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
@@ -457,6 +475,7 @@ export class EditAnimal implements OnInit, OnDestroy {
 
   async deleteVetAppointment(appointmentId: string): Promise<void> {
     try {
+      this.loading.start();
       await this.vetAppointmentService.delete(appointmentId);
       this.vetAppointments = this.vetAppointments.filter(
         (appointment) => appointment.id !== appointmentId,
@@ -465,6 +484,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       console.error('Erro ao remover consulta veterinaria:', error);
       this.errorMessage = error?.message || 'Nao foi possivel remover a consulta veterinaria.';
     } finally {
+      this.loading.stop();
       this.cdr.detectChanges();
     }
   }
@@ -474,6 +494,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const [animal, vaccines, dewormingRecords, vetAppointments, acceptedAdoption] =
         await Promise.all([
@@ -497,6 +518,7 @@ export class EditAnimal implements OnInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel carregar a ficha do animal.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

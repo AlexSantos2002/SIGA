@@ -12,6 +12,7 @@ import { PERMISSIONS } from '../../../constants/permissions';
 import { Adopter } from '../../../models/adopter/adopter.model';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { PermissionService } from '../../../services/permission/permission.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -77,6 +78,7 @@ export class Adopters implements OnInit {
   constructor(
     private adopterService: AdoptersService,
     public permissionService: PermissionService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -129,6 +131,7 @@ export class Adopters implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       this.adopters = await this.adopterService.getAll();
     } catch (error: any) {
@@ -136,6 +139,7 @@ export class Adopters implements OnInit {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel carregar os adotantes.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }
@@ -167,6 +171,7 @@ export class Adopters implements OnInit {
       this.deletingAdopterId = adopterId;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.adopterService.delete(adopterId);
 
@@ -179,6 +184,7 @@ export class Adopters implements OnInit {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel eliminar o adotante.';
     } finally {
+      this.loading.stop();
       this.deletingAdopterId = null;
       this.cdr.detectChanges();
     }

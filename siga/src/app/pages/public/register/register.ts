@@ -14,6 +14,7 @@ import { RegisterOrganizationRequest } from '../../../models/auth/register-organ
 import { CommonModule } from '@angular/common';
 import { AppError } from '../../../error/app-error';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingService } from '../../../services/services/loading.service';
 
 /**
  * @description
@@ -51,6 +52,7 @@ export class Register {
     private fb: FormBuilder,
     private organizationService: OrganizationService,
     private router: Router,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.fb.group(
@@ -89,6 +91,7 @@ export class Register {
     this.isLoading = true;
     this.errorMessage = null;
     this.successMessage = null;
+    this.loading.start();
 
     const request: RegisterOrganizationRequest = this.form.value;
 
@@ -109,6 +112,7 @@ export class Register {
         this.errorMessage = 'Nao foi possivel realizar a operacao.';
       }
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

@@ -42,6 +42,7 @@ import { AdoptionService } from '../../../services/adoption/adoption.service';
 import { AdoptersService } from '../../../services/adopter/adopters.service';
 import { AnimalCareService } from '../../../services/animal-health/animal-care.service';
 import { AnimalService } from '../../../services/animal/animal.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import { getTimelineState } from '../care/care-timeline.helpers';
 
 interface SummaryMetric {
@@ -122,6 +123,7 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
     private adoptionService: AdoptionService,
     private adoptersService: AdoptersService,
     private animalCareService: AnimalCareService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -417,6 +419,7 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
       this.isExporting = true;
       this.exportErrorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const ExcelJS = (await import('exceljs')) as ExcelJsModule;
       const Workbook = ExcelJS.Workbook ?? ExcelJS.default?.Workbook;
@@ -446,6 +449,7 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
       console.error('Erro ao exportar estatisticas para Excel:', error);
       this.exportErrorMessage = 'Nao foi possivel exportar o ficheiro Excel.';
     } finally {
+      this.loading.stop();
       this.isExporting = false;
       this.cdr.detectChanges();
     }
@@ -690,6 +694,7 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const [animals, adoptions, adopters, careRecords] = await Promise.all([
         this.animalService.getAnimalsFromCurrentOrganization(),
@@ -707,6 +712,7 @@ export class Statistics implements OnInit, AfterViewInit, OnDestroy {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel carregar as estatisticas.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
       this.renderCharts();

@@ -19,6 +19,7 @@ import { AnimalService } from '../../../services/animal/animal.service';
 import { AnimalReportService } from '../../../services/animal-report/animal-report.service';
 import { ImageService } from '../../../services/image/image.service';
 import { PermissionService } from '../../../services/permission/permission.service';
+import { LoadingService } from '../../../services/services/loading.service';
 import {
   createSortState,
   getInitialSortDirection,
@@ -95,6 +96,7 @@ export class Animals implements OnInit {
     private animalReportService: AnimalReportService,
     private imageService: ImageService,
     public permissionService: PermissionService,
+    private loading: LoadingService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -164,6 +166,7 @@ export class Animals implements OnInit {
     this.isHistoryModalOpen = true;
     this.isHistoryLoading = true;
     this.cdr.detectChanges();
+    this.loading.start();
 
     try {
       const entries = await this.animalHistoryService.getAnimalHistory(animal);
@@ -183,6 +186,7 @@ export class Animals implements OnInit {
         this.isHistoryLoading = false;
         this.cdr.detectChanges();
       }
+      this.loading.stop();
     }
   }
 
@@ -195,12 +199,14 @@ export class Animals implements OnInit {
       this.exportingAnimalId = animal.id;
       this.reportErrorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
       await this.animalReportService.exportAnimal(animal);
     } catch (error: any) {
       console.error('Erro ao exportar relatório do animal:', error);
       this.reportErrorMessage =
         'Não foi possível carregar todos os dados do relatório. Verifica a ligação e tenta novamente.';
     } finally {
+      this.loading.stop();
       this.exportingAnimalId = null;
       this.cdr.detectChanges();
     }
@@ -234,6 +240,7 @@ export class Animals implements OnInit {
       this.deletingAnimalId = animalId;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       await this.animalService.deleteAnimal(animalId);
 
@@ -244,6 +251,7 @@ export class Animals implements OnInit {
       console.error('Erro ao eliminar animal:', error);
       this.errorMessage = error?.message || error?.details || 'Nao foi possivel eliminar o animal.';
     } finally {
+      this.loading.stop();
       this.deletingAnimalId = null;
       this.cdr.detectChanges();
     }
@@ -285,6 +293,7 @@ export class Animals implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       this.animals = await this.animalService.getAnimalsFromCurrentOrganization();
     } catch (error: any) {
@@ -292,6 +301,7 @@ export class Animals implements OnInit {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel carregar os animais.';
     } finally {
+      this.loading.stop();
       this.isLoading = false;
       this.cdr.detectChanges();
     }

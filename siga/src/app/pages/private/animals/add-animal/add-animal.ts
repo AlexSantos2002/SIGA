@@ -8,6 +8,7 @@ import { DatePicker } from '../../../../components/date-picker/date-picker';
 import { AnimalService } from '../../../../services/animal/animal.service';
 import { withTimeout } from '../../../../utils/utils';
 import { ImageService } from '../../../../services/image/image.service';
+import { LoadingService } from '../../../../services/services/loading.service';
 
 @Component({
   selector: 'app-add-animal',
@@ -33,6 +34,7 @@ export class AddAnimal {
     private fb: FormBuilder,
     private animalService: AnimalService,
     private imageService: ImageService,
+    private loading: LoadingService,
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
@@ -88,6 +90,7 @@ export class AddAnimal {
       this.isSubmitting = true;
       this.errorMessage = '';
       this.cdr.detectChanges();
+      this.loading.start();
 
       const selectedFile = this.selectedFile
         ? await this.imageService.prepareImageForUpload(this.selectedFile)
@@ -116,6 +119,7 @@ export class AddAnimal {
       this.errorMessage =
         error?.message || error?.details || 'Nao foi possivel adicionar o animal.';
     } finally {
+      this.loading.stop();
       this.isSubmitting = false;
       this.cdr.detectChanges();
     }
