@@ -118,6 +118,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/private/care/care').then((m) => m.Care),
       },
       {
+        path: 'calendar',
+        loadComponent: () =>
+          import('./pages/private/calendar/calendar').then((m) => m.Calendar),
+      },
+      {
         path: 'statistics',
         canActivate: [permissionGuard],
         data: { permission: PERMISSIONS.statisticsView },

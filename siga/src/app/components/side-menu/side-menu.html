@@ -47,6 +47,15 @@
       Cuidados
     </a>
 
+    <a
+      routerLink="/app/calendar"
+      routerLinkActive="ativo"
+      class="item-menu"
+      i18n="Sidebar calendar link@@sidebar.calendar"
+    >
+      Calendário
+    </a>
+
     <ng-container *ngIf="permissionService.can(permissions.statisticsView)">
       <a
         routerLink="/app/statistics"

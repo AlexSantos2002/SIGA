@@ -3474,6 +3474,223 @@
         <target>Other</target>
       </trans-unit>
 
+      <!-- Calendar -->
+
+      <trans-unit id="sidebar.calendar" datatype="html">
+        <source>Calendário</source>
+        <target>Calendar</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.page.title" datatype="html">
+        <source>Calendário</source>
+        <target>Calendar</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.page.description" datatype="html">
+        <source>Consulta num só lugar todas as vacinas, desparasitações e consultas dos animais.</source>
+        <target>See all animal vaccinations, dewormings, and appointments in one place.</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.registerCare" datatype="html">
+        <source>Registar cuidado</source>
+        <target>Register care</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.loading" datatype="html">
+        <source>A carregar calendário...</source>
+        <target>Loading calendar...</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.retry" datatype="html">
+        <source>Tentar novamente</source>
+        <target>Try again</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.previousMonth" datatype="html">
+        <source>Mês anterior</source>
+        <target>Previous month</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.nextMonth" datatype="html">
+        <source>Mês seguinte</source>
+        <target>Next month</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.today" datatype="html">
+        <source>Hoje</source>
+        <target>Today</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.oneEvent" datatype="html">
+        <source>evento neste mês</source>
+        <target>event this month</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.multipleEvents" datatype="html">
+        <source>eventos neste mês</source>
+        <target>events this month</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.filter.label" datatype="html">
+        <source>Mostrar</source>
+        <target>Show</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.filter.all" datatype="html">
+        <source>Todos os eventos</source>
+        <target>All events</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.filter.vaccines" datatype="html">
+        <source>Vacinas</source>
+        <target>Vaccinations</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.filter.dewormings" datatype="html">
+        <source>Desparasitações</source>
+        <target>Dewormings</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.filter.appointments" datatype="html">
+        <source>Consultas</source>
+        <target>Appointments</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.grid.label" datatype="html">
+        <source>Calendário mensal</source>
+        <target>Monthly calendar</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.more" datatype="html">
+        <source>mais</source>
+        <target>more</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.selectedDay" datatype="html">
+        <source>Agenda do dia</source>
+        <target>Day's schedule</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.selectedOneEvent" datatype="html">
+        <source>compromisso</source>
+        <target>event</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.selectedMultipleEvents" datatype="html">
+        <source>compromissos</source>
+        <target>events</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.empty.title" datatype="html">
+        <source>Sem eventos</source>
+        <target>No events</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.empty.description" datatype="html">
+        <source>Não existem marcações ou cuidados registados para este dia.</source>
+        <target>There are no appointments or care records for this day.</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.viewAnimal" datatype="html">
+        <source>Ver ficha do animal</source>
+        <target>View animal record</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.closeDay" datatype="html">
+        <source>Fechar eventos do dia</source>
+        <target>Close the day's events</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.legend.label" datatype="html">
+        <source>Legenda</source>
+        <target>Legend</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.legend.vaccine" datatype="html">
+        <source>Vacina</source>
+        <target>Vaccination</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.legend.deworming" datatype="html">
+        <source>Desparasitação</source>
+        <target>Deworming</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.legend.appointment" datatype="html">
+        <source>Consulta</source>
+        <target>Appointment</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.legend.completed" datatype="html">
+        <source>Realizado</source>
+        <target>Completed</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.aria.oneEvent" datatype="html">
+        <source>1 evento</source>
+        <target>1 event</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.aria.multipleEvents" datatype="html">
+        <source><x id="EVENT_COUNT"/> eventos</source>
+        <target><x id="EVENT_COUNT"/> events</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.type.vaccine" datatype="html">
+        <source>Vacina</source>
+        <target>Vaccination</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.type.deworming" datatype="html">
+        <source>Desparasitação</source>
+        <target>Deworming</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.type.appointment" datatype="html">
+        <source>Consulta</source>
+        <target>Appointment</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.appointmentCompleted" datatype="html">
+        <source>Consulta realizada</source>
+        <target>Completed appointment</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.careCompleted" datatype="html">
+        <source>Cuidado realizado</source>
+        <target>Completed care</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.appointmentScheduled" datatype="html">
+        <source>Consulta marcada</source>
+        <target>Scheduled appointment</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.scheduled" datatype="html">
+        <source>Data prevista</source>
+        <target>Scheduled date</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.nextVaccine" datatype="html">
+        <source>Próxima dose</source>
+        <target>Next dose</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.nextDeworming" datatype="html">
+        <source>Próxima desparasitação</source>
+        <target>Next deworming</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.dateKind.nextAppointment" datatype="html">
+        <source>Próxima consulta</source>
+        <target>Next appointment</target>
+      </trans-unit>
+
+      <trans-unit id="calendar.loadError" datatype="html">
+        <source>Não foi possível carregar os eventos do calendário.</source>
+        <target>Calendar events could not be loaded.</target>
+      </trans-unit>
+
       <!--   Fim do form options     -->
 
     </body>

@@ -1,0 +1,209 @@
+<section class="calendar-page">
+  <header class="page-header">
+    <div>
+      <h1 i18n="Calendar page title@@calendar.page.title">Calendário</h1>
+      <p i18n="Calendar page description@@calendar.page.description">
+        Consulta num só lugar todas as vacinas, desparasitações e consultas dos animais.
+      </p>
+    </div>
+
+    <a class="care-link" routerLink="/app/care" i18n="Calendar register care@@calendar.registerCare">
+      Registar cuidado
+    </a>
+  </header>
+
+  <div *ngIf="isLoading" class="state-card" i18n="Calendar loading@@calendar.loading">
+    A carregar calendário...
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="state-card error-state">
+    <span>{{ errorMessage }}</span>
+    <button type="button" (click)="retry()" i18n="Calendar retry@@calendar.retry">
+      Tentar novamente
+    </button>
+  </div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <div class="calendar-toolbar">
+      <div class="month-navigation">
+        <button
+          type="button"
+          class="icon-button"
+          (click)="previousMonth()"
+          aria-label="Mês anterior"
+          i18n-aria-label="Previous month@@calendar.previousMonth"
+        >
+          &lsaquo;
+        </button>
+
+        <h2>{{ monthLabel }}</h2>
+
+        <button
+          type="button"
+          class="icon-button"
+          (click)="nextMonth()"
+          aria-label="Mês seguinte"
+          i18n-aria-label="Next month@@calendar.nextMonth"
+        >
+          &rsaquo;
+        </button>
+
+        <button type="button" class="today-button" (click)="goToToday()" i18n="@@calendar.today">
+          Hoje
+        </button>
+      </div>
+
+      <div class="toolbar-meta">
+        <span class="event-count">
+          {{ monthEventCount }}
+          <ng-container *ngIf="monthEventCount === 1; else multipleEvents" i18n="@@calendar.oneEvent">
+            evento neste mês
+          </ng-container>
+          <ng-template #multipleEvents i18n="@@calendar.multipleEvents">eventos neste mês</ng-template>
+        </span>
+
+        <label for="calendar-filter" i18n="Calendar filter label@@calendar.filter.label">
+          Mostrar
+        </label>
+        <select id="calendar-filter" [(ngModel)]="filterType">
+          <option *ngFor="let option of filterOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calendar-layout">
+      <section class="calendar-card" aria-label="Calendário mensal" i18n-aria-label="@@calendar.grid.label">
+        <div class="weekday-row" aria-hidden="true">
+          <span *ngFor="let weekday of weekdays">{{ weekday }}</span>
+        </div>
+
+        <div class="days-grid">
+          <button
+            *ngFor="let day of calendarDays; trackBy: trackByDateKey"
+            type="button"
+            class="calendar-day"
+            [class.outside-month]="!day.isCurrentMonth"
+            [class.today]="day.isToday"
+            [class.selected]="day.dateKey === selectedDateKey"
+            [attr.aria-label]="getDayAriaLabel(day)"
+            [attr.aria-pressed]="day.dateKey === selectedDateKey"
+            [attr.aria-expanded]="day.dateKey === selectedDateKey"
+            aria-controls="selected-day-events"
+            (click)="selectDay(day, $event)"
+          >
+            <span class="day-number">{{ day.dayNumber }}</span>
+
+            <span class="day-events">
+              <span
+                *ngFor="let event of day.events | slice: 0 : 3; trackBy: trackByEventKey"
+                class="event-pill"
+                [class.vaccine]="event.record.type === 'vaccine'"
+                [class.deworming]="event.record.type === 'deworming'"
+                [class.appointment]="event.record.type === 'appointment'"
+                [class.completed]="event.dateKind === 'completed'"
+              >
+                <span class="event-dot"></span>
+                <span class="event-title">{{ event.record.animal.name }} · {{ event.record.title }}</span>
+              </span>
+
+              <span *ngIf="day.events.length > 3" class="more-events">
+                +{{ day.events.length - 3 }}
+                <span i18n="@@calendar.more">mais</span>
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <div
+          *ngIf="selectedDateKey"
+          class="calendar-overlay"
+          (click)="closeSelectedDay()"
+        >
+          <section
+            id="selected-day-events"
+            class="day-panel"
+            [ngStyle]="popoverStyle"
+            aria-live="polite"
+            (click)="$event.stopPropagation()"
+          >
+            <div class="day-panel-header">
+              <div class="day-heading">
+                <span i18n="Day agenda@@calendar.selectedDay">Agenda do dia</span>
+                <h2>{{ selectedDateLabel }}</h2>
+                <p *ngIf="selectedEvents.length > 0">
+                  {{ selectedEvents.length }}
+                  <ng-container
+                    *ngIf="selectedEvents.length === 1; else selectedMultipleEvents"
+                    i18n="@@calendar.selectedOneEvent"
+                  >
+                    compromisso
+                  </ng-container>
+                  <ng-template #selectedMultipleEvents i18n="@@calendar.selectedMultipleEvents">
+                    compromissos
+                  </ng-template>
+                </p>
+              </div>
+
+              <button
+                type="button"
+                class="close-day-button"
+                (click)="closeSelectedDay()"
+                autofocus
+                aria-label="Fechar eventos do dia"
+                i18n-aria-label="@@calendar.closeDay"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div *ngIf="selectedEvents.length === 0" class="empty-day">
+              <strong i18n="No calendar events title@@calendar.empty.title">Sem eventos</strong>
+              <p i18n="No calendar events text@@calendar.empty.description">
+                Não existem marcações ou cuidados registados para este dia.
+              </p>
+            </div>
+
+            <div *ngIf="selectedEvents.length > 0" class="event-list">
+              <a
+                *ngFor="let event of selectedEvents; trackBy: trackByEventKey"
+                class="event-card"
+                [class.vaccine]="event.record.type === 'vaccine'"
+                [class.deworming]="event.record.type === 'deworming'"
+                [class.appointment]="event.record.type === 'appointment'"
+                [routerLink]="['/app/animals', event.record.animalId, 'edit']"
+              >
+                <div class="event-card-heading">
+                  <strong class="type-label">{{ getCareTypeLabel(event.record.type) }}</strong>
+                  <span class="date-kind">{{ event.dateLabel }}</span>
+                </div>
+
+                <h3>{{ event.record.title }}</h3>
+                <p class="animal-line">
+                  <strong>{{ event.record.animal.name }}</strong>
+                  <span *ngIf="getAnimalDescription(event)">
+                    · {{ getAnimalDescription(event) }}
+                  </span>
+                </p>
+                <p *ngIf="event.record.detail" class="event-detail">{{ event.record.detail }}</p>
+                <p *ngIf="event.record.notes" class="event-notes">{{ event.record.notes }}</p>
+
+                <span class="open-event">
+                  <span i18n="@@calendar.viewAnimal">Abrir ficha do animal</span>
+                </span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <div class="legend" aria-label="Legenda" i18n-aria-label="@@calendar.legend.label">
+      <span><i class="vaccine"></i><span i18n="@@calendar.legend.vaccine">Vacina</span></span>
+      <span><i class="deworming"></i><span i18n="@@calendar.legend.deworming">Desparasitação</span></span>
+      <span><i class="appointment"></i><span i18n="@@calendar.legend.appointment">Consulta</span></span>
+      <span><i class="completed"></i><span i18n="@@calendar.legend.completed">Realizado</span></span>
+    </div>
+  </ng-container>
+</section>
